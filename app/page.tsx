@@ -84,7 +84,7 @@ const WEEKDAYS_AR = [
 ];
 
 export default function CookReelPlatformPage() {
-  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [lang, setLang] = useState<'en' | 'ar'>('en');
   const isAr = lang === 'ar';
 
   const [recipes, setRecipes] = useState<CulinaryRecipe[]>(COOKREEL_RECIPES);

@@ -58,7 +58,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html
-      lang="ar"
+      lang="en"
       className={`${fraunces.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
     >
       <head>

@@ -44,7 +44,7 @@ export interface CookReelDatabase {
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
-const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v2.json');
+const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v3.json');
 
 const INITIAL_REVIEWS: RecipeReview[] = [
   {
@@ -59,10 +59,10 @@ const INITIAL_REVIEWS: RecipeReview[] = [
   {
     id: 'rev-2',
     recipeId: 'crispy-salmon-skillet',
-    authorName: 'أحمد المنصور',
+    authorName: 'Michael Vance',
     rating: 5,
     comment:
-      'أفضل طريقة لعمل السلمون بدون أن يلتصق بالمقلاة، وجدول بدائل المكونات ساعدني جداً عندما استبدلت الزبدة بزيت الزيتون.',
+      'Best method for searing salmon without sticking, and the 1:1 ingredient substitution chart helped me swap butter for olive oil seamlessly.',
     createdAt: '2026-11-22T14:15:00Z',
   },
   {
