@@ -28,10 +28,10 @@ export async function POST(req: NextRequest) {
 
     const subtitle =
       sanitizeText(body.subtitle, 240) ||
-      'Step-by-step culinary video reel and long-form E-E-A-T recipe guide published on CookReel.';
+      'Step-by-step culinary video reel and complete recipe guide published on CookReel.';
     const introText =
       sanitizeText(body.introText, 900) ||
-      `${title} is crafted in our test kitchen to deliver maximum flavor with foolproof step-by-step video guidance. Below you will find our tested ingredient substitutions, storage FAQs, and interactive recipe schema card.`;
+      `${title} is crafted in our test kitchen to deliver maximum flavor with foolproof step-by-step video guidance. Below you will find our tested ingredient substitutions, storage FAQs, and interactive recipe card.`;
     const chefTipText =
       sanitizeText(body.chefTip, 400) ||
       'Bring your primary ingredients to room temperature 15 minutes before cooking and season in layers for restaurant-level balance.';
@@ -87,11 +87,11 @@ export async function POST(req: NextRequest) {
       wordCount: 950,
       introParagraphsEn: [
         introText,
-        'Every recipe on CookReel follows our strict 5-part editorial standard—combining short-form video visuals, chef-tested ingredient substitutions, and structured nutritional data.',
+        'Every recipe on CookReel combines short-form video visuals, chef-tested ingredient substitutions, and complete nutritional metrics.',
       ],
       introParagraphsAr: [
         introText,
-        'تتبع هذه الوصفة معيار CookReel التحريري المتوافق مع شروط Google AdSense (مقدمة شاملة، فيديو خطوة بخطوة، نصائح وبدائل المكونات، بطاقة السكيما، والأسئلة الشائعة).',
+        'تجمع هذه الوصفة بين الفيديو القصير خطوة بخطوة، وجدول بدائل المكونات، وحساب القيم الغذائية.',
       ],
       whyThisWorksEn: [
         'Tested for consistent weeknight execution with minimal cleanup.',

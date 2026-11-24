@@ -757,7 +757,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     whyThisWorksEn: [
       'Dual-method tested: 22 minutes in an Air Fryer at 200°C or 25 minutes in a One-Pan Skillet.',
       'Cold-pan start renders subcutaneous skin fat slowly for potato-chip crispness.',
-      'High-volume search keyword target for home kitchen appliance buyers.',
+      'Complete weeknight dinner (protein + herb-roasted potatoes) in a single cooking vessel.',
     ],
     whyThisWorksAr: [
       'تعمل بطريقتين: 22 دقيقة في القلاية الهوائية (Air Fryer) أو 25 دقيقة في المقلاة.',
@@ -1271,14 +1271,14 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       'في هذا الدليل المرجعي الشامل من قسم (نصائح وأدوات CookReel)، جمعنا لك جدول البدائل الاحترافي المجرب في مطبخنا، بالإضافة إلى الطريقة الصحيحة لتعتيق وتنظيف مقالي الحديد الزهر، وخطة تجهيز 5 وجبات أسبوعية في 60 دقيقة فقط.',
     ],
     whyThisWorksEn: [
-      '1,280+ word long-form informational structure—maximizes dwell time and high-viewability in-article ad slots.',
-      'Answers high-intent search queries ("what to use instead of heavy cream", "how to season cast iron").',
-      'Directly links readers into CookReel’s quick dinner and baking categories.',
+      'Exact gram-for-gram substitution ratios tested across sauces, soups, and baked goods.',
+      'Answers common weeknight cooking dilemmas ("what to use instead of heavy cream", "how to season cast iron").',
+      'Streamlines Sunday meal prep into a single 60-minute batch workflow.',
     ],
     whyThisWorksAr: [
-      'مقال معلوماتي طويل وعالي القيمة (E-E-A-T) يضمن قبول الموقع في Google AdSense بسرعة.',
-      'يجيب على أكثر الأسئلة البحثية تكراراً في جوجل حول بدائل المكونات والعناية بأدوات الطهي.',
-      'يرفع مدة بقاء الزائر في الصفحة ويزيد عائد الوحدات الإعلانية داخل المحتوى.',
+      'نسب استبدال دقيقة بالجرام والملليلتر مجربة في الصلصات والشوربات والمخبوزات.',
+      'يجيب على أكثر الأسئلة اليومية في المطبخ حول بدائل الكريمة والعناية بأدوات الطهي.',
+      'يوفر خطة عملية لتجهيز وجبات الأسبوع في 60 دقيقة فقط.',
     ],
     chefTipsEn: [
       'Heavy Cream Substitute Rule: Whisk 180ml whole milk with 60g melted unsalted butter and 1 teaspoon cornstarch for simmering sauces—the butter restores the 36% milkfat content of heavy cream.',
@@ -1425,83 +1425,6 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
         instruction:
           'اترك الوجبات تبرد بدون غطاء لـ 20 دقيقة لخروج البخار ثم احفظها في علب زجاجية مع فصل الصلصات.',
         timerSeconds: 600,
-      },
-    ],
-  },
-];
-
-export const THIRTY_DAY_ADSENSE_PLAN = [
-  {
-    weekEn: 'Week 1: Technical Foundation & Mandatory Legal Pages',
-    weekAr: 'الأسبوع الأول: التأسيس التقني والصفحات القانونية الإلزامية',
-    tasks: [
-      {
-        id: 'w1-1',
-        textEn:
-          'Deploy fast, lightweight core architecture with clean 4-category navigation (Quick & Easy, Healthy & Diet, Desserts & Baking, Kitchen Hacks).',
-        textAr:
-          'تثبيت هيكل الموقع السريع والخفيف مع القائمة الرئيسية المنظمة (الأقسام الأربعة الرئيسية والأقسام الفرعية).',
-        doneByDefault: true,
-      },
-      {
-        id: 'w1-2',
-        textEn:
-          'Publish mandatory AdSense trust pages: About Us, Contact Us, Privacy Policy (with DoubleClick DART cookie notice), and Terms & Conditions.',
-        textAr:
-          'نشر الصفحات القانونية الإلزامية للقبول: من نحن (About Us)، اتصل بنا (Contact Us)، سياسة الخصوصية (Privacy Policy)، والشروط والأحكام (Terms).',
-        doneByDefault: true,
-      },
-      {
-        id: 'w1-3',
-        textEn:
-          'Connect Google Search Console, submit /sitemap.xml, and upload disavow-cookreel.txt to purge legacy .xyz/.shop spam backlinks.',
-        textAr:
-          'ربط Google Search Console وإرسال خريطة الموقع /sitemap.xml ورفع ملف التنصل disavow-cookreel.txt لتنظيف الروابط القديمة.',
-        doneByDefault: true,
-      },
-    ],
-  },
-  {
-    weekEn: 'Weeks 2 & 3: 100% Original Long-Form E-E-A-T Content Base',
-    weekAr: 'الأسبوع الثاني والثالث: بناء قاعدة المحتوى الأصلي (800–1,200 كلمة)',
-    tasks: [
-      {
-        id: 'w2-1',
-        textEn:
-          'Publish 20–25 original articles (5–6 per primary category) following the 5-part post template (Intro + Video/Step Photos + Tips & Substitutions + Recipe Schema Card + 3 FAQs).',
-        textAr:
-          'نشر 20 إلى 25 مقالاً أصلياً 100% موزعة بالتساوي على الأقسام الأربعة وفق قالب المقال المثالي (مقدمة + فيديو وصور خطوات + بدائل المكونات + بطاقة السكيما + الأسئلة الشائعة).',
-        doneByDefault: true,
-      },
-      {
-        id: 'w2-2',
-        textEn:
-          'Use 100% original studio photography and local HD MP4 video reels—zero copyrighted images scraped from other food blogs.',
-        textAr:
-          'استخدام صور وفيديوهات أصلية 100% وتجنب أي صور محمية بحقوق نشر من مواقع أخرى (السبب الأول للرفض في AdSense).',
-        doneByDefault: true,
-      },
-    ],
-  },
-  {
-    weekEn: 'Week 4: Indexing Verification & Google AdSense Application',
-    weekAr: 'الأسبوع الرابع: فحص الأرشفة والتقديم على Google AdSense',
-    tasks: [
-      {
-        id: 'w4-1',
-        textEn:
-          'Verify all 4 categories and 12 subcategories are populated with zero empty placeholder links or 404 errors.',
-        textAr:
-          'التأكد من أرشفة المقالات في جوجل وخلو كافة الأقسام الأربعة وفروعها من أي صفحات فارغة أو روابط معطلة.',
-        doneByDefault: true,
-      },
-      {
-        id: 'w4-2',
-        textEn:
-          'Submit site to Google AdSense and continue publishing 2 long-form video recipes per week during the review window.',
-        textAr:
-          'التقديم الرسمي على Google AdSense مع الاستمرار في نشر مقالين أسبوعياً أثناء فترة المراجعة.',
-        doneByDefault: false,
       },
     ],
   },

@@ -21,39 +21,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'CookReel Studio – Domain SEO Audit & Culinary Platform',
+  title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
   description:
-    'Forensic backlink audit, Google Disavow & 301 recovery blueprint, and shoppable video recipe monetization platform for cookreel.com.',
+    'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
   openGraph: {
-    title: 'CookReel Studio – Domain SEO Audit & Culinary Platform',
+    title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
     description:
-      'Forensic backlink audit, Google Disavow & 301 recovery blueprint, and shoppable video recipe monetization platform for cookreel.com.',
+      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
     type: 'website',
-    siteName: 'CookReel Studio',
+    siteName: 'CookReel',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CookReel Studio – Domain SEO Audit & Culinary Platform',
+    title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
     description:
-      'Forensic backlink audit, Google Disavow & 301 recovery blueprint, and shoppable video recipe monetization platform for cookreel.com.',
+      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
   },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const schemaOrg = {
     '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'CookReel Studio – Domain SEO Audit & Culinary Platform',
+    '@type': 'WebSite',
+    name: 'CookReel – Short-Form Video Recipes & Culinary Guides',
     url: 'https://cookreel.com',
-    applicationCategory: 'BusinessApplication',
-    operatingSystem: 'All',
     description:
-      'Complete Ahrefs backlink forensic analysis, disavow generator, 301 link equity recovery, and video recipe monetization architecture for cookreel.com.',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
+      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
   };
 
   return (
