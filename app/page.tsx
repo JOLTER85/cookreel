@@ -42,7 +42,6 @@ import {
   BookOpen,
   HelpCircle,
   Sparkles,
-  FileCheck,
 } from 'lucide-react';
 
 interface ClientReview {
@@ -760,25 +759,12 @@ export default function CookReelPlatformPage() {
                     </span>
                     <span>
                       {isAr
-                        ? 'هيكلة السيو والأدسنس المتكاملة · مقالات E-E-A-T + فيديو قصير'
-                        : '4-Pillar SEO Architecture · Long-Form E-E-A-T Video Recipes'}
+                        ? 'وصفات فيديو قصيرة وأدلة طهي منزلية مجربة'
+                        : 'Test-Kitchen Video Recipes & Culinary Guides'}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setActiveLegalModal('roadmap')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-md transition-colors whitespace-nowrap shrink-0"
-                    >
-                      <FileCheck className="w-3.5 h-3.5" />
-                      <span>
-                        {isAr
-                          ? 'خطة الـ 30 يوماً لقبول AdSense'
-                          : '30-Day AdSense Plan'}
-                      </span>
-                    </button>
-
                     <button
                       type="button"
                       onClick={() => setLang(isAr ? 'en' : 'ar')}
@@ -792,14 +778,14 @@ export default function CookReelPlatformPage() {
 
                 <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-slate-900 tracking-tight leading-[1.18] font-display">
                   {isAr
-                    ? 'منصة CookReel لوصفات الفيديو السريعة، الأكل الصحي عالي العائد، وأدلة المطبخ الشاملة.'
-                    : 'Short-Form Video Recipes Paired with Long-Form Culinary Guides & Chef Substitutions.'}
+                    ? 'وصفات فيديو قصيرة خطوة بخطوة مع أدلة المطبخ وجداول بدائل المكونات.'
+                    : 'Short-Form Video Recipes Paired with In-Depth Culinary Guides & Chef Substitutions.'}
                 </h1>
 
                 <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
                   {isAr
-                    ? 'تم هيكلة الموقع على 4 أقسام رئيسية و12 قسماً فرعياً عالي البحث والربحية، مع قالب المقال المتكامل للقبول في Google AdSense (مقدمة شاملة، فيديو وصور مراحل الطهي، جدول بدائل المكونات، بطاقة السكيما Recipe Schema، والأسئلة الشائعة).'
-                    : 'Engineered around 4 high-CPC culinary silos and 12 targeted subcategories. Every post delivers our 5-part E-E-A-T article template: rich introduction, HD video reel & step photos, ingredient substitution matrix, Recipe Schema card, and storage FAQs.'}
+                    ? 'اكتشف وصفات العشاء السريعة في 15 دقيقة، أطباق الكيتو والبروتين العالي، الحلويات المنزلية، وأدلة بدائل المكونات المختبرة في مطبخ CookReel.'
+                    : 'Explore 15-minute weeknight dinners, high-protein & keto skillets, bakery-style desserts, and kitchen-tested ingredient substitution guides.'}
                 </p>
               </div>
 
@@ -814,7 +800,7 @@ export default function CookReelPlatformPage() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder={
                         isAr
-                          ? 'ابحث في الأقسام الأربعة (وجبات 15 دقيقة، كيتو، قلاية هوائية، بدائل المكونات)...'
+                          ? 'ابحث عن وجبات 15 دقيقة، كيتو، قلاية هوائية، أو بدائل المكونات...'
                           : 'Search 15-minute meals, keto, air fryer, or ingredient substitutes...'
                       }
                       className="w-full pl-10 pr-4 py-3 text-sm bg-[#FAF9F6] border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
@@ -827,26 +813,19 @@ export default function CookReelPlatformPage() {
                   >
                     <Upload className="w-4 h-4" />
                     <span>
-                      {isAr
-                        ? 'نشر مقال وصفة جديد (قالب AdSense)'
-                        : 'Publish E-E-A-T Recipe Post'}
+                      {isAr ? 'إضافة وصفة جديدة' : 'Submit Recipe Reel'}
                     </span>
                   </button>
                 </div>
 
-                {/* Quick Trust Pages Bar (Mandatory Week 1 AdSense Pages) */}
+                {/* Quick Editorial Links */}
                 <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-1">
-                  <span className="font-semibold text-slate-700">
-                    {isAr
-                      ? 'صفحات القبول القانونية الجاهزة:'
-                      : 'AdSense Compliance Pages:'}
-                  </span>
                   <button
                     type="button"
                     onClick={() => setActiveLegalModal('about')}
                     className="hover:text-slate-900 underline underline-offset-4"
                   >
-                    {isAr ? 'من نحن (About Us)' : 'About Us'}
+                    {isAr ? 'من نحن' : 'About Us'}
                   </button>
                   <span aria-hidden="true">·</span>
                   <button
@@ -854,7 +833,7 @@ export default function CookReelPlatformPage() {
                     onClick={() => setActiveLegalModal('contact')}
                     className="hover:text-slate-900 underline underline-offset-4"
                   >
-                    {isAr ? 'اتصل بنا (Contact Us)' : 'Contact Us'}
+                    {isAr ? 'اتصل بنا' : 'Contact Us'}
                   </button>
                   <span aria-hidden="true">·</span>
                   <button
@@ -862,7 +841,7 @@ export default function CookReelPlatformPage() {
                     onClick={() => setActiveLegalModal('privacy')}
                     className="hover:text-slate-900 underline underline-offset-4"
                   >
-                    {isAr ? 'سياسة الخصوصية (Privacy)' : 'Privacy Policy'}
+                    {isAr ? 'سياسة الخصوصية' : 'Privacy Policy'}
                   </button>
                   <span aria-hidden="true">·</span>
                   <button
@@ -870,7 +849,7 @@ export default function CookReelPlatformPage() {
                     onClick={() => setActiveLegalModal('terms')}
                     className="hover:text-slate-900 underline underline-offset-4"
                   >
-                    {isAr ? 'الشروط والأحكام (Terms)' : 'Terms & Conditions'}
+                    {isAr ? 'الشروط والأحكام' : 'Terms & Conditions'}
                   </button>
                 </div>
               </div>
@@ -930,8 +909,8 @@ export default function CookReelPlatformPage() {
                 <div className="space-y-1.5">
                   <div className="text-xs font-mono text-amber-300">
                     {isAr
-                      ? 'فيديو أصلي 100% · متوافق مع حقوق الملكية الفكرية لـ AdSense'
-                      : '100% Original In-House Video · Zero Copyright Risk'}
+                      ? 'استوديو مطبخ CookReel · وصفة مميزة'
+                      : 'CookReel Test Kitchen · Featured Reel'}
                   </div>
                   <p className="text-base font-bold leading-snug">
                     {isAr
@@ -953,13 +932,13 @@ export default function CookReelPlatformPage() {
             <div>
               <p className="text-xs font-mono text-amber-800">
                 {isAr
-                  ? '01 · هيكلة أقسام الموقع (4 أقسام رئيسية و12 قسماً فرعياً لسهولة أرشفة عناكب جوجل)'
-                  : '01 · Clean 4-Silo Site Architecture & 12 High-CPC Subcategories'}
+                  ? 'أقسام الوصفات وأدلة الطهي'
+                  : 'EXPLORE RECIPES BY CATEGORY & DIET'}
               </p>
               <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-1 font-display">
                 {isAr
-                  ? 'تصفح حسب القسم الرئيسي أو القسم الفرعي المستهدف'
-                  : 'Browse by Primary Culinary Silo or Targeted Subcategory'}
+                  ? 'تصفح حسب القسم الرئيسي أو التخصص'
+                  : 'Browse by Culinary Department or Subcategory'}
               </h2>
             </div>
 
@@ -1070,13 +1049,13 @@ export default function CookReelPlatformPage() {
             <div>
               <p className="text-xs font-mono text-amber-800">
                 {isAr
-                  ? 'مقالات الوصفات المتوافقة مع معايير Google AdSense (800 – 1,200+ كلمة مع فيديو أصلي)'
-                  : 'AdSense-Ready Long-Form Video Recipe Articles (800–1,200+ Words E-E-A-T)'}
+                  ? 'أحدث وصفات الفيديو المصورة'
+                  : 'LATEST TEST-KITCHEN VIDEO RECIPES'}
               </p>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mt-1 font-display">
                 {isAr
-                  ? 'اضغط على أي مقال لقراءة الهيكل الكامل (المقدمة + الفيديو + البدائل + السكيما + الأسئلة)'
-                  : 'Select Any Article to Open the Full 5-Part E-E-A-T Post Structure'}
+                  ? 'اختر أي وصفة لمشاهدة الفيديو، خطوات التحضير، وجدول البدائل'
+                  : 'Fresh Video Reels, Step-by-Step Guides & Substitution Charts'}
               </h2>
             </div>
           </div>
@@ -1254,12 +1233,12 @@ export default function CookReelPlatformPage() {
                 </span>
                 <span>
                   {isAr
-                    ? `قالب المقال الكامل (${
+                    ? `دليل الطهي الكامل (${
                         activeRecipe.wordCount || 1080
-                      } كلمة · E-E-A-T)`
-                    : `Full AdSense Article Structure (${
+                      } كلمة)`
+                    : `Complete Culinary Guide (${
                         activeRecipe.wordCount || 1080
-                      } Words · E-E-A-T)`}
+                      } Words)`}
                 </span>
               </div>
 
@@ -1360,10 +1339,10 @@ export default function CookReelPlatformPage() {
               <div className="text-xs font-mono text-amber-800">
                 {isAr
                   ? '02. فيديو التحضير القصير (CookReel Video) + صور مراحل الطبخ خطوة بخطوة'
-                  : '02. Short-Form Video Reel & Original Step-by-Step Process Visuals'}
+                  : '02. Short-Form Video Reel & Step-by-Step Cooking Visuals'}
               </div>
               <span className="text-xs text-slate-500 font-mono">
-                100% Original Media · AdSense Copyright Verified
+                CookReel Test Kitchen Studio
               </span>
             </div>
 
@@ -1532,14 +1511,14 @@ export default function CookReelPlatformPage() {
             </div>
           </div>
 
-          {/* PART 3: Chef Tips for Success & Ingredient Substitutions Table (E-E-A-T Section) */}
+          {/* PART 3: Chef Tips for Success & Ingredient Substitutions Table */}
           <div className="space-y-6 pt-6 border-t border-slate-200">
             <div className="flex items-center gap-2 text-xs font-mono text-amber-800">
               <Sparkles className="w-4 h-4" />
               <span>
                 {isAr
-                  ? '03. أسرار نجاح الوصفة وجدول بدائل المكونات (قسم E-E-A-T لرفع قيمة المقال)'
-                  : '03. Chef Tips for Success & 1:1 Ingredient Substitutions Matrix (E-E-A-T)'}
+                  ? '03. أسرار نجاح الوصفة وجدول بدائل المكونات'
+                  : '03. Chef Tips for Success & 1:1 Ingredient Substitutions Matrix'}
               </span>
             </div>
 
@@ -1613,7 +1592,7 @@ export default function CookReelPlatformPage() {
             </div>
           </div>
 
-          {/* PART 4: Structured Printable Recipe Card with Schema.org (WP Recipe Maker Equivalent) */}
+          {/* PART 4: Structured Printable Recipe Card */}
           <div
             id="structured-recipe-card"
             className="pt-6 border-t border-slate-200 space-y-6"
@@ -1621,11 +1600,11 @@ export default function CookReelPlatformPage() {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="text-xs font-mono text-amber-800">
                 {isAr
-                  ? '04. بطاقة الوصفة المنظمة (Recipe Schema Card — تظهر بالنجوم والسعرات في بحث جوجل)'
-                  : '04. Structured Recipe Card (Google Rich Snippet Recipe Schema Enabled)'}
+                  ? '04. بطاقة الوصفة والمقادير الدقيقة'
+                  : '04. Printable Recipe Card & Interactive Cooking Timer'}
               </div>
               <span className="text-xs font-mono text-emerald-800 font-semibold">
-                JSON-LD Recipe + VideoObject + FAQPage Active
+                {isAr ? 'مختبرة في مطبخ CookReel' : 'Tested & Verified in Our Kitchen'}
               </span>
             </div>
 
@@ -1902,8 +1881,8 @@ export default function CookReelPlatformPage() {
               <HelpCircle className="w-4 h-4" />
               <span>
                 {isAr
-                  ? '05. الأسئلة الشائعة حول التخزين والتجميد وإعادة التسخين (FAQPage Schema)'
-                  : '05. Frequently Asked Questions: Storage, Freezing & Reheating (FAQ Schema)'}
+                  ? '05. الأسئلة الشائعة حول التخزين والتجميد وإعادة التسخين'
+                  : '05. Frequently Asked Questions: Storage, Freezing & Reheating'}
               </span>
             </div>
 
@@ -2587,7 +2566,7 @@ export default function CookReelPlatformPage() {
         lang={lang}
       />
 
-      {/* Editorial Footer with All 4 Primary Categories + Mandatory AdSense Legal Links */}
+      {/* Editorial Footer with All 4 Primary Categories + Popular Subcategories + Legal Links */}
       <footer className="border-t border-slate-200 bg-white px-6 py-10 mt-16">
         <div className="max-w-[1280px] mx-auto space-y-6 text-xs text-slate-500">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pb-6 border-b border-slate-200">
@@ -2597,14 +2576,14 @@ export default function CookReelPlatformPage() {
               </div>
               <p className="leading-relaxed">
                 {isAr
-                  ? 'منصة وصفات الفيديو القصيرة والمقالات الغذائية الشاملة، مصممة بهيكلة السيو والأدسنس المتكاملة.'
-                  : 'Short-form video recipes and 1,000+ word E-E-A-T culinary guides built for search authority.'}
+                  ? 'منصة وصفات الفيديو القصيرة وأدلة الطهي المنزلية مع جداول بدائل المكونات وحاسبة المقادير.'
+                  : 'Short-form video recipes, step-by-step culinary guides, and 1:1 ingredient substitution charts for home cooks.'}
               </p>
             </div>
 
             <div className="space-y-2">
               <div className="font-bold text-slate-900">
-                {isAr ? 'أقسام الموقع الرئيسية' : 'Primary Categories'}
+                {isAr ? 'أقسام الوصفات' : 'Recipe Categories'}
               </div>
               <div className="flex flex-col gap-1.5">
                 {SITE_ARCHITECTURE.map((cat) => (
@@ -2622,9 +2601,45 @@ export default function CookReelPlatformPage() {
 
             <div className="space-y-2">
               <div className="font-bold text-slate-900">
-                {isAr
-                  ? 'الصفحات القانونية (AdSense)'
-                  : 'Mandatory Legal & Trust Pages'}
+                {isAr ? 'تخصصات شائعة' : 'Popular Collections'}
+              </div>
+              <div className="flex flex-col gap-1.5 items-start">
+                <a
+                  href="#site-architecture"
+                  onClick={() => selectCategory('quick_easy', '15-minute-meals')}
+                  className="hover:text-slate-900"
+                >
+                  {isAr ? 'وجبات في 15 دقيقة' : '15-Minute Meals'}
+                </a>
+                <a
+                  href="#site-architecture"
+                  onClick={() => selectCategory('quick_easy', 'air-fryer-recipes')}
+                  className="hover:text-slate-900"
+                >
+                  {isAr ? 'وصفات القلاية الهوائية' : 'Air Fryer Recipes'}
+                </a>
+                <a
+                  href="#site-architecture"
+                  onClick={() => selectCategory('healthy_diet', 'keto-low-carb')}
+                  className="hover:text-slate-900"
+                >
+                  {isAr ? 'كيتو ولو كارب' : 'Keto & Low-Carb'}
+                </a>
+                <a
+                  href="#site-architecture"
+                  onClick={() =>
+                    selectCategory('kitchen_hacks', 'ingredient-substitutes')
+                  }
+                  className="hover:text-slate-900"
+                >
+                  {isAr ? 'بدائل المكونات' : 'Ingredient Substitutes'}
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="font-bold text-slate-900">
+                {isAr ? 'عن الموقع والسياسات' : 'About & Legal'}
               </div>
               <div className="flex flex-col gap-1.5 items-start">
                 <button
@@ -2632,75 +2647,39 @@ export default function CookReelPlatformPage() {
                   onClick={() => setActiveLegalModal('about')}
                   className="hover:text-slate-900"
                 >
-                  {isAr ? 'من نحن (About Us)' : 'About Us'}
+                  {isAr ? 'من نحن' : 'About Us'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveLegalModal('contact')}
                   className="hover:text-slate-900"
                 >
-                  {isAr ? 'اتصل بنا (Contact Us)' : 'Contact Us'}
+                  {isAr ? 'اتصل بنا' : 'Contact Us'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveLegalModal('privacy')}
                   className="hover:text-slate-900"
                 >
-                  {isAr
-                    ? 'سياسة الخصوصية (Privacy Policy)'
-                    : 'Privacy Policy (DART Cookie)'}
+                  {isAr ? 'سياسة الخصوصية' : 'Privacy Policy'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveLegalModal('terms')}
                   className="hover:text-slate-900"
                 >
-                  {isAr
-                    ? 'الشروط والأحكام (Terms & Conditions)'
-                    : 'Terms & Conditions'}
+                  {isAr ? 'الشروط والأحكام' : 'Terms & Conditions'}
                 </button>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="font-bold text-slate-900">
-                {isAr ? 'أدوات السيو والانطلاق' : 'SEO & Launch Tools'}
-              </div>
-              <div className="flex flex-col gap-1.5 items-start">
-                <button
-                  type="button"
-                  onClick={() => setActiveLegalModal('roadmap')}
-                  className="text-amber-800 font-semibold hover:underline"
-                >
-                  {isAr
-                    ? 'خطة الـ 30 يوماً لقبول AdSense + ملف Disavow'
-                    : '30-Day AdSense Roadmap & Disavow.txt'}
-                </button>
-                <a
-                  href="/sitemap.xml"
-                  target="_blank"
-                  className="hover:text-slate-900"
-                >
-                  XML Sitemap (/sitemap.xml)
-                </a>
-                <a
-                  href="/robots.txt"
-                  target="_blank"
-                  className="hover:text-slate-900"
-                >
-                  Robots.txt (/robots.txt)
-                </a>
               </div>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              © {new Date().getFullYear()} CookReel.com · All Original Video
-              Reels & E-E-A-T Recipes Reserved.
+              © {new Date().getFullYear()} CookReel.com · All Rights Reserved.
             </div>
             <div>
-              Recipe Schema + VideoObject + FAQPage JSON-LD Active
+              CookReel Culinary Studio & Test Kitchen
             </div>
           </div>
         </div>

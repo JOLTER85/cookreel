@@ -91,11 +91,11 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
     slug: 'quick_easy',
     labelEn: 'Quick & Easy',
-    labelAr: 'وصفات سريعة (Quick & Easy)',
+    labelAr: 'وصفات سريعة',
     seoObjectiveEn:
-      'High search volume keywords targeting busy families and home appliance advertisers (Air Fryer & 15-Minute meals).',
+      'Weeknight dinners on the table in 15 to 25 minutes—featuring crispy air fryer favorites, one-pan skillets, and 5-ingredient meals.',
     seoObjectiveAr:
-      'يستهدف كلمات بحثية عالية الحجم للباحثين عن حلول سريعة، خاصة وصفات القلاية الهوائية التي تجذب معلني الأجهزة المنزلية.',
+      'وجبات عشاء سريعة تجهز خلال 15 إلى 25 دقيقة، تشمل وصفات القلاية الهوائية والمقلاة الواحدة ووجبات الـ 5 مكونات.',
     subcategories: [
       {
         id: '15-minute-meals',
@@ -120,11 +120,11 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
     slug: 'healthy_diet',
     labelEn: 'Healthy & Diet',
-    labelAr: 'أكل صحي وحميات (Healthy & Diet)',
+    labelAr: 'أكل صحي وحميات',
     seoObjectiveEn:
-      'Highest AdSense CPC in the food vertical driven by nutrition, supplement, and fitness app advertisers.',
+      'Nutrient-dense recipes crafted with complete macro profiles—covering Keto, low-carb, high-protein, and vibrant plant-based bowls.',
     seoObjectiveAr:
-      'الأعلى سعراً للنقرة (High CPC) في مجال الطبخ، لأن شركات المكملات الغذائية وتطبيقات اللياقة تتنافس بقوة على الإعلان في هذه الصفحات.',
+      'وصفات صحية متوازنة العناصر الغذائية مع حساب دقيق للسعرات والبروتين، تشمل الكيتو واللو كارب والوجبات النباتية.',
     subcategories: [
       {
         id: 'keto-low-carb',
@@ -149,11 +149,11 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
     slug: 'desserts_baking',
     labelEn: 'Desserts & Baking',
-    labelAr: 'حلويات ومخبوزات (Desserts & Baking)',
+    labelAr: 'حلويات ومخبوزات',
     seoObjectiveEn:
-      'Massive viral traffic driver from Pinterest, TikTok, and Reels—matching CookReel’s core visual brand.',
+      'Bakery-worthy cakes, swirled cupcakes, effortless no-bake treats, and naturally sweetened desserts tested to perfection.',
     seoObjectiveAr:
-      'يجذب زيارات ضخمة جداً من منصات التواصل الاجتماعي (Pinterest & TikTok)، ومثالي لاسم CookReel.',
+      'حلويات منزلية ومخبوزات احترافية، تشمل الحلويات الباردة بدون فرن، الكيك والكب كيك، والحلويات الصحية خفيفة السكر.',
     subcategories: [
       {
         id: 'no-bake-desserts',
@@ -178,11 +178,11 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
     slug: 'kitchen_hacks',
     labelEn: 'Kitchen Hacks & Guides',
-    labelAr: 'نصائح وأدوات (Kitchen Hacks)',
+    labelAr: 'نصائح وأدوات المطبخ',
     seoObjectiveEn:
-      'Long-form evergreen informational articles (1,200+ words) that rank easily and maximize in-content ad viewability.',
+      'In-depth culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, and cast-iron skillet care.',
     seoObjectiveAr:
-      'مقالات معلوماتية طويلة (1,200+ كلمة) تتصدر نتائج البحث بسهولة وتستوعب عدداً أكبر من الوحدات الإعلانية داخل المقال.',
+      'أدلة مطبخ شاملة تغطي بدائل المكونات الدقيقة، خطط تجهيز وحفظ الوجبات الأسبوعية، وأسرار العناية بأدوات الطهي.',
     subcategories: [
       {
         id: 'ingredient-substitutes',
