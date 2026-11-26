@@ -3,61 +3,79 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ChevronRight, Sparkles, BookOpen } from 'lucide-react';
-import { readDatabase } from '@/lib/server-db';
-import { SITE_ARCHITECTURE } from '@/lib/cookreel-data';
+import { readDatabase, getSafeSiteUrl } from '@/lib/server-db';
+import { SITE_ARCHITECTURE, COOKREEL_RECIPES } from '@/lib/cookreel-data';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
 import { RecipeCard } from '@/components/RecipeCard';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return SITE_ARCHITECTURE.map((cat) => ({
+    slug: cat.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const category = SITE_ARCHITECTURE.find((c) => c.slug === slug);
+  try {
+    const resolvedParams = await params;
+    const slug = resolvedParams?.slug || '';
+    const category = SITE_ARCHITECTURE.find((c) => c.slug === slug);
 
-  if (!category) {
+    if (!category) {
+      return {
+        title: 'Category Not Found | CookReel',
+      };
+    }
+
+    const siteUrl = getSafeSiteUrl();
+    const db = readDatabase();
+    const recipes =
+      Array.isArray(db?.recipes) && db.recipes.length > 0
+        ? db.recipes
+        : COOKREEL_RECIPES;
+    const catRecipes = recipes.filter((r) => r.category === category.slug);
+    const heroImg = catRecipes[0]?.image
+      ? `${siteUrl}${catRecipes[0].image}`
+      : `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+
     return {
-      title: 'Category Not Found | CookReel',
+      title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
+      description: category.descriptionEn,
+      alternates: {
+        canonical: `/category/${category.slug}`,
+      },
+      openGraph: {
+        title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
+        description: category.descriptionEn,
+        url: `${siteUrl}/category/${category.slug}`,
+        type: 'website',
+        siteName: 'CookReel',
+        images: [
+          {
+            url: heroImg,
+            width: 1200,
+            height: 630,
+            alt: `${category.labelEn} — CookReel`,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
+        description: category.descriptionEn,
+        images: [heroImg],
+      },
+    };
+  } catch {
+    return {
+      title: 'Recipe Categories | CookReel',
     };
   }
-
-  const db = readDatabase();
-  const catRecipes = db.recipes.filter((r) => r.category === category.slug);
-  const heroImg = catRecipes[0]?.image
-    ? `${siteUrl}${catRecipes[0].image}`
-    : `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
-
-  return {
-    title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
-    description: category.descriptionEn,
-    alternates: {
-      canonical: `/category/${category.slug}`,
-    },
-    openGraph: {
-      title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
-      description: category.descriptionEn,
-      url: `${siteUrl}/category/${category.slug}`,
-      type: 'website',
-      siteName: 'CookReel',
-      images: [
-        {
-          url: heroImg,
-          width: 1200,
-          height: 630,
-          alt: `${category.labelEn} — CookReel`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
-      description: category.descriptionEn,
-      images: [heroImg],
-    },
-  };
 }
 
 export default async function CategoryPage({
@@ -65,18 +83,27 @@ export default async function CategoryPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ sub?: string }>;
+  searchParams?: Promise<{ sub?: string }>;
 }) {
-  const { slug } = await params;
-  const { sub } = await searchParams;
+  const resolvedParams = await params;
+  const slug = resolvedParams?.slug || '';
+  const resolvedSearch = searchParams ? await searchParams : {};
+  const sub = typeof resolvedSearch?.sub === 'string' ? resolvedSearch.sub : undefined;
 
   const category = SITE_ARCHITECTURE.find((c) => c.slug === slug);
   if (!category) {
     notFound();
   }
 
+  const siteUrl = getSafeSiteUrl();
   const db = readDatabase();
-  const allCategoryRecipes = db.recipes.filter(
+  const recipes =
+    Array.isArray(db?.recipes) && db.recipes.length > 0
+      ? db.recipes
+      : COOKREEL_RECIPES;
+  const reviews = Array.isArray(db?.reviews) ? db.reviews : [];
+
+  const allCategoryRecipes = recipes.filter(
     (r) => r.category === category.slug
   );
   const activeSubcategory = category.subcategories.find((s) => s.id === sub);
@@ -183,7 +210,7 @@ export default async function CategoryPage({
             <RecipeCard
               key={recipe.id}
               recipe={recipe}
-              reviews={db.reviews}
+              reviews={reviews}
             />
           ))}
         </div>

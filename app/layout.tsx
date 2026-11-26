@@ -3,6 +3,7 @@ import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { CookieConsentBanner } from '@/components/CookieConsentBanner';
 import { SOCIAL_LINKS } from '@/lib/cookreel-data';
+import { getSafeSiteUrl } from '@/lib/server-db';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -22,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
+const siteUrl = getSafeSiteUrl();
 const defaultOgImage = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {

@@ -1,10 +1,14 @@
 import type { MetadataRoute } from 'next';
-import { readDatabase } from '@/lib/server-db';
-import { SITE_ARCHITECTURE } from '@/lib/cookreel-data';
+import { readDatabase, getSafeSiteUrl } from '@/lib/server-db';
+import { SITE_ARCHITECTURE, COOKREEL_RECIPES } from '@/lib/cookreel-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.APP_URL || 'https://cookreel.com';
+  const baseUrl = getSafeSiteUrl();
   const db = readDatabase();
+  const recipes =
+    Array.isArray(db?.recipes) && db.recipes.length > 0
+      ? db.recipes
+      : COOKREEL_RECIPES;
 
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -52,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const recipeUrls: MetadataRoute.Sitemap = db.recipes.map((recipe) => ({
+  const recipeUrls: MetadataRoute.Sitemap = recipes.map((recipe) => ({
     url: `${baseUrl}/recipes/${encodeURIComponent(recipe.slug)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',

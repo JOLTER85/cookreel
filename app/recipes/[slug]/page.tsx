@@ -1,60 +1,78 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { readDatabase } from '@/lib/server-db';
-import { SITE_ARCHITECTURE } from '@/lib/cookreel-data';
+import { readDatabase, getSafeSiteUrl } from '@/lib/server-db';
+import { SITE_ARCHITECTURE, COOKREEL_RECIPES } from '@/lib/cookreel-data';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
 import { RecipeDetailClient } from '@/components/RecipeDetailClient';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return COOKREEL_RECIPES.map((recipe) => ({
+    slug: recipe.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const db = readDatabase();
-  const recipe = db.recipes.find((r) => r.slug === slug);
+  try {
+    const resolvedParams = await params;
+    const slug = resolvedParams?.slug || '';
+    const siteUrl = getSafeSiteUrl();
+    const db = readDatabase();
+    const recipes =
+      Array.isArray(db?.recipes) && db.recipes.length > 0
+        ? db.recipes
+        : COOKREEL_RECIPES;
+    const recipe = recipes.find((r) => r.slug === slug);
 
-  if (!recipe) {
+    if (!recipe) {
+      return {
+        title: 'Recipe Not Found | CookReel',
+      };
+    }
+
+    const imageUrl = recipe.image.startsWith('http')
+      ? recipe.image
+      : `${siteUrl}${recipe.image}`;
+
     return {
-      title: 'Recipe Not Found | CookReel',
+      title: `${recipe.titleEn} | CookReel`,
+      description: recipe.subtitleEn,
+      alternates: {
+        canonical: `/recipes/${recipe.slug}`,
+      },
+      openGraph: {
+        title: `${recipe.titleEn} | CookReel`,
+        description: recipe.subtitleEn,
+        url: `${siteUrl}/recipes/${recipe.slug}`,
+        type: 'article',
+        siteName: 'CookReel',
+        images: [
+          {
+            url: imageUrl,
+            width: 1200,
+            height: 630,
+            alt: recipe.titleEn,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${recipe.titleEn} | CookReel`,
+        description: recipe.subtitleEn,
+        images: [imageUrl],
+      },
+    };
+  } catch {
+    return {
+      title: 'Step-by-Step Recipe | CookReel',
     };
   }
-
-  const imageUrl = recipe.image.startsWith('http')
-    ? recipe.image
-    : `${siteUrl}${recipe.image}`;
-
-  return {
-    title: `${recipe.titleEn} | CookReel`,
-    description: recipe.subtitleEn,
-    alternates: {
-      canonical: `/recipes/${recipe.slug}`,
-    },
-    openGraph: {
-      title: `${recipe.titleEn} | CookReel`,
-      description: recipe.subtitleEn,
-      url: `${siteUrl}/recipes/${recipe.slug}`,
-      type: 'article',
-      siteName: 'CookReel',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: recipe.titleEn,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${recipe.titleEn} | CookReel`,
-      description: recipe.subtitleEn,
-      images: [imageUrl],
-    },
-  };
 }
 
 export default async function RecipePage({
@@ -62,15 +80,23 @@ export default async function RecipePage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const slug = resolvedParams?.slug || '';
+  const siteUrl = getSafeSiteUrl();
   const db = readDatabase();
-  const recipe = db.recipes.find((r) => r.slug === slug);
+  const recipes =
+    Array.isArray(db?.recipes) && db.recipes.length > 0
+      ? db.recipes
+      : COOKREEL_RECIPES;
+  const reviews = Array.isArray(db?.reviews) ? db.reviews : [];
+
+  const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) {
     notFound();
   }
 
-  const recipeReviews = db.reviews.filter((r) => r.recipeId === recipe.id);
+  const recipeReviews = reviews.filter((r) => r.recipeId === recipe.id);
   const reviewCount = recipeReviews.length;
   const averageRating =
     reviewCount > 0
@@ -81,7 +107,7 @@ export default async function RecipePage({
         )
       : null;
 
-  const relatedRecipes = db.recipes
+  const relatedRecipes = recipes
     .filter((r) => r.category === recipe.category && r.id !== recipe.id)
     .slice(0, 3);
 
@@ -90,7 +116,6 @@ export default async function RecipePage({
     ? recipe.image
     : `${siteUrl}${recipe.image}`;
 
-  // Build valid Schema.org Recipe + VideoObject (only if videoUrl exists) + FAQPage + BreadcrumbList
   const recipeNode: Record<string, unknown> = {
     '@type': 'Recipe',
     '@id': `${siteUrl}/recipes/${recipe.slug}#recipe`,
@@ -98,7 +123,7 @@ export default async function RecipePage({
     description: recipe.subtitleEn,
     image: [
       fullImageUrl,
-      ...recipe.stepGalleryImages.map((img) =>
+      ...(recipe.stepGalleryImages || []).map((img) =>
         img.startsWith('http') ? img : `${siteUrl}${img}`
       ),
     ],
@@ -121,10 +146,10 @@ export default async function RecipePage({
       proteinContent: `${recipe.proteinGrams} g`,
       carbohydrateContent: `${recipe.netCarbsGrams} g`,
     },
-    recipeIngredient: recipe.ingredientsEn.map(
+    recipeIngredient: (recipe.ingredientsEn || []).map(
       (i) => `${i.amount} ${i.unit} ${i.item}`
     ),
-    recipeInstructions: recipe.stepsEn.map((s, index) => ({
+    recipeInstructions: (recipe.stepsEn || []).map((s, index) => ({
       '@type': 'HowToStep',
       position: index + 1,
       name: s.title,
@@ -133,7 +158,6 @@ export default async function RecipePage({
     })),
   };
 
-  // Only include aggregateRating when actual verified reader reviews exist (> 0)
   if (averageRating && reviewCount > 0) {
     recipeNode.aggregateRating = {
       '@type': 'AggregateRating',
@@ -144,7 +168,6 @@ export default async function RecipePage({
     };
   }
 
-  // Only include VideoObject when this specific recipe has its own unique video clip
   if (recipe.videoUrl) {
     recipeNode.video = {
       '@type': 'VideoObject',
@@ -164,7 +187,7 @@ export default async function RecipePage({
       {
         '@type': 'FAQPage',
         '@id': `${siteUrl}/recipes/${recipe.slug}#faq`,
-        mainEntity: recipe.faqs.map((f) => ({
+        mainEntity: (recipe.faqs || []).map((f) => ({
           '@type': 'Question',
           name: f.questionEn,
           acceptedAnswer: {
@@ -209,7 +232,7 @@ export default async function RecipePage({
       <main className="flex-1">
         <RecipeDetailClient
           recipe={recipe}
-          initialReviews={db.reviews}
+          initialReviews={reviews}
           relatedRecipes={relatedRecipes}
         />
       </main>
