@@ -22,7 +22,9 @@ export function QaKnowledgeBaseClient() {
   const [qaList, setQaList] = useState<CookingQAItem[]>(
     COOKING_QA_KNOWLEDGE_BASE
   );
-  const [activeTopic, setActiveTopic] = useState<'all' | CookingQATopic>('all');
+  const [activeTopic, setActiveTopic] = useState<
+    'all' | 'trending_30d' | CookingQATopic
+  >('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [askModalOpen, setAskModalOpen] = useState(false);
 
@@ -31,15 +33,19 @@ export function QaKnowledgeBaseClient() {
   const [topic, setTopic] = useState<CookingQATopic>('meal_prep_storage');
   const [answerText, setAnswerText] = useState('');
   const [proTipText, setProTipText] = useState('');
-  const [captchaA, setCaptchaA] = useState(3);
-  const [captchaB, setCaptchaB] = useState(6);
+  const [captchaA] = useState(3);
+  const [captchaB] = useState(6);
   const [captchaAnswer, setCaptchaAnswer] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [formError, setFormError] = useState('');
 
   const filteredItems = qaList.filter((item) => {
-    const matchesTopic = activeTopic === 'all' || item.topic === activeTopic;
+    const matchesTopic =
+      activeTopic === 'all' ||
+      (activeTopic === 'trending_30d'
+        ? Boolean(item.isTrendingLast30Days)
+        : item.topic === activeTopic);
     const matchesSearch =
       !searchQuery.trim() ||
       item.questionEn.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -228,13 +234,19 @@ export function QaKnowledgeBaseClient() {
             className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-xs hover:shadow-md hover:border-amber-800/40 transition-all flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <span className="px-2.5 py-1 rounded bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-mono uppercase tracking-wider font-bold">
                   {qa.topicLabelEn}
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">
-                  CookReel Editorial Guide
-                </span>
+                {qa.isTrendingLast30Days ? (
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-mono font-bold">
+                    Most-Asked · Last 30 Days
+                  </span>
+                ) : (
+                  <span className="text-[11px] font-mono text-slate-500">
+                    CookReel Editorial Guide
+                  </span>
+                )}
               </div>
 
               <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-900 mb-3 leading-snug">

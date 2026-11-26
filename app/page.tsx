@@ -525,20 +525,22 @@ export default function CookReelHomePage() {
           </div>
         </section>
 
-        {/* SECTION 2: PREVIEW OF COOKING & MEAL-PREP Q&A KNOWLEDGE BASE */}
+        {/* SECTION 2: PREVIEW OF COOKING & MEAL-PREP Q&A KNOWLEDGE BASE (INCLUDES TOP 20 LAST 30 DAYS) */}
         <section className="py-14 bg-[#FAF9F6] border-b border-slate-200/80">
           <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold mb-1.5">
                   <HelpCircle className="w-4 h-4" />
-                  <span>Culinary Science &amp; Food Safety Q&amp;A</span>
+                  <span>
+                    Top Most-Asked Culinary Questions (Last 30 Days) · 36 Total Q&amp;A Guides
+                  </span>
                 </div>
                 <h2 className="font-serif text-3xl font-bold text-slate-900">
-                  Cooking &amp; Food Preparation Questions Answered
+                  Trending Cooking &amp; Food Preparation Questions Answered
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-                  Direct, actionable answers on meal-prep refrigeration, USDA safe minimum internal temperatures (74°C / 165°F for poultry, 63°C / 145°F for fish and whole steaks), and 1:1 ingredient swaps.
+                  Direct, science-backed answers to the 20 most-searched kitchen questions from the past 30 days—covering Air Fryer liners, high-protein cottage cheese swaps, preventing white albumin on salmon, USDA safe internal temperatures, and freezer meal prep.
                 </p>
               </div>
 
@@ -548,51 +550,58 @@ export default function CookReelHomePage() {
               >
                 <BookOpen className="w-4 h-4" />
                 <span>
-                  Open Full Q&amp;A Knowledge Base ({COOKING_QA_KNOWLEDGE_BASE.length} Guides)
+                  Explore All {COOKING_QA_KNOWLEDGE_BASE.length} Q&amp;A Guides
                 </span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {COOKING_QA_KNOWLEDGE_BASE.slice(0, 6).map((qa) => (
-                <article
-                  key={qa.id}
-                  className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-xs hover:border-amber-800/40 transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <span className="inline-block px-2.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-mono uppercase font-bold mb-2.5">
-                      {qa.topicLabelEn}
-                    </span>
-                    <h3 className="font-serif text-lg font-bold text-slate-900 mb-2 leading-snug">
-                      <Link href="/qa" className="hover:text-amber-800">
-                        {qa.questionEn}
-                      </Link>
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                      {qa.shortAnswerEn}
-                    </p>
-                  </div>
+              {COOKING_QA_KNOWLEDGE_BASE.filter((q) => q.isTrendingLast30Days)
+                .slice(0, 9)
+                .map((qa) => (
+                  <article
+                    key={qa.id}
+                    className="rounded-xl border border-slate-200/90 bg-white p-5 shadow-xs hover:border-amber-800/40 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                        <span className="inline-block px-2.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-900 text-[11px] font-mono uppercase font-bold">
+                          {qa.topicLabelEn}
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-mono font-bold">
+                          Last 30 Days
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-lg font-bold text-slate-900 mb-2 leading-snug">
+                        <Link href="/qa" className="hover:text-amber-800">
+                          {qa.questionEn}
+                        </Link>
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                        {qa.shortAnswerEn}
+                      </p>
+                    </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <Link
-                      href="/qa"
-                      className="text-xs font-bold text-slate-700 hover:text-amber-800"
-                    >
-                      Read Step-by-Step Checklist →
-                    </Link>
-                    {qa.relatedRecipeSlug && (
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                       <Link
-                        href={`/recipes/${qa.relatedRecipeSlug}`}
-                        className="text-xs font-bold text-amber-800 hover:underline flex items-center gap-1"
+                        href="/qa"
+                        className="text-xs font-bold text-slate-700 hover:text-amber-800"
                       >
-                        <span>Recipe</span>
-                        <ArrowUpRight className="w-3 h-3" />
+                        Read Full Answer →
                       </Link>
-                    )}
-                  </div>
-                </article>
-              ))}
+                      {qa.relatedRecipeSlug && (
+                        <Link
+                          href={`/recipes/${qa.relatedRecipeSlug}`}
+                          className="text-xs font-bold text-amber-800 hover:underline flex items-center gap-1"
+                        >
+                          <span>Related Recipe</span>
+                          <ArrowUpRight className="w-3 h-3" />
+                        </Link>
+                      )}
+                    </div>
+                  </article>
+                ))}
             </div>
           </div>
         </section>

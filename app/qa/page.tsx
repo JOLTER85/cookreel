@@ -9,16 +9,16 @@ import { QaKnowledgeBaseClient } from '@/components/QaKnowledgeBaseClient';
 const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {
-  title: 'Cooking & Meal-Prep Q&A Knowledge Base | CookReel',
+  title: 'Cooking & Meal-Prep Q&A Knowledge Base (36 Guides) | CookReel',
   description:
-    'Science-backed answers to 16 common cooking, food preparation, USDA safe internal temperature, and 1:1 ingredient substitution questions.',
+    'Science-backed answers to 36 common cooking, food preparation, USDA safe internal temperature, and 1:1 ingredient substitution questions—including the top 20 most-asked questions from the last 30 days.',
   alternates: {
     canonical: '/qa',
   },
   openGraph: {
-    title: 'Cooking & Meal-Prep Q&A Knowledge Base | CookReel',
+    title: 'Cooking & Meal-Prep Q&A Knowledge Base (36 Guides) | CookReel',
     description:
-      'Science-backed answers to 16 common cooking, food preparation, USDA safe internal temperature, and 1:1 ingredient substitution questions.',
+      'Science-backed answers to 36 common cooking, food preparation, USDA safe internal temperature, and 1:1 ingredient substitution questions—including the top 20 most-asked questions from the last 30 days.',
     url: `${SITE_ORIGIN}/qa`,
     type: 'website',
     siteName: 'CookReel',
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cooking & Meal-Prep Q&A Knowledge Base | CookReel',
+    title: 'Cooking & Meal-Prep Q&A Knowledge Base (36 Guides) | CookReel',
     description:
-      'Science-backed answers to 16 common cooking, food preparation, and USDA safe internal temperature questions.',
+      'Science-backed answers to 36 common cooking, food preparation, and USDA safe internal temperature questions.',
     images: [ogImg],
   },
 };
@@ -73,13 +73,13 @@ export default function QaPage() {
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest mb-3">
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>Culinary Science &amp; Food Safety Reference</span>
+              <span>36 Culinary Guides · Includes Top 20 Most-Asked Questions (Last 30 Days)</span>
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-2">
               Cooking &amp; Food Preparation Q&amp;A Knowledge Base
             </h1>
             <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-              Practical answers to everyday cooking, meal-prep storage, cast-iron seasoning, baking substitutions, and official USDA safe minimum internal temperatures.
+              Practical answers to 36 everyday cooking, meal-prep storage, Air Fryer troubleshooting, baking substitutions, and official USDA safe minimum internal temperature questions—featuring the 20 most-searched culinary questions from the past 30 days.
             </p>
           </div>
         </div>

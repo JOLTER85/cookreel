@@ -3278,6 +3278,266 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     proMetric: 'Max 2 Hours at Room Temp · Danger Zone 4°C–60°C',
     relatedRecipeId: 'freezer-meal-prep-guide-soups-grains-proteins',
   },
+  {
+    id: 'qa-17',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Air Fryer',
+    question:
+      'Can you put aluminum foil or perforated parchment paper inside an Air Fryer basket safely?',
+    shortAnswer:
+      'Yes, as long as the food weighs down the foil or parchment in the bottom basket and you never preheat the Air Fryer with loose paper inside.',
+    detailedAnswer:
+      'Never place bare parchment paper in a preheating Air Fryer alone because the high-velocity top fan will lift the paper into the heating element. Trim foil or perforated parchment slightly smaller than the basket so air still circulates around the perimeter, and weigh it down firmly with your food.',
+    proMetric: 'Never Preheat Loose Paper · Leave Perimeter Air Vents Open',
+    relatedRecipeId: 'lemon-herb-roasted-chicken',
+  },
+  {
+    id: 'qa-18',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · High-Protein Swaps',
+    question:
+      'How do I substitute cottage cheese or Greek yogurt for heavy cream or mayo in high-protein sauces?',
+    shortAnswer:
+      'Blend full-fat or 2% cottage cheese in a high-speed blender for 45 seconds until silky smooth, then Temper it into warm sauces off the heat at a 1:1 ratio.',
+    detailedAnswer:
+      'Blended cottage cheese delivers 24g of protein per cup with a neutral, creamy texture. To prevent curdling in hot skillet sauces, remove the pan from the burner first, let it cool for 60 seconds, and whisk in the blended cottage cheese or strained Greek yogurt gradually.',
+    proMetric: '45-Sec High-Speed Blend · Stir In Off Direct Heat',
+    relatedRecipeId: 'high-protein-cottage-cheese-egg-white-bites',
+  },
+  {
+    id: 'qa-19',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Seafood Science',
+    question:
+      'What is the white stuff (albumin) that comes out of cooked salmon, and how do I prevent it?',
+    shortAnswer:
+      'Albumin is a harmless liquid muscle protein that squeezes out and coagulates when salmon is overcooked or heated too aggressively; pulling salmon at 63°C (145°F) minimizes it.',
+    detailedAnswer:
+      'To keep salmon fillets clean and glossy, pat the fish dry, salt it 10 minutes before cooking (or soak in a 6% salt-water brine for 10 minutes and pat dry), sear 80% of the time skin-side down, and remove from heat as soon as the center reaches the USDA-recommended 63°C (145°F).',
+    proMetric: '10-Min Pre-Salt · Pull at USDA 63°C (145°F)',
+    relatedRecipeId: 'crispy-salmon-skillet',
+  },
+  {
+    id: 'qa-20',
+    topic: 'reheating_safety',
+    topicLabel: 'Trending Last 30 Days · Poultry & USDA Temps',
+    question:
+      'Why is my chicken breast rubbery or dry even when cooked to 74°C (165°F), and how do I keep it juicy?',
+    shortAnswer:
+      'Thick chicken breasts overcook on the outside before the center hits 74°C; slicing them horizontally into even 1.5cm cutlets and resting 4 minutes keeps them tender.',
+    detailedAnswer:
+      'Whole chicken breasts taper from 4cm thick on one end to 1cm on the other. Slicing each breast horizontally into two uniform cutlets cuts cooking time in half so the exterior and interior reach the safe USDA minimum 74°C (165°F) at the same moment.',
+    proMetric: '1.5cm Even Cutlets · Cook to USDA 74°C (165°F)',
+    relatedRecipeId: 'keto-creamy-tuscan-garlic-chicken-skillet',
+  },
+  {
+    id: 'qa-21',
+    topic: 'meal_prep',
+    topicLabel: 'Trending Last 30 Days · Breakfast Meal Prep',
+    question:
+      'How long do hard-boiled eggs and baked cottage-cheese egg bites stay fresh in the refrigerator?',
+    shortAnswer:
+      'Unpeeled hard-boiled eggs keep for up to 7 days at 4°C (40°F); peeled boiled eggs and baked egg bites should be eaten within 4 to 5 days (or frozen for 2 months).',
+    detailedAnswer:
+      'Store hard-boiled eggs in their shells inside a covered container on an interior refrigerator shelf (not the door, where temperatures fluctuate). Once peeled, wrap a damp paper towel inside the airtight container so the egg whites stay tender.',
+    proMetric: '7 Days Unpeeled · 4–5 Days Peeled/Egg Bites at 4°C',
+    relatedRecipeId: 'high-protein-cottage-cheese-egg-white-bites',
+  },
+  {
+    id: 'qa-22',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · Baking Swaps',
+    question:
+      'What is the best 1:1 substitute for eggs when baking cupcakes, banana bread, or cookies?',
+    shortAnswer:
+      'Use 1 tablespoon (10g) ground flaxseed whisked with 3 tablespoons (45ml) warm water for cookies/banana bread, or 60g unsweetened applesauce / mashed banana per egg in muffins.',
+    detailedAnswer:
+      'Let the flaxseed and warm water mixture rest for 5 minutes until gelatinous before mixing into cookie or loaf batters. For light vanilla cupcakes, 60g strained yogurt or 3ml vinegar + 4g baking soda provides lift without weighing down the crumb.',
+    proMetric: '10g Ground Flax + 45ml Water = 1 Large Egg (50g)',
+    relatedRecipeId: 'brown-butter-banana-bread-pecan-loaf',
+  },
+  {
+    id: 'qa-23',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Air Fryer Care',
+    question:
+      'Why is my Air Fryer smoking when cooking fatty meats, and how do I stop grease smoke immediately?',
+    shortAnswer:
+      'White smoke occurs when rendered fat drips into the hot bottom drawer; place 2 tablespoons (30ml) of water or a slice of bread in the lower drip pan underneath the basket.',
+    detailedAnswer:
+      'A thin film of water or a slice of bread in the bottom drawer (underneath the elevated crisper grate) catches dripping grease from ribeye steak, burgers, or chicken thighs so the fat cannot burn against the hot metal floor.',
+    proMetric: '30ml Water in Lower Drip Drawer · Clean Heating Coil',
+    relatedRecipeId: 'air-fryer-crispy-honey-garlic-salmon-bites',
+  },
+  {
+    id: 'qa-24',
+    topic: 'meal_prep',
+    topicLabel: 'Trending Last 30 Days · Produce Prep',
+    question:
+      'How do I chop potatoes, sweet potatoes, or apples a day ahead without them turning brown or gray?',
+    shortAnswer:
+      'Submerge peeled, cut raw potatoes completely in a bowl of cold water in the fridge for up to 24 hours; toss sliced apples in cold water with 15ml lemon juice for 3 minutes, then drain.',
+    detailedAnswer:
+      'Water blocks oxygen from reacting with polyphenol oxidase enzymes in raw potatoes. Before roasting or air-frying pre-soaked potatoes, drain them in a colander and pat completely dry on a kitchen towel so they crisp properly.',
+    proMetric: 'Cold Water Submersion (Max 24h) · Pat Bone-Dry Before Cooking',
+    relatedRecipeId: 'high-protein-turkey-sweet-potato-skillet',
+  },
+  {
+    id: 'qa-25',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · Gluten-Free Baking',
+    question:
+      'Can I substitute almond flour or oat flour 1:1 for regular all-purpose wheat flour in baking?',
+    shortAnswer:
+      'Oat flour can replace all-purpose flour 1:1 by weight (grams) in muffins and quick breads, whereas almond flour lacks gluten and requires an extra egg or binder for structure.',
+    detailedAnswer:
+      'Because 1 cup of oat flour weighs ~90g while 1 cup of all-purpose flour weighs 120g, always swap by gram weight rather than measuring cups. When baking with 100% blanched almond flour, let cookies cool on the baking sheet for 10 minutes so the cocoa butter and natural oils firm up.',
+    proMetric: 'Swap by Gram Weight (120g = 120g) · Cool Almond Cookies 10 Mins',
+    relatedRecipeId: 'healthy-almond-flour-dark-chocolate-chip-cookies',
+  },
+  {
+    id: 'qa-26',
+    topic: 'reheating_safety',
+    topicLabel: 'Trending Last 30 Days · USDA Food Safety',
+    question:
+      'Should I wash raw chicken or turkey in the kitchen sink before cooking?',
+    shortAnswer:
+      'No—the USDA strongly advises NEVER washing raw chicken or poultry because splashing water spreads bacteria up to 90cm across sinks and countertops.',
+    detailedAnswer:
+      'Cooking poultry to the official USDA minimum internal temperature of 74°C (165°F) destroys all surface bacteria safely. If raw chicken has excess moisture in the package, blot it dry with disposable paper towels, discard the towels immediately, and wash your hands with warm soapy water for 20 seconds.',
+    proMetric: 'USDA Rule: Never Rinse Raw Poultry · Blot Dry + Cook to 74°C',
+    relatedRecipeId: 'lemon-herb-roasted-chicken',
+  },
+  {
+    id: 'qa-27',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Cooking Oils',
+    question:
+      'Which cooking oils have the highest smoke point for cast-iron steak searing vs. Air Frying?',
+    shortAnswer:
+      'Refined avocado oil (270°C / 520°F) and clarified butter/ghee (250°C / 485°F) are best for high-heat cast-iron searing; extra-virgin olive oil (190°C–205°C) is safe for everyday sautéing.',
+    detailedAnswer:
+      'Unrefined butter burns above 175°C (350°F) because of its milk solids. Start searing steaks or salmon in refined avocado oil or light olive oil first, then add whole unsalted butter, garlic, and herbs during the final 90 seconds of basting.',
+    proMetric: 'Avocado Oil 270°C · Ghee 250°C · Butter Baste Last 90s',
+    relatedRecipeId: 'garlic-butter-ribeye-steak',
+  },
+  {
+    id: 'qa-28',
+    topic: 'meal_prep',
+    topicLabel: 'Trending Last 30 Days · Freezer Pasta Prep',
+    question:
+      'How do I freeze and reheat pasta dishes or gnocchi for meal prep without the pasta turning mushy?',
+    shortAnswer:
+      'Undercook boiled pasta by 2 minutes (firm al dente), toss with sauce, cool rapidly, and freeze in airtight glass containers.',
+    detailedAnswer:
+      'Pasta continues absorbing liquid when reheated. Cooking pasta 2 minutes short of package time leaves a firm starch core that finishes hydrating during reheating. Or use pan-seared potato gnocchi, which stays firm without boiling.',
+    proMetric: 'Cook Pasta 2 Mins Short of Al Dente · Reheat Covered to 74°C',
+    relatedRecipeId: '5-ingredient-pesto-gnocchi-skillet',
+  },
+  {
+    id: 'qa-29',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · Alcohol-Free Swaps',
+    question:
+      'What is the best non-alcoholic substitute for white or red wine when deglazing a skillet sauce?',
+    shortAnswer:
+      'Replace dry white wine 1:1 with low-sodium chicken or vegetable broth plus 1 tablespoon (15ml) fresh lemon juice or white wine vinegar per 120ml broth.',
+    detailedAnswer:
+      'Wine serves two culinary roles in a skillet: liquid to dissolve browned fond and acidity to balance rich butter or cream. Adding 15ml of lemon juice or vinegar to 120ml of savory broth replicates both the deglazing power and bright acidity without alcohol.',
+    proMetric: '120ml Low-Sodium Broth + 15ml Fresh Lemon Juice or Vinegar',
+    relatedRecipeId: 'cooking-science-temperatures-deglazing-guide',
+  },
+  {
+    id: 'qa-30',
+    topic: 'reheating_safety',
+    topicLabel: 'Trending Last 30 Days · Holiday & Roast Thawing',
+    question:
+      'How many hours per kilogram (or pound) does a frozen whole chicken or turkey take to thaw safely in the fridge?',
+    shortAnswer:
+      'Follow the USDA Refrigerator Thawing Rule: allow 24 hours in a 4°C (40°F) refrigerator for every 1.8 to 2.2 kg (4 to 5 lbs) of frozen poultry.',
+    detailedAnswer:
+      'Place the frozen bird in its original wrapper inside a rimmed baking tray on the lowest shelf of the refrigerator so condensation cannot drip onto other foods. Once thawed in the fridge, poultry stays safe for 1 to 2 days before roasting to 74°C (165°F).',
+    proMetric: 'USDA Rule: 24 Hours per 2kg (4–5 lbs) at 4°C · Cook to 74°C',
+    relatedRecipeId: 'freezer-meal-prep-guide-soups-grains-proteins',
+  },
+  {
+    id: 'qa-31',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Frozen-to-Air-Fryer',
+    question:
+      'Can I cook frozen salmon fillets or shrimp directly in the Air Fryer without thawing first?',
+    shortAnswer:
+      'Yes—rinse off any surface ice glaze under cold water, pat dry, brush with oil at 195°C (385°F) for 4 minutes to thaw the exterior, then season and air-fry 7–9 minutes more to 63°C (145°F).',
+    detailedAnswer:
+      'Seasoning slides off rock-hard frozen fish. A quick 4-minute initial heat stage melts the outer millimeter of the fillet so olive oil, garlic powder, and salt adhere evenly, followed by 7 to 9 minutes of air-frying until the center reaches 63°C (145°F).',
+    proMetric: '4-Min Thaw Stage + 8-Min Crisp Stage at 195°C · USDA 63°C',
+    relatedRecipeId: 'air-fryer-crispy-honey-garlic-salmon-bites',
+  },
+  {
+    id: 'qa-32',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · Leavening Swaps',
+    question:
+      'How do I substitute baking powder for baking soda (or baking soda for baking powder) in a recipe?',
+    shortAnswer:
+      'To replace 1 teaspoon (5g) baking soda, use 3 teaspoons (15g) baking powder; to replace 1 teaspoon baking powder, use 1/4 teaspoon baking soda plus 1/2 teaspoon cream of tartar (or 5ml lemon juice).',
+    detailedAnswer:
+      'Pure baking soda (sodium bicarbonate) is three times stronger than baking powder and requires an acidic ingredient (like buttermilk, yogurt, lemon juice, or brown sugar) to activate. Double-acting baking powder already contains both sodium bicarbonate and a dry acid.',
+    proMetric: '1 tsp Baking Soda = 3 tsp Baking Powder',
+    relatedRecipeId: 'healthy-greek-yogurt-berry-oat-muffins',
+  },
+  {
+    id: 'qa-33',
+    topic: 'meal_prep',
+    topicLabel: 'Trending Last 30 Days · Soup & Broth Safety',
+    question:
+      'What is the safest way to cool a large pot of hot soup, stew, or chili before refrigerating?',
+    shortAnswer:
+      'Never put a deep pot of boiling-hot soup straight into the fridge; divide it into shallow containers (5cm deep) or set the pot in an ice-water sink bath for 20 minutes first.',
+    detailedAnswer:
+      'A large deep pot of hot liquid can take over 6 hours to cool inside a fridge, warming surrounding groceries and keeping the center of the soup in the bacterial danger zone (4°C–60°C). Dividing soup into shallow glass containers cools it below 21°C within 30 minutes so it can be safely refrigerated.',
+    proMetric: 'Shallow 5cm Containers or 20-Min Ice Bath · Fridge at 4°C',
+    relatedRecipeId: 'freezer-meal-prep-guide-soups-grains-proteins',
+  },
+  {
+    id: 'qa-34',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Cast-Iron Restoration',
+    question:
+      'Why is my seasoned cast-iron skillet sticky, and how do I re-season it in the oven?',
+    shortAnswer:
+      'Stickiness means too much oil was left on the pan during seasoning; scrub clean, wipe an ultra-thin layer of oil off with a dry cloth, and bake upside-down at 230°C (450°F) for 60 minutes.',
+    detailedAnswer:
+      'Thick pools of oil partially polymerize into tacky gum. When seasoning cast iron, rub 1 teaspoon of avocado or grapeseed oil over the warm pan, then buff it off with a clean paper towel until the metal looks almost matte before baking upside-down for 1 hour.',
+    proMetric: 'Buff Oil Matte-Thin · Bake Upside-Down 60 Mins at 230°C',
+    relatedRecipeId: 'kitchen-guide-substitutes-cast-iron',
+  },
+  {
+    id: 'qa-35',
+    topic: 'substitutions',
+    topicLabel: 'Trending Last 30 Days · Natural Sweeteners',
+    question:
+      'How do I replace refined white sugar with honey or maple syrup in baking without making the batter soggy?',
+    shortAnswer:
+      'For every 200g (1 cup) of granulated white sugar, use 170g (3/4 cup) honey or maple syrup, reduce other liquids in the recipe by 30ml (2 tablespoons), and lower oven temp by 15°C (25°F).',
+    detailedAnswer:
+      'Liquid honey and maple syrup are roughly 18% to 20% water and caramelize faster than white sucrose. Reducing the milk or water in the batter by 30ml and lowering the oven temperature slightly prevents over-browning while keeping the crumb light.',
+    proMetric: '170g Honey per 200g Sugar · -30ml Liquid · -15°C Oven Temp',
+    relatedRecipeId: 'healthy-greek-yogurt-berry-oat-muffins',
+  },
+  {
+    id: 'qa-36',
+    topic: 'heat_skillet',
+    topicLabel: 'Trending Last 30 Days · Sheet-Pan Roasting',
+    question:
+      'Why do my roasted vegetables turn soft and steamed instead of crispy, and how do I fix it?',
+    shortAnswer:
+      'Crowding vegetables on a cold sheet pan traps steam; preheat the empty metal sheet pan at 215°C (420°F) for 5 minutes and leave 2cm space between vegetable pieces.',
+    detailedAnswer:
+      'Cut broccoli, zucchini, or sweet potatoes into uniform 2cm pieces, dry them thoroughly after washing, toss with oil, and spread across two pans if needed so steam escapes immediately upon hitting the preheated metal surface.',
+    proMetric: 'Preheat Sheet Pan at 215°C · Leave 2cm Airflow Space',
+    relatedRecipeId: 'sunday-meal-prep-high-protein-bowls',
+  },
 ];
 
 export type CookingQATopic =
@@ -3295,10 +3555,12 @@ export interface CookingQAItem {
   detailedStepsEn: string[];
   proTipEn: string;
   relatedRecipeSlug?: string;
+  isTrendingLast30Days?: boolean;
 }
 
-export const QA_TOPIC_LABELS: { id: 'all' | CookingQATopic; labelEn: string }[] = [
-  { id: 'all', labelEn: 'All Cooking & Prep Topics' },
+export const QA_TOPIC_LABELS: { id: 'all' | 'trending_30d' | CookingQATopic; labelEn: string }[] = [
+  { id: 'all', labelEn: 'All 36 Cooking Q&As' },
+  { id: 'trending_30d', labelEn: '🔥 Top 20 Most-Asked (Last 30 Days)' },
   { id: 'meal_prep_storage', labelEn: 'Meal Prep & Food Storage' },
   { id: 'cooking_science', labelEn: 'Cooking Science & USDA Temps' },
   { id: 'ingredient_substitutions', labelEn: '1:1 Ingredient Substitutions' },
@@ -3317,16 +3579,27 @@ export const COOKING_QA_KNOWLEDGE_BASE: CookingQAItem[] =
     const matchedRecipe = COOKREEL_RECIPES.find(
       (r) => r.id === item.relatedRecipeId
     );
+    const numId = Number(item.id.replace('qa-', ''));
+    const isTrending = Number.isFinite(numId) && numId >= 17;
+    const sentences = item.detailedAnswer
+      .split(/(?<=\.)\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     return {
       id: item.id,
       topic: TOPIC_MAP[item.topic],
       topicLabelEn: item.topicLabel,
       questionEn: item.question,
       shortAnswerEn: item.shortAnswer,
-      detailedStepsEn: [item.detailedAnswer],
+      detailedStepsEn:
+        sentences.length > 1
+          ? sentences
+          : [item.shortAnswer, item.detailedAnswer],
       proTipEn: item.proMetric,
       relatedRecipeSlug:
         matchedRecipe?.slug || '15-minute-crispy-cast-iron-salmon-lemon-caper',
+      isTrendingLast30Days: isTrending,
     };
   });
 
