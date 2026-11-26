@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Flame,
   HelpCircle,
   Mail,
   ShieldCheck,
@@ -10,6 +9,7 @@ import {
   Repeat,
 } from 'lucide-react';
 import { SITE_ARCHITECTURE, SOCIAL_LINKS } from '@/lib/cookreel-data';
+import { CookReelBrandLogo } from '@/components/CookReelBrandLogo';
 
 export function SiteHeader({
   activePath = '/',
@@ -24,18 +24,13 @@ export function SiteHeader({
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF9F6]/95 backdrop-blur-md">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-amber-800 flex items-center justify-center text-white shadow-sm group-hover:bg-amber-700 transition-colors">
-              <Flame className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="font-serif text-2xl font-bold tracking-tight text-slate-900">
-                Cook<span className="text-amber-800">Reel</span>
-              </span>
-              <span className="hidden sm:inline-block ml-2 text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300/60">
-                www.cookreel.com
-              </span>
-            </div>
+          <Link href="/" aria-label="CookReel Home — www.cookreel.com">
+            <CookReelBrandLogo
+              theme="light"
+              size="md"
+              showDomain={true}
+              showTagline={false}
+            />
           </Link>
         </div>
 
@@ -200,13 +195,17 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-10 border-b border-slate-800">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 rounded-lg bg-amber-700 flex items-center justify-center text-white">
-                <Flame className="w-5 h-5" />
-              </div>
-              <span className="font-serif text-xl font-bold text-white">
-                CookReel.com
-              </span>
+            <Link
+              href="/"
+              aria-label="CookReel Home — www.cookreel.com"
+              className="inline-block mb-4"
+            >
+              <CookReelBrandLogo
+                theme="dark"
+                size="md"
+                showDomain={true}
+                showTagline={true}
+              />
             </Link>
             <p className="text-xs text-slate-400 leading-relaxed max-w-md mb-4">
               CookReel is an independent culinary publication offering step-by-step recipe guides, short-form cooking clips, 1:1 ingredient substitutions, and USDA-aligned food safety references for everyday home cooks.

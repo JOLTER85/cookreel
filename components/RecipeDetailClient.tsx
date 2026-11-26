@@ -34,6 +34,7 @@ import {
 } from '@/lib/cookreel-data';
 import { RecipeReview } from '@/lib/server-db';
 import { RecipeCard } from '@/components/RecipeCard';
+import { CookReelBrandLogo } from '@/components/CookReelBrandLogo';
 
 export function RecipeDetailClient({
   recipe,
@@ -689,9 +690,17 @@ export function RecipeDetailClient({
             <div className="rounded-2xl border-2 border-amber-800/30 bg-[#FAF9F6] p-6 sm:p-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
-                  <span className="inline-block px-2.5 py-0.5 rounded bg-amber-800 text-white text-[11px] font-mono uppercase tracking-widest mb-2">
-                    4. Structured Recipe Card
-                  </span>
+                  <div className="flex flex-wrap items-center gap-3 mb-2.5">
+                    <CookReelBrandLogo
+                      theme="light"
+                      size="sm"
+                      showDomain={true}
+                      showTagline={false}
+                    />
+                    <span className="inline-block px-2.5 py-0.5 rounded bg-amber-800 text-white text-[11px] font-mono uppercase tracking-widest">
+                      4. Official Recipe Card
+                    </span>
+                  </div>
                   <h2 className="font-serif text-2xl font-bold text-slate-900">
                     {recipe.titleEn}
                   </h2>

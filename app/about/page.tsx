@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   ChevronRight,
-  Flame,
   ShieldCheck,
   BookOpen,
   Mail,
@@ -11,6 +10,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
+import { CookReelBrandLogo } from '@/components/CookReelBrandLogo';
 import { SOCIAL_LINKS, SITE_ORIGIN } from '@/lib/cookreel-data';
 
 const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
@@ -61,9 +61,13 @@ export default function AboutPage() {
 
         <article className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs space-y-8">
           <div className="border-b border-slate-200 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-100 text-amber-900 text-xs font-mono uppercase tracking-widest mb-3">
-              <Flame className="w-3.5 h-3.5" />
-              <span>About CookReel.com</span>
+            <div className="mb-5">
+              <CookReelBrandLogo
+                theme="light"
+                size="lg"
+                showDomain={true}
+                showTagline={true}
+              />
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
               Practical Video Recipes, Honest Culinary Guides &amp; Food Science
