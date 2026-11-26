@@ -4,9 +4,12 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import {
   COOKREEL_RECIPES,
+  COOKING_AND_MEAL_PREP_QA,
   HERO_FEATURED_VIDEO_URL,
   SITE_ARCHITECTURE,
   CulinaryRecipe,
+  CookingQaItem,
+  CookingQaTopic,
   PrimaryCategorySlug,
 } from '@/lib/cookreel-data';
 import LegalAndAdsenseModals, {
@@ -158,6 +161,17 @@ export default function CookReelPlatformPage() {
   const [newsletterEmail, setNewsletterEmail] = useState<string>('');
   const [newsletterSubscribed, setNewsletterSubscribed] =
     useState<boolean>(false);
+
+  // Cooking & Meal-Prep Q&A Knowledge Base State
+  const [qaItems, setQaItems] = useState<CookingQaItem[]>(
+    COOKING_AND_MEAL_PREP_QA
+  );
+  const [selectedQaTopic, setSelectedQaTopic] = useState<CookingQaTopic>('all');
+  const [qaSearchQuery, setQaSearchQuery] = useState<string>('');
+  const [expandedQaId, setExpandedQaId] = useState<string>('qa-1');
+  const [newQuestionText, setNewQuestionText] = useState<string>('');
+  const [newQuestionTopic, setNewQuestionTopic] =
+    useState<Exclude<CookingQaTopic, 'all'>>('meal_prep');
 
   // Upload Long-Form E-E-A-T Video Recipe Modal
   const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
@@ -351,6 +365,87 @@ export default function CookReelPlatformPage() {
       return true;
     });
   }, [recipes, selectedCategory, selectedSubcategory, searchQuery]);
+
+  const filteredQaItems = useMemo(() => {
+    return qaItems.filter((item) => {
+      if (selectedQaTopic !== 'all' && item.topic !== selectedQaTopic) {
+        return false;
+      }
+      if (qaSearchQuery.trim()) {
+        const q = qaSearchQuery.toLowerCase();
+        return (
+          item.question.toLowerCase().includes(q) ||
+          item.shortAnswer.toLowerCase().includes(q) ||
+          item.detailedAnswer.toLowerCase().includes(q) ||
+          item.topicLabel.toLowerCase().includes(q)
+        );
+      }
+      return true;
+    });
+  }, [qaItems, selectedQaTopic, qaSearchQuery]);
+
+  const handleAskCookingQuestion = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newQuestionText.trim()) return;
+    const qText = newQuestionText.trim();
+    const topicLabels: Record<Exclude<CookingQaTopic, 'all'>, string> = {
+      meal_prep: 'Meal Prep & Storage',
+      substitutions: 'Ingredient Swaps',
+      heat_skillet: 'Heat, Skillets & Air Fryer',
+      reheating_safety: 'Defrosting & Reheating',
+    };
+    const defaultAnswers: Record<
+      Exclude<CookingQaTopic, 'all'>,
+      { short: string; detailed: string; metric: string; recipeId: string }
+    > = {
+      meal_prep: {
+        short:
+          'Cool cooked food uncovered for 20 minutes to release steam before sealing in airtight glass containers at 4°C.',
+        detailed:
+          'For best 5-day meal prep quality, store proteins, roasted vegetables, and sauces in separate compartments or mini condiment jars. Reheat gently in a skillet or 175°C Air Fryer for 3–4 minutes just before serving.',
+        metric: '20-Min Steam Vent · 4°C Storage (4–5 Days)',
+        recipeId: 'sunday-meal-prep-high-protein-bowls',
+      },
+      substitutions: {
+        short:
+          'Match the fat, acid, and moisture percentage of the original ingredient using a 1:1 culinary ratio.',
+        detailed:
+          'When swapping dairy, herbs, or binders, balance both moisture and fat content—for example, 180ml whole milk + 60g melted butter replaces 240ml heavy cream, and 1 tsp dried herbs replaces 1 tbsp fresh herbs.',
+        metric: '1:1 Fat & Moisture Balance · Tested Ratio',
+        recipeId: 'kitchen-guide-substitutes-cast-iron',
+      },
+      heat_skillet: {
+        short:
+          'Preheat your dry skillet for 3 minutes until a water droplet glides, pat protein bone-dry, and sear undisturbed.',
+        detailed:
+          'Proper thermal control prevents sticking and builds a golden Maillard crust. Pull steak at 52°C, salmon at 50°C, and chicken breast at 71°C using an instant-read thermometer, then rest for 5 minutes.',
+        metric: '193°C Skillet Preheat · Instant-Read Probe',
+        recipeId: 'cooking-science-temperatures-deglazing-guide',
+      },
+      reheating_safety: {
+        short:
+          'Defrost in a cold tap-water bath (20 mins per 450g) and reheat in a 175°C Air Fryer or covered skillet with a splash of water.',
+        detailed:
+          'Avoid defrosting at room temperature or microwaving delicate proteins on high power. A gentle 3-minute reheat in an Air Fryer or covered skillet restores crispness without drying out the interior.',
+        metric: '175°C Reheat · Cold-Water Thaw',
+        recipeId: 'crispy-salmon-skillet',
+      },
+    };
+    const template = defaultAnswers[newQuestionTopic];
+    const createdQa: CookingQaItem = {
+      id: `qa-user-${Date.now()}`,
+      topic: newQuestionTopic,
+      topicLabel: topicLabels[newQuestionTopic],
+      question: qText.endsWith('?') ? qText : `${qText}?`,
+      shortAnswer: template.short,
+      detailedAnswer: template.detailed,
+      proMetric: template.metric,
+      relatedRecipeId: template.recipeId,
+    };
+    setQaItems((prev) => [createdQa, ...prev]);
+    setExpandedQaId(createdQa.id);
+    setNewQuestionText('');
+  };
 
   const toggleIngredientCheck = (key: string) => {
     setCheckedIngredients((prev) =>
@@ -1963,7 +2058,205 @@ export default function CookReelPlatformPage() {
           </div>
         </article>
 
-        {/* Section 5: 7-Day Weekly Dinner Meal Planner & Smart Grocery List Exporter */}
+        {/* Section 5: Cooking & Meal-Prep Q&A Knowledge Base */}
+        <section
+          id="cooking-qa"
+          className="bg-white border border-slate-200 rounded-xl p-6 md:p-10 space-y-8"
+        >
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-6 border-b border-slate-200">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-xs font-mono text-amber-800">
+                <HelpCircle className="w-4 h-4" />
+                <span>
+                  COOKING & MEAL-PREP Q&A KNOWLEDGE BASE · TEST KITCHEN ANSWERS
+                </span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 font-display">
+                Expert Answers to Your Everyday Cooking & Meal-Prep Questions
+              </h2>
+              <p className="text-xs md:text-sm text-slate-600 max-w-3xl">
+                Practical food-science solutions for weekly meal prep, preventing
+                food from sticking, exact meat temperatures, 1:1 ingredient
+                substitutions, safe defrosting, and reheating without drying out.
+              </p>
+            </div>
+
+            {/* Search Questions Input */}
+            <div className="relative w-full lg:w-80 shrink-0">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={qaSearchQuery}
+                onChange={(e) => setQaSearchQuery(e.target.value)}
+                placeholder="Search meal prep, heavy cream, defrosting..."
+                className="w-full pl-10 pr-4 py-2.5 text-xs bg-[#FAF9F6] border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900"
+              />
+            </div>
+          </div>
+
+          {/* Topic Filter Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
+            {(
+              [
+                { id: 'all', label: `All Cooking Q&A (${qaItems.length})` },
+                { id: 'meal_prep', label: 'Meal Prep & Food Storage' },
+                { id: 'substitutions', label: 'Ingredient Substitutions' },
+                { id: 'heat_skillet', label: 'Skillet, Heat & Air Fryer' },
+                { id: 'reheating_safety', label: 'Defrosting & Reheating' },
+              ] as const
+            ).map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setSelectedQaTopic(tab.id)}
+                className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors ${
+                  selectedQaTopic === tab.id
+                    ? 'bg-slate-900 text-white'
+                    : 'bg-[#FAF9F6] text-slate-700 border border-slate-200 hover:border-slate-400'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Q&A Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredQaItems.map((qa) => {
+              const isExpanded = expandedQaId === qa.id;
+              const linkedRecipe = recipes.find(
+                (r) => r.id === qa.relatedRecipeId
+              );
+              return (
+                <div
+                  key={qa.id}
+                  className={`p-5 rounded-xl border transition-all flex flex-col justify-between space-y-4 ${
+                    isExpanded
+                      ? 'bg-[#FAF9F6] border-slate-900 shadow-sm'
+                      : 'bg-white border-slate-200 hover:border-slate-400'
+                  }`}
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between gap-2 text-[11px] font-mono">
+                      <span className="text-amber-800 font-semibold">
+                        {qa.topicLabel}
+                      </span>
+                      <span className="text-emerald-800 font-semibold">
+                        {qa.proMetric}
+                      </span>
+                    </div>
+
+                    <h3
+                      onClick={() =>
+                        setExpandedQaId(isExpanded ? '' : qa.id)
+                      }
+                      className="text-base font-bold text-slate-900 cursor-pointer hover:text-amber-800 transition-colors leading-snug"
+                    >
+                      Q: {qa.question}
+                    </h3>
+
+                    <p className="text-xs font-semibold text-slate-800 bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
+                      <span className="font-mono text-amber-800 mr-1.5">
+                        Chef Answer:
+                      </span>
+                      {qa.shortAnswer}
+                    </p>
+
+                    {isExpanded && (
+                      <div className="pt-2 space-y-3 text-xs text-slate-600 leading-relaxed border-t border-slate-200/80">
+                        <p>{qa.detailedAnswer}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-200/80 flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedQaId(isExpanded ? '' : qa.id)
+                      }
+                      className="text-xs font-semibold text-slate-700 hover:text-slate-900 underline underline-offset-4"
+                    >
+                      {isExpanded
+                        ? 'Hide Detailed Explanation'
+                        : 'Read Full Food-Science Answer'}
+                    </button>
+
+                    {linkedRecipe && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          selectRecipeAndStep(linkedRecipe, 0, true);
+                          document
+                            .getElementById('adsense-post-template')
+                            ?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="px-3 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-amber-700 rounded-md transition-colors whitespace-nowrap shrink-0"
+                      >
+                        Open Related Guide →
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Interactive Ask a Cooking or Meal-Prep Question Form */}
+          <form
+            onSubmit={handleAskCookingQuestion}
+            className="p-5 rounded-xl bg-[#FAF9F6] border border-slate-200 space-y-3"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 className="text-sm font-bold text-slate-900">
+                  Have a Cooking or Meal-Prep Question? Ask the CookReel Test
+                  Kitchen
+                </h3>
+                <p className="text-xs text-slate-600">
+                  Submit your question on food storage, ingredient swaps, or pan
+                  temperatures to add it to our Q&A guide with an instant chef
+                  reference answer.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+              <select
+                value={newQuestionTopic}
+                onChange={(e) =>
+                  setNewQuestionTopic(
+                    e.target.value as Exclude<CookingQaTopic, 'all'>
+                  )
+                }
+                className="sm:col-span-3 px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-lg font-medium text-slate-800"
+              >
+                <option value="meal_prep">Meal Prep & Storage</option>
+                <option value="substitutions">Ingredient Substitutions</option>
+                <option value="heat_skillet">Skillet, Heat & Air Fryer</option>
+                <option value="reheating_safety">Defrosting & Reheating</option>
+              </select>
+
+              <input
+                type="text"
+                required
+                value={newQuestionText}
+                onChange={(e) => setNewQuestionText(e.target.value)}
+                placeholder="e.g. How do I keep meal-prep rice from drying out in the fridge?"
+                className="sm:col-span-7 px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-lg"
+              />
+
+              <button
+                type="submit"
+                className="sm:col-span-2 px-4 py-2.5 text-xs font-semibold text-white bg-amber-700 hover:bg-amber-800 rounded-lg transition-colors whitespace-nowrap shrink-0"
+              >
+                Post Question
+              </button>
+            </div>
+          </form>
+        </section>
+
+        {/* Section 6: 7-Day Weekly Dinner Meal Planner & Smart Grocery List Exporter */}
         <section
           id="weekly-planner"
           className="bg-white border border-slate-200 rounded-xl p-6 md:p-10 space-y-6"

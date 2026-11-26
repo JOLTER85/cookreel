@@ -1428,4 +1428,526 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
   },
+  {
+    id: 'sunday-meal-prep-high-protein-bowls',
+    slug: '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
+    category: 'kitchen_hacks',
+    subcategoryId: 'meal-prep-guides',
+    categoryLabelEn: 'Kitchen Hacks & Guides · Meal Prep Guides',
+    categoryLabelAr: 'نصائح وأدوات المطبخ · أدلة تجهيز الوجبات',
+    titleEn:
+      '60-Minute Sunday Meal Prep Guide: 5 High-Protein Lunches That Stay Fresh for 5 Days',
+    titleAr:
+      'دليل تجهيز وجبات الأسبوع في 60 دقيقة: 5 وجبات غداء عالية البروتين تبقى طازجة لـ 5 أيام',
+    subtitleEn:
+      'A step-by-step batch-cooking blueprint for prepping 5 restaurant-quality lunches simultaneously without soggy vegetables or dry chicken.',
+    subtitleAr:
+      'خطة عملية لتجهيز 5 وجبات أسبوعية متكاملة في ساعة واحدة مع أسرار منع جفاف الدجاج أو ذبول الخضروات.',
+    wordCount: 1240,
+    introParagraphsEn: [
+      'The biggest reason home meal prep fails by Wednesday is moisture migration: sealing warm proteins and roasted vegetables immediately inside airtight containers traps condensation, turning crisp broccoli and seared chicken into a soggy, unappetizing texture.',
+      'Our 60-minute Sunday Meal Prep Blueprint solves this through a three-phase restaurant workflow: staggered oven and skillet roasting, a mandatory 20-minute uncovered steam-venting phase on cooling racks, and compartmentalized glass storage that keeps dressings and citrus glazes separate until the moment you eat.',
+    ],
+    introParagraphsAr: [
+      'السبب الرئيسي وراء فشل تحضيرات الوجبات الأسبوعية بعد اليوم الثالث هو تراكم بخار الماء داخل الحافظات المغلقة وهي ساخنة.',
+      'يعتمد هذا الدليل على نظام المطاعم الاحترافي عبر التبريد المفتوح لمدة 20 دقيقة قبل الإغلاق، وفصل الصلصات في عبوات صغيرة منفصلة.',
+    ],
+    whyThisWorksEn: [
+      'Uncovered 20-minute steam venting prevents condensation from softening roasted vegetables.',
+      'Cooking thighs and salmon to 2°C below target temperature prevents dryness when reheated.',
+      'Produces 5 complete 45g+ protein meals in under 60 minutes of active kitchen time.',
+    ],
+    whyThisWorksAr: [
+      'التبريد المفتوح لمدة 20 دقيقة يمنع تكثف البخار داخل العلب الزجاجية.',
+      'حفظ الصلصات بشكل منفصل يحافظ على قرمشة الخضروات واللحوم.',
+      'تجهيز 5 وجبات غنية بالبروتين في 60 دقيقة فقط.',
+    ],
+    chefTipsEn: [
+      'Under-cook meal-prep proteins by 2°C (3–4°F) on Sunday so that when you reheat them on Wednesday or Thursday, they hit the exact juicy target temperature instead of overcooking.',
+      'Place a folded quarter-sheet of dry paper towel at the bottom of leafy green or herb containers to absorb ambient refrigerator humidity.',
+      'Always store grains (quinoa, jasmine rice, or farro) as the bottom base layer and keep proteins rested on top.',
+    ],
+    chefTipsAr: [
+      'ارفع الدجاج أو السلمون عن النار قبل دقيقتين من النضج الكامل حتى لا يجف عند إعادة تسخينه خلال الأسبوع.',
+      'ضع منديلاً ورقياً جافاً في قاعدة علب الخضروات الورقية لامتصاص الرطوبة الزائدة في الثلاجة.',
+      'افصل دائماً الصوص والليمون في عبوات صغيرة ولا تضفها إلا وقت التقديم.',
+    ],
+    substitutions: [
+      {
+        originalEn: 'Jasmine Rice or Brown Rice Base',
+        originalAr: 'أرز جاسمين أو أرز بني',
+        substituteEn: 'Cauliflower Rice, Tri-Color Quinoa, or Roasted Sweet Potato Cubes',
+        substituteAr: 'أرز القرنبيط للكيتو أو الكينوا أو مكعبات البطاطا الحلوة المشوية',
+        chefNoteEn:
+          'Quinoa adds 8g extra complete protein per bowl and holds its texture for 5 days refrigerated.',
+        chefNoteAr:
+          'الكينوا تضيف 8 جم بروتين إضافي وتحافظ على قوامها المتماسك طوال الأسبوع.',
+      },
+      {
+        originalEn: 'Boneless Skinless Chicken Thighs',
+        originalAr: 'أفخاذ دجاج مخلية',
+        substituteEn: ' cubed Firm Tofu, Wild Salmon Fillets, or Flank Steak Strips',
+        substituteAr: 'فيليه سلمون أو شرائح ستيك أو توفو مشوي',
+        chefNoteEn:
+          'Eat seafood bowls on Monday–Wednesday and poultry or beef bowls on Thursday–Friday.',
+        chefNoteAr:
+          'تناول وجبات الأسماك في أول 3 أيام من الأسبوع ووجبات الدجاج أو اللحم في اليوم الرابع والخامس.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How many days does cooked meal-prep food safely last in the refrigerator?',
+        questionAr: 'كم يوماً تدوم وجبات التحضير المسبق في الثلاجة بأمان؟',
+        answerEn:
+          'Cooked poultry, beef, roasted vegetables, and grains stay fresh for 4 to 5 days when stored in airtight borosilicate glass containers at or below 4°C (39°F). Cooked seafood is best consumed within 3 days.',
+        answerAr:
+          'تدوم وجبات الدجاج واللحوم والخضروات المشوية لمدة 4 إلى 5 أيام في الثلاجة بدرجة حرارة 4 مئوية أو أقل، بينما يُفضل استهلاك الأسماك خلال 3 أيام.',
+      },
+      {
+        questionEn: 'Should I use glass or plastic containers for weekly food prep?',
+        questionAr: 'أيهما أفضل لحفظ الوجبات: الحافظات الزجاجية أم البلاستيكية؟',
+        answerEn:
+          'Airtight borosilicate glass containers with snap-locking lids are far superior: they do not absorb garlic or spice odors, cool food faster, and can go directly from the refrigerator into a warm oven or skillet.',
+        answerAr:
+          'الحافظات الزجاجية المزودة بأغطية محكمة أفضل بكثير لأنها لا تمتص الروائح وتتحمل الحرارة وتحافظ على نكهة الطعام.',
+      },
+      {
+        questionEn: 'How do I prevent cut avocados or apples from browning in meal-prep boxes?',
+        questionAr: 'كيف أمنع تغير لون الأفوكادو أو التفاح المقطع في علب الوجبات؟',
+        answerEn:
+          'Brush cut surfaces lightly with fresh lime or lemon juice and press a small piece of parchment paper directly against the flesh to block oxygen contact.',
+        answerAr:
+          'امسح السطح بعصير الليمون الطازج وغطِّ القطعة بورق زبدة ملاصق لها لمنع وصول الأكسجين.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+    ],
+    chefName: 'Chef Marcus Thorne',
+    chefTitleEn: 'Sports Nutrition Chef & Meal-Prep Systems Specialist',
+    chefTitleAr: 'شيف التغذية الرياضية وتجهيز الوجبات الأسبوعية',
+    prepMinutes: 20,
+    cookMinutes: 40,
+    calories: 495,
+    proteinGrams: 46,
+    netCarbsGrams: 28,
+    videoDuration: '0:12',
+    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
+    rating: 4.9,
+    reviewsCount: 389,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-glass-prep-set',
+      nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set with Locking Lids',
+      nameAr: 'طقم حافظات زجاجية حرارية لتجهيز الوجبات (10 قطع)',
+      brand: 'Pyrex Culinary Pro',
+      priceUsd: 68,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Boneless skinless chicken thighs & salmon fillets', amount: 1000, unit: 'g' },
+      { item: 'Broccoli florets, bell peppers & sweet potatoes', amount: 850, unit: 'g' },
+      { item: 'Cooked jasmine rice or tri-color quinoa', amount: 600, unit: 'g' },
+      { item: 'Extra-virgin olive oil, lemon juice & garlic herb rub', amount: 65, unit: 'ml' },
+    ],
+    ingredientsAr: [
+      { item: 'أفخاذ دجاج مخلية وفيليه سلمون طازج', amount: 1000, unit: 'جم' },
+      { item: 'بروكلي وفلفل ملون وبطاطا حلوة', amount: 850, unit: 'جم' },
+      { item: 'كينوا مطهية أو أرز جاسمين', amount: 600, unit: 'جم' },
+      { item: 'زيت زيتون بكر وعصير ليمون وتتبيلة أعشاب', amount: 65, unit: 'مل' },
+    ],
+    stepsEn: [
+      {
+        title: 'Batch Chop & Season by Cooking Time',
+        instruction:
+          'Dice sweet potatoes and broccoli into uniform 2cm pieces and toss with olive oil, salt, and garlic powder on a sheet pan.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'Simultaneous Oven Roast & Skillet Sear',
+        instruction:
+          'Roast root vegetables at 200°C for 25 minutes while searing seasoned chicken thighs and salmon in your cast-iron skillet.',
+        timerSeconds: 600,
+      },
+      {
+        title: '20-Minute Steam Vent & Glass Portioning',
+        instruction:
+          'Cool all cooked components uncovered for 20 minutes until room temperature, then portion into 5 glass containers with sauce cups.',
+        timerSeconds: 300,
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'تقطيع وتتبيل الخضروات والبروتين',
+        instruction:
+          'قطّع البطاطا الحلوة والبروكلي بأحجام متساوية وتبلها بزيت الزيتون والأعشاب.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'الشوي المتزامن في الفرن والمقلاة',
+        instruction:
+          'اشوِ الخضروات في الفرن على 200 مئوية أثناء تحمير الدجاج والسلمون في المقلاة.',
+        timerSeconds: 600,
+      },
+      {
+        title: 'التبريد المفتوح والتقسيم لـ 5 أيام',
+        instruction:
+          'اترك الطعام يبرد 20 دقيقة بدون غطاء ثم قسّمه في 5 حافظات زجاجية.',
+        timerSeconds: 300,
+      },
+    ],
+  },
+  {
+    id: 'cooking-science-temperatures-deglazing-guide',
+    slug: 'essential-cooking-tips-internal-meat-temperatures-pan-deglazing-herb-storage',
+    category: 'kitchen_hacks',
+    subcategoryId: 'cooking-tips',
+    categoryLabelEn: 'Kitchen Hacks & Guides · Cooking Tips',
+    categoryLabelAr: 'نصائح وأدوات المطبخ · أسرار ونصائح الطبخ',
+    titleEn:
+      'Essential Cooking Tips & Food Science: Internal Meat Temperatures, Pan Deglazing & Herb Storage',
+    titleAr:
+      'أسرار علوم الطهي: درجات الحرارة الدقيقة لنضج اللحوم، صوص المقلاة، وحفظ الأعشاب الطازجة',
+    subtitleEn:
+      'Master the 5 foundational chef techniques: the Leidenfrost non-stick skillet test, carryover cooking temperatures, pan deglazing, and keeping herbs fresh for 14 days.',
+    subtitleAr:
+      'تعرف على أهم 5 قواعد علمية في المطبخ الاحترافي لمنع التصاق الطعام وضبط نضج الستيك والدجاج وحفظ الورقيات لأسبوعين.',
+    wordCount: 1190,
+    introParagraphsEn: [
+      'Professional chefs do not rely on guesswork or kitchen timers alone—they rely on thermal cues, surface moisture control, and carryover heat physics. Once you understand why proteins bond to cold metal or why chicken breast dries out above 74°C (165°F), every meal you cook at home becomes predictable and effortless.',
+      'This illustrated CookReel Cooking Tips guide answers the most frequent technical questions we receive from home cooks, covering exact pull temperatures for steak, poultry, and fish, how to turn browned skillet fond into a 90-second pan sauce, and how to store cilantro, parsley, and basil so they stay crisp for two full weeks.',
+    ],
+    introParagraphsAr: [
+      'لا يعتمد الطهاة المحترفون على التخمين، بل على قواعد فيزيائية بسيطة مثل اختبار قطرة الماء لضبط حرارة المقلاة ودرجات الحرارة الداخلية للحوم.',
+      'يجمع هذا الدليل أهم الإجابات العلمية لأسئلة المطبخ اليومية من ضبط نضج الستيك والدجاج إلى حفظ الأعشاب الطازجة لمدة 14 يوماً.',
+    ],
+    whyThisWorksEn: [
+      'Uses the Leidenfrost water-drop effect (193°C) to make stainless steel and cast iron naturally non-stick.',
+      'Accounts for 3°C–4°C carryover cooking during resting so proteins never dry out.',
+      'Bouquet-jar herb storage method extends fresh cilantro and parsley shelf life from 3 days to 14 days.',
+    ],
+    whyThisWorksAr: [
+      'اختبار قطرة الماء يمنع التصاق الطعام في مقالي الستانلس ستيل والحديد الزهر.',
+      'حساب الحرارة المتبقية أثناء إراحة اللحم يحميه من الجفاف.',
+      'طريقة حفظ الأعشاب في الماء تطيل عمرها من 3 أيام إلى أسبوعين كاملين.',
+    ],
+    chefTipsEn: [
+      'The Water-Drop Skillet Test: Heat your dry skillet first, then flick a single drop of water onto the metal. If it sizzles and evaporates, the pan is still too cool; if it forms a single mercury-like ball that glides across the pan, add your oil and protein immediately—it will never stick.',
+      'Pull Temperature Chart: Pull Medium-Rare Steak at 52°C (125°F), Salmon at 50°C (122°F), Chicken Breast at 71°C (160°F), and Chicken Thighs at 79°C (175°F), then rest for 5 minutes.',
+      'Fresh Herb Storage: Trim 1cm off the stems of parsley or cilantro, place upright in a glass with 2cm of cold water, cover loosely with a produce bag, and refrigerate (keep basil on the counter at room temperature away from direct sun).',
+    ],
+    chefTipsAr: [
+      'اختبار قطرة الماء للمقلاة: سخن المقلاة جافة أولاً ثم ضع قطرة ماء؛ إذا تدحرجت القطرة مثل الكرة الزئبقية دون أن تتبخر فوراً، فالمقلاة جاهزة ولن يلتصق بها الطعام أبداً.',
+      'درجات حرارة النضج المثالية: ارفع الستيك عند 52 مئوية، والسلمون عند 50 مئوية، وصدور الدجاج عند 71 مئوية ثم اتركها ترتاح 5 دقائق.',
+      'حفظ الأعشاب الطازجة: قص أطراف البقدونس أو الكزبرة وضعها في كوب به قليل من الماء داخل الثلاجة، بينما يُحفظ الريحان في حرارة الغرفة.',
+    ],
+    substitutions: [
+      {
+        originalEn: 'Dry White Wine (for Pan Deglazing)',
+        originalAr: 'عصير العنب غير المحلى لتذويب عصارة المقلاة',
+        substituteEn: 'Low-Sodium Chicken Bone Broth + 1 Tbsp Fresh Lemon Juice or White Wine Vinegar',
+        substituteAr: 'مرق الدجاج قليل الصوديوم مع ملعقة عصير ليمون طازج أو خل التفاح',
+        chefNoteEn:
+          'Provides the exact acidity and liquid volume needed to lift caramelized fond from the bottom of the skillet.',
+        chefNoteAr:
+          'يوفر الحموضة اللازمة لتذويب الطبقة المحمرة في قاع المقلاة وتحويلها إلى صوص غني.',
+      },
+      {
+        originalEn: ' Kosher Salt vs. Fine Table Salt',
+        originalAr: 'الملح البحري الخشن مقابل ملح الطعام الناعم',
+        substituteEn: 'Use half the volume (50%) if substituting fine table salt for flaky kosher salt',
+        substituteAr: 'استخدم نصف الكمية بالحجم إذا استبدلت الملح الخشن بملح المائدة الناعم',
+        chefNoteEn:
+          'Weighing salt in grams (1.2% to 1.5% of protein weight) guarantees perfect seasoning regardless of crystal size.',
+        chefNoteAr:
+          'قياس الملح بالجرام (حوالي 1.2% من وزن اللحم) يضمن تتبيلاً مثالياً دائماً.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why does my meat or fish stick to the pan even when I use oil?',
+        questionAr: 'لماذا يلتصق اللحم أو السمك بالمقلاة رغم إضافة الزيت؟',
+        answerEn:
+          'Food sticks for two reasons: the protein surface was wet when it hit the pan, or you tried to flip it too early. Pat proteins bone-dry with paper towels, preheat the pan properly, and wait until the natural Maillard crust releases itself automatically.',
+        answerAr:
+          'يلتصق الطعام إما بسبب وجود رطوبة على سطحه أو محاولة قلبه مبكراً قبل تكوّن القشرة الذهبية التي تجعله ينفصل تلقائياً.',
+      },
+      {
+        questionEn: 'How can I fix a soup or sauce that accidentally became too salty?',
+        questionAr: 'كيف أعالج الشوربة أو الصلصة إذا زادت ملوحتها عن طريق الخطأ؟',
+        answerEn:
+          'Never rely on the raw potato myth—instead, dilute with unsalted broth or water, whisk in a tablespoon of dairy (heavy cream, coconut milk, or unsalted butter) to coat the palate, and add a squeeze of fresh lemon juice or a pinch of honey to balance salt perception.',
+        answerAr:
+          'أضف القليل من المرق غير المملح أو ملعقة من الزبدة غير المملحة مع عصرة ليمون طازجة لموازنة طعم الملوحة على اللسان.',
+      },
+      {
+        questionEn: 'How do I convert any conventional oven recipe to an Air Fryer?',
+        questionAr: 'كيف أحوّل وقت وحرارة أي وصفة فرن عادي إلى القلاية الهوائية (Air Fryer)؟',
+        answerEn:
+          'Follow the 15°C / 20% Rule: reduce the oven temperature by 15°C (25°F) and reduce the total cooking time by 20% to 25%, checking five minutes early.',
+        answerAr:
+          'اخفض درجة الحرارة بمقدار 15 درجة مئوية وقلل وقت الطهي بنسبة 20% إلى 25% لأن توزيع الهواء في القلاية الهوائية أسرع.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+    ],
+    chefName: 'Chef Elena Vance',
+    chefTitleEn: 'Executive Culinary Director · Food Science Educator',
+    chefTitleAr: 'مديرة استوديو الطهي ومتخصصة علوم الأغذية',
+    prepMinutes: 10,
+    cookMinutes: 15,
+    calories: 320,
+    proteinGrams: 34,
+    netCarbsGrams: 6,
+    videoDuration: '0:12',
+    videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
+    rating: 5.0,
+    reviewsCount: 446,
+    image: '/images/action_searing_skillet_butter_1795530068462.jpg',
+    gearItem: {
+      id: 'gear-instant-thermometer',
+      nameEn: '1-Second Waterproof Digital Instant-Read Meat Thermometer',
+      nameAr: 'ميزان حرارة رقمي فوري للحوم والمخبوزات (قراءة في ثانية واحدة)',
+      brand: 'ThermoWorks Culinary',
+      priceUsd: 89,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Low-sodium chicken or beef bone broth (for deglazing)', amount: 120, unit: 'ml' },
+      { item: 'Cold unsalted butter cubes (for mounting pan sauce)', amount: 30, unit: 'g' },
+      { item: 'Fresh lemon juice & minced shallots', amount: 25, unit: 'g' },
+      { item: 'Fresh parsley, thyme & rosemary stems', amount: 15, unit: 'g' },
+    ],
+    ingredientsAr: [
+      { item: 'مرق طبيعي قليل الصوديوم (لتذويب عصارة المقلاة)', amount: 120, unit: 'مل' },
+      { item: 'مكعبات زبدة باردة غير مملحة (لتكثيف الصوص)', amount: 30, unit: 'جم' },
+      { item: 'عصير ليمون طازج وكراث مفروم', amount: 25, unit: 'جم' },
+      { item: 'بقدونس وزعتر بري وروزماري طازج', amount: 15, unit: 'جم' },
+    ],
+    stepsEn: [
+      {
+        title: 'Leidenfrost Preheat & Dry-Surface Sear',
+        instruction:
+          'Preheat skillet for 3 minutes until a water droplet glides across the surface, add oil, and sear bone-dry protein undisturbed.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Instant-Read Thermometer Pull & Rest',
+        instruction:
+          'Verify internal temperature with an instant-read probe 3°C below target and transfer protein to a warm resting board.',
+        timerSeconds: 300,
+      },
+      {
+        title: '60-Second Fond Deglaze & Cold-Butter Mount',
+        instruction:
+          'Pour broth and lemon juice into the hot skillet, scrape up browned fond with a wooden spoon, turn off heat, and swirl in cold butter.',
+        timerSeconds: 90,
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'التسخين المسبق واختبار قطرة الماء',
+        instruction:
+          'سخن المقلاة لـ 3 دقائق حتى تنزلق قطرة الماء على سطحها ثم أضف الزيت وحمّر البروتين المجفف.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'قياس الحرارة الداخلية وإراحة اللحم',
+        instruction:
+          'تأكد من درجة الحرارة الداخلية بميزان الحرارة ثم ارفع اللحم ليرتاح 5 دقائق.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'صنع صوص المقلاة في 60 ثانية',
+        instruction:
+          'أضف المرق والليمون لتذويب الطبقة المحمرة في المقلاة ثم أطفئ النار وحرك مكعبات الزبدة الباردة.',
+        timerSeconds: 90,
+      },
+    ],
+  },
 ];
+
+export type CookingQaTopic =
+  | 'all'
+  | 'meal_prep'
+  | 'substitutions'
+  | 'heat_skillet'
+  | 'reheating_safety';
+
+export interface CookingQaItem {
+  id: string;
+  topic: Exclude<CookingQaTopic, 'all'>;
+  topicLabel: string;
+  question: string;
+  shortAnswer: string;
+  detailedAnswer: string;
+  proMetric: string;
+  relatedRecipeId: string;
+}
+
+export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
+  {
+    id: 'qa-1',
+    topic: 'meal_prep',
+    topicLabel: 'Meal Prep & Storage',
+    question:
+      'How do I keep meal-prepped chicken and vegetables from getting soggy or dry by Day 4?',
+    shortAnswer:
+      'Vent steam uncovered for 20 minutes before sealing, under-cook protein by 2°C, and store sauces in separate mini jars.',
+    detailedAnswer:
+      'Closing container lids while food is still warm traps steam that condenses into water droplets on the lid and rains back onto your roasted vegetables. Always let sheet-pan vegetables and seared proteins cool uncovered on the counter for 20 minutes until room temperature. Pull chicken thighs at 77°C (170°F) or chicken breast at 70°C (158°F) so reheating brings them to peak juiciness.',
+    proMetric: '20-Min Uncovered Cool · 4°C Fridge Storage (Up to 5 Days)',
+    relatedRecipeId: 'sunday-meal-prep-high-protein-bowls',
+  },
+  {
+    id: 'qa-2',
+    topic: 'meal_prep',
+    topicLabel: 'Meal Prep & Storage',
+    question:
+      'What is the best way to wash and store fresh herbs (cilantro, parsley, basil) so they last 2 weeks?',
+    shortAnswer:
+      'Store tender stems (cilantro & parsley) upright in a jar with 2cm cold water in the fridge; keep basil at room temperature.',
+    detailedAnswer:
+      'Treat cilantro and parsley like fresh cut flowers: trim 1cm off the bottom stems, make sure the leaves are completely dry (wet leaves rot rapidly), place upright in a mason jar with 2cm of water, and drape a loose produce bag over the top in the refrigerator. Basil is a tropical herb that suffers cold damage below 10°C—keep basil in a glass of water on the kitchen counter away from direct sunlight.',
+    proMetric: '14-Day Shelf Life · Dry Leaves + 2cm Stem Water',
+    relatedRecipeId: 'cooking-science-temperatures-deglazing-guide',
+  },
+  {
+    id: 'qa-3',
+    topic: 'meal_prep',
+    topicLabel: 'Meal Prep & Storage',
+    question:
+      'Which cooked foods freeze well for monthly meal prep and which foods should never be frozen?',
+    shortAnswer:
+      'Braised meats, shakshuka sauce, cooked grains, and un-frosted cupcakes freeze for 3 months; avoid freezing raw salad greens or cream emulsions.',
+    detailedAnswer:
+      'Foods with high moisture structure like raw cucumbers, lettuce, and plain dairy cream sauces separate or turn limp when ice crystals expand. Instead, freeze cooked rice, marinated or seared meats, tomato-based sauces, and baked goods wrapped tightly. When freezing soups or stews with potatoes, mash a portion of the potatoes or swap for sweet potatoes and beans, which hold their texture after thawing.',
+    proMetric: '-18°C Freezer Storage · 2 to 3 Months Peak Quality',
+    relatedRecipeId: 'mediterranean-spiced-shakshuka',
+  },
+  {
+    id: 'qa-4',
+    topic: 'substitutions',
+    topicLabel: 'Ingredient Swaps',
+    question:
+      'What can I use instead of heavy whipping cream in pasta sauces, soups, or curries?',
+    shortAnswer:
+      'Whisk 180ml whole milk with 60g melted unsalted butter (plus 1 tsp cornstarch if simmering), or use full-fat canned coconut cream 1:1.',
+    detailedAnswer:
+      'Heavy cream is roughly 36% milkfat. Combining 3/4 cup (180ml) whole milk with 1/4 cup (60g) melted unsalted butter restores that exact fat-to-water ratio. For silky Italian pasta sauces like tagliatelle, you can skip cream altogether by emulsifying 90ml starchy pasta cooking water with cold butter and finely microplaned Parmigiano-Reggiano off the heat.',
+    proMetric: '1:1 Volume Ratio · 180ml Whole Milk + 60g Melted Butter',
+    relatedRecipeId: 'truffle-tagliatelle-pasta',
+  },
+  {
+    id: 'qa-5',
+    topic: 'substitutions',
+    topicLabel: 'Ingredient Swaps',
+    question:
+      'How do I make an instant 5-minute buttermilk substitute for baking cakes, cupcakes, or tenderizing chicken?',
+    shortAnswer:
+      'Stir 1 tablespoon (15ml) fresh lemon juice or white vinegar into 1 cup (240ml) warm whole milk and rest for 5 minutes.',
+    detailedAnswer:
+      'The mild acidity in buttermilk reacts with baking soda to create carbon dioxide lift while breaking down gluten strands for a velvety crumb. Measuring 15ml of lemon juice or white distilled vinegar into a liquid measuring cup, topping up to the 240ml line with room-temperature milk, and waiting 5 minutes creates the exact pH needed for bakery-level cupcakes and pancakes.',
+    proMetric: '15ml Acid + 225ml Whole Milk · 5-Min Rest',
+    relatedRecipeId: 'mango-strawberry-sunset-cupcakes',
+  },
+  {
+    id: 'qa-6',
+    topic: 'substitutions',
+    topicLabel: 'Ingredient Swaps',
+    question:
+      'What is the exact conversion ratio when swapping fresh herbs for dried herbs in a recipe?',
+    shortAnswer:
+      'Follow the 3-to-1 Rule: use 1 teaspoon of dried herbs for every 1 tablespoon (3 teaspoons) of fresh chopped herbs.',
+    detailedAnswer:
+      'Because drying removes water and concentrates essential aromatic oils by weight, dried oregano, thyme, and rosemary are three times more potent by volume than fresh leaves. Add dried herbs early in the cooking process so they rehydrate in warm oil or broth; add delicate fresh herbs (basil, parsley, cilantro, chives) during the final 60 seconds off the heat.',
+    proMetric: '3:1 Fresh-to-Dried Ratio (15ml Fresh = 5ml Dried)',
+    relatedRecipeId: 'kitchen-guide-substitutes-cast-iron',
+  },
+  {
+    id: 'qa-7',
+    topic: 'heat_skillet',
+    topicLabel: 'Heat, Skillets & Air Fryer',
+    question:
+      'How do I stop salmon skin, eggs, or steak from sticking to a cast-iron or stainless-steel skillet?',
+    shortAnswer:
+      'Preheat the dry pan until a water drop glides (193°C), add oil, and make sure the food surface is bone-dry before searing.',
+    detailedAnswer:
+      'Microscopic pores in cold metal expand and grip wet proteins. By preheating your dry skillet for 3 minutes until a drop of water dances across the metal (the Leidenfrost effect), then adding high-smoke-point avocado oil and patting your fish or steak completely dry with paper towels, an instant vapor barrier forms. Do not try to flip the protein for the first 3–5 minutes—once a golden Maillard crust forms, it releases naturally.',
+    proMetric: '193°C Leidenfrost Point · Dry Protein Surface',
+    relatedRecipeId: 'crispy-salmon-skillet',
+  },
+  {
+    id: 'qa-8',
+    topic: 'heat_skillet',
+    topicLabel: 'Heat, Skillets & Air Fryer',
+    question:
+      'How do I convert any traditional oven recipe into an Air Fryer recipe without burning the outside?',
+    shortAnswer:
+      'Reduce the recipe temperature by 15°C (25°F) and cut the total cooking time by 20% to 25%.',
+    detailedAnswer:
+      'An Air Fryer is a high-velocity countertop convection oven in a compact chamber. If a conventional oven recipe calls for roasting chicken thighs at 215°C (425°F) for 30 minutes, set your Air Fryer to 200°C (400°F) for 22 minutes. Leave at least 1cm of airflow space around food pieces in the basket and shake or flip halfway through.',
+    proMetric: '-15°C (-25°F) Temp · -20% Cooking Duration',
+    relatedRecipeId: 'lemon-herb-roasted-chicken',
+  },
+  {
+    id: 'qa-9',
+    topic: 'heat_skillet',
+    topicLabel: 'Heat, Skillets & Air Fryer',
+    question:
+      'What are the exact internal temperatures for juicy steak, chicken, and salmon using a meat thermometer?',
+    shortAnswer:
+      'Pull Steak (Medium-Rare) at 52°C, Salmon at 50°C, Chicken Breast at 71°C, and Chicken Thighs at 79°C—then rest for 5 minutes.',
+    detailedAnswer:
+      'Carryover thermal momentum continues to raise the internal core temperature of meat by 3°C to 4°C (5°F–7°F) after you remove it from the heat source. Pulling a ribeye steak at 52°C (125°F) and resting it on a warm wooden board for 6 minutes yields a flawless edge-to-edge 55°C (131°F) medium-rare center while keeping all intramuscular juices inside the fibers.',
+    proMetric: 'Steak 52°C · Salmon 50°C · Chicken Breast 71°C + 5-Min Rest',
+    relatedRecipeId: 'garlic-butter-ribeye-steak',
+  },
+  {
+    id: 'qa-10',
+    topic: 'reheating_safety',
+    topicLabel: 'Defrosting & Reheating',
+    question:
+      'What is the fastest and safest way to defrost frozen chicken, steak, or fish in 20 minutes?',
+    shortAnswer:
+      'Submerge the vacuum-sealed or zip-bagged meat in a bowl of cold tap water (never hot water), changing the water every 10 minutes.',
+    detailedAnswer:
+      'Water conducts heat 25 times faster than air, so a cold-water bath thaws a 450g pack of chicken breasts, salmon fillets, or ribeye steak in 20 to 30 minutes while keeping the outer surface out of the bacterial danger zone (above 4°C–60°C). Never defrost meat in hot water or on a warm counter for hours, as the outer edges begin to cook and spoil while the core stays frozen.',
+    proMetric: 'Cold Tap Water Bath · 20–30 Mins per 450g',
+    relatedRecipeId: 'crispy-salmon-skillet',
+  },
+  {
+    id: 'qa-11',
+    topic: 'reheating_safety',
+    topicLabel: 'Defrosting & Reheating',
+    question:
+      'How do I reheat leftover cooked salmon, steak, or crispy chicken without drying it out?',
+    shortAnswer:
+      'Skip the microwave: reheat in an Air Fryer at 175°C for 3–4 minutes or in a covered skillet over medium-low heat with a splash of broth.',
+    detailedAnswer:
+      'Microwaves agitate water molecules unevenly, boiling the moisture out of cooked fish and steak within 45 seconds and turningcrispy skin rubbery. Instead, place cold salmon or chicken skin-side up in a preheated 175°C (350°F) Air Fryer for 3 to 4 minutes, or warm sliced steak in a skillet with 15ml of melted garlic butter for 60 seconds just until warmed through.',
+    proMetric: '175°C (350°F) Air Fryer · 3 to 4 Minutes',
+    relatedRecipeId: 'lemon-herb-roasted-chicken',
+  },
+  {
+    id: 'qa-12',
+    topic: 'reheating_safety',
+    topicLabel: 'Defrosting & Reheating',
+    question:
+      'How do I store and reheat cooked rice or pasta for meal prep so it stays fluffy and safe to eat?',
+    shortAnswer:
+      'Cool cooked rice on a flat tray within 60 minutes, refrigerate at 4°C for up to 4 days, and reheat with 1 tablespoon of water per bowl.',
+    detailedAnswer:
+      'To prevent Bacillus cereus spores from multiplying in warm starch, spread freshly cooked rice or pasta on a wide plate to cool rapidly and move it into the refrigerator within 1 hour of cooking. When reheating, sprinkle 15ml (1 tablespoon) of water or broth over the grains and cover loosely so the steam rehydrates the starch granules back to a freshly cooked texture.',
+    proMetric: 'Refrigerate Within 60 Mins · Add 15ml Water When Reheating',
+    relatedRecipeId: 'truffle-tagliatelle-pasta',
+  },
+];
+

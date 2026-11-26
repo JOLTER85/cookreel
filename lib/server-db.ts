@@ -44,7 +44,7 @@ export interface CookReelDatabase {
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
-const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v4.json');
+const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v5.json');
 
 const INITIAL_REVIEWS: RecipeReview[] = [
   {
