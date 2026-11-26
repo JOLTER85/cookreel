@@ -255,6 +255,14 @@ export function SiteFooter() {
               ))}
               <li>
                 <Link
+                  href="/videos"
+                  className="hover:text-white transition-colors text-amber-300 font-semibold"
+                >
+                  Video Recipes Hub (/videos)
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/qa"
                   className="hover:text-white transition-colors text-amber-400 font-semibold"
                 >

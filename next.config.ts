@@ -20,6 +20,29 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Historical subdomain tv.cookreel.com (e.g. yankeedoodlepaddy.com backlink) -> /videos
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'tv.cookreel.com',
+          },
+        ],
+        destination: 'https://www.cookreel.com/videos',
+        permanent: true,
+      },
+      {
+        source: '/tv',
+        destination: '/videos',
+        permanent: true,
+      },
+      {
+        source: '/tv/:path*',
+        destination: '/videos',
+        permanent: true,
+      },
+      // Legacy underscore category paths -> hyphenated category paths
       {
         source: '/category/quick_easy',
         destination: '/category/quick-easy',
@@ -40,6 +63,7 @@ const nextConfig: NextConfig = {
         destination: '/category/kitchen-hacks',
         permanent: true,
       },
+      // Legacy recipe slug aliases -> canonical recipe slugs
       {
         source: '/recipes/keto-garlic-herb-butter-ribeye-steak-cast-iron',
         destination: '/recipes/keto-garlic-herb-butter-ribeye-steak-high-protein',
