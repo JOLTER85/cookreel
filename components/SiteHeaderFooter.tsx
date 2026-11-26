@@ -32,6 +32,7 @@ export function SiteHeader({
   const router = useRouter();
   const [headerSearch, setHeaderSearch] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const matchingRecipes =
     headerSearch.trim().length >= 1
@@ -50,23 +51,23 @@ export function SiteHeader({
     e.preventDefault();
     const q = headerSearch.trim();
     if (!q) return;
+    setSearchFocused(false);
+    setMobileSearchOpen(false);
     if (matchingRecipes.length === 1) {
-      setSearchFocused(false);
       router.push(`/recipes/${matchingRecipes[0].slug}`);
       return;
     }
-    setSearchFocused(false);
     router.push(`/?q=${encodeURIComponent(q)}#recipe-directory`);
   };
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF9F6]/95 backdrop-blur-md">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 h-20 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3 shrink-0">
+      <div className="mx-auto max-w-[1440px] px-3.5 sm:px-8 h-15 sm:h-20 flex items-center justify-between gap-2.5">
+        <div className="flex items-center gap-2 shrink-0">
           <Link href="/" aria-label="CookReel Home — cookreel.com">
             <CookReelBrandLogo
               theme="light"
-              size="md"
+              size="sm"
               showDomain={true}
               showTagline={false}
             />
@@ -137,9 +138,20 @@ export function SiteHeader({
           </Link>
         </nav>
 
-        {/* Global Recipe Search Bar + Action Slot (No Duplicate Cooking Q&A Button) */}
-        <div className="flex items-center gap-2.5">
-          <div className="relative">
+        {/* Global Recipe Search Bar + Action Slot */}
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Mobile Search Toggle Button (40x40px touch target on phones) */}
+          <button
+            type="button"
+            onClick={() => setMobileSearchOpen((prev) => !prev)}
+            aria-label="Open recipe search"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 bg-white text-slate-700 hover:border-amber-800 hover:text-amber-800 active:scale-95 transition-all"
+          >
+            <Search className="w-4 h-4" />
+          </button>
+
+          {/* Tablet & Desktop Inline Search Bar */}
+          <div className="relative hidden md:block">
             <form onSubmit={handleHeaderSearchSubmit} className="relative">
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
@@ -153,7 +165,7 @@ export function SiteHeader({
                 }}
                 placeholder="Search recipes (e.g. salmon, chicken)..."
                 aria-label="Search recipes or ingredients"
-                className="w-44 sm:w-56 md:w-64 pl-8 pr-3 py-2 rounded-lg border border-slate-300 bg-white text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-800 focus:ring-2 focus:ring-amber-800/15 transition-all"
+                className="w-56 lg:w-64 pl-8 pr-3 py-2 rounded-lg border border-slate-300 bg-white text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-800 focus:ring-2 focus:ring-amber-800/15 transition-all"
               />
             </form>
 
@@ -209,7 +221,7 @@ export function SiteHeader({
           ) : (
             <Link
               href="/"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm shrink-0"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm shrink-0 whitespace-nowrap"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span>All Recipes</span>
@@ -218,12 +230,87 @@ export function SiteHeader({
         </div>
       </div>
 
-      {/* Mobile / Tablet Scrollable Category Bar */}
-      <div className="xl:hidden border-t border-slate-200/70 bg-white px-4 py-2 overflow-x-auto">
-        <div className="flex items-center gap-2 text-xs font-bold whitespace-nowrap">
+      {/* Expandable Full-Width Mobile Search Drawer (Zero iOS Zoom, Instant Results) */}
+      {mobileSearchOpen && (
+        <div className="md:hidden border-t border-slate-200 bg-white px-3.5 py-3 shadow-lg">
+          <form onSubmit={handleHeaderSearchSubmit} className="relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="search"
+              autoFocus
+              value={headerSearch}
+              onChange={(e) => setHeaderSearch(e.target.value)}
+              placeholder="Search salmon, chicken, 15-min pasta..."
+              aria-label="Search recipes or ingredients"
+              className="w-full pl-10 pr-20 py-2.5 rounded-xl border border-slate-300 bg-[#FAF9F6] text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-800"
+            />
+            <button
+              type="submit"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-amber-800 text-white text-xs font-bold"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* Quick 1-Tap Popular Search Chips */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2.5">
+            <span className="text-[11px] font-mono text-slate-400 shrink-0">
+              Try:
+            </span>
+            {['Salmon', 'Chicken', 'Pasta', 'Keto', 'Lentil', 'Shrimp'].map(
+              (term) => (
+                <button
+                  key={term}
+                  type="button"
+                  onClick={() => setHeaderSearch(term)}
+                  className="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-amber-50 text-slate-700 text-xs font-semibold shrink-0"
+                >
+                  {term}
+                </button>
+              )
+            )}
+          </div>
+
+          {headerSearch.trim().length >= 1 && (
+            <div className="mt-2.5 rounded-xl border border-slate-200 bg-[#FAF9F6] overflow-hidden">
+              {matchingRecipes.length === 0 ? (
+                <div className="p-3 text-xs text-slate-500">
+                  No match for &ldquo;{headerSearch}&rdquo;. Try another ingredient.
+                </div>
+              ) : (
+                <ul className="divide-y divide-slate-200/70 max-h-64 overflow-y-auto">
+                  {matchingRecipes.map((rec) => (
+                    <li key={rec.id}>
+                      <Link
+                        href={`/recipes/${rec.slug}`}
+                        onClick={() => setMobileSearchOpen(false)}
+                        className="px-3.5 py-2.5 flex items-center justify-between gap-2 active:bg-amber-100/60"
+                      >
+                        <div className="min-w-0">
+                          <div className="text-xs font-bold text-slate-900 truncate">
+                            {rec.titleEn}
+                          </div>
+                          <div className="text-[11px] text-slate-500 font-mono">
+                            {rec.prepMinutes + rec.cookMinutes} mins · {rec.calories} kcal
+                          </div>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-amber-800 shrink-0" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Mobile / Tablet Smooth Scrollable Category Bar */}
+      <div className="xl:hidden border-t border-slate-200/70 bg-white px-3.5 py-1.5 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1.5 text-xs font-bold whitespace-nowrap">
           <Link
             href="/"
-            className={`px-3 py-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
               activePath === '/'
                 ? 'bg-amber-800 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -237,7 +324,7 @@ export function SiteHeader({
               <Link
                 key={cat.slug}
                 href={href}
-                className={`px-3 py-1.5 rounded-lg ${
+                className={`px-3 py-1.5 rounded-lg transition-colors ${
                   activePath === href
                     ? 'bg-amber-800 text-white'
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -249,7 +336,7 @@ export function SiteHeader({
           })}
           <Link
             href={substitutionsSlug}
-            className={`px-3 py-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
               activePath === substitutionsSlug
                 ? 'bg-amber-800 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -259,7 +346,7 @@ export function SiteHeader({
           </Link>
           <Link
             href="/qa"
-            className={`px-3 py-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
               activePath === '/qa'
                 ? 'bg-amber-800 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -269,7 +356,7 @@ export function SiteHeader({
           </Link>
           <Link
             href="/about"
-            className={`px-3 py-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
               activePath === '/about'
                 ? 'bg-amber-800 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -279,7 +366,7 @@ export function SiteHeader({
           </Link>
           <Link
             href="/contact"
-            className={`px-3 py-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
               activePath === '/contact'
                 ? 'bg-amber-800 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'

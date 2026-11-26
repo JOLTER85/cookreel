@@ -203,53 +203,53 @@ export function RecipeDetailClient({
   )}&description=${encodeURIComponent(recipe.titleEn)}`;
 
   return (
-    <div className="mx-auto max-w-[1440px] px-4 sm:px-8 py-10">
+    <div className="mx-auto max-w-[1440px] px-3 sm:px-8 py-5 sm:py-10">
       {/* Breadcrumb Navigation */}
       <nav
         aria-label="Breadcrumb"
-        className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-6"
+        className="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-500 mb-4 sm:mb-6 overflow-x-auto no-scrollbar whitespace-nowrap"
       >
-        <Link href="/" className="hover:text-amber-800 font-semibold">
+        <Link href="/" className="hover:text-amber-800 font-semibold shrink-0">
           Home
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
         <Link
           href={`/category/${recipe.category}`}
-          className="hover:text-amber-800 font-semibold"
+          className="hover:text-amber-800 font-semibold shrink-0"
         >
           {categoryObj?.labelEn || 'Recipes'}
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <span className="text-slate-800 font-bold truncate max-w-md">
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <span className="text-slate-800 font-bold truncate max-w-[210px] sm:max-w-md">
           {recipe.titleEn}
         </span>
       </nav>
 
       <article className="rounded-2xl border border-slate-200/90 bg-white shadow-lg overflow-hidden">
-        {/* Top Article Banner — Split Two-Column Layout with Appetizing Dish Photo Above the Fold */}
-        <div className="bg-slate-900 text-white px-6 sm:px-10 py-8 border-b border-slate-800">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column: Category, Share Actions, Title, Subtitle & Author Meta */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+        {/* Top Article Banner — Split Two-Column Layout with Appetizing Dish Photo First on Mobile */}
+        <div className="bg-slate-900 text-white px-4 sm:px-10 py-5 sm:py-8 border-b border-slate-800">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-center">
+            {/* Left Column (Order 2 on Mobile so Dish Photo is seen first immediately): Category, Share Actions, Title, Subtitle & Author Meta */}
+            <div className="order-2 lg:order-1 lg:col-span-7 space-y-3.5 sm:space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2.5">
                 <div className="flex flex-wrap items-center gap-2">
                   <Link
                     href={`/category/${recipe.category}`}
-                    className="px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest hover:bg-amber-500/30 transition-colors"
+                    className="px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[11px] sm:text-xs font-mono uppercase tracking-widest hover:bg-amber-500/30 transition-colors"
                   >
                     {recipe.categoryLabelEn}
                   </Link>
-                  <span className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">
+                  <span className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-[11px] sm:text-xs font-mono">
                     Step-by-Step Guide
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <a
                     href={pinterestShareUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white text-xs font-bold transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 active:scale-95 text-white text-xs font-bold transition-all"
                   >
                     <Share2 className="w-3.5 h-3.5" />
                     <span>Pin to Pinterest</span>
@@ -257,7 +257,7 @@ export function RecipeDetailClient({
                   <button
                     type="button"
                     onClick={handleCopyShareLink}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 text-xs font-semibold transition-all"
                   >
                     {copiedUrl ? (
                       <>
@@ -276,7 +276,7 @@ export function RecipeDetailClient({
                     onClick={() =>
                       typeof window !== 'undefined' && window.print()
                     }
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 text-xs font-semibold transition-all"
                   >
                     <Printer className="w-3.5 h-3.5 text-amber-400" />
                     <span>Print Recipe</span>
@@ -287,11 +287,11 @@ export function RecipeDetailClient({
               <h1 className="font-serif text-2xl sm:text-4xl font-bold text-white leading-tight">
                 {recipe.titleEn}
               </h1>
-              <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-base max-w-2xl leading-relaxed">
                 {recipe.subtitleEn}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3.5 pt-4 border-t border-slate-800/80 text-xs text-slate-300">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 pt-3.5 border-t border-slate-800/80 text-xs text-slate-300">
                 <div>
                   Written by{' '}
                   <Link
@@ -302,12 +302,12 @@ export function RecipeDetailClient({
                   </Link>{' '}
                   <span className="text-slate-400">({recipe.authorRoleEn})</span>
                 </div>
-                <span className="text-slate-600">•</span>
+                <span className="text-slate-600 hidden sm:inline">•</span>
                 <span className="font-mono">
                   Prep: {recipe.prepMinutes}m · Cook: {recipe.cookMinutes}m · Total:{' '}
                   {recipe.prepMinutes + recipe.cookMinutes}m
                 </span>
-                <span className="text-slate-600">•</span>
+                <span className="text-slate-600 hidden sm:inline">•</span>
                 {averageRating && reviewCount > 0 ? (
                   <a
                     href="#reader-reviews"
@@ -330,8 +330,8 @@ export function RecipeDetailClient({
               </div>
             </div>
 
-            {/* Right Column: Appetizing Hero Dish Photo & Quick Video Preview Above the Fold */}
-            <div className="lg:col-span-5">
+            {/* Right Column (Order 1 on Mobile): Appetizing Hero Dish Photo & Quick Video Preview Above the Fold */}
+            <div className="order-1 lg:order-2 lg:col-span-5">
               <div className="relative rounded-xl overflow-hidden border border-slate-700/80 bg-slate-950 aspect-[16/10] shadow-2xl group">
                 <Image
                   src={recipe.image}
@@ -372,11 +372,11 @@ export function RecipeDetailClient({
           </div>
         </div>
 
-        <div className="p-6 sm:p-10 space-y-12">
+        <div className="p-4 sm:p-10 space-y-8 sm:space-y-12">
           {/* QUICK SUMMARY BAR (Prep Time, Cook Time, Servings, Calories + Jump to Recipe) */}
-          <div className="rounded-xl border border-amber-300/80 bg-[#FAF9F6] p-5 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
-              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+          <div className="rounded-xl border border-amber-300/80 bg-[#FAF9F6] p-3.5 sm:p-5 flex flex-col xl:flex-row xl:items-center justify-between gap-3.5 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 flex-1">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-white border border-slate-200/90">
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Prep Time
                 </div>
@@ -385,7 +385,7 @@ export function RecipeDetailClient({
                   <span>{recipe.prepMinutes} mins</span>
                 </div>
               </div>
-              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-white border border-slate-200/90">
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Cook Time
                 </div>
@@ -394,7 +394,7 @@ export function RecipeDetailClient({
                   <span>{recipe.cookMinutes} mins</span>
                 </div>
               </div>
-              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-white border border-slate-200/90">
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Yield / Servings
                 </div>
@@ -403,7 +403,7 @@ export function RecipeDetailClient({
                   <span>{2 * servingsMultiplier} Servings</span>
                 </div>
               </div>
-              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-white border border-slate-200/90">
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Calories &amp; Protein
                 </div>
@@ -416,19 +416,19 @@ export function RecipeDetailClient({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 shrink-0">
               <a
                 href="#structured-recipe-card"
-                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-xs whitespace-nowrap"
+                className="min-h-[42px] px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 active:scale-[0.99] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center whitespace-nowrap"
               >
                 Jump to Recipe ↓
               </a>
               {recipe.videoUrl && (
                 <a
                   href="#step-by-step-visuals"
-                  className="px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                  className="min-h-[42px] px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white hover:border-amber-800 active:scale-[0.99] text-slate-800 text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
                 >
-                  <Play className="w-3.5 h-3.5 text-amber-800 fill-current" />
+                  <Play className="w-3.5 h-3.5 text-amber-800 fill-current shrink-0" />
                   <span>Watch Short Video</span>
                 </a>
               )}
@@ -599,25 +599,25 @@ export function RecipeDetailClient({
               <div
                 className={`${
                   recipe.videoUrl ? 'lg:col-span-6' : 'lg:col-span-12'
-                } grid grid-cols-1 sm:grid-cols-3 gap-4`}
+                } flex sm:grid sm:grid-cols-3 gap-3.5 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar pb-1 sm:pb-0`}
               >
                 {recipe.stepGalleryImages.map((imgSrc, i) => (
                   <div
                     key={i}
-                    className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[4/5] flex flex-col justify-end p-3"
+                    className="relative min-w-[78%] sm:min-w-0 snap-center rounded-xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/11] sm:aspect-[4/5] flex flex-col justify-end p-3 shrink-0"
                   >
                     <Image
                       src={imgSrc}
                       alt={`${recipe.titleEn} - Stage ${i + 1}`}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 25vw"
                       referrerPolicy="no-referrer"
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="relative z-10 text-white">
                       <span className="inline-block px-2 py-0.5 rounded bg-amber-600 text-[10px] font-mono uppercase font-bold mb-1">
-                        Stage {i + 1}
+                        Stage {i + 1} of {recipe.stepGalleryImages.length}
                       </span>
                       <p className="text-xs font-semibold leading-snug">
                         {recipe.stepsEn[i]?.title || 'Plating & Finishing'}
@@ -834,7 +834,7 @@ export function RecipeDetailClient({
                           <button
                             type="button"
                             onClick={() => toggleIngredient(key)}
-                            className={`w-full flex items-center justify-between gap-3 p-2.5 rounded-lg border text-left transition-all ${
+                            className={`w-full min-h-[44px] flex items-center justify-between gap-3 p-3 rounded-lg border text-left active:scale-[0.99] transition-all ${
                               isChecked
                                 ? 'bg-emerald-50/60 border-emerald-200 text-slate-400 line-through'
                                 : 'bg-white border-slate-200/90 hover:border-amber-800/40 text-slate-800'

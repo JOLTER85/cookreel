@@ -215,49 +215,49 @@ export default function CookReelHomePage() {
       <main className="flex-1">
         {/* HERO SECTION — Clean White Editorial Hub Overview */}
         <section className="relative overflow-hidden bg-white text-slate-900 border-b border-slate-200/90">
-          <div className="mx-auto max-w-[1440px] px-4 sm:px-8 py-12 lg:py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-8 py-6 sm:py-12 lg:py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
               {/* Left Editorial Copy */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-xs font-mono uppercase tracking-widest font-semibold">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-800" />
+              <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+                <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-[11px] sm:text-xs font-mono uppercase tracking-wider sm:tracking-widest font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-800 shrink-0" />
                   <span>
-                    Step-by-Step Video Recipes · 1:1 Substitutions · USDA Safety Standards
+                    Step-by-Step Video Recipes · 1:1 Substitutions · USDA Safety
                   </span>
                 </div>
 
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight leading-[1.08] text-slate-900">
+                <h1 className="font-serif text-[28px] sm:text-5xl lg:text-[54px] font-bold tracking-tight leading-[1.12] sm:leading-[1.08] text-slate-900">
                   Practical Weeknight Recipes &amp;{' '}
                   <span className="text-amber-800">
                     Short-Form Step Visuals.
                   </span>
                 </h1>
 
-                <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+                <p className="text-slate-600 text-sm sm:text-lg leading-relaxed max-w-2xl">
                   Explore {recipes.length} comprehensive recipe guides across Quick 15-Minute Meals, Keto &amp; High-Protein Dinners, No-Bake Desserts, and Kitchen Hacks—complete with gram measurements, 1:1 ingredient swaps, and official USDA safe internal cooking temperatures.
                 </p>
 
                 {/* Primary Hero CTAs */}
-                <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 sm:pt-2">
                   <Link
                     href={`/recipes/${featuredHeroRecipe.slug}`}
-                    className="px-6 py-3.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white font-bold text-sm flex items-center gap-2.5 shadow-md shadow-amber-900/15 transition-all cursor-pointer"
+                    className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-xl sm:rounded-lg bg-amber-800 hover:bg-amber-700 active:scale-[0.99] text-white font-bold text-sm flex items-center gap-2.5 shadow-md shadow-amber-900/15 transition-all cursor-pointer"
                   >
-                    <Play className="w-4 h-4 fill-current" />
+                    <Play className="w-4 h-4 fill-current shrink-0" />
                     <span>Open Featured Salmon Recipe</span>
                   </Link>
 
                   <Link
                     href="/qa"
-                    className="px-5 py-3.5 rounded-lg bg-[#FAF9F6] hover:bg-amber-50/70 text-slate-800 border border-slate-300 hover:border-amber-800 font-semibold text-sm flex items-center gap-2 transition-colors"
+                    className="w-full sm:w-auto justify-center px-5 py-3.5 rounded-xl sm:rounded-lg bg-[#FAF9F6] hover:bg-amber-50/70 active:scale-[0.99] text-slate-800 border border-slate-300 hover:border-amber-800 font-semibold text-sm flex items-center gap-2 transition-all"
                   >
-                    <HelpCircle className="w-4 h-4 text-amber-800" />
+                    <HelpCircle className="w-4 h-4 text-amber-800 shrink-0" />
                     <span>Cooking &amp; Meal-Prep Q&amp;A ({COOKING_QA_KNOWLEDGE_BASE.length})</span>
                   </Link>
                 </div>
 
                 {/* 4 Pillar Quick Links to Real Category Pages */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-200">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-slate-200">
                   {SITE_ARCHITECTURE.map((cat) => (
                     <Link
                       key={cat.slug}
@@ -378,16 +378,26 @@ export default function CookReelHomePage() {
                 </h2>
               </div>
 
-              {/* Search Bar */}
+              {/* Search Bar (16px on mobile to prevent iOS Safari auto-zoom) */}
               <div className="relative w-full md:w-80">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
-                  type="text"
+                  type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search salmon, keto, air fryer, substitutes..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-300 bg-[#FAF9F6] text-xs text-slate-900 focus:outline-none focus:border-amber-800"
+                  className="w-full pl-10 pr-9 py-2.5 rounded-xl sm:rounded-lg border border-slate-300 bg-[#FAF9F6] text-base sm:text-xs text-slate-900 focus:outline-none focus:border-amber-800"
                 />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    aria-label="Clear search"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -471,16 +481,16 @@ export default function CookReelHomePage() {
               })}
             </div>
 
-            {/* Subcategory Filter Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 py-3 px-4 rounded-xl bg-[#FAF9F6] border border-slate-200/80 mb-8">
-              <div className="flex flex-wrap items-center gap-2">
+            {/* Subcategory Filter Bar — Smooth Horizontal Swipe on Mobile */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 py-3 px-3.5 sm:px-4 rounded-xl bg-[#FAF9F6] border border-slate-200/80 mb-6 sm:mb-8">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5 sm:pb-0">
                 <button
                   type="button"
                   onClick={() => {
                     setActiveCategory('all');
                     setActiveSubcategory('all');
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                  className={`px-3.5 py-2 sm:py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap shrink-0 ${
                     activeCategory === 'all'
                       ? 'bg-amber-800 text-white'
                       : 'bg-white border border-slate-200 text-slate-700 hover:bg-amber-50'
@@ -499,7 +509,7 @@ export default function CookReelHomePage() {
                           activeSubcategory === sub.id ? 'all' : sub.id
                         )
                       }
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                      className={`px-3.5 py-2 sm:py-1.5 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap shrink-0 ${
                         activeSubcategory === sub.id
                           ? 'bg-amber-800 text-white'
                           : 'bg-white text-slate-700 hover:bg-amber-50'
@@ -510,7 +520,7 @@ export default function CookReelHomePage() {
                   ))}
               </div>
 
-              <div className="text-xs text-slate-500 font-mono">
+              <div className="text-[11px] sm:text-xs text-slate-500 font-mono shrink-0">
                 Showing {filteredRecipes.length} of {recipes.length} Standalone Recipes
               </div>
             </div>
@@ -626,13 +636,13 @@ export default function CookReelHomePage() {
                     Select any day of the week to preview balanced lunch and dinner pairings with total prep time and daily calorie targets.
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex items-center sm:flex-wrap gap-2 overflow-x-auto no-scrollbar pb-1 mb-5">
                     {MEAL_PLAN_DAYS.map((d, idx) => (
                       <button
                         key={d.dayEn}
                         type="button"
                         onClick={() => setActiveMealDayIndex(idx)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                        className={`px-3.5 py-2 sm:py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap shrink-0 ${
                           activeMealDayIndex === idx
                             ? 'bg-amber-800 text-white'
                             : 'bg-white border border-slate-200 text-slate-700 hover:bg-amber-50'
