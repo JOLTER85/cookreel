@@ -11,10 +11,9 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
-import { SOCIAL_LINKS } from '@/lib/cookreel-data';
+import { SOCIAL_LINKS, SITE_ORIGIN } from '@/lib/cookreel-data';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
-const ogImg = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {
   title: 'About Us & Editorial Process | CookReel',
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
     title: 'About Us & Editorial Process | CookReel',
     description:
       'Learn about the CookReel Editorial Team, our recipe development standards, and USDA food safety temperature compliance.',
-    url: `${siteUrl}/about`,
+    url: `${SITE_ORIGIN}/about`,
     type: 'website',
     siteName: 'CookReel',
     images: [{ url: ogImg, width: 1200, height: 630, alt: 'About CookReel' }],
@@ -121,9 +120,9 @@ export default function AboutPage() {
               <span>How CookReel Is Funded (Affiliate &amp; Ad Transparency)</span>
             </h2>
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-              All recipes and meal-prep guides on CookReel are free to read and print. To cover hosting, video production, and editorial costs, we participate in the Amazon Services LLC Associates Program and display clearly labeled affiliate links next to recommended cookware. If you click a &ldquo;Shop Gear&rdquo; link and make a purchase, we may earn a small referral commission at no additional cost to you. Read our full{' '}
+              All recipes and meal-prep guides on CookReel are free to read and print. To cover hosting, video production, and editorial costs, we display clearly labeled affiliate partner links next to recommended cookware. If you click a &ldquo;Shop Gear&rdquo; link and make a purchase, we may earn a small referral commission at no additional cost to you. Read our full{' '}
               <Link
-                href="/privacy"
+                href="/privacy#affiliate-disclosure"
                 className="text-amber-800 font-semibold underline"
               >
                 Privacy, Cookie &amp; Affiliate Disclosure Policy
@@ -134,7 +133,7 @@ export default function AboutPage() {
 
           <section className="space-y-4 pt-4 border-t border-slate-200">
             <h2 className="font-serif text-2xl font-bold text-slate-900">
-              Connect With CookReel
+              Share &amp; Connect With CookReel
             </h2>
             <p className="text-slate-700 text-sm leading-relaxed">
               Have a question about an ingredient substitution, found an error in a recipe measurement, or want to collaborate? Reach our editorial desk directly at{' '}
@@ -156,12 +155,15 @@ export default function AboutPage() {
                 <a
                   key={soc.platform}
                   href={soc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={soc.url.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={
+                    soc.url.startsWith('mailto:')
+                      ? undefined
+                      : 'noopener noreferrer'
+                  }
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-slate-300 bg-[#FAF9F6] hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
                 >
                   <span>{soc.platform}</span>
-                  <span className="text-slate-500 font-mono">{soc.handle}</span>
                   <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                 </a>
               ))}

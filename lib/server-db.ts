@@ -170,10 +170,10 @@ export function sanitizeText(input: unknown, maxLength = 500): string {
 
 export function isValidCategory(cat: unknown): cat is PrimaryCategorySlug {
   return (
-    cat === 'quick_easy' ||
-    cat === 'healthy_diet' ||
-    cat === 'desserts_baking' ||
-    cat === 'kitchen_hacks'
+    cat === 'quick-easy' ||
+    cat === 'healthy-diet' ||
+    cat === 'desserts-baking' ||
+    cat === 'kitchen-hacks'
   );
 }
 

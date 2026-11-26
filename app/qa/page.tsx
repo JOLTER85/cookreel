@@ -2,12 +2,11 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, HelpCircle } from 'lucide-react';
-import { COOKING_QA_KNOWLEDGE_BASE } from '@/lib/cookreel-data';
+import { COOKING_QA_KNOWLEDGE_BASE, SITE_ORIGIN } from '@/lib/cookreel-data';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
 import { QaKnowledgeBaseClient } from '@/components/QaKnowledgeBaseClient';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
-const ogImg = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {
   title: 'Cooking & Meal-Prep Q&A Knowledge Base | CookReel',
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Cooking & Meal-Prep Q&A Knowledge Base | CookReel',
     description:
       'Science-backed answers to 16 common cooking, food preparation, USDA safe internal temperature, and 1:1 ingredient substitution questions.',
-    url: `${siteUrl}/qa`,
+    url: `${SITE_ORIGIN}/qa`,
     type: 'website',
     siteName: 'CookReel',
     images: [{ url: ogImg, width: 1200, height: 630, alt: 'CookReel Q&A' }],

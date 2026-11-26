@@ -1,8 +1,8 @@
 export type PrimaryCategorySlug =
-  | 'quick_easy'
-  | 'healthy_diet'
-  | 'desserts_baking'
-  | 'kitchen_hacks';
+  | 'quick-easy'
+  | 'healthy-diet'
+  | 'desserts-baking'
+  | 'kitchen-hacks';
 
 export interface SubcategoryMeta {
   id: string;
@@ -70,124 +70,129 @@ export interface CulinaryRecipe {
   stepsEn: { title: string; instruction: string; timerSeconds: number }[];
 }
 
+export const SITE_ORIGIN = 'https://www.cookreel.com';
 export const HERO_FEATURED_VIDEO_URL = '/videos/hero-cookreel-featured.mp4';
 
+/**
+ * Verified sharing & bookmarking channels for CookReel.com
+ * (Does not point to unclaimed third-party social handles)
+ */
 export const SOCIAL_LINKS = [
   {
-    name: 'Pinterest',
-    platform: 'Pinterest',
-    url: 'https://www.pinterest.com/cookreel',
-    handle: '@cookreel',
+    name: 'Pin to Pinterest',
+    platform: 'Pin to Pinterest',
+    url: 'https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.cookreel.com&media=https%3A%2F%2Fwww.cookreel.com%2Fimages%2Fhero_cookreel_studio_1795527112508.jpg&description=CookReel%20Step-by-Step%20Video%20Recipes%20%26%20Culinary%20Guides',
+    handle: 'Save Recipe Pin',
   },
   {
-    name: 'Instagram',
-    platform: 'Instagram',
-    url: 'https://www.instagram.com/cookreel',
-    handle: '@cookreel',
+    name: 'Share on WhatsApp',
+    platform: 'Share on WhatsApp',
+    url: 'https://api.whatsapp.com/send?text=CookReel%20Step-by-Step%20Video%20Recipes%20https%3A%2F%2Fwww.cookreel.com',
+    handle: 'Send to Kitchen',
   },
   {
-    name: 'TikTok',
-    platform: 'TikTok',
-    url: 'https://www.tiktok.com/@cookreel',
-    handle: '@cookreel',
+    name: 'Share on Facebook',
+    platform: 'Share on Facebook',
+    url: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.cookreel.com',
+    handle: 'Share Guide',
   },
   {
-    name: 'YouTube',
-    platform: 'YouTube',
-    url: 'https://www.youtube.com/@cookreel',
-    handle: '@cookreel',
+    name: 'Editorial Desk',
+    platform: 'Editorial Desk',
+    url: 'mailto:editorial@cookreel.com',
+    handle: 'editorial@cookreel.com',
   },
 ];
 
 export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
-    slug: 'quick_easy',
+    slug: 'quick-easy',
     labelEn: 'Quick & Easy',
     descriptionEn:
       'Weeknight dinners ready in 15 to 25 minutes—featuring crispy air fryer favorites, one-pan skillets, and streamlined 5-ingredient meals.',
     subcategories: [
       {
         id: '15-minute-meals',
-        parent: 'quick_easy',
+        parent: 'quick-easy',
         labelEn: '15-Minute Meals',
       },
       {
         id: '5-ingredient-recipes',
-        parent: 'quick_easy',
+        parent: 'quick-easy',
         labelEn: '5-Ingredient Recipes',
       },
       {
         id: 'air-fryer-recipes',
-        parent: 'quick_easy',
+        parent: 'quick-easy',
         labelEn: 'Air Fryer Recipes',
       },
     ],
   },
   {
-    slug: 'healthy_diet',
+    slug: 'healthy-diet',
     labelEn: 'Healthy & Diet',
     descriptionEn:
       'Nutrient-dense recipes with complete macro profiles—covering Keto, low-carb, high-protein, and plant-based meals.',
     subcategories: [
       {
         id: 'keto-low-carb',
-        parent: 'healthy_diet',
+        parent: 'healthy-diet',
         labelEn: 'Keto & Low-Carb',
       },
       {
         id: 'high-protein-meals',
-        parent: 'healthy_diet',
+        parent: 'healthy-diet',
         labelEn: 'High-Protein Meals',
       },
       {
         id: 'vegan-vegetarian',
-        parent: 'healthy_diet',
+        parent: 'healthy-diet',
         labelEn: 'Vegan & Vegetarian',
       },
     ],
   },
   {
-    slug: 'desserts_baking',
+    slug: 'desserts-baking',
     labelEn: 'Desserts & Baking',
     descriptionEn:
       'Step-by-step cakes, swirled cupcakes, effortless no-bake treats, and naturally sweetened desserts.',
     subcategories: [
       {
         id: 'no-bake-desserts',
-        parent: 'desserts_baking',
+        parent: 'desserts-baking',
         labelEn: 'No-Bake Desserts',
       },
       {
         id: 'healthy-sweets',
-        parent: 'desserts_baking',
+        parent: 'desserts-baking',
         labelEn: 'Healthy Sweets',
       },
       {
         id: 'cakes-pastries',
-        parent: 'desserts_baking',
+        parent: 'desserts-baking',
         labelEn: 'Cakes & Pastries',
       },
     ],
   },
   {
-    slug: 'kitchen_hacks',
+    slug: 'kitchen-hacks',
     labelEn: 'Kitchen Hacks & Guides',
     descriptionEn:
       'Practical culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, and USDA safe cooking temperatures.',
     subcategories: [
       {
         id: 'ingredient-substitutes',
-        parent: 'kitchen_hacks',
+        parent: 'kitchen-hacks',
         labelEn: 'Ingredient Substitutes',
       },
       {
         id: 'meal-prep-guides',
-        parent: 'kitchen_hacks',
+        parent: 'kitchen-hacks',
         labelEn: 'Meal Prep Guides',
       },
       {
         id: 'cooking-tips',
-        parent: 'kitchen_hacks',
+        parent: 'kitchen-hacks',
         labelEn: 'Cooking Tips',
       },
     ],
@@ -198,7 +203,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'crispy-salmon-skillet',
     slug: '15-minute-crispy-cast-iron-salmon-lemon-caper',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '15-minute-meals',
     categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
     titleEn: '15-Minute Crispy Cast-Iron Salmon with Meyer Lemon Caper Butter',
@@ -279,7 +284,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -315,7 +320,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'garlic-butter-ribeye-steak',
     slug: 'keto-garlic-herb-butter-ribeye-steak-high-protein',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'keto-low-carb',
     categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
     titleEn: 'Pan-Seared Ribeye Steak with Garlic & Fresh Thyme Butter',
@@ -424,7 +429,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'truffle-tagliatelle-pasta',
     slug: '5-ingredient-tagliatelle-black-truffle-butter-parmigiano',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '5-ingredient-recipes',
     categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
     titleEn: '5-Ingredient Tagliatelle with Black Truffle Butter & Parmigiano',
@@ -498,7 +503,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Italian Stainless Steel Pasta Machine & Fine Grater Set',
       brand: 'Marcato Atlas',
       priceUsd: 112,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -532,7 +537,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'lemon-herb-roasted-chicken',
     slug: 'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: 'air-fryer-recipes',
     categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
     titleEn: 'Crispy Air Fryer & One-Pan Lemon Herb Chicken Thighs with Potatoes',
@@ -606,7 +611,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '3.5-Quart Stainless Steel All-Clad Braiser & Roasting Pan',
       brand: 'All-Clad',
       priceUsd: 165,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -640,7 +645,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'mediterranean-spiced-shakshuka',
     slug: 'mediterranean-poached-eggs-spiced-tomato-pepper-shakshuka',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'vegan-vegetarian',
     categoryLabelEn: 'Healthy & Diet · Vegetarian & Plant-Forward',
     titleEn: 'Mediterranean Poached Eggs in Spiced Tomato & Roasted Pepper Sauce',
@@ -714,7 +719,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '11-Inch Enameled Cast-Iron Deep Sauté Skillet with Lid',
       brand: 'Le Creuset',
       priceUsd: 185,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -748,7 +753,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'tropical-mango-berry-swirl-cupcakes',
     slug: 'tropical-mango-berry-swirl-vanilla-bean-cupcakes',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'cakes-pastries',
     categoryLabelEn: 'Desserts & Baking · Cakes & Pastries',
     titleEn: 'Tropical Mango & Berry Swirl Vanilla Bean Cupcakes',
@@ -822,7 +827,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Professional Stainless Steel Pastry Piping Tip Set & 12-Cup Pan',
       brand: 'Ateco Pastry',
       priceUsd: 54,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -856,7 +861,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'kitchen-guide-substitutes-cast-iron',
     slug: 'ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide',
-    category: 'kitchen_hacks',
+    category: 'kitchen-hacks',
     subcategoryId: 'ingredient-substitutes',
     categoryLabelEn: 'Kitchen Hacks & Guides · Ingredient Substitutes',
     titleEn:
@@ -935,7 +940,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Seasoned 12-Inch Cast-Iron Skillet & Silicone Handle Cover',
       brand: 'Lodge Culinary',
       priceUsd: 49,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -967,7 +972,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'sunday-meal-prep-high-protein-bowls',
     slug: '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
-    category: 'kitchen_hacks',
+    category: 'kitchen-hacks',
     subcategoryId: 'meal-prep-guides',
     categoryLabelEn: 'Kitchen Hacks & Guides · Meal Prep Guides',
     titleEn:
@@ -1040,7 +1045,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set with Locking Lids',
       brand: 'Pyrex Culinary',
       priceUsd: 68,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1073,7 +1078,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'cooking-science-temperatures-deglazing-guide',
     slug: 'essential-cooking-tips-internal-meat-temperatures-pan-deglazing-herb-storage',
-    category: 'kitchen_hacks',
+    category: 'kitchen-hacks',
     subcategoryId: 'cooking-tips',
     categoryLabelEn: 'Kitchen Hacks & Guides · Cooking Tips',
     titleEn:
@@ -1146,7 +1151,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
       brand: 'ThermoWorks',
       priceUsd: 89,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1179,7 +1184,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: '15-minute-garlic-shrimp-zucchini-skillet',
     slug: '15-minute-garlic-lemon-shrimp-and-zucchini-skillet',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '15-minute-meals',
     categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
     titleEn: '15-Minute Garlic Lemon Shrimp & Crisp Zucchini Skillet',
@@ -1249,7 +1254,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1283,7 +1288,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: '15-minute-Mediterranean-chickpea-feta-skillet',
     slug: '15-minute-mediterranean-spiced-chickpea-spinach-feta-skillet',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '15-minute-meals',
     categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
     titleEn: '15-Minute Mediterranean Crispy Chickpea, Spinach & Feta Skillet',
@@ -1353,7 +1358,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '11-Inch Enameled Cast-Iron Deep Sauté Skillet',
       brand: 'Le Creuset',
       priceUsd: 185,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1387,7 +1392,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: '5-ingredient-pesto-gnocchi-skillet',
     slug: '5-ingredient-crispy-pan-seared-gnocchi-basil-pesto-mozzarella',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '5-ingredient-recipes',
     categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
     titleEn: '5-Ingredient Crispy Pan-Seared Potato Gnocchi with Basil Pesto',
@@ -1457,7 +1462,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1491,7 +1496,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: '5-ingredient-honey-mustard-pork-tenderloin',
     slug: '5-ingredient-herb-crusted-honey-mustard-pork-tenderloin-medallions',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: '5-ingredient-recipes',
     categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
     titleEn: '5-Ingredient Pan-Seared Honey Mustard Pork Tenderloin Medallions',
@@ -1561,7 +1566,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
       brand: 'ThermoWorks',
       priceUsd: 89,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1595,7 +1600,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'air-fryer-crispy-honey-garlic-salmon-bites',
     slug: 'air-fryer-crispy-honey-garlic-salmon-bites-and-broccoli',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: 'air-fryer-recipes',
     categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
     titleEn: '12-Minute Air Fryer Honey Garlic Salmon Bites & Roasted Broccoli',
@@ -1665,7 +1670,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
       brand: 'ThermoWorks',
       priceUsd: 89,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1699,7 +1704,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'air-fryer-crispy-parmesan-zucchini-fries',
     slug: 'air-fryer-crispy-garlic-parmesan-zucchini-fries',
-    category: 'quick_easy',
+    category: 'quick-easy',
     subcategoryId: 'air-fryer-recipes',
     categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
     titleEn: 'Crispy Air Fryer Garlic Parmesan Zucchini Batons',
@@ -1769,7 +1774,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Stainless Steel Wire Cooling & Air-Flow Baking Rack Set',
       brand: 'All-Clad',
       priceUsd: 42,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1803,7 +1808,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'keto-creamy-tuscan-garlic-chicken-skillet',
     slug: 'keto-creamy-tuscan-garlic-spinach-chicken-skillet',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'keto-low-carb',
     categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
     titleEn: 'Keto Creamy Tuscan Garlic Chicken with Spinach & Sun-Dried Tomatoes',
@@ -1873,7 +1878,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -1907,7 +1912,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'keto-cauliflower-fried-rice-garlic-shrimp',
     slug: 'keto-low-carb-garlic-ginger-shrimp-cauliflower-fried-rice',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'keto-low-carb',
     categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
     titleEn: '15-Minute Low-Carb Shrimp & Egg Cauliflower Fried Rice',
@@ -1977,7 +1982,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2011,7 +2016,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'high-protein-turkey-sweet-potato-skillet',
     slug: 'high-protein-lean-turkey-and-roasted-sweet-potato-meal-prep-skillet',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'high-protein-meals',
     categoryLabelEn: 'Healthy & Diet · High-Protein Meals',
     titleEn: 'High-Protein Lean Ground Turkey & Sweet Potato Skillet (45g Protein)',
@@ -2081,7 +2086,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set',
       brand: 'Pyrex Culinary',
       priceUsd: 68,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2115,7 +2120,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'high-protein-cottage-cheese-egg-white-bites',
     slug: 'high-protein-baked-cottage-cheese-spinach-egg-bites',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'high-protein-meals',
     categoryLabelEn: 'Healthy & Diet · High-Protein Meals',
     titleEn: 'High-Protein Blended Cottage Cheese & Roasted Pepper Egg Bites',
@@ -2185,7 +2190,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set',
       brand: 'Pyrex Culinary',
       priceUsd: 68,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2219,7 +2224,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'vegan-crispy-sesame-tofu-broccoli-skillet',
     slug: 'vegan-crispy-pan-seared-sesame-ginger-tofu-and-broccoli',
-    category: 'healthy_diet',
+    category: 'healthy-diet',
     subcategoryId: 'vegan-vegetarian',
     categoryLabelEn: 'Healthy & Diet · Vegan & Vegetarian',
     titleEn: 'Crispy Pan-Seared Sesame Ginger Tofu & Broccoli Skillet',
@@ -2289,7 +2294,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
       brand: 'Staub Culinary',
       priceUsd: 145,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2323,7 +2328,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'no-bake-dark-chocolate-avocado-truffle-tart',
     slug: 'no-bake-dark-chocolate-espresso-ganache-tart-date-walnut-crust',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'no-bake-desserts',
     categoryLabelEn: 'Desserts & Baking · No-Bake Desserts',
     titleEn: 'No-Bake 70% Dark Chocolate Ganache Tart with Toasted Walnut Crust',
@@ -2393,7 +2398,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '9-Inch Non-Stick Fluted Tart Pan with Removable Bottom',
       brand: 'Ateco Pastry',
       priceUsd: 34,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2427,7 +2432,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'no-bake-lemon-berry-mascarpone-parfait-cups',
     slug: '10-minute-no-bake-lemon-berry-mascarpone-cheesecake-cups',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'no-bake-desserts',
     categoryLabelEn: 'Desserts & Baking · No-Bake Desserts',
     titleEn: '10-Minute No-Bake Lemon Berry Mascarpone Cheesecake Cups',
@@ -2497,7 +2502,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Set of 6 Glass Dessert Parfait Jars with Airtight Lids',
       brand: 'Pyrex Culinary',
       priceUsd: 29,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2531,7 +2536,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'healthy-almond-flour-dark-chocolate-chip-cookies',
     slug: 'healthy-one-bowl-almond-flour-dark-chocolate-sea-salt-cookies',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'healthy-sweets',
     categoryLabelEn: 'Desserts & Baking · Healthy Sweets',
     titleEn: 'One-Bowl Almond Flour Dark Chocolate Chunk Cookies with Sea Salt',
@@ -2601,7 +2606,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: 'Heavy-Duty Aluminum Half-Sheet Baking Pan & Silicone Mat',
       brand: 'Nordic Ware',
       priceUsd: 38,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2635,7 +2640,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'healthy-greek-yogurt-berry-oat-muffins',
     slug: 'healthy-high-protein-greek-yogurt-blueberry-oat-muffins',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'healthy-sweets',
     categoryLabelEn: 'Desserts & Baking · Healthy Sweets',
     titleEn: 'Wholesome Greek Yogurt & Wild Blueberry Rolled Oat Muffins',
@@ -2705,7 +2710,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '12-Cup Non-Stick Muffin & Cupcake Baking Pan',
       brand: 'Nordic Ware',
       priceUsd: 32,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2739,7 +2744,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'brown-butter-banana-bread-pecan-loaf',
     slug: 'bakery-style-brown-butter-banana-bread-toasted-pecans',
-    category: 'desserts_baking',
+    category: 'desserts-baking',
     subcategoryId: 'cakes-pastries',
     categoryLabelEn: 'Desserts & Baking · Cakes & Pastries',
     titleEn: 'Bakery-Style Brown Butter Banana Bread with Toasted Pecans',
@@ -2809,7 +2814,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '9x5-Inch Heavy-Gauge Aluminized Steel Loaf Pan',
       brand: 'Nordic Ware',
       priceUsd: 26,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2843,7 +2848,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'freezer-meal-prep-guide-soups-grains-proteins',
     slug: 'ultimate-freezer-meal-prep-guide-how-to-freeze-and-thaw-cooked-food',
-    category: 'kitchen_hacks',
+    category: 'kitchen-hacks',
     subcategoryId: 'meal-prep-guides',
     categoryLabelEn: 'Kitchen Hacks & Guides · Meal Prep Guides',
     titleEn: 'Complete Freezer Meal-Prep Handbook: Packaging, Shelf Life & Safe Thawing',
@@ -2913,7 +2918,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       nameEn: '10-Piece Freezer-to-Oven Borosilicate Glass Container Set',
       brand: 'Pyrex Culinary',
       priceUsd: 68,
-      affiliateStore: 'Amazon Kitchen',
+      affiliateStore: 'Culinary Gear Partner',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
@@ -2945,7 +2950,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
   {
     id: 'knife-skills-and-cutting-board-safety-guide',
     slug: 'essential-chef-knife-skills-honing-and-cutting-board-food-safety',
-    category: 'kitchen_hacks',
+    category: 'kitchen-hacks',
     subcategoryId: 'cooking-tips',
     categoryLabelEn: 'Kitchen Hacks & Guides · Cooking Tips',
     titleEn: 'Chef Knife Skills, Honing vs. Sharpening & Cutting Board Food Safety',
@@ -3376,4 +3381,48 @@ export const MEAL_PLAN_DAYS = [
     prepTime: '45m',
   },
 ];
+
+export const LEGACY_CATEGORY_SLUG_MAP: Record<string, PrimaryCategorySlug> = {
+  quick_easy: 'quick-easy',
+  'quick-easy': 'quick-easy',
+  healthy_diet: 'healthy-diet',
+  'healthy-diet': 'healthy-diet',
+  desserts_baking: 'desserts-baking',
+  'desserts-baking': 'desserts-baking',
+  kitchen_hacks: 'kitchen-hacks',
+  'kitchen-hacks': 'kitchen-hacks',
+};
+
+export function normalizeCategorySlug(
+  rawSlug: string
+): PrimaryCategorySlug | null {
+  const cleaned = (rawSlug || '').trim().toLowerCase();
+  return LEGACY_CATEGORY_SLUG_MAP[cleaned] || null;
+}
+
+export const LEGACY_RECIPE_SLUG_ALIASES: Record<string, string> = {
+  'keto-garlic-herb-butter-ribeye-steak-cast-iron':
+    'keto-garlic-herb-butter-ribeye-steak-high-protein',
+  'air-fryer-crispy-lemon-herb-chicken-thighs':
+    'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
+  'complete-baking-cooking-ingredient-substitutions-guide':
+    'ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide',
+  'sunday-high-protein-meal-prep-blueprint':
+    '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
+  'mango-strawberry-sunset-cupcakes':
+    'tropical-mango-berry-swirl-vanilla-bean-cupcakes',
+};
+
+export function findRecipeBySlug(
+  rawSlug: string,
+  recipeList: CulinaryRecipe[] = COOKREEL_RECIPES
+): CulinaryRecipe | undefined {
+  const cleaned = (rawSlug || '').trim().toLowerCase();
+  const canonicalSlug = LEGACY_RECIPE_SLUG_ALIASES[cleaned] || cleaned;
+  return (
+    recipeList.find((r) => r.slug === canonicalSlug) ||
+    recipeList.find((r) => r.id === canonicalSlug)
+  );
+}
+
 

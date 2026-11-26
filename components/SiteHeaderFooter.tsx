@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   ExternalLink,
   BookOpen,
+  Repeat,
 } from 'lucide-react';
 import { SITE_ARCHITECTURE, SOCIAL_LINKS } from '@/lib/cookreel-data';
 
@@ -17,6 +18,9 @@ export function SiteHeader({
   activePath?: string;
   rightSlot?: React.ReactNode;
 }) {
+  const substitutionsSlug =
+    '/recipes/ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide';
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF9F6]/95 backdrop-blur-md">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
@@ -30,13 +34,13 @@ export function SiteHeader({
                 Cook<span className="text-amber-800">Reel</span>
               </span>
               <span className="hidden sm:inline-block ml-2 text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300/60">
-                cookreel.com
+                www.cookreel.com
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Clean 5-Item Main Navigation with Real Indexable URLs */}
+        {/* Clean Main Navigation with Real Indexable URLs + Substitutions Guide */}
         <nav
           aria-label="Primary Categories"
           className="hidden xl:flex items-center gap-1 text-sm font-semibold text-slate-700"
@@ -48,7 +52,7 @@ export function SiteHeader({
               <Link
                 key={cat.slug}
                 href={href}
-                className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
                   isActive
                     ? 'bg-amber-800 text-white shadow-sm'
                     : 'hover:text-amber-800 hover:bg-amber-50/70'
@@ -59,8 +63,19 @@ export function SiteHeader({
             );
           })}
           <Link
+            href={substitutionsSlug}
+            className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+              activePath === substitutionsSlug
+                ? 'bg-amber-800 text-white shadow-sm'
+                : 'hover:text-amber-800 hover:bg-amber-50/70'
+            }`}
+          >
+            <Repeat className="w-3.5 h-3.5 text-amber-800" />
+            <span>Substitutions Guide</span>
+          </Link>
+          <Link
             href="/qa"
-            className={`px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
               activePath === '/qa'
                 ? 'bg-amber-800 text-white shadow-sm'
                 : 'hover:text-amber-800 hover:bg-amber-50/70'
@@ -71,7 +86,7 @@ export function SiteHeader({
           </Link>
           <Link
             href="/about"
-            className={`px-3 py-2 rounded-lg transition-colors ${
+            className={`px-2.5 py-2 rounded-lg transition-colors ${
               activePath === '/about'
                 ? 'bg-amber-800 text-white shadow-sm'
                 : 'hover:text-amber-800 hover:bg-amber-50/70'
@@ -135,6 +150,16 @@ export function SiteHeader({
             );
           })}
           <Link
+            href={substitutionsSlug}
+            className={`px-3 py-1.5 rounded-lg ${
+              activePath === substitutionsSlug
+                ? 'bg-amber-800 text-white'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            Substitutions Guide
+          </Link>
+          <Link
             href="/qa"
             className={`px-3 py-1.5 rounded-lg ${
               activePath === '/qa'
@@ -188,22 +213,25 @@ export function SiteFooter() {
               CookReel is an independent culinary publication offering step-by-step recipe guides, short-form cooking clips, 1:1 ingredient substitutions, and USDA-aligned food safety references for everyday home cooks.
             </p>
             <div className="rounded-lg border border-slate-800 bg-slate-900/80 p-3 text-[11px] text-slate-400 leading-relaxed mb-4">
-              <strong className="text-amber-400">Affiliate &amp; Advertising Disclosure:</strong>{' '}
-              CookReel participates in the Amazon Services LLC Associates Program and select culinary affiliate partnerships. If you purchase cookware through our &ldquo;Shop Gear&rdquo; links, we may earn a small commission at no additional cost to you.
+              <strong className="text-amber-400">
+                Editorial &amp; Affiliate Disclosure:
+              </strong>{' '}
+              Recommended cookware and kitchen tools are independently selected by our editorial team. Some &ldquo;Shop Gear&rdquo; links may be affiliate partner links that earn CookReel a small referral commission at no extra cost to you.
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {SOCIAL_LINKS.map((soc) => (
                 <a
                   key={soc.platform}
                   href={soc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={soc.url.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={
+                    soc.url.startsWith('mailto:')
+                      ? undefined
+                      : 'noopener noreferrer'
+                  }
                   className="inline-flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-amber-500 hover:text-white transition-colors"
                 >
                   <span>{soc.platform}</span>
-                  <span className="text-slate-500 font-mono text-[11px]">
-                    {soc.handle}
-                  </span>
                   <ExternalLink className="w-3 h-3 text-slate-500" />
                 </a>
               ))}
@@ -251,7 +279,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/recipes/keto-garlic-herb-butter-ribeye-steak-cast-iron"
+                  href="/recipes/keto-garlic-herb-butter-ribeye-steak-high-protein"
                   className="hover:text-white transition-colors"
                 >
                   Keto Garlic Butter Ribeye Steak
@@ -259,7 +287,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/recipes/air-fryer-crispy-lemon-herb-chicken-thighs"
+                  href="/recipes/air-fryer-or-skillet-golden-lemon-herb-chicken-thighs"
                   className="hover:text-white transition-colors"
                 >
                   Air Fryer Lemon Herb Chicken
@@ -267,10 +295,10 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/recipes/complete-baking-cooking-ingredient-substitutions-guide"
+                  href="/recipes/ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide"
                   className="hover:text-white transition-colors"
                 >
-                  25 Essential Ingredient Substitutions
+                  Essential Ingredient Substitutions Guide
                 </Link>
               </li>
               <li>
@@ -324,7 +352,7 @@ export function SiteFooter() {
 
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {new Date().getFullYear()} CookReel (cookreel.com). All rights reserved. Written and edited by the CookReel Editorial Team.
+            © {new Date().getFullYear()} CookReel (www.cookreel.com). All rights reserved. Written and edited by the CookReel Editorial Team.
           </p>
           <div className="flex items-center gap-2 text-[11px] text-slate-400">
             <ShieldCheck className="w-4 h-4 text-emerald-500" />

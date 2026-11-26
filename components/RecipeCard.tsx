@@ -105,18 +105,27 @@ export function RecipeCard({
           </p>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-          <div className="text-[11px] text-slate-500 truncate max-w-[190px]">
-            Pan/Tool:{' '}
-            <strong className="text-slate-700">{recipe.gearItem.nameEn}</strong>
+        <div className="pt-3 border-t border-slate-100 space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-[11px] text-slate-500 truncate max-w-[190px]">
+              Pan/Tool:{' '}
+              <strong className="text-slate-700">{recipe.gearItem.nameEn}</strong>
+            </div>
+            <Link
+              href={`/recipes/${recipe.slug}`}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-800 text-amber-900 hover:text-white text-xs font-bold transition-colors shrink-0"
+            >
+              <span>Read Full Recipe</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
-          <Link
-            href={`/recipes/${recipe.slug}`}
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-800 text-amber-900 hover:text-white text-xs font-bold transition-colors"
-          >
-            <span>Read Full Recipe</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
+          <p className="text-[10px] text-slate-400 leading-snug">
+            Affiliate Disclosure: Gear links inside recipe cards may earn a commission at no extra cost ({' '}
+            <Link href="/privacy#affiliate-disclosure" className="underline hover:text-amber-800">
+              details
+            </Link>
+            ).
+          </p>
         </div>
       </div>
     </article>

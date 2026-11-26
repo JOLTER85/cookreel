@@ -74,6 +74,22 @@ export function RecipeDetailClient({
   } | null>(null);
 
   useEffect(() => {
+    let active = true;
+    fetch('/api/recipes')
+      .then((res) => res.json())
+      .then((data) => {
+        if (!active) return;
+        if (Array.isArray(data?.reviews)) {
+          setReviews(data.reviews);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!timerRunning) return;
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
@@ -180,9 +196,9 @@ export function RecipeDetailClient({
 
   const categoryObj = SITE_ARCHITECTURE.find((c) => c.slug === recipe.category);
   const pinterestShareUrl = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
-    `https://cookreel.com/recipes/${recipe.slug}`
+    `https://www.cookreel.com/recipes/${recipe.slug}`
   )}&media=${encodeURIComponent(
-    `https://cookreel.com${recipe.image}`
+    `https://www.cookreel.com${recipe.image}`
   )}&description=${encodeURIComponent(recipe.titleEn)}`;
 
   return (
@@ -700,12 +716,13 @@ export function RecipeDetailClient({
                       </Link>
                     </div>
                     <p className="mt-2.5 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 leading-relaxed">
-                      <strong>Affiliate Disclosure:</strong> As an Amazon
-                      Associate and culinary affiliate partner, CookReel may
-                      earn a commission from qualifying purchases at no extra
-                      cost to you. See our{' '}
+                      <strong>Affiliate Disclosure:</strong> Recommended kitchen
+                      tools are independently selected by our editorial team. If
+                      you purchase through our partner links, CookReel may earn
+                      a small referral commission at no extra cost to you. See
+                      our{' '}
                       <Link
-                        href="/privacy"
+                        href="/privacy#affiliate-disclosure"
                         className="underline text-amber-800 hover:text-amber-900"
                       >
                         Affiliate &amp; Privacy Policy

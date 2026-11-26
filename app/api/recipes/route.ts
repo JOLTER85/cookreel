@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
       'CookReel Community Contributor';
     const category = isValidCategory(body.category)
       ? body.category
-      : 'quick_easy';
+      : 'quick-easy';
 
     const catObj =
       SITE_ARCHITECTURE.find((c) => c.slug === category) || SITE_ARCHITECTURE[0];
@@ -153,7 +153,7 @@ export async function POST(req: NextRequest) {
         nameEn: gearName,
         brand: 'CookReel Select',
         priceUsd: gearPrice,
-        affiliateStore: 'Amazon Kitchen Partner',
+        affiliateStore: 'Culinary Gear Partner',
         image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
       },
       ingredientsEn: [

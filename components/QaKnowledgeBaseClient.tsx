@@ -94,7 +94,8 @@ export function QaKnowledgeBaseClient() {
       proTipEn:
         proTipText.trim() ||
         'Label all meal-prep containers with the date prepared and consume within 3 to 4 days.',
-      relatedRecipeSlug: 'sunday-high-protein-meal-prep-blueprint',
+      relatedRecipeSlug:
+        '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
     };
 
     setQaList((prev) => [newQa, ...prev]);

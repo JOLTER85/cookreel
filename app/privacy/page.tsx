@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, ShieldCheck } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
+import { SITE_ORIGIN } from '@/lib/cookreel-data';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
-const ogImg = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {
   title: 'Privacy, Cookie & Affiliate Disclosure Policy | CookReel',
   description:
-    'CookReel Privacy Policy, GDPR/EEA Cookie Consent details, Google AdSense DART cookie disclosure, and FTC Amazon Associates Affiliate Disclosure.',
+    'CookReel Privacy Policy, GDPR/EEA Cookie Consent details, Google AdSense DART cookie disclosure, and FTC Affiliate Disclosure.',
   alternates: {
     canonical: '/privacy',
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Privacy, Cookie & Affiliate Disclosure Policy | CookReel',
     description:
       'CookReel Privacy Policy, GDPR/EEA Cookie Consent details, and FTC Affiliate Disclosure.',
-    url: `${siteUrl}/privacy`,
+    url: `${SITE_ORIGIN}/privacy`,
     type: 'website',
     siteName: 'CookReel',
     images: [{ url: ogImg, width: 1200, height: 630, alt: 'CookReel Privacy Policy' }],
@@ -58,16 +58,16 @@ export default function PrivacyPage() {
               <span>Last Updated: November 2026</span>
             </span>
             <h1 className="font-serif text-3xl font-bold text-slate-900">
-              Privacy Policy, GDPR Cookie Consent &amp; FTC Affiliate Disclosure
+              Privacy Policy, GDPR Cookie Consent &amp; Affiliate Disclosure
             </h1>
           </div>
 
           <section id="affiliate-disclosure" className="space-y-2 rounded-xl bg-amber-50/70 border border-amber-200 p-5">
             <h2 className="font-serif text-xl font-bold text-slate-900">
-              1. FTC &amp; Amazon Associates Affiliate Disclosure
+              1. Editorial &amp; Affiliate Link Disclosure
             </h2>
             <p>
-              In compliance with Federal Trade Commission (FTC) guidelines, please note that CookReel (<strong>cookreel.com</strong>) participates in the Amazon Services LLC Associates Program and select culinary affiliate programs. When you click on &ldquo;Shop Gear&rdquo; or cookware recommendation links in our recipe cards and complete a purchase, we may earn an affiliate commission at no extra cost to you. Our editorial team selects cookware strictly based on culinary utility (such as heat retention for cast-iron searing or air-fryer circulation), never on commission rates.
+              In compliance with Federal Trade Commission (FTC) disclosure guidelines, please note that some &ldquo;Shop Gear&rdquo; or cookware links on CookReel (<strong>www.cookreel.com</strong>) may be affiliate partner links. If you click an affiliate link and complete a purchase, CookReel may earn a small referral commission at no additional cost to you. Our editorial team selects cookware strictly based on culinary utility (such as heat retention for cast-iron searing or air-fryer circulation), never on commission rates.
             </p>
           </section>
 

@@ -55,7 +55,7 @@ export default function CookReelHomePage() {
   const [newSubtitle, setNewSubtitle] = useState('');
   const [newAuthor, setNewAuthor] = useState('');
   const [newCategory, setNewCategory] =
-    useState<PrimaryCategorySlug>('quick_easy');
+    useState<PrimaryCategorySlug>('quick-easy');
   const [newSubcategoryId, setNewSubcategoryId] = useState('15-minute-meals');
   const [newCookMinutes, setNewCookMinutes] = useState('15');
   const [newIntroText, setNewIntroText] = useState('');

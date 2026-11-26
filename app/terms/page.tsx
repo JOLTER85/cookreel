@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, ShieldAlert } from 'lucide-react';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
+import { SITE_ORIGIN } from '@/lib/cookreel-data';
 
-const siteUrl = process.env.APP_URL || 'https://cookreel.com';
-const ogImg = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+const ogImg = `${SITE_ORIGIN}/images/hero_cookreel_studio_1795527112508.jpg`;
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions, USDA Safety Disclaimer & Moderation Policy | CookReel',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Terms & Conditions & USDA Food Safety Disclaimer | CookReel',
     description:
       'Terms of Use, USDA Food Safety & Nutritional Disclaimer, and User Submission Moderation Rules for CookReel.com.',
-    url: `${siteUrl}/terms`,
+    url: `${SITE_ORIGIN}/terms`,
     type: 'website',
     siteName: 'CookReel',
     images: [{ url: ogImg, width: 1200, height: 630, alt: 'CookReel Terms' }],
