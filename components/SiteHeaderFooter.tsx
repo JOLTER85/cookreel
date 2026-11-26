@@ -18,8 +18,7 @@ export function SiteHeader({
   activePath?: string;
   rightSlot?: React.ReactNode;
 }) {
-  const substitutionsSlug =
-    '/recipes/ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide';
+  const substitutionsSlug = '/substitutions';
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF9F6]/95 backdrop-blur-md">
@@ -255,6 +254,14 @@ export function SiteFooter() {
               ))}
               <li>
                 <Link
+                  href="/substitutions"
+                  className="hover:text-white transition-colors text-amber-300 font-semibold"
+                >
+                  1:1 Substitutions Guide (/substitutions)
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/videos"
                   className="hover:text-white transition-colors text-amber-300 font-semibold"
                 >
@@ -303,7 +310,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/recipes/ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide"
+                  href="/substitutions"
                   className="hover:text-white transition-colors"
                 >
                   Essential Ingredient Substitutions Guide

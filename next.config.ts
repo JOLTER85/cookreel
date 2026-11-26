@@ -123,6 +123,16 @@ const nextConfig: NextConfig = {
         destination: '/recipes/60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
         permanent: true,
       },
+      {
+        source: '/substitutions-guide',
+        destination: '/substitutions',
+        permanent: true,
+      },
+      {
+        source: '/ingredient-substitutions',
+        destination: '/substitutions',
+        permanent: true,
+      },
     ];
   },
   output: 'standalone',
