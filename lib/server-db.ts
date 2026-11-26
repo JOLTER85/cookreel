@@ -12,6 +12,7 @@ export interface RecipeReview {
   authorName: string;
   rating: number;
   comment: string;
+  status: 'approved' | 'pending_moderation';
   createdAt: string;
 }
 
@@ -44,46 +45,10 @@ export interface CookReelDatabase {
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'data');
-const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v5.json');
+const DB_FILE_PATH = path.resolve(DATA_DIR, 'cookreel-db-v6.json');
 
-const INITIAL_REVIEWS: RecipeReview[] = [
-  {
-    id: 'rev-1',
-    recipeId: 'crispy-salmon-skillet',
-    authorName: 'Sarah Jenkins',
-    rating: 5,
-    comment:
-      'Pressing the salmon skin for 10 seconds in the hot cast-iron skillet made it shatteringly crisp. Ready in 14 minutes flat!',
-    createdAt: '2026-11-20T18:30:00Z',
-  },
-  {
-    id: 'rev-2',
-    recipeId: 'crispy-salmon-skillet',
-    authorName: 'Michael Vance',
-    rating: 5,
-    comment:
-      'Best method for searing salmon without sticking, and the 1:1 ingredient substitution chart helped me swap butter for olive oil seamlessly.',
-    createdAt: '2026-11-22T14:15:00Z',
-  },
-  {
-    id: 'rev-3',
-    recipeId: 'garlic-butter-ribeye-steak',
-    authorName: 'David K.',
-    rating: 5,
-    comment:
-      'The step timer kept me from overcooking the ribeye. Perfect medium-rare crust with 54g protein for my keto meal plan.',
-    createdAt: '2026-11-21T20:10:00Z',
-  },
-  {
-    id: 'rev-4',
-    recipeId: 'mango-strawberry-sunset-cupcakes',
-    authorName: 'Lina Haddad',
-    rating: 5,
-    comment:
-      'Found this from an old recipe bookmark on WeCookRecipe and the dual-tone mango strawberry frosting is even better with the video reel!',
-    createdAt: '2026-11-23T11:05:00Z',
-  },
-];
+// Zero fabricated reviews on launch — only authentic user-submitted reviews are stored
+const INITIAL_REVIEWS: RecipeReview[] = [];
 
 function ensureDbFile(): CookReelDatabase {
   if (!fs.existsSync(DATA_DIR)) {
@@ -150,4 +115,22 @@ export function isValidCategory(cat: unknown): cat is PrimaryCategorySlug {
     cat === 'desserts_baking' ||
     cat === 'kitchen_hacks'
   );
+}
+
+export function verifyAntiSpamChallenge(
+  numA: unknown,
+  numB: unknown,
+  answer: unknown,
+  honeypot?: unknown
+): boolean {
+  if (typeof honeypot === 'string' && honeypot.trim().length > 0) {
+    return false;
+  }
+  const a = Number(numA);
+  const b = Number(numB);
+  const ans = Number(answer);
+  if (!Number.isFinite(a) || !Number.isFinite(b) || !Number.isFinite(ans)) {
+    return false;
+  }
+  return a + b === ans;
 }

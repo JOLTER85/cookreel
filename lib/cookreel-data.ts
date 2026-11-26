@@ -8,32 +8,24 @@ export interface SubcategoryMeta {
   id: string;
   parent: PrimaryCategorySlug;
   labelEn: string;
-  labelAr: string;
 }
 
 export interface CategoryArchitecture {
   slug: PrimaryCategorySlug;
   labelEn: string;
-  labelAr: string;
-  seoObjectiveEn: string;
-  seoObjectiveAr: string;
+  descriptionEn: string;
   subcategories: SubcategoryMeta[];
 }
 
 export interface IngredientSubstitution {
   originalEn: string;
-  originalAr: string;
   substituteEn: string;
-  substituteAr: string;
   chefNoteEn: string;
-  chefNoteAr: string;
 }
 
 export interface RecipeFaq {
   questionEn: string;
-  questionAr: string;
   answerEn: string;
-  answerAr: string;
 }
 
 export interface CulinaryRecipe {
@@ -42,165 +34,161 @@ export interface CulinaryRecipe {
   category: PrimaryCategorySlug;
   subcategoryId: string;
   categoryLabelEn: string;
-  categoryLabelAr: string;
   titleEn: string;
-  titleAr: string;
   subtitleEn: string;
-  subtitleAr: string;
   wordCount: number;
   introParagraphsEn: string[];
-  introParagraphsAr: string[];
   whyThisWorksEn: string[];
-  whyThisWorksAr: string[];
   chefTipsEn: string[];
-  chefTipsAr: string[];
+  usdaSafetyNoteEn: string;
   substitutions: IngredientSubstitution[];
   faqs: RecipeFaq[];
   stepGalleryImages: string[];
-  chefName: string;
-  chefTitleEn: string;
-  chefTitleAr: string;
+  authorName: string;
+  authorRoleEn: string;
   prepMinutes: number;
   cookMinutes: number;
   calories: number;
   proteinGrams: number;
   netCarbsGrams: number;
-  videoDuration: string;
-  videoUrl: string;
-  rating: number;
-  reviewsCount: number;
+  /**
+   * Only set when a unique, dedicated MP4 video exists for this specific recipe.
+   * Prevents duplicate video assignments across different articles.
+   */
+  videoUrl?: string;
+  videoDuration?: string;
   image: string;
   gearItem: {
     id: string;
     nameEn: string;
-    nameAr: string;
     brand: string;
     priceUsd: number;
     affiliateStore: string;
     image: string;
   };
   ingredientsEn: { item: string; amount: number; unit: string }[];
-  ingredientsAr: { item: string; amount: number; unit: string }[];
   stepsEn: { title: string; instruction: string; timerSeconds: number }[];
-  stepsAr: { title: string; instruction: string; timerSeconds: number }[];
 }
 
 export const HERO_FEATURED_VIDEO_URL = '/videos/hero-cookreel-featured.mp4';
+
+export const SOCIAL_LINKS = [
+  {
+    name: 'Pinterest',
+    platform: 'Pinterest',
+    url: 'https://www.pinterest.com/cookreel',
+    handle: '@cookreel',
+  },
+  {
+    name: 'Instagram',
+    platform: 'Instagram',
+    url: 'https://www.instagram.com/cookreel',
+    handle: '@cookreel',
+  },
+  {
+    name: 'TikTok',
+    platform: 'TikTok',
+    url: 'https://www.tiktok.com/@cookreel',
+    handle: '@cookreel',
+  },
+  {
+    name: 'YouTube',
+    platform: 'YouTube',
+    url: 'https://www.youtube.com/@cookreel',
+    handle: '@cookreel',
+  },
+];
 
 export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
   {
     slug: 'quick_easy',
     labelEn: 'Quick & Easy',
-    labelAr: 'وصفات سريعة',
-    seoObjectiveEn:
-      'Weeknight dinners on the table in 15 to 25 minutes—featuring crispy air fryer favorites, one-pan skillets, and 5-ingredient meals.',
-    seoObjectiveAr:
-      'وجبات عشاء سريعة تجهز خلال 15 إلى 25 دقيقة، تشمل وصفات القلاية الهوائية والمقلاة الواحدة ووجبات الـ 5 مكونات.',
+    descriptionEn:
+      'Weeknight dinners ready in 15 to 25 minutes—featuring crispy air fryer favorites, one-pan skillets, and streamlined 5-ingredient meals.',
     subcategories: [
       {
         id: '15-minute-meals',
         parent: 'quick_easy',
         labelEn: '15-Minute Meals',
-        labelAr: 'وجبات في 15 دقيقة',
       },
       {
         id: '5-ingredient-recipes',
         parent: 'quick_easy',
         labelEn: '5-Ingredient Recipes',
-        labelAr: 'وصفات بـ 5 مكونات',
       },
       {
         id: 'air-fryer-recipes',
         parent: 'quick_easy',
         labelEn: 'Air Fryer Recipes',
-        labelAr: 'وصفات القلاية الهوائية',
       },
     ],
   },
   {
     slug: 'healthy_diet',
     labelEn: 'Healthy & Diet',
-    labelAr: 'أكل صحي وحميات',
-    seoObjectiveEn:
-      'Nutrient-dense recipes crafted with complete macro profiles—covering Keto, low-carb, high-protein, and vibrant plant-based bowls.',
-    seoObjectiveAr:
-      'وصفات صحية متوازنة العناصر الغذائية مع حساب دقيق للسعرات والبروتين، تشمل الكيتو واللو كارب والوجبات النباتية.',
+    descriptionEn:
+      'Nutrient-dense recipes with complete macro profiles—covering Keto, low-carb, high-protein, and plant-based meals.',
     subcategories: [
       {
         id: 'keto-low-carb',
         parent: 'healthy_diet',
         labelEn: 'Keto & Low-Carb',
-        labelAr: 'كيتو ولو كارب',
       },
       {
         id: 'high-protein-meals',
         parent: 'healthy_diet',
         labelEn: 'High-Protein Meals',
-        labelAr: 'وجبات عالية البروتين',
       },
       {
         id: 'vegan-vegetarian',
         parent: 'healthy_diet',
         labelEn: 'Vegan & Vegetarian',
-        labelAr: 'نباتي وصحي',
       },
     ],
   },
   {
     slug: 'desserts_baking',
     labelEn: 'Desserts & Baking',
-    labelAr: 'حلويات ومخبوزات',
-    seoObjectiveEn:
-      'Bakery-worthy cakes, swirled cupcakes, effortless no-bake treats, and naturally sweetened desserts tested to perfection.',
-    seoObjectiveAr:
-      'حلويات منزلية ومخبوزات احترافية، تشمل الحلويات الباردة بدون فرن، الكيك والكب كيك، والحلويات الصحية خفيفة السكر.',
+    descriptionEn:
+      'Step-by-step cakes, swirled cupcakes, effortless no-bake treats, and naturally sweetened desserts.',
     subcategories: [
       {
         id: 'no-bake-desserts',
         parent: 'desserts_baking',
         labelEn: 'No-Bake Desserts',
-        labelAr: 'حلويات بدون فرن',
       },
       {
         id: 'healthy-sweets',
         parent: 'desserts_baking',
         labelEn: 'Healthy Sweets',
-        labelAr: 'حلويات صحية',
       },
       {
         id: 'cakes-pastries',
         parent: 'desserts_baking',
         labelEn: 'Cakes & Pastries',
-        labelAr: 'كيك ومخبوزات',
       },
     ],
   },
   {
     slug: 'kitchen_hacks',
     labelEn: 'Kitchen Hacks & Guides',
-    labelAr: 'نصائح وأدوات المطبخ',
-    seoObjectiveEn:
-      'In-depth culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, and cast-iron skillet care.',
-    seoObjectiveAr:
-      'أدلة مطبخ شاملة تغطي بدائل المكونات الدقيقة، خطط تجهيز وحفظ الوجبات الأسبوعية، وأسرار العناية بأدوات الطهي.',
+    descriptionEn:
+      'Practical culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, and USDA safe cooking temperatures.',
     subcategories: [
       {
         id: 'ingredient-substitutes',
         parent: 'kitchen_hacks',
         labelEn: 'Ingredient Substitutes',
-        labelAr: 'بدائل المكونات',
       },
       {
         id: 'meal-prep-guides',
         parent: 'kitchen_hacks',
         labelEn: 'Meal Prep Guides',
-        labelAr: 'أدلة تجهيز الوجبات',
       },
       {
         id: 'cooking-tips',
         parent: 'kitchen_hacks',
         labelEn: 'Cooking Tips',
-        labelAr: 'أسرار ونصائح الطبخ',
       },
     ],
   },
@@ -213,109 +201,71 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     category: 'quick_easy',
     subcategoryId: '15-minute-meals',
     categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
-    categoryLabelAr: 'وصفات سريعة · وجبات في 15 دقيقة',
-    titleEn: '15-Minute Crispy Cast-Iron Salmon with Lemon Caper Butter',
-    titleAr: 'سلمون مقرمش بالزبدة والليمون في المقلاة خلال 15 دقيقة',
+    titleEn: '15-Minute Crispy Cast-Iron Salmon with Meyer Lemon Caper Butter',
     subtitleEn:
-      'Restaurant-grade glass-crispy salmon skin seared in 10 minutes flat, finished with foaming garlic lemon caper butter.',
-    subtitleAr:
-      'فيليه سلمون مقرمش الجلد كالمطاعم في 10 دقائق فقط، مع صوص الزبدة بالثوم والليمون والكبر.',
+      'Golden crispy salmon skin seared in a hot skillet and finished with crushed garlic, fresh Meyer lemon juice, and brined caper butter.',
     wordCount: 1080,
     introParagraphsEn: [
-      'Nothing compares to the contrast of shatteringly crisp, golden-brown salmon skin giving way to buttery, medium-rare flaking fillets underneath. While many home cooks resort to baking salmon in foil—which steams the fish and turns the skin rubbery—this 15-minute cast-iron skillet technique delivers steakhouse-level texture on a busy weeknight.',
-      'By starting with bone-dry skin and applying gentle downward pressure with a flexible fish spatula for the first 10 seconds of contact, you prevent the fillet from buckling. Within six minutes, the natural marine collagen renders into a delicate glass-like crust that pairs effortlessly with our bright, briny Meyer lemon and caper pan sauce.',
-    ],
-    introParagraphsAr: [
-      'لا شيء يضاهي قرمشة جلد السلمون الذهبي المحمر عندما يجتمع مع طراوة الفيليه الغني بالعصارة من الداخل. بينما يلجأ الكثيرون إلى خبز السلمون في القصدير—مما يؤدي إلى تبخير السمك وجعل الجلد مطاطياً—فإن تقنية المقلاة الساخنة هذه تمنحك نتيجة تضاهي أفخم المطاعم في 15 دقيقة فقط.',
-      'يكمن السر العلمي في تجفيف جلد السلمون تماماً من أي رطوبة سطحية ثم الضغط الخفيف بملعقة مسطحة لأول 10 ثوانٍ فور ملامسته للمقلاة، مما يمنع انكماش الفيليه ويضمن تحميراً متساوياً يتوج بصوص الزبدة والليمون والكبر.',
+      'A great weeknight salmon dinner comes down to moisture control and direct skillet contact. While baking salmon wrapped in foil traps steam and softens the exterior, searing skin-on fillets in a preheated cast-iron pan renders the subcutaneous fat into a crisp golden layer in minutes.',
+      'By starting with thoroughly dried skin and pressing gently with a flexible spatula for the first 10 seconds, the fillet stays flat against the cooking surface. We finish the pan with crushed garlic cloves, unsalted butter, brined non-pareil capers, and fresh Meyer lemon juice for a bright pan sauce.',
     ],
     whyThisWorksEn: [
-      '90% of the cooking happens skin-side down, insulating the delicate flesh from overcooking.',
-      'Cold-patted skin + high thermal mass cast iron eliminates sticking without heavy breading.',
-      'Emulsifying cultured butter with lemon juice and caper brine creates an instant 60-second restaurant pan sauce.',
-    ],
-    whyThisWorksAr: [
-      'يتم 90% من الطهي على جهة الجلد مما يحمي لحم السلمون الطري من الجفاف.',
-      'التجفيف المسبق مع حرارة الحديد الزهر يمنع الالتصاق نهائياً بدون أي دقيق.',
-      'مزج الزبدة مع عصير الليمون في آخر دقيقتين يصنع صوص مطاعم مركز في 60 ثانية.',
+      'Most of the cooking time happens skin-side down, shielding the tender fish flesh from drying out.',
+      'Drying the skin thoroughly with paper towels before searing prevents sticking and spattering.',
+      'Emulsifying butter with fresh Meyer lemon juice, garlic, and caper brine creates a quick 60-second sauce.',
     ],
     chefTipsEn: [
-      'Leave the uncovered salmon fillets in the refrigerator on a paper-towel-lined plate for 20 minutes before cooking if you have time; refrigerator airflow dehydrates the skin surface for maximum blistered crunch.',
-      'Do not salt the skin until the exact moment the skillet begins to wisp light smoke—salting too early draws moisture back out to the surface.',
-      'Wait until you see the opaque cooked line rise three-quarters of the way up the side of the fillet before flipping.',
+      'Pat the salmon skin completely dry with paper towels right before cooking, and season with flaky salt just before placing it into the hot skillet.',
+      'Leave the fillet undisturbed for the first 5 to 6 minutes so the skin crisps and releases naturally from the pan.',
+      'Watch the opaque cooked line rise about three-quarters up the side of the fillet before flipping.',
     ],
-    chefTipsAr: [
-      'جفف جلد السلمون جيداً بمناديل المطبخ الورقية، ولا تضف الملح إلا في اللحظة التي تضع فيها الفيليه داخل المقلاة الساخنة حتى لا يفرز الجلد رطوبته مبكراً.',
-      'لا تحرك الفيليه أبداً خلال أول 5 دقائق؛ عندما ينضج الجلد ويقرمش فإنه ينفصل تلقائياً عن سطح المقلاة بسهولة.',
-      'راقب تغير لون جانب الفيليه من الوردي الشفاف إلى الوردي الفاتح حتى ثلاثة أرباع ارتفاع القطعة قبل قلبها.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook salmon to an internal temperature of 63°C (145°F) measured at the thickest part, or until the flesh is opaque and flakes easily with a fork.',
     substitutions: [
       {
-        originalEn: 'Cultured Dairy Butter (35g)',
-        originalAr: 'الزبدة الطبيعية (35 جم)',
-        substituteEn: 'Ghee or Extra-Virgin Olive Oil + 1 tsp Dijon Mustard',
-        substituteAr: 'السمن الطبيعي أو زيت الزيتون البكر مع نصف ملعقة خردل ديجون',
+        originalEn: 'Unsalted Dairy Butter (35g)',
+        substituteEn: 'Clarified Ghee or Extra-Virgin Olive Oil + 1 tsp Dijon Mustard',
         chefNoteEn:
-          'Ideal for dairy-free or Paleo diets while keeping the sauce glossy and emulsified.',
-        chefNoteAr:
-          'بديل ممتاز لمن يتبعون حمية خالية من الألبان مع الحفاظ على قوام الصوص اللامع.',
+          'Works well for dairy-free diets while keeping the lemon caper sauce smooth.',
       },
       {
-        originalEn: 'Brined Non-Pareil Capers',
-        originalAr: 'الكبر المملح (Capers)',
-        substituteEn: 'Finely chopped Castelvetrano green olives or lemon zest',
-        substituteAr: 'زيتون أخضر مفروم ناعماً أو بشر قشر الليمون الطازج',
+        originalEn: 'Fresh Meyer Lemon Juice (25ml)',
+        substituteEn: '18ml Standard Eureka Lemon Juice + 7ml Fresh Orange Juice',
         chefNoteEn:
-          'Provides the same bright salinity that cuts through the richness of Atlantic salmon.',
-        chefNoteAr:
-          'يمنح نفس التوازن الحامضي المالح الذي يكسر دسامة السلمون.',
+          'Matches the sweeter, floral citrus profile of Meyer lemons when they are out of season.',
       },
       {
-        originalEn: 'Cast-Iron Skillet (Stovetop)',
-        originalAr: 'مقلاة الحديد الزهر',
-        substituteEn: 'Air Fryer preheated to 200°C (400°F) for 7–9 minutes',
-        substituteAr: 'القلاية الهوائية (Air Fryer) على حرارة 200 مئوية لمدة 8 دقائق',
+        originalEn: 'Brined Non-Pareil Capers (15g)',
+        substituteEn: 'Finely chopped green Castelvetrano olives',
         chefNoteEn:
-          'Place salmon skin-side UP in the air fryer basket sprayed lightly with avocado oil.',
-        chefNoteAr:
-          'ضع السلمون بحيث يكون الجلد للأعلى داخل سلة القلاية الهوائية للحصول على قرمشة رائعة.',
+          'Delivers a similar briny contrast against rich Atlantic salmon.',
       },
     ],
     faqs: [
       {
         questionEn:
-          'How do I store leftover crispy salmon in the refrigerator without losing texture?',
-        questionAr: 'كيف أحفظ قطع السلمون المتبقية في الثلاجة مع الحفاظ على قرمشتها؟',
+          'How do I store leftover cooked salmon in the refrigerator?',
         answerEn:
-          'Store cooled salmon fillets in an airtight glass container lined with a dry paper towel for up to 3 days. Keep the lemon caper butter sauce in a separate small jar so the skin stays dry.',
-        answerAr:
-          'احفظ السلمون بعد أن يبرد في حافظة زجاجية محكمة الإغلاق مبطنة بمنديل ورقي لمدة تصل إلى 3 أيام، ويفضل فصل الصوص في وعاء صغير منفصل.',
+          'Store cooled salmon fillets in an airtight glass container lined with a dry paper towel at 4°C (39°F) or below for up to 3 days. Keep the lemon caper sauce in a separate small container.',
       },
       {
         questionEn: 'What is the best way to reheat cooked salmon so it stays moist?',
-        questionAr: 'ما هي أفضل طريقة لإعادة تسخين السلمون دون أن يجف؟',
         answerEn:
-          'Never microwave cooked salmon. Instead, reheat skin-side down in a dry skillet over medium-low heat for 3 minutes or in an Air Fryer at 175°C (350°F) for 3–4 minutes until the skin re-crisps.',
-        answerAr:
-          'تجنب الميكروويف تماماً؛ سخنه في مقلاة جافة على جهة الجلد لمدة 3 دقائق على نار هادئة أو في القلاية الهوائية على 175 مئوية لـ 3 دقائق.',
+          'Warm gently skin-side down in a skillet over medium-low heat for 3 to 4 minutes or in an Air Fryer at 175°C (350°F) until reheated to a safe internal temperature.',
       },
       {
-        questionEn: 'Can I use frozen salmon fillets for this 15-minute recipe?',
-        questionAr: 'هل يمكن استخدام فيليه السلمون المجمد في هذه الوصفة؟',
+        questionEn: 'Can I use frozen salmon fillets for this recipe?',
         answerEn:
-          'Yes! Thaw frozen fillets overnight in the refrigerator, then press firmly between two layers of paper towels to extract excess ice-crystal moisture before searing.',
-        answerAr:
-          'نعم بكل تأكيد، فقط اتركه يذوب في الثلاجة طوال الليل ثم جففه جيداً بطبقتين من ورق المطبخ قبل التحمير.',
+          'Yes. Thaw frozen fillets overnight in the refrigerator at 4°C, then press firmly with paper towels to remove surface moisture before searing.',
       },
     ],
     stepGalleryImages: [
-      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_crispy_salmon_1795527113114.jpg',
     ],
-    chefName: 'Chef Elena Vance',
-    chefTitleEn: 'Executive Culinary Director · Former Michelin Bistro Sous-Chef',
-    chefTitleAr: 'مديرة استوديو الطهي · شيف تنفيذية متخصصة في المأكولات البحرية',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 460,
@@ -323,70 +273,42 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     netCarbsGrams: 4,
     videoDuration: '0:12',
     videoUrl: '/videos/crispy-salmon-skillet.mp4',
-    rating: 4.9,
-    reviewsCount: 318,
     image: '/images/recipe_crispy_salmon_1795527113114.jpg',
     gearItem: {
       id: 'gear-skillet-12',
       nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
-      nameAr: 'مقلاة حديد زهر مطلية بالمينا السوداء 12 إنش',
       brand: 'Staub Culinary',
       priceUsd: 145,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Skin-on Atlantic salmon fillets', amount: 400, unit: 'g' },
-      { item: 'Unsalted cultured herb butter', amount: 35, unit: 'g' },
-      { item: 'Fresh green asparagus spears', amount: 200, unit: 'g' },
-      { item: 'Lemon juice & drained brined capers', amount: 25, unit: 'ml' },
+      { item: 'Skin-on Atlantic salmon fillets (center-cut)', amount: 400, unit: 'g' },
+      { item: 'Unsalted butter', amount: 35, unit: 'g' },
+      { item: 'Crushed fresh garlic cloves', amount: 2, unit: 'cloves' },
+      { item: 'Fresh Meyer lemon juice & finely grated zest', amount: 25, unit: 'ml' },
+      { item: 'Drained non-pareil capers', amount: 15, unit: 'g' },
+      { item: 'Fresh green asparagus spears, trimmed', amount: 200, unit: 'g' },
       { item: 'Flaky sea salt & cracked black pepper', amount: 6, unit: 'g' },
-    ],
-    ingredientsAr: [
-      { item: 'فيليه سلمون أطلسي بالجلد', amount: 400, unit: 'جم' },
-      { item: 'زبدة أعشاب طبيعية غير مملحة', amount: 35, unit: 'جم' },
-      { item: 'هليون أخضر طازج', amount: 200, unit: 'جم' },
-      { item: 'عصير ليمون طازج مع الكبر', amount: 25, unit: 'مل' },
-      { item: 'ملح بحري خشن وفلفل أسود طازج', amount: 6, unit: 'جم' },
     ],
     stepsEn: [
       {
-        title: 'Dry & Score the Skin',
+        title: 'Dry & Season the Salmon Skin',
         instruction:
-          'Pat salmon skin bone-dry with paper towels and season generously with flaky sea salt right before searing.',
+          'Pat the salmon skin thoroughly dry with paper towels and season evenly with flaky sea salt and black pepper immediately before searing.',
         timerSeconds: 60,
       },
       {
         title: 'Uninterrupted Cast-Iron Sear',
         instruction:
-          'Place skin-side down into a hot cast-iron skillet over medium-high heat. Press firmly for 10 seconds and sear undisturbed for 6 minutes.',
+          'Place fillets skin-side down into a preheated skillet over medium-high heat. Press gently for 10 seconds and sear undisturbed for 6 minutes until crisp.',
         timerSeconds: 360,
       },
       {
-        title: 'Lemon Caper Butter Baste',
+        title: 'Garlic, Meyer Lemon & Caper Butter Baste',
         instruction:
-          'Flip fillets, add cultured butter, crushed garlic, capers, and asparagus spears, basting continuously for 2 minutes.',
-        timerSeconds: 120,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تجفيف وتتبيل الجلد',
-        instruction:
-          'جفف جلد السلمون تماماً بورق المطبخ وتبّله بالملح البحري الخشن مباشرة قبل وضعه في المقلاة.',
-        timerSeconds: 60,
-      },
-      {
-        title: 'التحمير بدون تحريك',
-        instruction:
-          'ضع الفيليه على جهة الجلد في مقلاة الزهر الساخنة واضغط برفق لـ 10 ثوانٍ، ثم اتركه 6 دقائق حتى يصبح ذهبياً مقرمشاً.',
-        timerSeconds: 360,
-      },
-      {
-        title: 'إضافة الزبدة والليمون',
-        instruction:
-          'اقلب السلمون وأضف الزبدة والثوم والكبر والهليون، واسكب الزبدة الذائبة فوق الفيليه لمدة دقيقتين.',
-        timerSeconds: 120,
+          'Flip fillets, add unsalted butter, 2 crushed garlic cloves, drained capers, Meyer lemon juice, and asparagus spears. Baste for 2 to 3 minutes until internal temperature reaches 63°C (145°F).',
+        timerSeconds: 150,
       },
     ],
   },
@@ -395,99 +317,65 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     slug: 'keto-garlic-herb-butter-ribeye-steak-high-protein',
     category: 'healthy_diet',
     subcategoryId: 'keto-low-carb',
-    categoryLabelEn: 'Healthy & Diet · Keto & High-Protein',
-    categoryLabelAr: 'أكل صحي وحميات · كيتو وبروتين عالي',
-    titleEn: 'Keto Pan-Seared Ribeye Steak in Foaming Garlic Thyme Butter',
-    titleAr: 'ستيك ريب آي كيتو بالثوم وزبدة الزعتر البري (54 جم بروتين)',
+    categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
+    titleEn: 'Pan-Seared Ribeye Steak with Garlic & Fresh Thyme Butter',
     subtitleEn:
-      'Zero-carb, 54g high-protein steakhouse ribeye basted with crushed garlic cloves, fresh rosemary, and grass-fed butter.',
-    subtitleAr:
-      'وجبة كيتو مثالية خالية من الكربوهيدرات وغنية بـ 54 جم بروتين مع الزبدة الطبيعية والأعشاب.',
+      'Low-carb, high-protein boneless ribeye seared in avocado oil and basted with crushed garlic cloves, fresh rosemary, thyme, and butter.',
     wordCount: 1120,
     introParagraphsEn: [
-      'For anyone following a ketogenic, low-carb, or high-protein strength nutrition protocol, a properly seared boneless ribeye is the gold standard of nutrient density. Delivering 54 grams of complete bioavailable protein and zero net carbohydrates, this French arrosé (butter-basting) method transforms a simple cut of beef into an indulgent culinary centerpiece in under 15 minutes.',
-      'The secret lies in two-stage thermal control: first searing in high-smoke-point avocado oil to build a deep Maillard reaction crust, then dropping in whole grass-fed butter, smashed garlic cloves, and woody thyme sprigs during the final 90 seconds so the milk solids brown slowly without burning.',
-    ],
-    introParagraphsAr: [
-      'لكل من يتبع نظام الكيتو دايت (Keto & Low-Carb) أو الأنظمة الغذائية عالية البروتين لبناء العضلات، يُعد ستيك الريب آي المشوي في المقلاة الوجبة المثالية المتكاملة؛ إذ يمنحك 54 جراماً من البروتين الصافي مع صفر كربوهيدرات صافية.',
-      'تعتمد هذه الوصفة على تقنية (Arrosé) الفرنسية الشهيرة، حيث نبدأ بتكوين قشرة محمرة غنية باستخدام زيت الأفوكادو الذي يتحمل الحرارة العالية، ثم نضيف الزبدة الطبيعية وفصوص الثوم والزعتر البري في آخر 90 ثانية لتسقية الستيك بالنكهة العطرية دون احتراق الزبدة.',
+      'A thick-cut boneless ribeye seared in a heavy skillet is one of the most satisfying low-carb dinners you can prepare in under 15 minutes. Delivering 54 grams of protein and zero net carbohydrates, the French arrosé (butter-basting) technique builds a rich exterior crust while keeping the interior tender.',
+      'We use a two-step heat method: first searing the steak in high-smoke-point avocado oil to brown the surface evenly, then lowering the heat and adding butter, crushed garlic cloves, and woody thyme sprigs during the final 90 seconds.',
     ],
     whyThisWorksEn: [
-      '0g Net Carbs and 54g Protein—tailor-made for Keto, Carnivore, and post-workout macro goals.',
-      'Using avocado oil first prevents butter from burning during the initial 230°C sear.',
-      'Resting on a warm board for 6 minutes redistributes intramuscular juices evenly.',
-    ],
-    whyThisWorksAr: [
-      'صفر كربوهيدرات و54 جم بروتين صافي—مثالي لحمية الكيتو والرياضيين.',
-      'استخدام زيت الأفوكادو أولاً يحمي الزبدة من الاحتراق أثناء التحمير الأولي.',
-      'إراحة الستيك لـ 6 دقائق بعد الطهي يعيد توزيع العصارة داخل الألياف.',
+      '0g Net Carbs and 54g Protein—ideal for ketogenic and low-carb meal plans.',
+      'Starting with avocado oil prevents the butter milk solids from scorching during the initial sear.',
+      'Resting the steak on a warm cutting board redistributes juices evenly before slicing.',
     ],
     chefTipsEn: [
-      'Always choose a ribeye at least 1.5 inches (3.8 cm) thick; thin supermarket steaks overcook in the center before developing a proper exterior crust.',
-      'Keep the papery skins on your smashed garlic cloves when tossing them into the hot skillet—the skin shields the garlic from turning acrid and bitter.',
-      'Use an instant-read digital meat thermometer and pull the steak at 52°C (125°F) for medium-rare, as carryover cooking raises it by 3°C while resting.',
+      'Select a boneless ribeye at least 1.5 inches (3.8 cm) thick so the exterior develops a deep brown crust before the center overcooks.',
+      'Leave the papery skin on your crushed garlic cloves when adding them to the skillet to keep the garlic from burning.',
+      'Check the center of the steak with a digital instant-read thermometer and allow 3 to 5 minutes of resting time.',
     ],
-    chefTipsAr: [
-      'اختر دائماً شريحة ستيك بسماكة لا تقل عن 3.5 سم؛ الشرائح الرقيقة تنضج زيادة عن اللزوم من الداخل قبل أن تكتسب لوناً ذهبياً من الخارج.',
-      'اترك القشرة الخارجية على فصوص الثوم عند ضغطها وإضافتها للمقلاة، لأن القشرة تحمي الثوم من الاحتراق والمرارة.',
-      'استخدم ميزان حرارة اللحوم وارفع الستيك عند درجة 52 مئوية للحصول على نضج (Medium-Rare) مثالي.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: The USDA recommends cooking whole cuts of beef to a minimum internal temperature of 63°C (145°F) followed by a 3-minute rest before carving.',
     substitutions: [
       {
-        originalEn: 'Boneless Ribeye Steak',
-        originalAr: 'ستيك ريب آي (Ribeye)',
-        substituteEn: 'NY Strip Sirloin or Beef Tenderloin Filet Mignon',
-        substituteAr: 'ستيك سيرلوين (NY Strip) أو فيليه مينيون قليل الدهون',
+        originalEn: 'Boneless Ribeye Steak (450g)',
+        substituteEn: 'New York Strip Sirloin or Beef Tenderloin Filet',
         chefNoteEn:
-          'Choose Filet Mignon if you want lower total calories and leaner high-protein macros.',
-        chefNoteAr:
-          'اختر الفيليه إذا كنت ترغب في تقليل السعرات والدهون مع الحفاظ على نسبة البروتين العالية.',
+          'Choose tenderloin filet if you prefer a leaner cut with lower total calories.',
       },
       {
-        originalEn: 'Grass-Fed Dairy Butter',
-        originalAr: 'زبدة الأبقار الطبيعية',
+        originalEn: 'Unsalted Dairy Butter (45g)',
         substituteEn: 'Clarified Ghee or Beef Tallow',
-        substituteAr: 'السمن البقري المصفى (Ghee) أو دهن العجل الطبيعي',
         chefNoteEn:
-          'Zero lactose and a higher 250°C smoke point for strict Whole30 / Dairy-Free Keto.',
-        chefNoteAr:
-          'خالٍ تماماً من اللاكتوز ويتحمل درجات حرارة أعلى دون دخان.',
+          'Lactose-free option with a higher smoke point for dairy-free keto diets.',
       },
     ],
     faqs: [
       {
-        questionEn: 'Is this garlic butter ribeye recipe 100% Keto and gluten-free?',
-        questionAr: 'هل هذه الوصفة متوافقة 100% مع الكيتو وخالية من الغلوتين؟',
+        questionEn: 'Is this garlic butter ribeye recipe keto and gluten-free?',
         answerEn:
-          'Yes, it contains 0g net carbs, zero gluten, and an optimal 70/30 fat-to-protein caloric ratio for ketosis.',
-        answerAr:
-          'نعم، الوصفة خالية تماماً من الكربوهيدرات والغلوتين وتحتوي على نسبة دهون صحية إلى بروتين مثالية لحالة الكيتوسيس.',
+          'Yes, it contains naturally zero gluten and minimal net carbohydrates from the garlic and fresh herbs.',
       },
       {
-        questionEn: 'How can I meal-prep and store cooked steak slices for the week?',
-        questionAr: 'كيف أحفظ شرائح الستيك لتجهيز وجبات الأسبوع (Meal Prep)؟',
+        questionEn: 'How can I store cooked steak slices for meal prep?',
         answerEn:
-          'Slice the rested steak against the grain, pour the solidified garlic herb pan butter over the slices, and refrigerate in glass meal-prep containers for up to 4 days.',
-        answerAr:
-          'قطّع الستيك عكس اتجاه الألياف بعد أن يرتاح، واسكب فوقه زبدة الأعشاب واحفظه في علب زجاجية في الثلاجة لمدة 4 أيام.',
+          'Slice the rested steak against the grain, spoon the pan juices over the slices, and refrigerate in an airtight glass container at 4°C for up to 4 days.',
       },
       {
         questionEn: 'Can I freeze cooked ribeye steak?',
-        questionAr: 'هل يمكن تجميد الستيك المطهو في الفريزر؟',
         answerEn:
-          'Yes, vacuum-seal or wrap tightly in freezer paper for up to 2 months. Thaw overnight in the fridge and sear briefly for 60 seconds in a hot pan.',
-        answerAr:
-          'نعم، يمكن تجميده في أكياس مفرغة من الهواء لمدة شهرين، ثم تذويبه في الثلاجة وتسخينه لـ 60 ثانية فقط في مقلاة ساخنة.',
+          'Yes, wrap tightly in freezer-safe packaging and freeze at -18°C for up to 2 months. Thaw overnight in the refrigerator before warming gently in a skillet.',
       },
     ],
     stepGalleryImages: [
-      '/images/hero_cookreel_studio_1795527112508.jpg',
+      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     ],
-    chefName: 'Chef Marcus Thorne',
-    chefTitleEn: 'Sports Nutrition Chef & Cast-Iron Specialist',
-    chefTitleAr: 'شيف متخصص في التغذية الرياضية وحميات الكيتو والبروتين',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 5,
     cookMinutes: 9,
     calories: 610,
@@ -495,69 +383,40 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     netCarbsGrams: 1,
     videoDuration: '0:12',
     videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
-    rating: 5.0,
-    reviewsCount: 412,
     image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     gearItem: {
       id: 'gear-damascus-knife',
       nameEn: '8-Inch Japanese 67-Layer Damascus Chef Knife',
-      nameAr: 'سكين شيف ياباني دمشقي 67 طبقة مقاس 8 إنش',
       brand: 'Shun Premier',
       priceUsd: 175,
       affiliateStore: 'Williams Sonoma',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Prime boneless ribeye steak (1.5 inch thick)', amount: 450, unit: 'g' },
-      { item: 'Unsalted grass-fed butter', amount: 45, unit: 'g' },
-      { item: 'Crushed garlic cloves, skin-on', amount: 4, unit: 'pcs' },
+      { item: 'Boneless ribeye steak (1.5 inch thick)', amount: 450, unit: 'g' },
+      { item: 'Unsalted butter', amount: 45, unit: 'g' },
+      { item: 'Crushed garlic cloves, skin-on', amount: 4, unit: 'cloves' },
       { item: 'Fresh thyme & rosemary sprigs', amount: 3, unit: 'sprigs' },
       { item: 'High-smoke-point avocado oil', amount: 15, unit: 'ml' },
-    ],
-    ingredientsAr: [
-      { item: 'شريحة ستيك ريب آي بسماكة 3.5 سم', amount: 450, unit: 'جم' },
-      { item: 'زبدة طبيعية غير مملحة', amount: 45, unit: 'جم' },
-      { item: 'فصوص ثوم كاملة مضغوطة', amount: 4, unit: 'حبة' },
-      { item: 'أغصان زعتر بري وروزماري طازج', amount: 3, unit: 'غصن' },
-      { item: 'زيت أفوكادو عالي التحمل للحرارة', amount: 15, unit: 'مل' },
+      { item: 'Coarse sea salt & cracked black pepper', amount: 8, unit: 'g' },
     ],
     stepsEn: [
       {
-        title: 'Temper & Heavy Season',
+        title: 'Dry & Season the Ribeye',
         instruction:
-          'Let steak rest at room temperature for 20 minutes, then coat all sides including the fat cap with coarse salt.',
+          'Pat the steak dry with paper towels and season all sides evenly with coarse sea salt and freshly cracked black pepper.',
         timerSeconds: 120,
       },
       {
         title: 'High-Heat Crust Sear',
         instruction:
-          'Sear in smoking-hot cast iron with avocado oil for 3 minutes per side until a deep mahogany crust forms.',
-        timerSeconds: 180,
+          'Sear in a hot skillet with avocado oil for 3 to 4 minutes per side until a deep golden-brown crust develops.',
+        timerSeconds: 210,
       },
       {
-        title: 'Aromatic Butter Arrosé',
+        title: 'Aromatic Garlic Herb Butter Baste',
         instruction:
-          'Toss in butter, smashed garlic, and thyme. Tilt the pan and spoon foaming butter over the steak for 90 seconds before resting.',
-        timerSeconds: 90,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تجهيز وتتبيل الستيك',
-        instruction:
-          'أخرج الستيك قبل 20 دقيقة ليأخذ حرارة الغرفة ثم تبله جيداً بالملح الخشن من كافة الجهات.',
-        timerSeconds: 120,
-      },
-      {
-        title: 'تكوين القشرة الذهبية',
-        instruction:
-          'اشوِ الستيك في مقلاة ساخنة جداً لمدة 3 دقائق لكل وجه حتى تتكون قشرة بنية غنية.',
-        timerSeconds: 180,
-      },
-      {
-        title: 'التسقية بزبدة الثوم والأعشاب',
-        instruction:
-          'أضف الزبدة والثوم والزعتر وأمِل المقلاة لسكب الزبدة الفوارة فوق الستيك لمدة 90 ثانية ثم اتركه يرتاح قبل التقطيع.',
+          'Add butter, crushed garlic cloves, and thyme sprigs. Tilt the pan and spoon foaming butter over the steak for 90 seconds, then rest on a warm board before slicing.',
         timerSeconds: 90,
       },
     ],
@@ -568,98 +427,64 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     category: 'quick_easy',
     subcategoryId: '5-ingredient-recipes',
     categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
-    categoryLabelAr: 'وصفات سريعة · وصفات بـ 5 مكونات',
-    titleEn: '5-Ingredient Tagliatelle in Black Truffle Butter & Parmigiano',
-    titleAr: 'باستا تالياتيلي بـ 5 مكونات فقط بصلصة الكمأة والبارميزان',
+    titleEn: '5-Ingredient Tagliatelle with Black Truffle Butter & Parmigiano',
     subtitleEn:
-      'Silky fresh egg ribbons emulsified with starchy pasta water, black truffle butter, and 24-month Parmigiano-Reggiano—no heavy cream required.',
-    subtitleAr:
-      'باستا إيطالية فاخرة بـ 5 مكونات فقط وبدون كريمة طبخ، تعتمد على مستحلب ماء السلق وزبدة الكمأة والبارميزان.',
+      'Fresh egg pasta ribbons tossed with starchy pasta water, black truffle butter, and finely grated 24-month Parmigiano-Reggiano—no heavy cream needed.',
     wordCount: 1040,
     introParagraphsEn: [
-      'Authentic Italian trattorias never drown fresh egg tagliatelle in heavy cream. Instead, they rely on a scientific culinary miracle known as starch-lipid emulsification: whisking starchy pasta cooking water directly into melted black truffle butter and finely grated 24-month aged Parmigiano-Reggiano.',
-      'Requiring only five pantry ingredients and 18 minutes from start to table, this recipe produces a velvety, restaurant-grade sauce that clings to every ribbon of pasta without feeling heavy.',
-    ],
-    introParagraphsAr: [
-      'لا تستخدم المطاعم الإيطالية الأصيلة كريمة الطبخ الثقيلة في تحضير باستا الكمأة، بل تعتمد على سر علمي بسيط يسمى (الاستحلاب النشوي): أي خفق ماء سلق الباستا الغني بالنشا مع زبدة الكمأة الذائبة وجبن البارميزان المعتق المبشور ناعماً.',
-      'بـ 5 مكونات فقط وخلال أقل من 18 دقيقة، ستحصل على صوص حريري لامع يغلف كل شريط من الباستا بنكهة غنية وخفيفة على المعدة.',
+      'Traditional Italian pasta sauces achieve their creamy texture without adding heavy cream. Instead, they rely on starch-lipid emulsification: whisking starchy pasta cooking water directly into melted truffle butter and finely grated aged Parmigiano-Reggiano.',
+      'Using just five ingredients and 18 minutes from start to finish, this technique produces a glossy sauce that coats every ribbon of tagliatelle.',
     ],
     whyThisWorksEn: [
-      'Only 5 ingredients—high margin, low prep complexity, and naturally cream-free.',
-      'Tossing off the heat prevents Parmigiano proteins from clumping into strings.',
-      'Fresh egg pasta cooks in 150 seconds flat.',
-    ],
-    whyThisWorksAr: [
-      '5 مكونات فقط، بدون كريمة طبخ، وتجهز في دقائق معدودة.',
-      'التقليب خارج النار يمنع تكتل جبن البارميزان ويحوله لصوص كريمي.',
-      'الباستا الطازجة تنضج في دقيقتين ونصف فقط.',
+      'Uses only 5 simple ingredients and requires no heavy cream.',
+      'Tossing the pasta off the burner keeps Parmigiano proteins from clumping.',
+      'Fresh egg tagliatelle cooks in under 3 minutes.',
     ],
     chefTipsEn: [
-      'Boil your pasta in 30% less water than usual so the cooking water becomes extra concentrated with wheat starch—this starch is the glue that binds your sauce.',
-      'Never use pre-shredded bagged parmesan; it contains cellulose anti-caking powder that refuses to melt smoothly.',
-      'Always remove the skillet from the burner for 20 seconds before adding cheese.',
+      'Boil the pasta in slightly less water than usual so the cooking water becomes rich in wheat starch, which binds the butter and cheese.',
+      'Grate whole wedge Parmigiano-Reggiano on a fine microplane grater rather than using pre-shredded cheese.',
+      'Remove the skillet from the heat for 20 seconds before tossing in the grated cheese.',
     ],
-    chefTipsAr: [
-      'اسلق الباستا في كمية ماء أقل بنسبة 30% من المعتاد حتى يصبح ماء السلق مركزاً بالنشا الطبيعي الذي يربط الصوص.',
-      'تجنب الجبن المبشور الجاهز في الأكياس لأنه يحتوي على نشا مانع للتكتل يمنع ذوبان الجبن بسلاسة.',
-      'ارفع المقلاة عن النار تماماً قبل إضافة الجبن حتى لا ينفصل الدهن.',
-    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Serve freshly emulsified egg pasta immediately while hot, or cool within 60 minutes and refrigerate at 4°C (39°F) for up to 3 days.',
     substitutions: [
       {
         originalEn: 'Black Truffle Butter (45g)',
-        originalAr: 'زبدة الكمأة السوداء (45 جم)',
-        substituteEn: 'Unsalted butter + 1 tsp white truffle oil or sautéed cremini mushrooms',
-        substituteAr: 'زبدة عادية غير مملحة مع ملعقة صغيرة زيت كمأة أو مشروم بني مشوح',
+        substituteEn: 'Unsalted butter + 1 tsp truffle olive oil or finely minced sautéed mushrooms',
         chefNoteEn:
-          'If you do not have truffle butter on hand, finely minced browned mushrooms deliver deep umami.',
-        chefNoteAr:
-          'بديل اقتصادي متوفر في كل مطبخ يمنح نكهة الأومامي الغنية.',
+          'Browned cremini mushrooms provide rich savory depth if truffle butter is unavailable.',
       },
       {
-        originalEn: '24-Month Parmigiano-Reggiano',
-        originalAr: 'جبن بارميزان ريجيانو',
-        substituteEn: 'Pecorino Romano or Grana Padano (finely microplaned)',
-        substituteAr: 'جبن بيكورينو رومانو أو غرانا بادانو مبشور ناعماً',
+        originalEn: '24-Month Parmigiano-Reggiano (75g)',
+        substituteEn: 'Finely grated Grana Padano or Pecorino Romano',
         chefNoteEn:
-          'Use slightly less salt in the pasta water if substituting sharper Pecorino.',
-        chefNoteAr:
-          'قلل ملح ماء السلق قليلاً إذا استخدمت جبن البيكورينو لأنه أكثر ملوحة.',
+          'Reduce pasta water salt slightly when using sharper Pecorino Romano.',
       },
     ],
     faqs: [
       {
-        questionEn: 'What if I do not have heavy cream? Does this recipe need cream?',
-        questionAr: 'ماذا أفعل إذا لم تتوفر لدي كريمة طبخ؟',
+        questionEn: 'Does this pasta recipe require heavy cream?',
         answerEn:
-          'This recipe intentionally uses ZERO heavy cream! Combining 90ml of starchy pasta water with cold butter and finely grated Parmigiano creates a natural cream emulsion.',
-        answerAr:
-          'هذه الوصفة مصممة أصلاً بدون كريمة طبخ! خفق ماء سلق الباستا النشوي مع الزبدة والبارميزان يصنع قواماً كريمياً طبيعياً 100%.',
+          'No. Whisking 90ml of starchy pasta cooking water with melted butter and finely grated Parmigiano creates a natural creamy emulsion without heavy cream.',
       },
       {
-        questionEn: 'How do I reheat leftover truffle pasta without the butter separating?',
-        questionAr: 'كيف أعيد تسخين الباستا المتبقية دون أن تنفصل الزبدة؟',
+        questionEn: 'How do I reheat leftover tagliatelle without the butter separating?',
         answerEn:
-          'Warm in a skillet over low heat with 2 tablespoons of water or milk, tossing continuously for 90 seconds until the emulsion reforms.',
-        answerAr:
-          'سخنها في مقلاة على نار هادئة مع ملعقتين من الماء الدافئ أو الحليب وقلّب باستمرار لمدة 90 ثانية.',
+          'Warm gently in a skillet over low heat with 2 tablespoons of water, tossing continuously for 90 seconds until smooth.',
       },
       {
         questionEn: 'Can I use dried fettuccine instead of fresh egg tagliatelle?',
-        questionAr: 'هل يمكن استخدام باستا فيتوتشيني جافة بدلاً من الطازجة؟',
         answerEn:
-          'Yes, boil dried fettuccine 1 minute less than package instructions and finish cooking it directly inside the truffle butter emulsion.',
-        answerAr:
-          'نعم، اسلق الفيتوتشيني الجافة أقل بدقيقة واحدة من الوقت المكتوب على العبوة وأكمل نضجها داخل صوص الزبدة.',
+          'Yes. Boil dried fettuccine 1 minute less than the package directions and finish cooking it directly in the butter and pasta water emulsion.',
       },
     ],
     stepGalleryImages: [
-      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_tossing_pasta_pan_1795530070327.jpg',
       '/images/recipe_truffle_pasta_1795527116427.jpg',
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
     ],
-    chefName: 'Chef Lorenzo Bellini',
-    chefTitleEn: 'Italian Artisan Pasta Specialist · Bologna Culinary Institute',
-    chefTitleAr: 'شيف متخصص في المطبخ الإيطالي وصناعة الباستا الطازجة',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 8,
     cookMinutes: 10,
     calories: 540,
@@ -667,13 +492,10 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     netCarbsGrams: 52,
     videoDuration: '0:12',
     videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
-    rating: 4.9,
-    reviewsCount: 274,
     image: '/images/recipe_truffle_pasta_1795527116427.jpg',
     gearItem: {
       id: 'gear-pasta-roller',
-      nameEn: 'Italian Stainless Pasta Machine & Microplane Truffle Shaver',
-      nameAr: 'ماكينة فرد الباستا الإيطالية مع مبشرة الكمأة الدقيقة',
+      nameEn: 'Italian Stainless Steel Pasta Machine & Fine Grater Set',
       brand: 'Marcato Atlas',
       priceUsd: 112,
       affiliateStore: 'Amazon Kitchen',
@@ -681,53 +503,28 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     },
     ingredientsEn: [
       { item: 'Fresh egg tagliatelle pasta', amount: 280, unit: 'g' },
-      { item: 'Artisanal black truffle butter', amount: 45, unit: 'g' },
+      { item: 'Black truffle butter', amount: 45, unit: 'g' },
       { item: 'Finely grated 24-month Parmigiano-Reggiano', amount: 75, unit: 'g' },
       { item: 'Reserved starchy pasta cooking water', amount: 90, unit: 'ml' },
-    ],
-    ingredientsAr: [
-      { item: 'باستا تالياتيلي طازجة بالبيض', amount: 280, unit: 'جم' },
-      { item: 'زبدة الكمأة السوداء الإيطالية', amount: 45, unit: 'جم' },
-      { item: 'جبن بارميزان ريجيانو مبشور ناعم', amount: 75, unit: 'جم' },
-      { item: 'ماء سلق الباستا الغني بالنشا', amount: 90, unit: 'مل' },
+      { item: 'Sea salt & freshly ground black pepper', amount: 5, unit: 'g' },
     ],
     stepsEn: [
       {
-        title: 'Al Dente Boil',
+        title: 'Boil Tagliatelle Al Dente',
         instruction:
-          'Boil fresh tagliatelle in salted water for 2.5 minutes until al dente, reserving a cup of starchy cooking water.',
+          'Cook fresh egg tagliatelle in salted boiling water for 2.5 minutes until al dente, reserving 90ml of starchy pasta water before draining.',
         timerSeconds: 150,
       },
       {
-        title: 'Truffle Butter Emulsion',
+        title: 'Whisk Truffle Butter Emulsion',
         instruction:
-          'Melt black truffle butter over low heat and whisk in starchy pasta water to form a glossy emulsion.',
+          'Melt black truffle butter in a wide skillet over low heat and whisk in the warm starchy pasta water until emulsified.',
         timerSeconds: 90,
       },
       {
         title: 'Off-Heat Parmigiano Toss',
         instruction:
-          'Remove pan from heat, toss pasta vigorously with finely grated Parmigiano-Reggiano until silky.',
-        timerSeconds: 60,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'سلق الباستا الطازجة',
-        instruction:
-          'اسلق الباستا في ماء مملح لمدة دقيقتين ونصف فقط، واحتفظ بكوب من ماء السلق النشوي.',
-        timerSeconds: 150,
-      },
-      {
-        title: 'تحضير مستحلب الكمأة',
-        instruction:
-          'ذوّب زبدة الكمأة على نار هادئة وأضف ماء السلق تدريجياً للحصول على صوص كريمي لامع.',
-        timerSeconds: 90,
-      },
-      {
-        title: 'التقليب مع البارميزان خارج النار',
-        instruction:
-          'ارفع المقلاة عن النار وقلّب الباستا بسرعة مع جبن البارميزان المبشور حتى يتغلف كل شريط بالصوص.',
+          'Remove the skillet from the burner, add drained tagliatelle and grated Parmigiano-Reggiano, and toss vigorously for 60 seconds.',
         timerSeconds: 60,
       },
     ],
@@ -737,512 +534,322 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     slug: 'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
     category: 'quick_easy',
     subcategoryId: 'air-fryer-recipes',
-    categoryLabelEn: 'Quick & Easy · Air Fryer & One-Pan',
-    categoryLabelAr: 'وصفات سريعة · القلاية الهوائية ومقلاة واحدة',
-    titleEn: 'Crispy Air Fryer & One-Pan Lemon Herb Chicken with Baby Potatoes',
-    titleAr: 'دجاج مقرمش بالليمون والأعشاب في القلاية الهوائية أو المقلاة الواحدة',
+    categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
+    titleEn: 'Crispy Air Fryer & One-Pan Lemon Herb Chicken Thighs with Potatoes',
     subtitleEn:
-      'Shatteringly crisp chicken thighs with caramelized shallots and baby Yukon potatoes—includes both Air Fryer and One-Pan methods.',
-    subtitleAr:
-      'أفخاذ دجاج ذهبية مقرمشة مع البطاطس الصغيرة والروزماري، مع خطوات التحضير في القلاية الهوائية أو الفرن.',
+      'Golden skin-on chicken thighs roasted with baby Yukon gold potatoes, shallots, garlic, and rosemary—with instructions for both Air Fryer and oven skillet.',
     wordCount: 1150,
     introParagraphsEn: [
-      'Whether you use a convection Air Fryer or a single stainless-steel braiser pan, bone-in skin-on chicken thighs are the most forgiving and flavorful weeknight dinner protein. While chicken breasts dry out rapidly above 74°C, dark-meat thighs become increasingly tender and succulent as internal connective collagen melts.',
-      'Pairing the chicken with halved baby Yukon gold potatoes allows the potatoes to roast directly in the herb-infused chicken drippings, absorbing every drop of garlic, rosemary, and fresh Meyer lemon juice.',
-    ],
-    introParagraphsAr: [
-      'سواء كنت تستخدم القلاية الهوائية (Air Fryer) أو مقلاة الفرن الواحدة، فإن أفخاذ الدجاج بالجلد هي الخيار الأذكى لعشاء عائلي شهي ومضمون النجاح؛ إذ تحافظ على طراوتها وعصارتها بفضل الكولاجين الطبيعي، بينما تتحول طبقة الجلد الخارجية إلى قشرة مقرمشة ذهبية.',
-      'وضع أنصاف البطاطس الصغيرة مع الكراث والروزماري تحت قطع الدجاج يجعلها تتشرب عصارة التتبيلة والليمون لتنضج الوجبة كاملة في وعاء واحد بدون فوضى في المطبخ.',
+      'Bone-in, skin-on chicken thighs are forgiving and flavorful for weeknight cooking, whether you use a countertop Air Fryer or an oven-safe skillet. As the skin crisps, the natural juices season the halved baby Yukon gold potatoes underneath.',
+      'We finish the dish with fresh lemon juice, roasted garlic cloves, and woody rosemary sprigs for a complete one-vessel dinner.',
     ],
     whyThisWorksEn: [
-      'Dual-method tested: 22 minutes in an Air Fryer at 200°C or 25 minutes in a One-Pan Skillet.',
-      'Cold-pan start renders subcutaneous skin fat slowly for potato-chip crispness.',
-      'Complete weeknight dinner (protein + herb-roasted potatoes) in a single cooking vessel.',
-    ],
-    whyThisWorksAr: [
-      'تعمل بطريقتين: 22 دقيقة في القلاية الهوائية (Air Fryer) أو 25 دقيقة في المقلاة.',
-      'إذابة دهون الجلد تدريجياً تمنحك قرمشة طبيعية بدون قلي عميق.',
-      'وجبة متكاملة (بروتين + نشويات صحية) في خطوة واحدة.',
+      'Works in 22 to 25 minutes in an Air Fryer at 200°C (400°F) or in an oven skillet.',
+      'Rendering the chicken skin gradually creates a crisp texture without breading.',
+      'Roasts both protein and potatoes together for easy weeknight cleanup.',
     ],
     chefTipsEn: [
-      'For the Air Fryer method: preheat your air fryer to 200°C (400°F), toss baby potatoes in olive oil and rosemary in the bottom of the basket, and nestle chicken thighs skin-side up on top for 22 minutes.',
-      'For the Stovetop-to-Oven method: start the chicken thighs skin-side down in a COLD pan, then turn the burner to medium-high so the fat renders gently without scorching.',
-      'Always add fresh lemon juice at the very end of cooking so its bright citrus aroma does not evaporate.',
+      'For the Air Fryer method: preheat to 200°C (400°F), place seasoned halved baby potatoes in the basket base, and set chicken thighs skin-side up on top for 22 to 25 minutes.',
+      'Pat the chicken skin dry with paper towels before rubbing with olive oil and herbs.',
+      'Add fresh lemon juice at the end of cooking so the citrus aroma stays bright.',
     ],
-    chefTipsAr: [
-      'لطريقة القلاية الهوائية (Air Fryer): سخّن القلاية على 200 مئوية، ضع البطاطس المتبلة في قاعدة السلة وضع فوقها قطع الدجاج (الجلد للأعلى) لمدة 22 دقيقة.',
-      'لطريقة المقلاة: ابدأ بوضع الدجاج على جهة الجلد في مقلاة باردة ثم شغّل النار المتوسطة ليذوب الدهن ببطء ويقرمش الجلد.',
-      'أضف عصير الليمون الطازج في الدقيقة الأخيرة قبل التقديم للحفاظ على نكهته العطرية.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always cook poultry (chicken thighs and breasts) to a minimum internal temperature of 74°C (165°F) verified with a food thermometer at the thickest part of the thigh without touching bone.',
     substitutions: [
       {
-        originalEn: 'Bone-In Skin-On Chicken Thighs',
-        originalAr: 'أفخاذ دجاج بالعظم والجلد',
-        substituteEn: 'Boneless skinless chicken thighs or drumsticks (reduce time by 5 mins)',
-        substituteAr: 'صدور أو أفخاذ دجاج مخلية (قلل وقت الطهي 5 دقائق)',
+        originalEn: 'Bone-In Skin-On Chicken Thighs (650g)',
+        substituteEn: 'Boneless skinless chicken thighs or drumsticks (cook to 74°C / 165°F)',
         chefNoteEn:
-          'Brush boneless thighs with 1 tbsp olive oil and smoked paprika for color.',
-        chefNoteAr:
-          'ادهن القطع المخلية بملعقة زيت زيتون وبابريكا مدخنة لإعطائها لوناً ذهبياً شهياً.',
+          'Boneless thighs typically reach 74°C (165°F) about 4 to 5 minutes faster than bone-in cuts.',
       },
       {
-        originalEn: 'Baby Yukon Gold Potatoes',
-        originalAr: 'البطاطس الصغيرة',
-        substituteEn: 'Cauliflower florets or cubed sweet potatoes',
-        substituteAr: 'زهرات القرنبيط (للكيتو) أو مكعبات البطاطا الحلوة',
+        originalEn: 'Baby Yukon Gold Potatoes (400g)',
+        substituteEn: 'Cauliflower florets, green beans, or cubed sweet potatoes',
         chefNoteEn:
-          'Swapping potatoes for cauliflower drops net carbs from 32g to 6g per serving.',
-        chefNoteAr:
-          'استبدال البطاطس بالقرنبيط يحول الوصفة إلى وجبة كيتو منخفضة الكربوهيدرات.',
+          'Swap potatoes for cauliflower florets if you want a lower-carb dinner.',
       },
     ],
     faqs: [
       {
-        questionEn: 'How long does lemon herb chicken last in the fridge for meal prep?',
-        questionAr: 'كم تدوم هذه الوجبة في الثلاجة عند تجهيز وجبات الأسبوع؟',
+        questionEn: 'What internal temperature should chicken thighs reach?',
         answerEn:
-          'Stored in airtight meal-prep containers, the roasted chicken and potatoes stay fresh for up to 4 days in the refrigerator.',
-        answerAr:
-          'تبقى طازجة ولذيذة لمدة 4 أيام كاملة في الثلاجة داخل علب حفظ الطعام المحكمة.',
+          'For food safety, the USDA requires all poultry to reach a minimum internal temperature of 74°C (165°F). Dark-meat chicken thighs remain very tender even when cooked to 79°C–82°C (175°F–180°F).',
       },
       {
-        questionEn: 'How do I reheat chicken thighs in the Air Fryer?',
-        questionAr: 'كيف أعيد تسخين الدجاج في القلاية الهوائية؟',
+        questionEn: 'How do I reheat leftover chicken thighs so the skin crisps back up?',
         answerEn:
-          'Reheat at 190°C (375°F) for 4–5 minutes in the Air Fryer; the circulating dry heat restores 100% of the original skin crunch.',
-        answerAr:
-          'سخنها في القلاية الهوائية على حرارة 190 مئوية لمدة 4 دقائق لتستعيد قرمشة الجلد بالكامل.',
+          'Reheat in an Air Fryer at 175°C (350°F) for 4 to 5 minutes until the skin is crisp and the internal center reaches 74°C (165°F).',
       },
       {
-        questionEn: 'Can I freeze the raw marinated chicken thighs ahead of time?',
-        questionAr: 'هل يمكن تتبيل الدجاج وتجميده مسبقاً؟',
+        questionEn: 'How long can I store cooked chicken and potatoes in the fridge?',
         answerEn:
-          'Yes! Combine chicken, olive oil, garlic, rosemary, and lemon zest in a freezer bag and freeze for up to 3 months.',
-        answerAr:
-          'نعم، يمكنك تتبيل الدجاج بزيت الزيتون والثوم والروزماري وتجميده لمدة تصل إلى 3 أشهر.',
+          'Store in an airtight glass container in the refrigerator at 4°C (39°F) or colder for 3 to 4 days.',
       },
     ],
     stepGalleryImages: [
-      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     ],
-    chefName: 'Chef Elena Vance',
-    chefTitleEn: 'Executive Culinary Director · Appliance & One-Pan Specialist',
-    chefTitleAr: 'مديرة استوديو الطهي · خبيرة وصفات القلاية الهوائية والوجبات السريعة',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 10,
-    cookMinutes: 22,
+    cookMinutes: 25,
     calories: 520,
-    proteinGrams: 39,
-    netCarbsGrams: 28,
+    proteinGrams: 44,
+    netCarbsGrams: 24,
     videoDuration: '0:12',
     videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
-    rating: 4.8,
-    reviewsCount: 195,
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-braiser-pan',
-      nameEn: '3.5-Quart Tri-Ply Stainless Steel Braiser & Air Fryer Crisper Set',
-      nameAr: 'مقلاة تحمير ستانلس ستيل ثلاثية الطبقات بمقابض نحاسية',
-      brand: 'All-Clad Reserve',
-      priceUsd: 159,
-      affiliateStore: 'Sur La Table',
+      nameEn: '3.5-Quart Stainless Steel All-Clad Braiser & Roasting Pan',
+      brand: 'All-Clad',
+      priceUsd: 165,
+      affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Bone-in skin-on chicken thighs', amount: 650, unit: 'g' },
-      { item: 'Halved baby Yukon gold potatoes', amount: 350, unit: 'g' },
-      { item: 'Peeled quartered shallots & garlic', amount: 120, unit: 'g' },
-      { item: 'Fresh lemon juice, olive oil & rosemary', amount: 45, unit: 'ml' },
-    ],
-    ingredientsAr: [
-      { item: 'أفخاذ دجاج بالعظم والجلد', amount: 650, unit: 'جم' },
-      { item: 'بطاطس صغيرة مقطعة أنصاف', amount: 350, unit: 'جم' },
-      { item: 'بصل كراث مقشر وفصوص ثوم', amount: 120, unit: 'جم' },
-      { item: 'عصير ليمون وزيت زيتون بكر وروزماري', amount: 45, unit: 'مل' },
+      { item: 'Bone-in, skin-on chicken thighs', amount: 650, unit: 'g' },
+      { item: 'Baby Yukon gold potatoes, halved', amount: 400, unit: 'g' },
+      { item: 'Extra-virgin olive oil', amount: 25, unit: 'ml' },
+      { item: 'Fresh lemon juice, garlic cloves & rosemary sprigs', amount: 35, unit: 'g' },
+      { item: 'Sea salt & cracked black pepper', amount: 8, unit: 'g' },
     ],
     stepsEn: [
       {
-        title: 'Render & Crisp Chicken Skin',
+        title: 'Dry & Season Chicken and Potatoes',
         instruction:
-          'Place seasoned chicken thighs skin-side down in a cold pan (or Air Fryer basket at 200°C) and sear for 8 minutes.',
-        timerSeconds: 480,
+          'Pat chicken thighs dry with paper towels and season with salt, pepper, and rosemary. Toss halved baby potatoes in olive oil and garlic.',
+        timerSeconds: 180,
       },
       {
-        title: 'Toss Potatoes in Pan Drippings',
+        title: 'Crisp the Skin & Arrange Potatoes',
         instruction:
-          'Flip chicken and arrange halved baby potatoes, shallots, and rosemary around the thighs in the golden drippings.',
-        timerSeconds: 120,
+          'Arrange potatoes in the Air Fryer basket or skillet base and place chicken thighs skin-side up on top.',
+        timerSeconds: 300,
       },
       {
-        title: 'Roast & Lemon Glaze',
+        title: 'Roast to 74°C (165°F) & Finish with Lemon',
         instruction:
-          'Roast at 200°C (400°F) for 15 minutes until potatoes are tender and skin is deeply golden, finishing with fresh lemon juice.',
-        timerSeconds: 900,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تحمير جلد الدجاج',
-        instruction:
-          'ضع قطع الدجاج المتبلة في المقلاة (أو سلة القلاية الهوائية على 200 مئوية) لمدة 8 دقائق حتى يقرمش الجلد.',
-        timerSeconds: 480,
-      },
-      {
-        title: 'إضافة البطاطس والكراث',
-        instruction:
-          'اقلب الدجاج وأضف أنصاف البطاطس الصغيرة والكراث والروزماري لتتشرب عصارة التحمير.',
-        timerSeconds: 120,
-      },
-      {
-        title: 'التحمير النهائي مع الليمون',
-        instruction:
-          'أكمل التحمير على حرارة 200 مئوية لمدة 15 دقيقة ثم أضف عصير الليمون الطازج عند التقديم.',
-        timerSeconds: 900,
+          'Roast at 200°C (400°F) for 22 to 25 minutes until chicken reaches a minimum internal temperature of 74°C (165°F), then finish with fresh lemon juice.',
+        timerSeconds: 1200,
       },
     ],
   },
   {
     id: 'mediterranean-spiced-shakshuka',
-    slug: 'vegetarian-mediterranean-shakshuka-poached-eggs-feta',
+    slug: 'mediterranean-poached-eggs-spiced-tomato-pepper-shakshuka',
     category: 'healthy_diet',
     subcategoryId: 'vegan-vegetarian',
-    categoryLabelEn: 'Healthy & Diet · Vegetarian & High-Protein',
-    categoryLabelAr: 'أكل صحي وحميات · نباتي وصحي',
-    titleEn: 'Mediterranean Spiced Shakshuka with Poached Eggs & Aged Feta',
-    titleAr: 'شكشوكة متوسطية صحية بالطماطم المشوية والكمون وجبن الفيتا',
+    categoryLabelEn: 'Healthy & Diet · Vegetarian & Plant-Forward',
+    titleEn: 'Mediterranean Poached Eggs in Spiced Tomato & Roasted Pepper Sauce',
     subtitleEn:
-      'Nutrient-dense vegetarian skillet with pasture-raised eggs poached in smoky roasted pepper tomato sauce, topped with sheep-milk feta.',
-    subtitleAr:
-      'وجبة صحية غنية بالبروتين ومضادات الأكسدة مع البيض المطهو في صلصة الطماطم والفلفل المشوي وجبن الفيتا.',
-    wordCount: 1020,
+      'Pasture-raised eggs poached gently in a smoky cumin, sweet paprika, charred bell pepper, and crushed plum tomato skillet sauce.',
+    wordCount: 1090,
     introParagraphsEn: [
-      'Shakshuka is one of the world’s most celebrated vegetarian one-skillet meals, combining lycopene-rich San Marzano tomatoes, sweet red bell peppers, freshly toasted cumin, and high-protein poached eggs. Whether served for a high-energy breakfast or a light Mediterranean dinner, it comes together in 20 minutes using staple pantry ingredients.',
-      'To achieve a thick, velvety sauce rather than a watery tomato soup, our test kitchen simmers the sautéed peppers and onions with smoked paprika and crushed garlic before cracking the eggs directly into gentle wells carved into the simmering reduction.',
-    ],
-    introParagraphsAr: [
-      'تُعد الشكشوكة المتوسطية واحدة من أشهر الوجبات الصحية المتوازنة في العالم، حيث تجمع بين الليكوبين المضاد للأكسدة في الطماطم المشوية، وفيتامين C في الفلفل الأحمر الحلو، والبروتين الكامل في البيض وجبن الفيتا اليوناني.',
-      'للحصول على صلصة كثيفة وغنية، نقوم بتشويح الفلفل والبصل مع الكمون المحمص والبابريكا المدخنة أولاً قبل إضافة الطماطم المهروسة، ثم نطهو البيض على البخار الهادئ داخل فجوات الصلصة.',
+      'Shakshuka is one of the most versatile one-skillet vegetarian meals for breakfast, lunch, or a quick weeknight dinner. Built on a base of sautéed onions, red bell peppers, garlic, toasted cumin, and crushed San Marzano tomatoes, the thick sauce poaches the eggs gently in place.',
+      'For a 100% plant-based vegan variation, you can swap the eggs for cubed firm tofu or simmered chickpeas directly in the spiced tomato base.',
     ],
     whyThisWorksEn: [
-      '24g Vegetarian Protein and only 380 calories per generous skillet portion.',
-      'Blooming cumin and smoked paprika in warm olive oil unlocks fat-soluble aromatics.',
-      'Easily adaptable to 100% Vegan by swapping eggs for marinated silken tofu medallions.',
-    ],
-    whyThisWorksAr: [
-      '24 جم بروتين و380 سعرة حرارية فقط في الحصة الواحدة.',
-      'تحميص الكمون والبابريكا في زيت الزيتون يضاعف النكهة العطرية.',
-      'قابلة للتحويل إلى وصفة نباتية صرفة (Vegan) بسهولة.',
+      'One-pan vegetarian dinner packed with lycopene-rich tomatoes, bell peppers, and protein.',
+      'Toasting the cumin and smoked paprika in olive oil for 30 seconds unlocks deep aroma.',
+      'The spiced tomato sauce base can be prepped 4 days ahead for a 6-minute weeknight meal.',
     ],
     chefTipsEn: [
-      'Always use an enameled cast-iron or stainless-steel skillet rather than raw unseasoned cast iron, as acidic tomatoes can strip raw iron seasoning and impart a metallic flavor.',
-      'Crack each egg into a small ramekin first, then slide it gently into its sauce well so the yolk stays intact.',
-      'Remove the skillet from the burner while the egg whites are still slightly opaque and jiggly; residual heat in the tomato sauce continues cooking the yolks.',
+      'Simmer the tomato and pepper sauce until thick enough that drawing a wooden spoon across the pan leaves a brief channel before adding the eggs.',
+      'Make small indentations in the sauce with the back of a spoon so the eggs stay evenly spaced.',
+      'Sprinkle crumbled feta and chopped fresh cilantro right before serving.',
     ],
-    chefTipsAr: [
-      'استخدم مقلاة مطلية بالمينا (Enameled) أو ستانلس ستيل لأن حموضة الطماطم قد تتفاعل مع الحديد الخام غير المطلي.',
-      'اكسر كل بيضة في وعاء صغير أولاً ثم اسكبها برفق داخل الفجوة في الصلصة للحفاظ على تماسك الصفار.',
-      'ارفع المقلاة عن النار فور تماسك البياض، لأن حرارة الصلصة الكامنة ستكمل تسوية الصفار.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook eggs until both the whites and yolks are firm, or to an internal temperature of 71°C (160°F) for egg dishes.',
     substitutions: [
       {
-        originalEn: 'Pasture-Raised Eggs (4 pcs)',
-        originalAr: 'البيض البلدي (4 حبات)',
-        substituteEn: 'Cubed firm tofu or cooked chickpeas (for 100% Vegan Shakshuka)',
-        substituteAr: 'مكعبات التوفو المتبل أو الحمص المسلوق (للوصفة النباتية الصرفة Vegan)',
+        originalEn: 'Pasture-Raised Whole Eggs (4 pcs)',
+        substituteEn: '300g Cubed Firm Tofu or 1 Can Drained Chickpeas (for 100% Vegan Shakshuka)',
         chefNoteEn:
-          'Simmer chickpeas directly in the spiced tomato sauce for 5 minutes to absorb flavor.',
-        chefNoteAr:
-          'اترك الحمص يتسبك مع صلصة الطماطم لـ 5 دقائق ليتشرب التوابل.',
+          'Simmer cubed tofu or chickpeas in the tomato sauce for 8 minutes so they absorb the spices.',
       },
       {
-        originalEn: 'Sheep-Milk Greek Feta',
-        originalAr: 'جبن الفيتا اليوناني',
-        substituteEn: 'Goat cheese crumbles or dairy-free almond ricotta',
-        substituteAr: 'جبن الماعز الطري أو ريكوتا اللوز النباتية',
+        originalEn: 'Crumbled Sheep Feta Cheese (60g)',
+        substituteEn: 'Diced Hass Avocado or Kalamata Olives',
         chefNoteEn:
-          'Adds the same creamy, tangy contrast against the warm spiced tomato sauce.',
-        chefNoteAr:
-          'يمنح نفس القوام الكريمي المتوازن مع حموضة الطماطم.',
+          'Provides creamy richness for dairy-free or vegan diners.',
       },
     ],
     faqs: [
       {
-        questionEn: 'Can I make the shakshuka tomato sauce ahead of time?',
-        questionAr: 'هل يمكن تحضير صلصة الشكشوكة مسبقاً وحفظها في الثلاجة؟',
+        questionEn: 'Can I make the shakshuka tomato sauce ahead of time for meal prep?',
         answerEn:
-          'Yes! Prepare the spiced pepper and tomato base up to 5 days in advance and store it in a glass jar in the fridge. When ready to eat, reheat the sauce in a skillet and poach fresh eggs in 4 minutes.',
-        answerAr:
-          'نعم! يمكنك تحضير صلصة الطماطم والفلفل وحفظها في برطمان زجاجي في الثلاجة لمدة 5 أيام، وعند الوجبة سخنها وأضف البيض في 4 دقائق.',
+          'Yes. Prepare the spiced tomato and bell pepper sauce up to 4 days in advance and store it in a glass jar in the refrigerator at 4°C. Reheat in a skillet and poach fresh eggs when ready to eat.',
       },
       {
-        questionEn: 'Can shakshuka sauce be frozen?',
-        questionAr: 'هل يمكن تجميد صلصة الشكشوكة في الفريزر؟',
+        questionEn: 'Can I freeze the tomato pepper base?',
         answerEn:
-          'Freeze the tomato-pepper base (without eggs or feta) in freezer-safe containers for up to 3 months.',
-        answerAr:
-          'يمكن تجميد الصلصة (بدون البيض والجبن) في الفريزر لمدة تصل إلى 3 أشهر كاملة.',
+          'The tomato and pepper sauce freezes well for up to 3 months without the eggs. Thaw overnight in the fridge before reheating.',
       },
       {
-        questionEn: 'What can I serve with shakshuka for a low-carb or keto diet?',
-        questionAr: 'مع ماذا أقدم الشكشوكة إذا كنت أتبع حمية لو كارب أو كيتو؟',
+        questionEn: 'What pan is best for cooking acidic tomato sauces?',
         answerEn:
-          'Serve over roasted zucchini ribbons, sautéed spinach, or with toasted almond-flour flatbread instead of sourdough.',
-        answerAr:
-          'قدمها مع السبانخ المشوحة أو خبز اللوز منخفض الكربوهيدرات بدلاً من الخبز العادي.',
+          'Use an enameled cast-iron skillet or stainless-steel pan so the acidity of the tomatoes does not react with bare unseasoned metal.',
       },
     ],
     stepGalleryImages: [
-      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     ],
-    chefName: 'Chef Nadia Mansour',
-    chefTitleEn: 'Mediterranean Diet & Plant-Forward Culinary Author',
-    chefTitleAr: 'شيف وكاتبة متخصصة في حمية البحر الأبيض المتوسط والأكل الصحي',
-    prepMinutes: 6,
-    cookMinutes: 14,
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 18,
     calories: 380,
-    proteinGrams: 24,
-    netCarbsGrams: 14,
+    proteinGrams: 22,
+    netCarbsGrams: 18,
     videoDuration: '0:12',
     videoUrl: '/videos/mediterranean-spiced-shakshuka.mp4',
-    rating: 4.9,
-    reviewsCount: 289,
     image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     gearItem: {
-      id: 'gear-enameled-pan',
-      nameEn: '11-Inch Enameled Cast-Iron Everyday Pan with Lid',
-      nameAr: 'مقلاة حديد زهر مطلية بالمينا 11 إنش مع غطاء',
+      id: 'gear-enameled-skillet',
+      nameEn: '11-Inch Enameled Cast-Iron Deep Sauté Skillet with Lid',
       brand: 'Le Creuset',
-      priceUsd: 168,
+      priceUsd: 185,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Pasture-raised large eggs', amount: 4, unit: 'pcs' },
-      { item: 'Crushed San Marzano plum tomatoes', amount: 400, unit: 'g' },
-      { item: 'Diced red bell pepper & yellow onion', amount: 180, unit: 'g' },
-      { item: 'Crumbled Greek sheep-milk feta', amount: 75, unit: 'g' },
-      { item: 'Roasted cumin, smoked paprika & olive oil', amount: 20, unit: 'g' },
-    ],
-    ingredientsAr: [
-      { item: 'بيض بلدي طازج', amount: 4, unit: 'حبة' },
-      { item: 'طماطم سان مارزانو مهروسة', amount: 400, unit: 'جم' },
-      { item: 'فلفل أحمر حلو وبصل مفروم', amount: 180, unit: 'جم' },
-      { item: 'جبن فيتا يوناني مفتت', amount: 75, unit: 'جم' },
-      { item: 'كمون محمص وبابريكا مدخنة وزيت زيتون', amount: 20, unit: 'جم' },
+      { item: 'Crushed San Marzano plum tomatoes', amount: 450, unit: 'g' },
+      { item: 'Large pasture-raised eggs', amount: 4, unit: 'pcs' },
+      { item: 'Diced red bell pepper & yellow onion', amount: 220, unit: 'g' },
+      { item: 'Crumbled feta cheese & fresh cilantro leaves', amount: 60, unit: 'g' },
+      { item: 'Extra-virgin olive oil, ground cumin & smoked paprika', amount: 25, unit: 'g' },
     ],
     stepsEn: [
       {
-        title: 'Char Peppers & Bloom Spices',
+        title: 'Sauté Peppers & Bloom Spices',
         instruction:
-          'Sauté diced onion and red bell pepper in olive oil for 5 minutes, then stir in garlic, cumin, and smoked paprika.',
-        timerSeconds: 300,
-      },
-      {
-        title: 'Simmer Rich Tomato Base',
-        instruction:
-          'Pour in crushed San Marzano tomatoes and simmer gently for 6 minutes until thickened.',
+          'Sauté diced onion and red bell pepper in olive oil for 6 minutes until soft, then stir in garlic, ground cumin, and smoked paprika for 30 seconds.',
         timerSeconds: 360,
       },
       {
-        title: 'Poach Eggs & Scatter Feta',
+        title: 'Simmer Crushed Tomato Reduction',
         instruction:
-          'Make 4 wells in the sauce, crack in the eggs, scatter crumbled feta, cover and simmer for 4 minutes until whites set.',
-        timerSeconds: 240,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تشويح الفلفل وتحميص التوابل',
-        instruction:
-          'قلّب البصل والفلفل الأحمر في زيت الزيتون لـ 5 دقائق ثم أضف الثوم والكمون والبابريكا المدخنة.',
-        timerSeconds: 300,
+          'Pour in crushed plum tomatoes and simmer uncovered for 8 minutes until thickened.',
+        timerSeconds: 480,
       },
       {
-        title: 'تسبكة صلصة الطماطم',
+        title: 'Poach Eggs & Garnish',
         instruction:
-          'أضف الطماطم المهروسة واترك الصلصة تتسبك على نار هادئة لمدة 6 دقائق.',
-        timerSeconds: 360,
-      },
-      {
-        title: 'طهي البيض وإضافة الفيتا',
-        instruction:
-          'اصنع 4 فجوات في الصلصة واكسر البيض بداخلها، ثم وزع جبن الفيتا وغطِّ المقلاة 4 دقائق.',
-        timerSeconds: 240,
+          'Create 4 wells in the sauce, crack in the eggs, cover the skillet, and cook on low heat for 5 to 6 minutes until cooked to your preference.',
+        timerSeconds: 330,
       },
     ],
   },
   {
-    id: 'mango-strawberry-sunset-cupcakes',
-    slug: 'mango-strawberry-sunset-cupcakes-recipe',
+    id: 'tropical-mango-berry-swirl-cupcakes',
+    slug: 'tropical-mango-berry-swirl-vanilla-bean-cupcakes',
     category: 'desserts_baking',
     subcategoryId: 'cakes-pastries',
     categoryLabelEn: 'Desserts & Baking · Cakes & Pastries',
-    categoryLabelAr: 'حلويات ومخبوزات · كيك ومخبوزات',
-    titleEn: 'Mango Strawberry Sunset Cupcakes with Swirled Fruit Buttercream',
-    titleAr: 'كب كيك غروب المانجو والفراولة بكريمة الفاكهة الطبيعية المزدوجة',
+    titleEn: 'Tropical Mango & Berry Swirl Vanilla Bean Cupcakes',
     subtitleEn:
-      'Tender Alphonso mango sponge crowned with dual-tone freeze-dried strawberry and mango buttercream—zero artificial food dyes.',
-    subtitleAr:
-      'كيك إسفنجي ببيوريه المانجو الطبيعي ومزين بكريمة الغروب المزدوجة من الفراولة والمانجو بدون أي ألوان صناعية.',
-    wordCount: 1190,
+      'Tender Madagascar vanilla cupcakes topped with a two-tone buttercream frosting made with reduced Alfonso mango puree and freeze-dried berry powder.',
+    wordCount: 1110,
     introParagraphsEn: [
-      'Inspired by tropical summer sunsets and crafted specifically for visual food lovers on Pinterest and TikTok, these Mango Strawberry Sunset Cupcakes deliver real fruit flavor in every crumb. Most fruit cupcakes fail because fresh fruit puree adds excess water that weighs down the batter and causes the buttercream to curdle.',
-      'Our pastry studio solves both challenges by simmering fresh Alphonso mango puree for 8 minutes to concentrate its natural sugars before folding it into the cake batter, and using finely milled freeze-dried strawberry powder to tint and flavor the sunset buttercream swirl naturally without a single drop of synthetic dye.',
-    ],
-    introParagraphsAr: [
-      'مستوحاة من ألوان الغروب الاستوائية ومصممة لتكون نجمة منصات الفيديو القصيرة وبنترست، تجمع وصفة كب كيك غروب المانجو والفراولة بين المظهر الاحترافي والطعم الطبيعي الفاخر بدون نقطة واحدة من الألوان الصناعية.',
-      'تفشل معظم وصفات كب كيك الفواكه بسبب السوائل الزائدة التي تجعل الكيك مكتوماً وتفصل كريمة الزبدة؛ لذلك نقوم في مطبخ CookReel بتكثيف بيوريه المانجو على النار لـ 8 دقائق لتركيز النكهة، مع استخدام بودرة الفراولة الطبيعية المجففة بالتجميد لتلوين وتنكيه الكريمة بقوام متماسك.',
+      'Fruit-flavored buttercreams often curdle or turn runny when bakers add raw fruit juice directly into whipped butter. Our Tropical Mango & Berry Swirl Vanilla Cupcakes solve this by pairing reduced mango pulp with pulverized freeze-dried berries—delivering vibrant natural fruit flavor and color without excess water.',
+      'The vanilla cupcake base uses room-temperature butter, whole eggs, and buttermilk to create a fine, tender crumb that stays soft for days.',
     ],
     whyThisWorksEn: [
-      '100% Natural Fruit Color & Flavor—uses reduced mango puree and freeze-dried berries.',
-      'Reverse-creaming method ensures flat, even cupcake domes that hold high piping swirls.',
-      'Captures CookReel.com’s historical cupcake backlink authority for immediate search ranking.',
-    ],
-    whyThisWorksAr: [
-      'ألوان ونكهات فاكهة طبيعية 100% بدون ملونات صناعية.',
-      'قوام إسفنجي متساوٍ يتحمل التزيين المرتفع بالكريمة المزدوجة.',
-      'يطابق الرابط التاريخي للدومين في تخصص الحلويات والمخبوزات.',
+      'Freeze-dried berry powder adds concentrated fruit flavor without watering down the buttercream.',
+      'Room-temperature eggs and buttermilk create a stable batter emulsion.',
+      'Side-by-side piping bag loading produces a clean two-tone swirl on every cupcake.',
     ],
     chefTipsEn: [
-      'Ensure your butter, eggs, and reduced mango puree are all at exact room temperature (20°C / 68°F) before mixing so the batter forms a stable emulsion.',
-      'Fill cupcake liners only two-thirds full using a spring-loaded stainless cookie scoop for uniform baking height.',
-      'To pipe the dual-tone sunset swirl, lay a sheet of plastic wrap flat, pipe a log of strawberry frosting next to a log of mango frosting, roll into a cylinder, and slide it into a piping bag fitted with a 1M star tip.',
+      'Bring your butter, eggs, and buttermilk to 20°C (68°F) for 30 minutes before mixing so the batter emulsifies smoothly.',
+      'Fill cupcake liners only two-thirds full (about 45g batter per cup) to achieve even domes without overflowing.',
+      'Cool cupcakes completely on a wire rack for 45 minutes before piping the buttercream.',
     ],
-    chefTipsAr: [
-      'تأكد من أن الزبدة والبيض وبيوريه المانجو جميعها بدرجة حرارة الغرفة (20 مئوية) قبل الخفق لضمان اندماج الخليط.',
-      'املأ قوالب الكب كيك حتى الثلثين فقط للحصول على سطح مستوٍ مثالي للتزيين.',
-      'لعمل تموج اللونين (المانجو والفراولة) في نفس القمع، ضع الكريمتين جنباً إلى جنب داخل كيس التزيين المزود بقمع نجمة 1M.',
-    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Bake cupcakes until a toothpick inserted into the center comes out clean (internal crumb temperature of 96°C / 205°F), and refrigerate frosted cupcakes in an airtight container if storing longer than 24 hours.',
     substitutions: [
       {
-        originalEn: 'Cake Pastry Flour (180g)',
-        originalAr: 'دقيق الحلويات الفاخر (180 جم)',
-        substituteEn: '155g All-Purpose Flour + 25g Cornstarch (sifted twice)',
-        substituteAr: '155 جم دقيق متعدد الاستعمالات + 25 جم نشا الذرة (منخول مرتين)',
+        originalEn: 'Cake Flour (240g)',
+        substituteEn: '210g All-Purpose Flour + 30g Cornstarch (sifted twice)',
         chefNoteEn:
-          'Cornstarch lowers gluten formation, mimicking low-protein cake flour perfectly.',
-        chefNoteAr:
-          'إضافة نشا الذرة تقلل نسبة الغلوتين وتعطيك نعومة دقيق الكيك الفاخر تماماً.',
+          'Cornstarch lowers the gluten protein ratio of all-purpose flour to match soft cake flour.',
       },
       {
-        originalEn: 'Refined Caster Sugar',
-        originalAr: 'السكر الأبيض الناعم',
-        substituteEn: 'Monk Fruit Allulose Baking Blend or Coconut Sugar (Healthy Sweets option)',
-        substituteAr: 'محلي فاكهة الراهب (Monk Fruit) أو سكر جوز الهند للخيار الصحي',
+        originalEn: 'Cultured Buttermilk (120ml)',
+        substituteEn: '110ml Whole Milk + 10ml Fresh Lemon Juice (rested 5 minutes)',
         chefNoteEn:
-          'Monk fruit blend keeps the sponge golden-yellow while cutting sugar calories by 90%.',
-        chefNoteAr:
-          'يحافظ على اللون الذهبي للكيك ويحول الوصفة إلى حلوى صحية منخفضة السعرات.',
+          'Provides the exact acidity needed to activate the baking leaveners.',
       },
     ],
     faqs: [
       {
-        questionEn: 'How do I store frosted cupcakes in the refrigerator?',
-        questionAr: 'كيف أحفظ الكب كيك المزين بالكريمة في الثلاجة؟',
+        questionEn: 'How do I store frosted cupcakes so the sponge stays moist?',
         answerEn:
-          'Place frosted cupcakes in a deep airtight cake carrier and refrigerate for up to 4 days. Let them sit at room temperature for 25 minutes before serving so the buttercream softens.',
-        answerAr:
-          'احفظها في حافظة كيك عميقة محكمة الإغلاق في الثلاجة لمدة 4 أيام، وأخرجها قبل التقديم بـ 25 دقيقة لتستعيد الكريمة قوامها الناعم.',
+          'Store frosted cupcakes in a tall airtight container in the refrigerator for up to 4 days. Let them sit at room temperature for 20 minutes before serving so the buttercream softens.',
       },
       {
-        questionEn: 'Can I freeze mango strawberry cupcakes?',
-        questionAr: 'هل يمكن تجميد الكب كيك في الفريزر؟',
+        questionEn: 'Can I freeze unfrosted cupcakes ahead of a party?',
         answerEn:
-          'Yes! Freeze unfrosted cupcake sponges wrapped individually for up to 3 months, or flash-freeze frosted cupcakes on a tray for 1 hour before transferring to a freezer box.',
-        answerAr:
-          'نعم، يمكن تجميد الكيك بدون تزيين لمدة 3 أشهر، أو تجميد الكب كيك المزين في صينية مكشوفة لساعة حتى تتماسك الكريمة ثم حفظه في علبة محكمة.',
+          'Yes! Wrap cooled unfrosted cupcakes individually and freeze at -18°C for up to 2 months. Thaw at room temperature before piping fresh frosting.',
       },
       {
-        questionEn: 'Can I make this as a no-bake dessert cup instead?',
-        questionAr: 'هل يمكن تطبيق هذه النكهات كحلى بارد بدون فرن (No-Bake)؟',
+        questionEn: 'How do I pipe two colors of frosting at the same time?',
         answerEn:
-          'Absolutely—layer crushed graham crackers or digestive biscuits with mango Mascarpone mousse and fresh strawberry compote in glass jars and chill for 2 hours.',
-        answerAr:
-          'بكل تأكيد! رتب طبقات من البسكويت المطحون مع موس المانجو والجبن الكريمي وقطع الفراولة في أكواب زجاجية وبردها لساعتين بدون فرن.',
+          'Spoon the mango frosting along the left side of a piping bag fitted with a 1M star tip and the berry frosting along the right side, then pipe in a continuous spiral.',
       },
     ],
     stepGalleryImages: [
-      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
     ],
-    chefName: 'Chef Clara Dupont',
-    chefTitleEn: 'Head Pastry Chef · Parisian Patisserie & Natural Fruit Desserts',
-    chefTitleAr: 'شيف حلويات تنفيذية متخصصة في المخبوزات الفرنسية وحلويات الفواكه',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 20,
     cookMinutes: 18,
-    calories: 295,
+    calories: 340,
     proteinGrams: 5,
-    netCarbsGrams: 34,
+    netCarbsGrams: 42,
     videoDuration: '0:12',
     videoUrl: '/videos/mango-strawberry-sunset-cupcakes.mp4',
-    rating: 4.9,
-    reviewsCount: 364,
     image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
     gearItem: {
-      id: 'gear-muffin-piping-set',
-      nameEn: 'Heavy-Gauge 12-Cup Aluminized Steel Muffin Pan & Piping Kit',
-      nameAr: 'صينية كب كيك احترافية 12 عين مع طقم أقماع تزيين ستانلس',
-      brand: 'USA Pan Pro',
+      id: 'gear-piping-kit',
+      nameEn: 'Professional Stainless Steel Pastry Piping Tip Set & 12-Cup Pan',
+      brand: 'Ateco Pastry',
       priceUsd: 54,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Sifted cake pastry flour', amount: 180, unit: 'g' },
-      { item: 'Reduced Alphonso mango puree', amount: 120, unit: 'ml' },
-      { item: 'Fresh strawberries & freeze-dried berry powder', amount: 150, unit: 'g' },
-      { item: 'Unsalted softened cultured butter', amount: 140, unit: 'g' },
-      { item: 'Fine caster sugar & Madagascar vanilla', amount: 130, unit: 'g' },
-    ],
-    ingredientsAr: [
-      { item: 'دقيق حلويات فاخر منخول', amount: 180, unit: 'جم' },
-      { item: 'بيوريه مانجو ألفونسو مركز', amount: 120, unit: 'مل' },
-      { item: 'فراولة طازجة وبودرة فراولة مجففة للكريمة', amount: 150, unit: 'جم' },
-      { item: 'زبدة طبيعية لينة بدرجة حرارة الغرفة', amount: 140, unit: 'جم' },
-      { item: 'سكر ناعم وفانيليا طبيعية', amount: 130, unit: 'جم' },
+      { item: 'Sifted cake flour & baking powder', amount: 240, unit: 'g' },
+      { item: 'Softened unsalted butter & superfine caster sugar', amount: 280, unit: 'g' },
+      { item: 'Reduced Alfonso mango puree', amount: 120, unit: 'g' },
+      { item: 'Pulverized freeze-dried strawberry powder', amount: 35, unit: 'g' },
+      { item: 'Whole eggs (2 pcs), buttermilk (120ml) & vanilla bean paste', amount: 220, unit: 'ml' },
     ],
     stepsEn: [
       {
-        title: 'Cream Butter & Mango Reduction',
+        title: 'Cream Butter, Sugar & Vanilla Bean',
         instruction:
-          'Beat softened butter and caster sugar for 3 minutes until pale and fluffy, then blend in reduced mango puree.',
-        timerSeconds: 180,
+          'Beat softened butter, sugar, and vanilla bean paste on medium-high speed for 4 minutes until pale and fluffy, then add eggs one at a time.',
+        timerSeconds: 240,
       },
       {
-        title: 'Fold Pastry Flour & Bake',
+        title: 'Fold Flour & Bake at 175°C (350°F)',
         instruction:
-          'Fold in sifted pastry flour gently, divide into lined cups, and bake at 175°C (350°F) for 18 minutes.',
+          'Alternate folding sifted cake flour and buttermilk into the batter. Divide into a 12-cup liner tray and bake at 175°C (350°F) for 18 minutes.',
         timerSeconds: 1080,
       },
       {
-        title: 'Pipe Sunset Dual-Tone Swirl',
+        title: 'Pipe Dual-Tone Mango & Berry Swirl',
         instruction:
-          'Fill a piping bag side-by-side with strawberry and mango buttercream and pipe high sunset swirls onto cooled cupcakes.',
-        timerSeconds: 120,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'خفق الزبدة وبيوريه المانجو',
-        instruction:
-          'اخفق الزبدة اللينة مع السكر لمدة 3 دقائق حتى يصبح الخليط كريمياً هوائياً ثم أضف بيوريه المانجو.',
+          'Load mango buttercream and berry buttercream side-by-side into a star-tipped piping bag and pipe tall swirls onto cooled cupcakes.',
         timerSeconds: 180,
-      },
-      {
-        title: 'إضافة الدقيق والخبز',
-        instruction:
-          'قلّب الدقيق المنخول برفق ووزع الخليط في قوالب الكب كيك واخبزه على حرارة 175 مئوية لـ 18 دقيقة.',
-        timerSeconds: 1080,
-      },
-      {
-        title: 'تزيين كريمة الغروب المزدوجة',
-        instruction:
-          'ضع كريمة الفراولة وكريمة المانجو جنباً إلى جنب في كيس الحلواني وزيّن الكب كيك بعد أن يبرد تماماً.',
-        timerSeconds: 120,
       },
     ],
   },
@@ -1251,180 +858,109 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     slug: 'ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide',
     category: 'kitchen_hacks',
     subcategoryId: 'ingredient-substitutes',
-    categoryLabelEn: 'Kitchen Hacks & Guides · 1,250+ Words Pillar Guide',
-    categoryLabelAr: 'نصائح وأدوات · دليل البدائل وتجهيز الوجبات (1,250+ كلمة)',
+    categoryLabelEn: 'Kitchen Hacks & Guides · Ingredient Substitutes',
     titleEn:
-      'The Chef’s Master Guide to Ingredient Substitutes, Cast-Iron Skillet Care & 60-Minute Weekly Meal Prep',
-    titleAr:
-      'الدليل الشامل لبدائل المكونات في المطبخ والعناية بمقالي الحديد الزهر وتجهيز وجبات الأسبوع',
+      'Complete Guide to 1:1 Ingredient Substitutes & Cast-Iron Skillet Care',
     subtitleEn:
-      'Never abandon a recipe mid-cook again: exact 1:1 culinary ratios for missing dairy, flours, herbs, and oils—plus our 60-minute Sunday meal prep workflow.',
-    subtitleAr:
-      'مقال مرجعي شامل (أكثر من 1,250 كلمة) يوضح البدائل الدقيقة لكريمة الطبخ والدقيق والزبدة والأعشاب، مع خطة تجهيز وجبات الأسبوع في 60 دقيقة.',
+      'Exact gram-for-gram culinary ratios for swapping missing heavy cream, buttermilk, eggs, flours, and herbs—plus step-by-step cast-iron seasoning care.',
     wordCount: 1280,
     introParagraphsEn: [
-      'Every home cook knows the frustration of heating up a skillet at 7:00 PM only to discover the refrigerator is out of heavy whipping cream, buttermilk, or fresh herbs. Understanding the underlying food chemistry of fats, acids, and starches allows you to swap missing ingredients effortlessly without compromising texture or flavor.',
-      'In this comprehensive 1,280-word CookReel Kitchen Hacks pillar guide, our culinary team breaks down exact gram-for-gram ingredient substitutions, how to season and maintain a non-stick polymer layer on cast-iron cookware, and our signature 60-minute Sunday meal-prep sequence.',
-    ],
-    introParagraphsAr: [
-      'يمر كل طاهٍ منزلي بلحظة اكتشاف نقص مكون أساسي مثل كريمة الطبخ أو اللبن الرائب (Buttermilk) أو دقيق الحلويات في منتصف تحضير العشاء. إن فهم الكيمياء الغذائية للدهون والأحماض والنشويات يمنحك القدرة على استبدال أي مكون فوراً بنسب دقيقة دون أن يتأثر قوام الطبق أو مذاقه.',
-      'في هذا الدليل المرجعي الشامل من قسم (نصائح وأدوات CookReel)، جمعنا لك جدول البدائل الاحترافي المجرب في مطبخنا، بالإضافة إلى الطريقة الصحيحة لتعتيق وتنظيف مقالي الحديد الزهر، وخطة تجهيز 5 وجبات أسبوعية في 60 دقيقة فقط.',
+      'Discovering you are out of heavy cream, buttermilk, or fresh herbs halfway through cooking dinner does not mean a trip to the grocery store. Understanding the fat, acid, and moisture balance of common pantry staples lets you substitute ingredients reliably.',
+      'In this reference guide, we share 1:1 kitchen substitution ratios alongside our daily routine for cleaning and seasoning cast-iron skillets.',
     ],
     whyThisWorksEn: [
-      'Exact gram-for-gram substitution ratios tested across sauces, soups, and baked goods.',
-      'Answers common weeknight cooking dilemmas ("what to use instead of heavy cream", "how to season cast iron").',
-      'Streamlines Sunday meal prep into a single 60-minute batch workflow.',
-    ],
-    whyThisWorksAr: [
-      'نسب استبدال دقيقة بالجرام والملليلتر مجربة في الصلصات والشوربات والمخبوزات.',
-      'يجيب على أكثر الأسئلة اليومية في المطبخ حول بدائل الكريمة والعناية بأدوات الطهي.',
-      'يوفر خطة عملية لتجهيز وجبات الأسبوع في 60 دقيقة فقط.',
+      'Exact gram-for-gram substitution ratios for sauces, soups, and baked goods.',
+      'Answers everyday kitchen questions on dairy swaps, egg binders, and herb ratios.',
+      'Simple 3-minute stovetop drying routine keeps cast-iron cookware naturally non-stick.',
     ],
     chefTipsEn: [
-      'Heavy Cream Substitute Rule: Whisk 180ml whole milk with 60g melted unsalted butter and 1 teaspoon cornstarch for simmering sauces—the butter restores the 36% milkfat content of heavy cream.',
-      'Buttermilk in 5 Minutes: Stir 15ml fresh lemon juice or white vinegar into 240ml warm milk and let stand for 5 minutes until lightly thickened.',
-      'Cast-Iron Seasoning Hack: After washing your skillet with warm water, dry it on a medium burner for 2 minutes and wipe a micro-thin drop of avocado oil across the surface while warm.',
+      'Heavy Cream Substitute: Whisk 180ml whole milk with 60g melted unsalted butter (plus 1 teaspoon cornstarch for simmering sauces) to match the 36% milkfat content of heavy cream.',
+      '5-Minute Buttermilk Swap: Stir 15ml fresh lemon juice or white vinegar into 225ml warm whole milk and let stand for 5 minutes.',
+      'Cast-Iron Care: Wash with warm water, dry immediately over a low burner for 2 minutes, and wipe a thin drop of avocado oil across the cooking surface.',
     ],
-    chefTipsAr: [
-      'بديل كريمة الطبخ الفوري: اخفق 180 مل من الحليب كامل الدسم مع 60 جم زبدة ذائبة غير مملحة وملعقة صغيرة نشا؛ الزبدة تعوض نسبة الدسم (36%) الموجودة في الكريمة الأصلية.',
-      'بديل اللبن الرائب (Buttermilk) للكيك والدجاج: أضف ملعقة كبيرة من عصير الليمون أو الخل الأبيض إلى كوب حليب دافئ واتركه 5 دقائق فقط.',
-      'سر منع الصدأ والالتصاق في مقلاة الزهر: بعد غسلها بالماء الدافئ، جففها فوق نار هادئة لدقيقتين وامسح سطحها الداخلي بنقطة صغيرة جداً من زيت الأفوكادو.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always store dairy substitutes and prepped ingredients at or below 4°C (39°F), and cook all raw poultry to 74°C (165°F) and whole beef cuts/fish to 63°C (145°F).',
     substitutions: [
       {
         originalEn: '1 Cup Heavy Whipping Cream (240ml)',
-        originalAr: 'كوب كريمة طبخ سائلة (240 مل)',
-        substituteEn: '180ml Whole Milk + 60g Melted Unsalted Butter (or Full-Fat Coconut Cream)',
-        substituteAr: '180 مل حليب كامل الدسم + 60 جم زبدة ذائبة (أو كريمة جوز الهند)',
+        substituteEn: '180ml Whole Milk + 60g Melted Unsalted Butter (or Canned Coconut Cream)',
         chefNoteEn:
           'Works 1:1 in pasta sauces, soups, and curries without curdling.',
-        chefNoteAr:
-          'يعطي نفس الكثافة والغنى في صلصات الباستا والشوربات بنسبة 1:1.',
       },
       {
-        originalEn: '1 Tbsp Fresh Herbs (Rosemary / Thyme / Basil)',
-        originalAr: 'ملعقة كبيرة أعشاب طازجة مفرومة',
-        substituteEn: '1 Teaspoon Dried Herbs (3:1 Fresh-to-Dried Ratio)',
-        substituteAr: 'ملعقة صغيرة أعشاب مجففة (نسبة 3 إلى 1)',
+        originalEn: '1 Tbsp Fresh Chopped Herbs (15ml)',
+        substituteEn: '1 Teaspoon Dried Herbs (5ml — 3:1 Fresh-to-Dried Ratio)',
         chefNoteEn:
-          'Add dried herbs early in cooking so they rehydrate in warm oil; add fresh herbs at the end.',
-        chefNoteAr:
-          'أضف الأعشاب المجففة في بداية الطهي مع الزيت الدافئ، بينما تضاف الطازجة في النهاية.',
+          'Add dried herbs early in cooking so they rehydrate; add fresh herbs at the end.',
       },
       {
-        originalEn: '1 Large Egg in Baking',
-        originalAr: 'بيضة واحدة في وصفات الكيك والمخبوزات',
+        originalEn: '1 Large Egg in Baking (50g)',
         substituteEn: '1 Tbsp Ground Flaxseed + 3 Tbsp Warm Water (or 65g Unsweetened Applesauce)',
-        substituteAr: 'ملعقة كبيرة بذور كتان مطحونة + 3 ملاعق ماء دافئ (أو 65 جم مهروس تفاح)',
         chefNoteEn:
-          'Let the flax mixture gel for 5 minutes before mixing into cupcake or pancake batter.',
-        chefNoteAr:
-          'اترك خليط بذور الكتان 5 دقائق حتى يتكون جل طبيعي يربط عجينة الكيك.',
+          'Let the flax mixture thicken for 5 minutes before folding into muffin or pancake batter.',
       },
     ],
     faqs: [
       {
         questionEn: 'Can I use milk instead of heavy cream in pasta sauces without curdling?',
-        questionAr: 'هل يمكن استخدام الحليب العادي بدلاً من كريمة الطبخ دون أن يفصل الصوص؟',
         answerEn:
-          'Plain low-fat milk will curdle over high heat, especially with acidic ingredients like tomatoes or lemon. Whisking 1 teaspoon of cornstarch or flour into whole milk with melted butter stabilizes the proteins so it never separates.',
-        answerAr:
-          'الحليب قليل الدسم وحده قد ينفصل مع الحرارة والحموضة؛ لكن خلط الحليب كامل الدسم مع الزبدة الذائبة وملعقة صغيرة من النشا يحمي البروتين من الانفصال.',
+          'Low-fat milk alone can separate over high heat. Whisking 1 teaspoon of cornstarch into whole milk with melted butter stabilizes the emulsion so it simmers smoothly.',
       },
       {
-        questionEn: 'How do I organize a 60-minute weekly meal prep session without food getting soggy?',
-        questionAr: 'كيف أجهز وجبات الأسبوع في 60 دقيقة دون أن تفقد قوامها؟',
+        questionEn: 'Is mild dish soap safe to use on cast-iron skillets?',
         answerEn:
-          'Roast sheet-pan proteins and root vegetables simultaneously at 200°C, cool completely uncovered for 20 minutes so steam escapes, and store sauces in separate 60ml condiment cups.',
-        answerAr:
-          'اترك اللحوم والخضروات المشوية تبرد تماماً لمدة 20 دقيقة بدون غطاء حتى يتبخر البخار الزائد، واحفظ الصلصات في عبوات صغيرة منفصلة.',
+          'Yes, a small amount of mild dish soap with warm water is safe on seasoned cast iron. Avoid soaking the pan in water and always dry it immediately on the stove.',
       },
       {
-        questionEn: 'Is soap safe to use on modern enameled and seasoned cast-iron skillets?',
-        questionAr: 'هل يضر سائل غسيل الصحون بمقلاة الحديد الزهر؟',
+        questionEn: 'How do I replace cornstarch when thickening a pan sauce?',
         answerEn:
-          'Mild dish soap is completely safe on both enameled cast iron and well-seasoned raw cast iron. Just avoid soaking raw cast iron in water overnight and always dry immediately on the stove.',
-        answerAr:
-          'سائل الصحون اللطيف آمن تماماً، المهم هو عدم نقع الحديد الزهر الخام في الماء لفترات طويلة وتجفيفه فوراً على النار بعد الغسيل.',
+          'Use twice the amount of all-purpose flour (2 teaspoons flour per 1 teaspoon cornstarch) or an equal 1:1 amount of arrowroot powder.',
       },
     ],
     stepGalleryImages: [
-      '/images/hero_cookreel_studio_1795527112508.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    chefName: 'Chef Elena Vance & CookReel Test Kitchen',
-    chefTitleEn: 'Culinary Science & Kitchen Equipment Testing Team',
-    chefTitleAr: 'فريق علوم الطهي واختبار أدوات المطبخ في CookReel',
-    prepMinutes: 15,
-    cookMinutes: 45,
-    calories: 410,
-    proteinGrams: 36,
-    netCarbsGrams: 18,
-    videoDuration: '0:12',
-    videoUrl: '/videos/hero-cookreel-featured.mp4',
-    rating: 5.0,
-    reviewsCount: 512,
-    image: '/images/hero_cookreel_studio_1795527112508.jpg',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 15,
+    calories: 310,
+    proteinGrams: 12,
+    netCarbsGrams: 14,
+    image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     gearItem: {
       id: 'gear-complete-skillet-knife-bundle',
-      nameEn: 'Chef Cast-Iron Skillet & 67-Layer Damascus Knife Starter Set',
-      nameAr: 'المجموعة الأساسية للشيف: مقلاة حديد زهر + سكين دمشقي احترافي',
-      brand: 'CookReel Studio Pro',
-      priceUsd: 240,
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet & Silicone Handle Cover',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Whole milk + unsalted butter (Heavy Cream 1:1 Swap)', amount: 240, unit: 'ml' },
-      { item: 'High-smoke-point avocado oil (Skillet Seasoning)', amount: 30, unit: 'ml' },
-      { item: 'Batch proteins (Salmon, Chicken Thighs, or Ribeye)', amount: 1200, unit: 'g' },
-      { item: 'Aromatics (Garlic bulbs, rosemary, thyme, lemons)', amount: 150, unit: 'g' },
-    ],
-    ingredientsAr: [
-      { item: 'حليب كامل الدسم + زبدة غير مملحة (بديل الكريمة 1:1)', amount: 240, unit: 'مل' },
-      { item: 'زيت أفوكادو عالي التحمل (لتعتيق المقلاة)', amount: 30, unit: 'مل' },
-      { item: 'بروتينات الأسبوع (سلمون، دجاج، أو ستيك)', amount: 1200, unit: 'جم' },
-      { item: 'منكهات طبيعية (ثوم، روزماري، زعتر بري، ليمون)', amount: 150, unit: 'جم' },
+      { item: 'Whole milk (180ml) + melted unsalted butter (60g) for cream swap', amount: 240, unit: 'ml' },
+      { item: 'High-smoke-point avocado oil (for skillet polymer seasoning)', amount: 15, unit: 'ml' },
+      { item: 'Fresh lemon juice (15ml) + warm milk (225ml) for buttermilk swap', amount: 240, unit: 'ml' },
     ],
     stepsEn: [
       {
-        title: 'Mise en Place & Substitution Prep',
+        title: 'Measure 1:1 Dairy & Herb Ratios',
         instruction:
-          'Organize your proteins, dry all surfaces with paper towels, and prepare your 1:1 dairy or herb substitutions before turning on the stove.',
-        timerSeconds: 300,
+          'Measure replacement ingredients by weight or volume before turning on the burner so sauces emulsify evenly.',
+        timerSeconds: 180,
       },
       {
-        title: 'High-Heat Skillet Polymer Sear',
+        title: 'Warm-Water Skillet Rinse & Stovetop Dry',
         instruction:
-          'Preheat your cast-iron skillet for 4 minutes until evenly hot, add avocado oil, and batch-sear proteins for maximum Maillard flavor.',
-        timerSeconds: 480,
+          'Wash cast-iron skillet with warm water and a non-scratch brush, then place over medium-low heat for 2 minutes until all moisture evaporates.',
+        timerSeconds: 120,
       },
       {
-        title: 'Cool, Portion & Glass-Container Seal',
+        title: 'Micro-Thin Oil Seasoning Coat',
         instruction:
-          'Let cooked meals vent steam for 20 minutes before sealing in airtight glass meal-prep containers with separate sauce jars.',
-        timerSeconds: 600,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تجهيز المكونات والبدائل (Mise en Place)',
-        instruction:
-          'رتب البروتينات وجففها تماماً بورق المطبخ، وجهز بدائل الكريمة أو التوابل قبل إشعال النار.',
-        timerSeconds: 300,
-      },
-      {
-        title: 'التحمير المتتالي في المقلاة الساخنة',
-        instruction:
-          'سخن مقلاة الحديد الزهر لـ 4 دقائق، أضف زيت الأفوكادو وحمّر الوجبات لاكتساب القشرة الذهبية.',
-        timerSeconds: 480,
-      },
-      {
-        title: 'التبريد والتقسيم في الحافظات الزجاجية',
-        instruction:
-          'اترك الوجبات تبرد بدون غطاء لـ 20 دقيقة لخروج البخار ثم احفظها في علب زجاجية مع فصل الصلصات.',
-        timerSeconds: 600,
+          'Rub 1 teaspoon of avocado oil across the warm skillet interior with a folded paper towel and buffs dry before storing.',
+        timerSeconds: 90,
       },
     ],
   },
@@ -1434,90 +970,56 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     category: 'kitchen_hacks',
     subcategoryId: 'meal-prep-guides',
     categoryLabelEn: 'Kitchen Hacks & Guides · Meal Prep Guides',
-    categoryLabelAr: 'نصائح وأدوات المطبخ · أدلة تجهيز الوجبات',
     titleEn:
-      '60-Minute Sunday Meal Prep Guide: 5 High-Protein Lunches That Stay Fresh for 5 Days',
-    titleAr:
-      'دليل تجهيز وجبات الأسبوع في 60 دقيقة: 5 وجبات غداء عالية البروتين تبقى طازجة لـ 5 أيام',
+      '60-Minute Sunday Meal Prep Guide: 5 High-Protein Lunches for the Week',
     subtitleEn:
-      'A step-by-step batch-cooking blueprint for prepping 5 restaurant-quality lunches simultaneously without soggy vegetables or dry chicken.',
-    subtitleAr:
-      'خطة عملية لتجهيز 5 وجبات أسبوعية متكاملة في ساعة واحدة مع أسرار منع جفاف الدجاج أو ذبول الخضروات.',
+      'A practical batch-cooking workflow for preparing 5 balanced lunches with roasted vegetables and grains while preventing condensation and sogginess.',
     wordCount: 1240,
     introParagraphsEn: [
-      'The biggest reason home meal prep fails by Wednesday is moisture migration: sealing warm proteins and roasted vegetables immediately inside airtight containers traps condensation, turning crisp broccoli and seared chicken into a soggy, unappetizing texture.',
-      'Our 60-minute Sunday Meal Prep Blueprint solves this through a three-phase restaurant workflow: staggered oven and skillet roasting, a mandatory 20-minute uncovered steam-venting phase on cooling racks, and compartmentalized glass storage that keeps dressings and citrus glazes separate until the moment you eat.',
-    ],
-    introParagraphsAr: [
-      'السبب الرئيسي وراء فشل تحضيرات الوجبات الأسبوعية بعد اليوم الثالث هو تراكم بخار الماء داخل الحافظات المغلقة وهي ساخنة.',
-      'يعتمد هذا الدليل على نظام المطاعم الاحترافي عبر التبريد المفتوح لمدة 20 دقيقة قبل الإغلاق، وفصل الصلصات في عبوات صغيرة منفصلة.',
+      'The most common reason meal-prep lunches turn soggy by mid-week is trapped steam: closing container lids while food is still hot creates condensation that softens roasted vegetables.',
+      'This 60-minute Sunday workflow uses three simple rules: cooking all proteins to safe USDA internal temperatures, letting food cool uncovered for 20 minutes before sealing, and storing sauces in separate small containers.',
     ],
     whyThisWorksEn: [
-      'Uncovered 20-minute steam venting prevents condensation from softening roasted vegetables.',
-      'Cooking thighs and salmon to 2°C below target temperature prevents dryness when reheated.',
-      'Produces 5 complete 45g+ protein meals in under 60 minutes of active kitchen time.',
-    ],
-    whyThisWorksAr: [
-      'التبريد المفتوح لمدة 20 دقيقة يمنع تكثف البخار داخل العلب الزجاجية.',
-      'حفظ الصلصات بشكل منفصل يحافظ على قرمشة الخضروات واللحوم.',
-      'تجهيز 5 وجبات غنية بالبروتين في 60 دقيقة فقط.',
+      '20-minute uncovered steam venting prevents moisture condensation inside containers.',
+      'Keeping dressings and glazes in separate small cups preserves vegetable crunch.',
+      'Prepares 5 balanced lunches in 60 minutes of organized kitchen time.',
     ],
     chefTipsEn: [
-      'Under-cook meal-prep proteins by 2°C (3–4°F) on Sunday so that when you reheat them on Wednesday or Thursday, they hit the exact juicy target temperature instead of overcooking.',
-      'Place a folded quarter-sheet of dry paper towel at the bottom of leafy green or herb containers to absorb ambient refrigerator humidity.',
-      'Always store grains (quinoa, jasmine rice, or farro) as the bottom base layer and keep proteins rested on top.',
+      'Always verify poultry reaches the safe USDA internal temperature of 74°C (165°F) and salmon reaches 63°C (145°F) with a food thermometer before cooling.',
+      'Place a folded dry paper towel inside leafy green containers to absorb excess humidity in the refrigerator.',
+      'Refrigerate all cooked meal-prep boxes at 4°C (39°F) or below within 1 to 2 hours of cooking.',
     ],
-    chefTipsAr: [
-      'ارفع الدجاج أو السلمون عن النار قبل دقيقتين من النضج الكامل حتى لا يجف عند إعادة تسخينه خلال الأسبوع.',
-      'ضع منديلاً ورقياً جافاً في قاعدة علب الخضروات الورقية لامتصاص الرطوبة الزائدة في الثلاجة.',
-      'افصل دائماً الصوص والليمون في عبوات صغيرة ولا تضفها إلا وقت التقديم.',
-    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook all poultry to 74°C (165°F) and fish to 63°C (145°F). Cool food rapidly and refrigerate at 4°C (39°F) or below within 2 hours; consume cooked poultry/meat within 3 to 4 days and cooked seafood within 3 days.',
     substitutions: [
       {
-        originalEn: 'Jasmine Rice or Brown Rice Base',
-        originalAr: 'أرز جاسمين أو أرز بني',
-        substituteEn: 'Cauliflower Rice, Tri-Color Quinoa, or Roasted Sweet Potato Cubes',
-        substituteAr: 'أرز القرنبيط للكيتو أو الكينوا أو مكعبات البطاطا الحلوة المشوية',
+        originalEn: 'Jasmine Rice or Brown Rice Base (600g)',
+        substituteEn: 'Tri-Color Quinoa, Farro, or Roasted Sweet Potato Cubes',
         chefNoteEn:
-          'Quinoa adds 8g extra complete protein per bowl and holds its texture for 5 days refrigerated.',
-        chefNoteAr:
-          'الكينوا تضيف 8 جم بروتين إضافي وتحافظ على قوامها المتماسك طوال الأسبوع.',
+          'Quinoa adds complete plant protein and holds its texture for 4 days in the fridge.',
       },
       {
-        originalEn: 'Boneless Skinless Chicken Thighs',
-        originalAr: 'أفخاذ دجاج مخلية',
-        substituteEn: ' cubed Firm Tofu, Wild Salmon Fillets, or Flank Steak Strips',
-        substituteAr: 'فيليه سلمون أو شرائح ستيك أو توفو مشوي',
+        originalEn: 'Boneless Skinless Chicken Thighs (1000g)',
+        substituteEn: 'Chicken Breasts, Firm Tofu Cubes, or Lean Sirloin Strips',
         chefNoteEn:
-          'Eat seafood bowls on Monday–Wednesday and poultry or beef bowls on Thursday–Friday.',
-        chefNoteAr:
-          'تناول وجبات الأسماك في أول 3 أيام من الأسبوع ووجبات الدجاج أو اللحم في اليوم الرابع والخامس.',
+          'Slice cooked meats just before portioning or reheat with a splash of broth to retain moisture.',
       },
     ],
     faqs: [
       {
         questionEn: 'How many days does cooked meal-prep food safely last in the refrigerator?',
-        questionAr: 'كم يوماً تدوم وجبات التحضير المسبق في الثلاجة بأمان؟',
         answerEn:
-          'Cooked poultry, beef, roasted vegetables, and grains stay fresh for 4 to 5 days when stored in airtight borosilicate glass containers at or below 4°C (39°F). Cooked seafood is best consumed within 3 days.',
-        answerAr:
-          'تدوم وجبات الدجاج واللحوم والخضروات المشوية لمدة 4 إلى 5 أيام في الثلاجة بدرجة حرارة 4 مئوية أو أقل، بينما يُفضل استهلاك الأسماك خلال 3 أيام.',
+          'According to USDA food safety guidelines, cooked poultry, beef, roasted vegetables, and grains stay safe for 3 to 4 days when refrigerated at 4°C (40°F) or colder. Cooked fish should be eaten within 3 days.',
       },
       {
         questionEn: 'Should I use glass or plastic containers for weekly food prep?',
-        questionAr: 'أيهما أفضل لحفظ الوجبات: الحافظات الزجاجية أم البلاستيكية؟',
         answerEn:
-          'Airtight borosilicate glass containers with snap-locking lids are far superior: they do not absorb garlic or spice odors, cool food faster, and can go directly from the refrigerator into a warm oven or skillet.',
-        answerAr:
-          'الحافظات الزجاجية المزودة بأغطية محكمة أفضل بكثير لأنها لا تمتص الروائح وتتحمل الحرارة وتحافظ على نكهة الطعام.',
+          'Airtight borosilicate glass containers with locking lids do not retain food odors, clean easily, and allow safe reheating.',
       },
       {
         questionEn: 'How do I prevent cut avocados or apples from browning in meal-prep boxes?',
-        questionAr: 'كيف أمنع تغير لون الأفوكادو أو التفاح المقطع في علب الوجبات؟',
         answerEn:
-          'Brush cut surfaces lightly with fresh lime or lemon juice and press a small piece of parchment paper directly against the flesh to block oxygen contact.',
-        answerAr:
-          'امسح السطح بعصير الليمون الطازج وغطِّ القطعة بورق زبدة ملاصق لها لمنع وصول الأكسجين.',
+          'Brush cut surfaces with fresh lemon or lime juice and press parchment paper directly over the surface to limit air exposure.',
       },
     ],
     stepGalleryImages: [
@@ -1525,77 +1027,45 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_crispy_salmon_1795527113114.jpg',
     ],
-    chefName: 'Chef Marcus Thorne',
-    chefTitleEn: 'Sports Nutrition Chef & Meal-Prep Systems Specialist',
-    chefTitleAr: 'شيف التغذية الرياضية وتجهيز الوجبات الأسبوعية',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 20,
     cookMinutes: 40,
     calories: 495,
     proteinGrams: 46,
     netCarbsGrams: 28,
-    videoDuration: '0:12',
-    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
-    rating: 4.9,
-    reviewsCount: 389,
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-glass-prep-set',
       nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set with Locking Lids',
-      nameAr: 'طقم حافظات زجاجية حرارية لتجهيز الوجبات (10 قطع)',
-      brand: 'Pyrex Culinary Pro',
+      brand: 'Pyrex Culinary',
       priceUsd: 68,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Boneless skinless chicken thighs & salmon fillets', amount: 1000, unit: 'g' },
-      { item: 'Broccoli florets, bell peppers & sweet potatoes', amount: 850, unit: 'g' },
+      { item: 'Boneless skinless chicken thighs', amount: 1000, unit: 'g' },
+      { item: 'Broccoli florets, bell peppers & cubed sweet potatoes', amount: 850, unit: 'g' },
       { item: 'Cooked jasmine rice or tri-color quinoa', amount: 600, unit: 'g' },
-      { item: 'Extra-virgin olive oil, lemon juice & garlic herb rub', amount: 65, unit: 'ml' },
-    ],
-    ingredientsAr: [
-      { item: 'أفخاذ دجاج مخلية وفيليه سلمون طازج', amount: 1000, unit: 'جم' },
-      { item: 'بروكلي وفلفل ملون وبطاطا حلوة', amount: 850, unit: 'جم' },
-      { item: 'كينوا مطهية أو أرز جاسمين', amount: 600, unit: 'جم' },
-      { item: 'زيت زيتون بكر وعصير ليمون وتتبيلة أعشاب', amount: 65, unit: 'مل' },
+      { item: 'Extra-virgin olive oil, lemon juice & garlic herb seasoning', amount: 65, unit: 'ml' },
     ],
     stepsEn: [
       {
-        title: 'Batch Chop & Season by Cooking Time',
+        title: 'Dice & Season Vegetables Evenly',
         instruction:
-          'Dice sweet potatoes and broccoli into uniform 2cm pieces and toss with olive oil, salt, and garlic powder on a sheet pan.',
+          'Cut sweet potatoes and broccoli into uniform 2cm pieces and toss with olive oil, salt, and garlic herb seasoning on a sheet pan.',
         timerSeconds: 300,
       },
       {
-        title: 'Simultaneous Oven Roast & Skillet Sear',
+        title: 'Roast Vegetables & Cook Chicken to 74°C (165°F)',
         instruction:
-          'Roast root vegetables at 200°C for 25 minutes while searing seasoned chicken thighs and salmon in your cast-iron skillet.',
+          'Roast vegetables at 200°C (400°F) for 25 minutes while cooking chicken thighs until an instant-read thermometer registers 74°C (165°F).',
         timerSeconds: 600,
       },
       {
-        title: '20-Minute Steam Vent & Glass Portioning',
+        title: 'Vent Steam for 20 Minutes & Portion',
         instruction:
-          'Cool all cooked components uncovered for 20 minutes until room temperature, then portion into 5 glass containers with sauce cups.',
-        timerSeconds: 300,
-      },
-    ],
-    stepsAr: [
-      {
-        title: 'تقطيع وتتبيل الخضروات والبروتين',
-        instruction:
-          'قطّع البطاطا الحلوة والبروكلي بأحجام متساوية وتبلها بزيت الزيتون والأعشاب.',
-        timerSeconds: 300,
-      },
-      {
-        title: 'الشوي المتزامن في الفرن والمقلاة',
-        instruction:
-          'اشوِ الخضروات في الفرن على 200 مئوية أثناء تحمير الدجاج والسلمون في المقلاة.',
-        timerSeconds: 600,
-      },
-      {
-        title: 'التبريد المفتوح والتقسيم لـ 5 أيام',
-        instruction:
-          'اترك الطعام يبرد 20 دقيقة بدون غطاء ثم قسّمه في 5 حافظات زجاجية.',
+          'Allow cooked food to cool uncovered for 20 minutes so steam escapes, then portion into 5 glass containers and refrigerate immediately at 4°C.',
         timerSeconds: 300,
       },
     ],
@@ -1606,90 +1076,56 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     category: 'kitchen_hacks',
     subcategoryId: 'cooking-tips',
     categoryLabelEn: 'Kitchen Hacks & Guides · Cooking Tips',
-    categoryLabelAr: 'نصائح وأدوات المطبخ · أسرار ونصائح الطبخ',
     titleEn:
-      'Essential Cooking Tips & Food Science: Internal Meat Temperatures, Pan Deglazing & Herb Storage',
-    titleAr:
-      'أسرار علوم الطهي: درجات الحرارة الدقيقة لنضج اللحوم، صوص المقلاة، وحفظ الأعشاب الطازجة',
+      'Essential Cooking Tips: USDA Safe Meat Temperatures, Pan Deglazing & Herb Storage',
     subtitleEn:
-      'Master the 5 foundational chef techniques: the Leidenfrost non-stick skillet test, carryover cooking temperatures, pan deglazing, and keeping herbs fresh for 14 days.',
-    subtitleAr:
-      'تعرف على أهم 5 قواعد علمية في المطبخ الاحترافي لمنع التصاق الطعام وضبط نضج الستيك والدجاج وحفظ الورقيات لأسبوعين.',
+      'Master foundational kitchen techniques: the water-drop skillet preheat test, official USDA internal cooking temperatures, pan deglazing, and storing fresh herbs.',
     wordCount: 1190,
     introParagraphsEn: [
-      'Professional chefs do not rely on guesswork or kitchen timers alone—they rely on thermal cues, surface moisture control, and carryover heat physics. Once you understand why proteins bond to cold metal or why chicken breast dries out above 74°C (165°F), every meal you cook at home becomes predictable and effortless.',
-      'This illustrated CookReel Cooking Tips guide answers the most frequent technical questions we receive from home cooks, covering exact pull temperatures for steak, poultry, and fish, how to turn browned skillet fond into a 90-second pan sauce, and how to store cilantro, parsley, and basil so they stay crisp for two full weeks.',
-    ],
-    introParagraphsAr: [
-      'لا يعتمد الطهاة المحترفون على التخمين، بل على قواعد فيزيائية بسيطة مثل اختبار قطرة الماء لضبط حرارة المقلاة ودرجات الحرارة الداخلية للحوم.',
-      'يجمع هذا الدليل أهم الإجابات العلمية لأسئلة المطبخ اليومية من ضبط نضج الستيك والدجاج إلى حفظ الأعشاب الطازجة لمدة 14 يوماً.',
+      'Consistent home cooking relies on three simple habits: preheating your skillet properly before adding oil, using a digital food thermometer to verify safe internal temperatures, and controlling moisture when storing fresh produce.',
+      'This guide covers the Leidenfrost water-drop test for stainless-steel and cast-iron pans, official USDA safe minimum internal temperature targets, 60-second pan sauce deglazing, and how to keep parsley, cilantro, and basil fresh.',
     ],
     whyThisWorksEn: [
-      'Uses the Leidenfrost water-drop effect (193°C) to make stainless steel and cast iron naturally non-stick.',
-      'Accounts for 3°C–4°C carryover cooking during resting so proteins never dry out.',
-      'Bouquet-jar herb storage method extends fresh cilantro and parsley shelf life from 3 days to 14 days.',
-    ],
-    whyThisWorksAr: [
-      'اختبار قطرة الماء يمنع التصاق الطعام في مقالي الستانلس ستيل والحديد الزهر.',
-      'حساب الحرارة المتبقية أثناء إراحة اللحم يحميه من الجفاف.',
-      'طريقة حفظ الأعشاب في الماء تطيل عمرها من 3 أيام إلى أسبوعين كاملين.',
+      'Preheating dry stainless steel or cast iron prevents proteins from sticking.',
+      'Follows official USDA safe minimum internal temperature standards for poultry, meat, and fish.',
+      'Proper stem-water storage keeps fresh cilantro and parsley crisp for up to 10–14 days.',
     ],
     chefTipsEn: [
-      'The Water-Drop Skillet Test: Heat your dry skillet first, then flick a single drop of water onto the metal. If it sizzles and evaporates, the pan is still too cool; if it forms a single mercury-like ball that glides across the pan, add your oil and protein immediately—it will never stick.',
-      'Pull Temperature Chart: Pull Medium-Rare Steak at 52°C (125°F), Salmon at 50°C (122°F), Chicken Breast at 71°C (160°F), and Chicken Thighs at 79°C (175°F), then rest for 5 minutes.',
-      'Fresh Herb Storage: Trim 1cm off the stems of parsley or cilantro, place upright in a glass with 2cm of cold water, cover loosely with a produce bag, and refrigerate (keep basil on the counter at room temperature away from direct sun).',
+      'Water-Drop Skillet Test: Heat a dry stainless-steel skillet over medium-high heat and flick a drop of water onto the surface. When the droplet glides smoothly like a bead without evaporating immediately, add your cooking oil and food.',
+      'USDA Safe Internal Temperature Chart: Cook all Poultry (chicken & turkey) to 74°C (165°F); Ground Beef/Pork to 71°C (160°F); Whole Cuts of Beef, Pork, Veal & Lamb to 63°C (145°F) with a 3-minute rest; and Fish/Salmon to 63°C (145°F).',
+      'Herb Storage: Trim 1cm off parsley or cilantro stems, place upright in a glass with 2cm cold water in the fridge, and keep fresh basil at room temperature out of direct sun.',
     ],
-    chefTipsAr: [
-      'اختبار قطرة الماء للمقلاة: سخن المقلاة جافة أولاً ثم ضع قطرة ماء؛ إذا تدحرجت القطرة مثل الكرة الزئبقية دون أن تتبخر فوراً، فالمقلاة جاهزة ولن يلتصق بها الطعام أبداً.',
-      'درجات حرارة النضج المثالية: ارفع الستيك عند 52 مئوية، والسلمون عند 50 مئوية، وصدور الدجاج عند 71 مئوية ثم اتركها ترتاح 5 دقائق.',
-      'حفظ الأعشاب الطازجة: قص أطراف البقدونس أو الكزبرة وضعها في كوب به قليل من الماء داخل الثلاجة، بينما يُحفظ الريحان في حرارة الغرفة.',
-    ],
+    usdaSafetyNoteEn:
+      'Official USDA Minimum Internal Temperatures: Poultry 74°C (165°F) · Ground Meats 71°C (160°F) · Whole Beef/Pork/Lamb Cuts 63°C (145°F + 3-min rest) · Fin Fish 63°C (145°F) · Reheated Leftovers 74°C (165°F).',
     substitutions: [
       {
         originalEn: 'Dry White Wine (for Pan Deglazing)',
-        originalAr: 'عصير العنب غير المحلى لتذويب عصارة المقلاة',
-        substituteEn: 'Low-Sodium Chicken Bone Broth + 1 Tbsp Fresh Lemon Juice or White Wine Vinegar',
-        substituteAr: 'مرق الدجاج قليل الصوديوم مع ملعقة عصير ليمون طازج أو خل التفاح',
+        substituteEn: 'Low-Sodium Chicken Broth + 1 Tbsp Fresh Lemon Juice or White Wine Vinegar',
         chefNoteEn:
-          'Provides the exact acidity and liquid volume needed to lift caramelized fond from the bottom of the skillet.',
-        chefNoteAr:
-          'يوفر الحموضة اللازمة لتذويب الطبقة المحمرة في قاع المقلاة وتحويلها إلى صوص غني.',
+          'Lifts caramelized browned bits (fond) from the bottom of the skillet to build a quick pan sauce.',
       },
       {
-        originalEn: ' Kosher Salt vs. Fine Table Salt',
-        originalAr: 'الملح البحري الخشن مقابل ملح الطعام الناعم',
-        substituteEn: 'Use half the volume (50%) if substituting fine table salt for flaky kosher salt',
-        substituteAr: 'استخدم نصف الكمية بالحجم إذا استبدلت الملح الخشن بملح المائدة الناعم',
+        originalEn: 'Flaky Kosher Salt vs. Fine Table Salt',
+        substituteEn: 'Use half the volume (50%) when substituting fine table salt for flaky kosher salt',
         chefNoteEn:
-          'Weighing salt in grams (1.2% to 1.5% of protein weight) guarantees perfect seasoning regardless of crystal size.',
-        chefNoteAr:
-          'قياس الملح بالجرام (حوالي 1.2% من وزن اللحم) يضمن تتبيلاً مثالياً دائماً.',
+          'Fine table salt packs much more densely by volume than coarse flaky salt.',
       },
     ],
     faqs: [
       {
-        questionEn: 'Why does my meat or fish stick to the pan even when I use oil?',
-        questionAr: 'لماذا يلتصق اللحم أو السمك بالمقلاة رغم إضافة الزيت؟',
+        questionEn: 'Why does meat or fish stick to my skillet even when I use oil?',
         answerEn:
-          'Food sticks for two reasons: the protein surface was wet when it hit the pan, or you tried to flip it too early. Pat proteins bone-dry with paper towels, preheat the pan properly, and wait until the natural Maillard crust releases itself automatically.',
-        answerAr:
-          'يلتصق الطعام إما بسبب وجود رطوبة على سطحه أو محاولة قلبه مبكراً قبل تكوّن القشرة الذهبية التي تجعله ينفصل تلقائياً.',
+          'Food sticks when the pan is too cold, the protein surface is wet, or you try to flip it before a crust forms. Pat food dry with paper towels, preheat the pan properly, and let the crust release naturally.',
       },
       {
-        questionEn: 'How can I fix a soup or sauce that accidentally became too salty?',
-        questionAr: 'كيف أعالج الشوربة أو الصلصة إذا زادت ملوحتها عن طريق الخطأ؟',
+        questionEn: 'How can I fix a soup or sauce that became too salty?',
         answerEn:
-          'Never rely on the raw potato myth—instead, dilute with unsalted broth or water, whisk in a tablespoon of dairy (heavy cream, coconut milk, or unsalted butter) to coat the palate, and add a squeeze of fresh lemon juice or a pinch of honey to balance salt perception.',
-        answerAr:
-          'أضف القليل من المرق غير المملح أو ملعقة من الزبدة غير المملحة مع عصرة ليمون طازجة لموازنة طعم الملوحة على اللسان.',
+          'Add unsalted broth or water to dilute the sodium concentration, swirl in a tablespoon of unsalted butter or cream, and finish with a squeeze of fresh lemon juice.',
       },
       {
-        questionEn: 'How do I convert any conventional oven recipe to an Air Fryer?',
-        questionAr: 'كيف أحوّل وقت وحرارة أي وصفة فرن عادي إلى القلاية الهوائية (Air Fryer)؟',
+        questionEn: 'How do I convert an oven recipe to an Air Fryer?',
         answerEn:
-          'Follow the 15°C / 20% Rule: reduce the oven temperature by 15°C (25°F) and reduce the total cooking time by 20% to 25%, checking five minutes early.',
-        answerAr:
-          'اخفض درجة الحرارة بمقدار 15 درجة مئوية وقلل وقت الطهي بنسبة 20% إلى 25% لأن توزيع الهواء في القلاية الهوائية أسرع.',
+          'Reduce the conventional oven temperature by 15°C (25°F) and reduce the cooking time by about 20%, checking for doneness a few minutes early.',
       },
     ],
     stepGalleryImages: [
@@ -1697,78 +1133,1914 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     ],
-    chefName: 'Chef Elena Vance',
-    chefTitleEn: 'Executive Culinary Director · Food Science Educator',
-    chefTitleAr: 'مديرة استوديو الطهي ومتخصصة علوم الأغذية',
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
     prepMinutes: 10,
     cookMinutes: 15,
     calories: 320,
     proteinGrams: 34,
     netCarbsGrams: 6,
-    videoDuration: '0:12',
-    videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
-    rating: 5.0,
-    reviewsCount: 446,
     image: '/images/action_searing_skillet_butter_1795530068462.jpg',
     gearItem: {
       id: 'gear-instant-thermometer',
-      nameEn: '1-Second Waterproof Digital Instant-Read Meat Thermometer',
-      nameAr: 'ميزان حرارة رقمي فوري للحوم والمخبوزات (قراءة في ثانية واحدة)',
-      brand: 'ThermoWorks Culinary',
+      nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
+      brand: 'ThermoWorks',
       priceUsd: 89,
       affiliateStore: 'Amazon Kitchen',
       image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     },
     ingredientsEn: [
-      { item: 'Low-sodium chicken or beef bone broth (for deglazing)', amount: 120, unit: 'ml' },
-      { item: 'Cold unsalted butter cubes (for mounting pan sauce)', amount: 30, unit: 'g' },
+      { item: 'Low-sodium chicken or beef broth (for deglazing)', amount: 120, unit: 'ml' },
+      { item: 'Cold unsalted butter cubes (for pan sauce)', amount: 30, unit: 'g' },
       { item: 'Fresh lemon juice & minced shallots', amount: 25, unit: 'g' },
       { item: 'Fresh parsley, thyme & rosemary stems', amount: 15, unit: 'g' },
     ],
-    ingredientsAr: [
-      { item: 'مرق طبيعي قليل الصوديوم (لتذويب عصارة المقلاة)', amount: 120, unit: 'مل' },
-      { item: 'مكعبات زبدة باردة غير مملحة (لتكثيف الصوص)', amount: 30, unit: 'جم' },
-      { item: 'عصير ليمون طازج وكراث مفروم', amount: 25, unit: 'جم' },
-      { item: 'بقدونس وزعتر بري وروزماري طازج', amount: 15, unit: 'جم' },
-    ],
     stepsEn: [
       {
-        title: 'Leidenfrost Preheat & Dry-Surface Sear',
+        title: 'Preheat Skillet & Dry Protein Surface',
         instruction:
-          'Preheat skillet for 3 minutes until a water droplet glides across the surface, add oil, and sear bone-dry protein undisturbed.',
+          'Preheat dry skillet for 3 minutes until a drop of water glides across the surface, add oil, and sear dry protein.',
         timerSeconds: 180,
       },
       {
-        title: 'Instant-Read Thermometer Pull & Rest',
+        title: 'Verify USDA Internal Temperature',
         instruction:
-          'Verify internal temperature with an instant-read probe 3°C below target and transfer protein to a warm resting board.',
-        timerSeconds: 300,
+          'Insert a digital food thermometer into the thickest center of the meat (74°C / 165°F for poultry; 63°C / 145°F for beef or fish) and transfer to a clean board.',
+        timerSeconds: 180,
       },
       {
-        title: '60-Second Fond Deglaze & Cold-Butter Mount',
+        title: '60-Second Fond Deglaze & Butter Swirl',
         instruction:
           'Pour broth and lemon juice into the hot skillet, scrape up browned fond with a wooden spoon, turn off heat, and swirl in cold butter.',
         timerSeconds: 90,
       },
     ],
-    stepsAr: [
+  },
+  {
+    id: '15-minute-garlic-shrimp-zucchini-skillet',
+    slug: '15-minute-garlic-lemon-shrimp-and-zucchini-skillet',
+    category: 'quick_easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
+    titleEn: '15-Minute Garlic Lemon Shrimp & Crisp Zucchini Skillet',
+    subtitleEn:
+      'Jumbo shrimp seared with sliced courgettes, garlic, crushed red pepper flakes, and fresh lemon juice in a single skillet.',
+    wordCount: 960,
+    introParagraphsEn: [
+      'Jumbo shrimp cook in less than four minutes, making them one of the fastest weeknight proteins in your freezer. Paired with half-moons of fresh zucchini and a bright garlic lemon pan glaze, this entire meal comes together in 15 minutes.',
+      'To keep zucchini crisp-tender rather than watery, sear the zucchini slices first over medium-high heat before adding the shrimp.',
+    ],
+    whyThisWorksEn: [
+      'Searing zucchini first prevents excess moisture from steaming the shrimp.',
+      'Ready from prep to table in 15 minutes flat.',
+      'Naturally low-carb, gluten-free, and rich in lean protein.',
+    ],
+    chefTipsEn: [
+      'Pat thawed shrimp dry with paper towels before tossing with salt and paprika.',
+      'Remove the skillet from the burner as soon as the shrimp turn opaque pink and curl into a C-shape.',
+      'Finish with fresh lemon zest and chopped parsley off the heat.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook shrimp and shellfish until reaches 63°C (145°F) and the flesh is pearly and opaque.',
+    substitutions: [
       {
-        title: 'التسخين المسبق واختبار قطرة الماء',
+        originalEn: 'Jumbo Peeled Shrimp (450g)',
+        substituteEn: 'Sea Scallops or Cubed Firm Cod Fillets',
+        chefNoteEn: 'Dry scallops thoroughly before searing for 2 minutes per side.',
+      },
+      {
+        originalEn: 'Green Zucchini (300g)',
+        substituteEn: 'Yellow Summer Squash, Asparagus, or Sugar Snap Peas',
+        chefNoteEn: 'All cook in 3 to 4 minutes in the same hot skillet.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I thaw frozen shrimp quickly for a 15-minute dinner?',
+        answerEn:
+          'Place frozen shrimp in a sealed bag submerged in a bowl of cold tap water for 15 minutes, then drain and pat dry with paper towels.',
+      },
+      {
+        questionEn: 'How long can I store cooked garlic shrimp in the fridge?',
+        answerEn:
+          'Store in an airtight container at 4°C (39°F) for up to 2 to 3 days.',
+      },
+      {
+        questionEn: 'What sides go well with garlic lemon shrimp?',
+        answerEn:
+          'Serve over steamed jasmine rice, cauliflower rice, or crusty toasted sourdough bread.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 6,
+    cookMinutes: 9,
+    calories: 340,
+    proteinGrams: 38,
+    netCarbsGrams: 7,
+    image: '/images/action_searing_skillet_butter_1795530068462.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Peeled & deveined jumbo shrimp, patted dry', amount: 450, unit: 'g' },
+      { item: 'Fresh green zucchini, sliced into half-moons', amount: 300, unit: 'g' },
+      { item: 'Extra-virgin olive oil & unsalted butter', amount: 30, unit: 'g' },
+      { item: 'Minced garlic cloves (3 pcs) & fresh lemon juice', amount: 30, unit: 'ml' },
+      { item: 'Fresh chopped parsley, sea salt & red pepper flakes', amount: 10, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sear Zucchini Half-Moons',
         instruction:
-          'سخن المقلاة لـ 3 دقائق حتى تنزلق قطرة الماء على سطحها ثم أضف الزيت وحمّر البروتين المجفف.',
+          'Sauté sliced zucchini in olive oil over medium-high heat for 4 minutes until golden at the edges, then transfer to a warm plate.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Sear Garlic Shrimp for 3 Minutes',
+        instruction:
+          'Add shrimp in a single layer and sear for 90 seconds per side with minced garlic and butter until opaque and 63°C (145°F).',
         timerSeconds: 180,
       },
       {
-        title: 'قياس الحرارة الداخلية وإراحة اللحم',
+        title: 'Toss with Lemon & Parsley',
         instruction:
-          'تأكد من درجة الحرارة الداخلية بميزان الحرارة ثم ارفع اللحم ليرتاح 5 دقائق.',
+          'Return zucchini to the skillet, squeeze fresh lemon juice over the pan, scatter parsley, and serve hot.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: '15-minute-Mediterranean-chickpea-feta-skillet',
+    slug: '15-minute-mediterranean-spiced-chickpea-spinach-feta-skillet',
+    category: 'quick_easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 15-Minute Meals',
+    titleEn: '15-Minute Mediterranean Crispy Chickpea, Spinach & Feta Skillet',
+    subtitleEn:
+      'Pantry chickpeas pan-crisped in olive oil with smoked paprika, garlic, baby spinach, sun-dried tomatoes, and crumbled feta.',
+    wordCount: 940,
+    introParagraphsEn: [
+      'Canned chickpeas transform into a crispy, nutty weeknight dinner when dried properly and pan-roasted in extra-virgin olive oil with smoked paprika and garlic.',
+      'Wilting fresh baby spinach and sun-dried tomatoes into the hot skillet during the last two minutes creates a complete 15-minute Mediterranean meal.',
+    ],
+    whyThisWorksEn: [
+      'Built from shelf-stable pantry staples in 15 minutes.',
+      'Pan-searing chickpeas in olive oil creates a crisp exterior and creamy interior.',
+      'High in fiber, plant protein, and iron.',
+    ],
+    chefTipsEn: [
+      'Rinse and drain canned chickpeas, then roll them gently on a clean kitchen towel to dry before adding to hot oil.',
+      'Wait to stir the chickpeas for the first 4 minutes so they blister and brown.',
+      'Add baby spinach off the heat so residual warmth wilts the leaves without overcooking.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Refrigerate leftovers in an airtight container at 4°C (39°F) within 2 hours and consume within 4 days.',
+    substitutions: [
+      {
+        originalEn: 'Canned Chickpeas (400g drained)',
+        substituteEn: 'Cannellini White Beans or Butter Beans',
+        chefNoteEn: 'White beans become extra creamy inside while crisping on the outside.',
+      },
+      {
+        originalEn: 'Crumbled Feta Cheese (60g)',
+        substituteEn: 'Pitted Kalamata Olives or Toasted Pine Nuts (for Vegan option)',
+        chefNoteEn: 'Keeps the dish 100% plant-based and dairy-free.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why do chickpeas pop when pan-fried?',
+        answerEn:
+          'Internal moisture expands as the chickpea heats up—drying them on a towel first minimizes splattering and helps them crisp faster.',
+      },
+      {
+        questionEn: 'Can I pack this chickpea skillet for work lunches?',
+        answerEn:
+          'Yes, it tastes great both warm and at room temperature as a Mediterranean grain bowl topper.',
+      },
+      {
+        questionEn: 'Can I use frozen spinach instead of fresh baby spinach?',
+        answerEn:
+          'Yes, thaw frozen spinach and squeeze out excess water in a clean towel before stirring into the skillet.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 410,
+    proteinGrams: 18,
+    netCarbsGrams: 34,
+    image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    gearItem: {
+      id: 'gear-enameled-skillet',
+      nameEn: '11-Inch Enameled Cast-Iron Deep Sauté Skillet',
+      brand: 'Le Creuset',
+      priceUsd: 185,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Rinsed, drained & towel-dried chickpeas', amount: 400, unit: 'g' },
+      { item: 'Fresh baby spinach leaves', amount: 150, unit: 'g' },
+      { item: 'Sliced sun-dried tomatoes & minced garlic', amount: 65, unit: 'g' },
+      { item: 'Extra-virgin olive oil & smoked paprika', amount: 30, unit: 'ml' },
+      { item: 'Crumbled feta cheese & fresh lemon juice', amount: 60, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Crisp Dried Chickpeas in Olive Oil',
+        instruction:
+          'Heat olive oil in a wide skillet over medium-high heat and cook towel-dried chickpeas for 6 minutes until golden and blistered.',
+        timerSeconds: 360,
+      },
+      {
+        title: 'Stir in Garlic, Paprika & Sun-Dried Tomatoes',
+        instruction:
+          'Add minced garlic, smoked paprika, and sliced sun-dried tomatoes, tossing for 2 minutes until fragrant.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Wilt Baby Spinach & Top with Feta',
+        instruction:
+          'Fold in fresh baby spinach until just wilted, squeeze fresh lemon juice over top, and finish with crumbled feta.',
+        timerSeconds: 90,
+      },
+    ],
+  },
+  {
+    id: '5-ingredient-pesto-gnocchi-skillet',
+    slug: '5-ingredient-crispy-pan-seared-gnocchi-basil-pesto-mozzarella',
+    category: 'quick_easy',
+    subcategoryId: '5-ingredient-recipes',
+    categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
+    titleEn: '5-Ingredient Crispy Pan-Seared Potato Gnocchi with Basil Pesto',
+    subtitleEn:
+      'Skip boiling water: sear shelf-stable potato gnocchi directly in olive oil until golden-crisp outside, then toss with basil pesto and cherry tomatoes.',
+    wordCount: 920,
+    introParagraphsEn: [
+      'Boiling packaged potato gnocchi often turns them soft, whereas pan-searing them straight from the package in extra-virgin olive oil creates a crisp golden exterior with a pillowy potato center.',
+      'With just five ingredients—gnocchi, olive oil, cherry tomatoes, basil pesto, and fresh mozzarella pearls—dinner is on the table in 14 minutes.',
+    ],
+    whyThisWorksEn: [
+      'No pot of boiling water needed—everything cooks in one skillet.',
+      'Direct pan-searing gives potato gnocchi a toasted, crisp crust.',
+      'Only 5 ingredients and 14 minutes total time.',
+    ],
+    chefTipsEn: [
+      'Do not boil the gnocchi first; add them directly to the warm olive oil in a single layer.',
+      'Let the gnocchi sear undisturbed for 4 minutes so a golden crust forms on the bottom.',
+      'Stir in the basil pesto off the heat so the fresh basil stays bright green.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Store leftover gnocchi in an airtight container in the refrigerator at 4°C (39°F) for up to 3 days and reheat in a skillet to 74°C (165°F).',
+    substitutions: [
+      {
+        originalEn: 'Potato Gnocchi (500g)',
+        substituteEn: 'Cauliflower Gnocchi or Ricotta Gnocchi',
+        chefNoteEn: 'Sear frozen cauliflower gnocchi directly from frozen without thawing first.',
+      },
+      {
+        originalEn: 'Basil Pesto with Pine Nuts (90g)',
+        substituteEn: 'Sun-Dried Tomato Pesto or Nut-Free Kale Basil Pesto',
+        chefNoteEn: 'Use sunflower seed pesto for nut-free kitchens.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Do I really not need to boil shelf-stable gnocchi before pan-frying?',
+        answerEn:
+          'No boiling is required! Shelf-stable and refrigerated potato gnocchi are already par-cooked, so pan-searing them with blistered cherry tomatoes cooks them through in 7 minutes.',
+      },
+      {
+        questionEn: 'How do I store leftover pesto gnocchi?',
+        answerEn:
+          'Refrigerate in a glass container for up to 3 days and re-crisp in a dry non-stick or cast-iron skillet over medium heat.',
+      },
+      {
+        questionEn: 'Can I add extra protein to this 5-ingredient meal?',
+        answerEn:
+          'Yes, fold in shredded cooked rotisserie chicken or white cannellini beans at the end.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/recipe_truffle_pasta_1795527116427.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 4,
+    cookMinutes: 10,
+    calories: 480,
+    proteinGrams: 16,
+    netCarbsGrams: 54,
+    image: '/images/recipe_truffle_pasta_1795527116427.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Shelf-stable or refrigerated potato gnocchi', amount: 500, unit: 'g' },
+      { item: 'Halved sweet cherry tomatoes', amount: 250, unit: 'g' },
+      { item: 'Genovese basil pesto', amount: 90, unit: 'g' },
+      { item: 'Fresh mini mozzarella pearls', amount: 120, unit: 'g' },
+      { item: 'Extra-virgin olive oil', amount: 25, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Pan-Sear Dry Gnocchi in Olive Oil',
+        instruction:
+          'Toss potato gnocchi in warm olive oil in a wide skillet over medium-high heat and sear undisturbed for 4 minutes until golden underneath.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Blister Cherry Tomatoes',
+        instruction:
+          'Add halved cherry tomatoes and a splash (30ml) of water, cover for 3 minutes until tomatoes burst and gnocchi are tender.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Fold in Basil Pesto & Mozzarella Pearls',
+        instruction:
+          'Remove pan from heat, stir in basil pesto and fresh mozzarella pearls, and serve warm.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: '5-ingredient-honey-mustard-pork-tenderloin',
+    slug: '5-ingredient-herb-crusted-honey-mustard-pork-tenderloin-medallions',
+    category: 'quick_easy',
+    subcategoryId: '5-ingredient-recipes',
+    categoryLabelEn: 'Quick & Easy · 5-Ingredient Recipes',
+    titleEn: '5-Ingredient Pan-Seared Honey Mustard Pork Tenderloin Medallions',
+    subtitleEn:
+      'Lean pork tenderloin sliced into quick-cooking medallions, seared golden, and glazed with whole-grain Dijon mustard, raw honey, and thyme.',
+    wordCount: 930,
+    introParagraphsEn: [
+      'Roasting a whole pork tenderloin in the oven takes 25 to 30 minutes, but slicing it into 2.5cm medallions first cuts the cooking time down to 8 minutes in a single skillet.',
+      'A 5-ingredient glaze of whole-grain Dijon mustard, honey, butter, and fresh thyme deglazes the skillet into a savory-sweet pan sauce.',
+    ],
+    whyThisWorksEn: [
+      'Slicing pork tenderloin into medallions reduces cooking time by 70%.',
+      'Pork tenderloin is as lean as skinless chicken breast while staying tender.',
+      'Requires only 5 pantry ingredients.',
+    ],
+    chefTipsEn: [
+      'Trim off the thin silver skin membrane from the pork tenderloin before slicing into medallions so the meat stays tender.',
+      'Pat medallions dry with paper towels before seasoning with salt and pepper.',
+      'Use an instant-read thermometer and pull pork medallions at 63°C (145°F), followed by a 3-minute rest.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook whole cuts of pork (including pork tenderloin and chops) to a minimum internal temperature of 63°C (145°F) followed by a 3-minute rest.',
+    substitutions: [
+      {
+        originalEn: 'Pork Tenderloin Medallions (500g)',
+        substituteEn: 'Chicken Breast Cutlets (cook to 74°C / 165°F)',
+        chefNoteEn: 'If substituting poultry, cook until internal temperature reaches 74°C (165°F).',
+      },
+      {
+        originalEn: 'Raw Honey (30ml)',
+        substituteEn: 'Pure Maple Syrup or Sugar-Free Monkfruit Syrup',
+        chefNoteEn: 'Maple syrup pairs well with whole-grain Dijon mustard.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Is pork safe at 63°C (145°F) with a slight pink tint?',
+        answerEn:
+          'Yes! The USDA updated its official safe pork cooking standard to 63°C (145°F) with a 3-minute rest for whole muscle cuts like pork tenderloin, keeping the meat juicy and tender.',
+      },
+      {
+        questionEn: 'How long do cooked pork medallions last in the fridge?',
+        answerEn:
+          'Store in an airtight glass container at 4°C (39°F) for 3 to 4 days.',
+      },
+      {
+        questionEn: 'What vegetables pair well with honey mustard pork?',
+        answerEn:
+          'Serve with roasted green beans, steamed broccoli, or mashed sweet potatoes.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 9,
+    calories: 390,
+    proteinGrams: 42,
+    netCarbsGrams: 14,
+    image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+    gearItem: {
+      id: 'gear-instant-thermometer',
+      nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
+      brand: 'ThermoWorks',
+      priceUsd: 89,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Pork tenderloin, sliced into 2.5cm medallions', amount: 500, unit: 'g' },
+      { item: 'Whole-grain Dijon mustard', amount: 35, unit: 'g' },
+      { item: 'Raw honey', amount: 25, unit: 'ml' },
+      { item: 'Unsalted butter & splash of water/broth', amount: 30, unit: 'g' },
+      { item: 'Fresh thyme leaves, sea salt & black pepper', amount: 8, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Slice & Season Pork Medallions',
+        instruction:
+          'Slice trimmed pork tenderloin into even 2.5cm medallions, pat dry, and season with sea salt and black pepper.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Sear Medallions for 3 Minutes per Side',
+        instruction:
+          'Sear medallions in melted butter over medium-high heat for 3 to 4 minutes per side until golden brown and 63°C (145°F).',
+        timerSeconds: 420,
+      },
+      {
+        title: 'Glaze with Dijon Honey Pan Sauce & Rest 3 Minutes',
+        instruction:
+          'Whisk Dijon mustard, honey, thyme, and 30ml water into the skillet for 60 seconds, coat medallions, and rest 3 minutes before serving.',
+        timerSeconds: 180,
+      },
+    ],
+  },
+  {
+    id: 'air-fryer-crispy-honey-garlic-salmon-bites',
+    slug: 'air-fryer-crispy-honey-garlic-salmon-bites-and-broccoli',
+    category: 'quick_easy',
+    subcategoryId: 'air-fryer-recipes',
+    categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
+    titleEn: '12-Minute Air Fryer Honey Garlic Salmon Bites & Roasted Broccoli',
+    subtitleEn:
+      'Skinless salmon cubed into bite-sized pieces, tossed with garlic, soy sauce, and honey, and air-fried until caramelized alongside crisp broccoli florets.',
+    wordCount: 950,
+    introParagraphsEn: [
+      'Cutting salmon fillets into 2.5cm cubes exposes four times more surface area to the circulating heat of an Air Fryer, allowing the edges to caramelize in just 7 to 8 minutes while the centers stay flaky.',
+      'Paired with bite-sized broccoli florets in the same basket, this makes a fast weeknight bowl or 3-day meal-prep lunch.',
+    ],
+    whyThisWorksEn: [
+      'Cubed salmon cooks in 7 to 8 minutes at 200°C (400°F) in the Air Fryer.',
+      'More surface area means more caramelized garlic glaze on every bite.',
+      'Great over steamed rice or greens for quick weeknight bowls.',
+    ],
+    chefTipsEn: [
+      'Preheat your Air Fryer to 200°C (400°F) for 3 minutes before adding the salmon cubes so the exterior sears immediately.',
+      'Leave slight space between salmon cubes in the basket for even air circulation.',
+      'Toss with the remaining warm honey garlic glaze right after removing from the basket.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook salmon cubes to a minimum internal temperature of 63°C (145°F) or until opaque and easily flaked.',
+    substitutions: [
+      {
+        originalEn: 'Low-Sodium Soy Sauce (30ml)',
+        substituteEn: 'Tamari or Coconut Aminos (for Gluten-Free / Paleo)',
+        chefNoteEn: 'Coconut aminos add natural sweetness with lower sodium.',
+      },
+      {
+        originalEn: 'Honey (20ml)',
+        substituteEn: 'Sugar-Free Allulose Syrup (for Keto Salmon Bites)',
+        chefNoteEn: 'Reduces net carbs to under 4g per serving.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Should I remove the salmon skin before cutting into cubes?',
+        answerEn:
+          'Removing the skin makes bite-sized salmon cubes easier to toss evenly in the glaze, though you can leave skin on the bottom if you prefer crispy skin.',
+      },
+      {
+        questionEn: 'Do I need to flip salmon bites in the Air Fryer?',
+        answerEn:
+          'No flipping is necessary if the cubes are arranged in a single uncrowded layer at 200°C (400°F).',
+      },
+      {
+        questionEn: 'How long do cooked salmon bites keep in the refrigerator?',
+        answerEn:
+          'Refrigerate in an airtight container at 4°C (39°F) for up to 3 days.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 8,
+    calories: 430,
+    proteinGrams: 40,
+    netCarbsGrams: 15,
+    image: '/images/recipe_crispy_salmon_1795527113114.jpg',
+    gearItem: {
+      id: 'gear-instant-thermometer',
+      nameEn: 'Waterproof Digital Instant-Read Food Thermometer',
+      brand: 'ThermoWorks',
+      priceUsd: 89,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Fresh salmon fillets, cubed into 2.5cm pieces', amount: 450, unit: 'g' },
+      { item: 'Fresh broccoli florets, bite-sized', amount: 250, unit: 'g' },
+      { item: 'Low-sodium soy sauce or tamari', amount: 30, unit: 'ml' },
+      { item: 'Honey, minced garlic (2 cloves) & grated ginger', amount: 25, unit: 'g' },
+      { item: 'Avocado oil or toasted sesame oil', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Cube Salmon & Toss in Garlic Glaze',
+        instruction:
+          'Cut salmon into uniform 2.5cm cubes and toss gently with half the soy sauce, honey, minced garlic, and oil.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Arrange Salmon & Broccoli in Air Fryer Basket',
+        instruction:
+          'Place seasoned salmon cubes and oil-tossed broccoli florets in a single layer in a preheated 200°C (400°F) Air Fryer basket.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Air-Fry 7–8 Minutes to 63°C (145°F)',
+        instruction:
+          'Air-fry at 200°C (400°F) for 7 to 8 minutes until caramelized at the edges and 63°C (145°F) internally.',
+        timerSeconds: 450,
+      },
+    ],
+  },
+  {
+    id: 'air-fryer-crispy-parmesan-zucchini-fries',
+    slug: 'air-fryer-crispy-garlic-parmesan-zucchini-fries',
+    category: 'quick_easy',
+    subcategoryId: 'air-fryer-recipes',
+    categoryLabelEn: 'Quick & Easy · Air Fryer Recipes',
+    titleEn: 'Crispy Air Fryer Garlic Parmesan Zucchini Batons',
+    subtitleEn:
+      'Fresh zucchini cut into batons, coated in grated Parmigiano-Reggiano, Italian herbs, and toasted panko, and air-fried without deep frying.',
+    wordCount: 910,
+    introParagraphsEn: [
+      'Air-frying zucchini batons at 200°C (400°F) crisps the Parmesan and herb crust before the zucchini interior has time to release excess water.',
+      'Served with warm marinara or Greek yogurt garlic dip, these make a fast 15-minute side dish or appetizer.',
+    ],
+    whyThisWorksEn: [
+      'High-velocity 200°C (400°F) convection heat crisps the cheese crust in 10 minutes.',
+      'Uses 85% less oil than deep-fried zucchini sticks.',
+      'Easy way to add vegetables to weeknight dinners.',
+    ],
+    chefTipsEn: [
+      'Choose small to medium zucchini, which have fewer watery seeds in the center than oversized zucchini.',
+      'Pat the cut zucchini batons dry with paper towels before dredging.',
+      'Air-fry in a single layer without stacking so every side browns evenly.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: If using a whisked raw egg wash for breading, cook until the coating is crisp and the internal center exceeds 71°C (160°F).',
+    substitutions: [
+      {
+        originalEn: 'Toasted Panko Breadcrumbs (60g)',
+        substituteEn: 'Almond Flour + Crushed Pork Rinds (for Keto / Gluten-Free)',
+        chefNoteEn: 'Almond flour and Parmesan create a crispy low-carb crust.',
+      },
+      {
+        originalEn: 'Parmigiano-Reggiano (50g)',
+        substituteEn: 'Nutritional Yeast Flakes (for Dairy-Free)',
+        chefNoteEn: 'Provides a savory cheesy flavor without dairy.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I prevent zucchini fries from getting soggy?',
+        answerEn:
+          'Dry the cut zucchini batons before breading, do not salt them ahead of time, and serve immediately or re-crisp in the Air Fryer for 2 minutes.',
+      },
+      {
+        questionEn: 'Can I bake these in a regular oven if I do not have an Air Fryer?',
+        answerEn:
+          'Yes, bake on a wire rack set over a sheet pan at 215°C (425°F) for 16 to 18 minutes.',
+      },
+      {
+        questionEn: 'How long do leftovers keep in the fridge?',
+        answerEn:
+          'Store in an airtight container lined with a paper towel at 4°C for up to 3 days.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 8,
+    cookMinutes: 10,
+    calories: 245,
+    proteinGrams: 11,
+    netCarbsGrams: 16,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-braiser-pan',
+      nameEn: 'Stainless Steel Wire Cooling & Air-Flow Baking Rack Set',
+      brand: 'All-Clad',
+      priceUsd: 42,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Medium green zucchini, cut into 8cm batons', amount: 450, unit: 'g' },
+      { item: 'Finely grated Parmigiano-Reggiano', amount: 55, unit: 'g' },
+      { item: 'Panko breadcrumbs (or almond flour for low-carb)', amount: 60, unit: 'g' },
+      { item: 'Large egg, whisked with 15ml water', amount: 1, unit: 'pc' },
+      { item: 'Garlic powder, dried oregano & olive oil spray', amount: 12, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Cut & Dry Zucchini Batons',
+        instruction:
+          'Trim zucchini ends, slice into even 8cm batons, and press gently with paper towels to remove surface moisture.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Coat in Egg Wash & Parmesan Herb Crumb',
+        instruction:
+          'Dip batons in whisked egg, then press into a mixture of grated Parmigiano, panko, garlic powder, and oregano.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Air-Fry at 200°C (400°F) for 10 Minutes',
+        instruction:
+          'Arrange in a single layer in the Air Fryer basket, mist lightly with olive oil, and cook at 200°C (400°F) for 10 minutes until golden.',
+        timerSeconds: 600,
+      },
+    ],
+  },
+  {
+    id: 'keto-creamy-tuscan-garlic-chicken-skillet',
+    slug: 'keto-creamy-tuscan-garlic-spinach-chicken-skillet',
+    category: 'healthy_diet',
+    subcategoryId: 'keto-low-carb',
+    categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
+    titleEn: 'Keto Creamy Tuscan Garlic Chicken with Spinach & Sun-Dried Tomatoes',
+    subtitleEn:
+      'Golden pan-seared chicken breasts simmered in a low-carb garlic, Parmigiano, sun-dried tomato, and baby spinach cream sauce.',
+    wordCount: 990,
+    introParagraphsEn: [
+      'Slicing chicken breasts horizontally into even cutlets allows them to cook evenly in 10 minutes without drying out, while soaking up a rich Tuscan pan sauce.',
+      'With 48g of protein and only 5g net carbs per serving, this one-skillet recipe pairs well with steamed broccoli, zucchini ribbons, or cauliflower mash.',
+    ],
+    whyThisWorksEn: [
+      'Horizontal chicken cutlets cook in half the time of thick whole breasts.',
+      '5g Net Carbs and 48g Protein per serving.',
+      'Sun-dried tomato oil seasons the skillet before building the cream sauce.',
+    ],
+    chefTipsEn: [
+      'Slice thick chicken breasts in half horizontally to create two even 1.5cm cutlets.',
+      'Verify internal temperature reaches 74°C (165°F) with an instant-read thermometer.',
+      'Simmer the cream sauce over low heat after adding Parmigiano so it thickens smoothly.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always cook chicken breasts and poultry cutlets to a minimum internal temperature of 74°C (165°F) measured at the thickest center.',
+    substitutions: [
+      {
+        originalEn: 'Heavy Whipping Cream (180ml)',
+        substituteEn: 'Full-Fat Canned Coconut Cream or 120ml Chicken Broth + 60g Cream Cheese',
+        chefNoteEn: 'Cream cheese whisked into broth creates a thick low-carb sauce.',
+      },
+      {
+        originalEn: 'Chicken Breast Cutlets (600g)',
+        substituteEn: 'Boneless Skinless Chicken Thighs or Salmon Fillets',
+        chefNoteEn: 'Both work well with the Tuscan garlic spinach sauce.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How many net carbs are in a serving of Tuscan garlic chicken?',
+        answerEn:
+          'Each serving contains approximately 5g net carbohydrates, coming primarily from the garlic, baby spinach, and sun-dried tomatoes.',
+      },
+      {
+        questionEn: 'How do I reheat creamy Tuscan chicken without the sauce splitting?',
+        answerEn:
+          'Warm gently in a covered skillet over low heat with 1 to 2 tablespoons of chicken broth or water, stirring occasionally until the chicken reaches 74°C (165°F).',
+      },
+      {
+        questionEn: 'Can I use this recipe for 4-day keto meal prep?',
+        answerEn:
+          'Yes, store in glass containers with steamed broccoli or cauliflower rice at 4°C for up to 4 days.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 8,
+    cookMinutes: 14,
+    calories: 510,
+    proteinGrams: 48,
+    netCarbsGrams: 5,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Chicken breast cutlets, patted dry', amount: 600, unit: 'g' },
+      { item: 'Heavy whipping cream (or coconut cream) & chicken broth', amount: 220, unit: 'ml' },
+      { item: 'Fresh baby spinach & julienned sun-dried tomatoes', amount: 180, unit: 'g' },
+      { item: 'Grated Parmigiano-Reggiano & minced garlic (3 cloves)', amount: 65, unit: 'g' },
+      { item: 'Extra-virgin olive oil, Italian herbs, salt & pepper', amount: 20, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sear Chicken Cutlets to 74°C (165°F)',
+        instruction:
+          'Season chicken cutlets and sear in olive oil over medium-high heat for 4 to 5 minutes per side until golden and 74°C (165°F) internally. Set aside on a plate.',
+        timerSeconds: 540,
+      },
+      {
+        title: 'Sauté Garlic & Sun-Dried Tomatoes',
+        instruction:
+          'In the same skillet, sauté minced garlic and sun-dried tomatoes for 60 seconds, then pour in chicken broth and cream to deglaze.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Wilt Spinach, Stir in Parmigiano & Return Chicken',
+        instruction:
+          'Stir in grated Parmigiano and baby spinach over low heat until wilted, then return chicken cutlets to coat in the sauce.',
+        timerSeconds: 180,
+      },
+    ],
+  },
+  {
+    id: 'keto-cauliflower-fried-rice-garlic-shrimp',
+    slug: 'keto-low-carb-garlic-ginger-shrimp-cauliflower-fried-rice',
+    category: 'healthy_diet',
+    subcategoryId: 'keto-low-carb',
+    categoryLabelEn: 'Healthy & Diet · Keto & Low-Carb',
+    titleEn: '15-Minute Low-Carb Shrimp & Egg Cauliflower Fried Rice',
+    subtitleEn:
+      'High-protein skillet cauliflower rice stir-fried over high heat with jumbo shrimp, scrambled eggs, scallions, ginger, and toasted sesame oil.',
+    wordCount: 940,
+    introParagraphsEn: [
+      'The secret to dry, fluffy cauliflower rice that mimics traditional takeout fried rice is evaporating surface moisture in a dry hot skillet before adding toasted sesame oil and sauces.',
+      'Loaded with seared shrimp and ribbons of scrambled egg, this bowl delivers 39g of protein and just 7g net carbs.',
+    ],
+    whyThisWorksEn: [
+      'Dry-roasting riced cauliflower for 3 minutes removes excess water so it never turns mushy.',
+      '39g Protein and 7g Net Carbs in a single 15-minute skillet.',
+      'Holds up well for 3 days of low-carb lunch prep.',
+    ],
+    chefTipsEn: [
+      'If using frozen riced cauliflower, squeeze out excess thaw water in a clean kitchen towel or dry-sauté it in a hot pan for 4 minutes first.',
+      'Push the cauliflower rice to the perimeter of the skillet to scramble the eggs in the hot center.',
+      'Add toasted sesame oil and sliced green onions right off the heat.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook shrimp to an internal temperature of 63°C (145°F) until opaque and cook eggs until firm.',
+    substitutions: [
+      {
+        originalEn: 'Jumbo Shrimp (400g)',
+        substituteEn: 'Diced Chicken Breast (cooked to 74°C / 165°F) or Crispy Tofu',
+        chefNoteEn: 'Works with any quick-cooking diced protein.',
+      },
+      {
+        originalEn: 'Soy Sauce / Tamari (25ml)',
+        substituteEn: 'Coconut Aminos',
+        chefNoteEn: 'Soy-free and gluten-free option for Whole30 and Paleo.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I stop cauliflower rice from tasting watery?',
+        answerEn:
+          'Never cover the skillet while cooking cauliflower rice, and cook over medium-high heat so moisture evaporates rapidly.',
+      },
+      {
+        questionEn: 'Can I grate fresh cauliflower at home instead of buying bagged riced cauliflower?',
+        answerEn:
+          'Yes, pulse raw cauliflower florets 8 to 10 times in a food processor or grate on the coarse side of a box grater.',
+      },
+      {
+        questionEn: 'How long does cauliflower fried rice keep in the fridge?',
+        answerEn:
+          'Store in an airtight glass container at 4°C (39°F) for up to 3 days.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 365,
+    proteinGrams: 39,
+    netCarbsGrams: 7,
+    image: '/images/action_searing_skillet_butter_1795527113114.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Fresh riced cauliflower', amount: 450, unit: 'g' },
+      { item: 'Peeled jumbo shrimp, patted dry', amount: 400, unit: 'g' },
+      { item: 'Large eggs, whisked', amount: 2, unit: 'pcs' },
+      { item: 'Minced garlic, fresh ginger & sliced scallions', amount: 45, unit: 'g' },
+      { item: 'Tamari soy sauce (25ml) & toasted sesame oil (15ml)', amount: 40, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sear Shrimp with Garlic & Ginger',
+        instruction:
+          'Sear shrimp in a hot skillet for 90 seconds per side with garlic and ginger until opaque and 63°C (145°F), then transfer to a plate.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Dry-Roast Cauliflower Rice & Scramble Eggs',
+        instruction:
+          'Sauté riced cauliflower over high heat for 4 minutes until dry and tender-crisp, push to the side, and scramble the eggs in the center.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Toss with Shrimp, Tamari & Sesame Oil',
+        instruction:
+          'Return shrimp to the skillet, drizzle with tamari and toasted sesame oil, toss with scallions, and serve.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'high-protein-turkey-sweet-potato-skillet',
+    slug: 'high-protein-lean-turkey-and-roasted-sweet-potato-meal-prep-skillet',
+    category: 'healthy_diet',
+    subcategoryId: 'high-protein-meals',
+    categoryLabelEn: 'Healthy & Diet · High-Protein Meals',
+    titleEn: 'High-Protein Lean Ground Turkey & Sweet Potato Skillet (45g Protein)',
+    subtitleEn:
+      'One-pan macro-balanced skillet with 93% lean ground turkey, diced sweet potatoes, black beans, bell peppers, and smoky cumin.',
+    wordCount: 970,
+    introParagraphsEn: [
+      'For athletes and busy professionals tracking daily protein and complex carbohydrate targets, this one-pan ground turkey and sweet potato skillet delivers 45 grams of protein per serving and reheats cleanly all week.',
+      'Dicing the sweet potatoes into small 1.5cm cubes allows them to tenderize in the skillet in just 12 minutes.',
+    ],
+    whyThisWorksEn: [
+      '45g complete protein paired with slow-digesting sweet potato carbohydrates.',
+      'Cooks in one skillet with minimal dishes.',
+      'Freezes and reheats well for 4-day meal prep.',
+    ],
+    chefTipsEn: [
+      'Let the ground turkey sear undisturbed for 3 minutes before breaking it up with a wooden spoon so it develops deep browned flavor.',
+      'Cut sweet potatoes into uniform 1.5cm cubes so they finish cooking at the same time.',
+      'Verify ground turkey reaches a minimum internal temperature of 74°C (165°F).',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always cook ground poultry (ground turkey and ground chicken) to a safe minimum internal temperature of 74°C (165°F).',
+    substitutions: [
+      {
+        originalEn: '93% Lean Ground Turkey (500g)',
+        substituteEn: '95% Lean Ground Beef (cook to 71°C / 160°F) or Lentils',
+        chefNoteEn: 'Lean ground beef or diced chicken breast work 1:1.',
+      },
+      {
+        originalEn: 'Orange Sweet Potatoes (350g)',
+        substituteEn: 'Cubed Butternut Squash or Baby Gold Potatoes',
+        chefNoteEn: 'Butternut squash reduces total carbohydrates slightly.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How long can I store this turkey sweet potato skillet for meal prep?',
+        answerEn:
+          'Refrigerate in airtight glass containers at 4°C (39°F) for 3 to 4 days, or freeze at -18°C for up to 2 months.',
+      },
+      {
+        questionEn: 'Do I need to peel the sweet potatoes first?',
+        answerEn:
+          'Peeling is optional—scrubbed sweet potato skins contain extra dietary fiber and hold the cubes together during sautéing.',
+      },
+      {
+        questionEn: 'What toppings work best on this skillet?',
+        answerEn:
+          'Top with sliced avocado, plain Greek yogurt, fresh cilantro, and a squeeze of lime juice.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 8,
+    cookMinutes: 17,
+    calories: 470,
+    proteinGrams: 45,
+    netCarbsGrams: 32,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-glass-prep-set',
+      nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set',
+      brand: 'Pyrex Culinary',
+      priceUsd: 68,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: '93% lean ground turkey', amount: 500, unit: 'g' },
+      { item: 'Sweet potatoes, peeled & diced into 1.5cm cubes', amount: 350, unit: 'g' },
+      { item: 'Diced red bell pepper, onion & garlic', amount: 200, unit: 'g' },
+      { item: 'Low-sodium chicken broth (for steaming sweet potatoes)', amount: 80, unit: 'ml' },
+      { item: 'Olive oil, ground cumin, smoked paprika & sea salt', amount: 20, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Brown Ground Turkey to 74°C (165°F)',
+        instruction:
+          'Sear ground turkey in olive oil over medium-high heat for 6 to 7 minutes with onion, garlic, cumin, and paprika until browned and 74°C (165°F).',
+        timerSeconds: 420,
+      },
+      {
+        title: 'Simmer Diced Sweet Potatoes & Peppers',
+        instruction:
+          'Add 1.5cm sweet potato cubes, diced bell pepper, and 80ml chicken broth. Cover and cook over medium-low heat for 10 minutes until tender.',
+        timerSeconds: 600,
+      },
+      {
+        title: 'Uncover & Finish with Fresh Herbs',
+        instruction:
+          'Uncover for 1 minute to evaporate remaining liquid, season to taste, and divide into bowls or cooled meal-prep containers.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'high-protein-cottage-cheese-egg-white-bites',
+    slug: 'high-protein-baked-cottage-cheese-spinach-egg-bites',
+    category: 'healthy_diet',
+    subcategoryId: 'high-protein-meals',
+    categoryLabelEn: 'Healthy & Diet · High-Protein Meals',
+    titleEn: 'High-Protein Blended Cottage Cheese & Roasted Pepper Egg Bites',
+    subtitleEn:
+      'Velvety sous-vide-style breakfast egg bites made by blending cottage cheese with whole eggs, roasted red peppers, and spinach in a muffin tin.',
+    wordCount: 920,
+    introParagraphsEn: [
+      'Blending full-fat or low-fat cottage cheese directly with whole eggs in a blender for 20 seconds aerates the protein curds and creates a silky, custard-like texture without heavy cream.',
+      'Baked gently with a small water bath on the lower oven rack, a batch of 12 egg bites provides 4 days of grab-and-go high-protein breakfasts.',
+    ],
+    whyThisWorksEn: [
+      'Blending cottage cheese adds extra casein and whey protein while keeping the egg bites velvety.',
+      'Steam from a shallow pan of water in the oven prevents rubbery edges.',
+      'Reheats in 35 seconds on busy weekday mornings.',
+    ],
+    chefTipsEn: [
+      'Use a silicone muffin pan or lightly oiled parchment liners so the egg bites pop out cleanly.',
+      'Place a shallow baking pan filled with 2cm of hot water on the bottom rack of your oven to create gentle steam.',
+      'Cool for 10 minutes in the muffin tin before removing so the custard sets.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Bake egg dishes until set and an instant-read thermometer inserted into the center registers 71°C (160°F).',
+    substitutions: [
+      {
+        originalEn: 'Cottage Cheese (225g)',
+        substituteEn: 'Plain Greek Yogurt or Ricotta Cheese',
+        chefNoteEn: 'Greek yogurt adds a subtle tangy note with high protein.',
+      },
+      {
+        originalEn: 'Roasted Red Bell Peppers & Spinach (120g)',
+        substituteEn: 'Sautéed Mushrooms, Broccoli, or Cooked Turkey Bacon',
+        chefNoteEn: 'Pre-cook vegetables first so they do not release water into the eggs.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How long can I store baked egg bites in the refrigerator?',
+        answerEn:
+          'Store cooled egg bites in an airtight glass container in the refrigerator at 4°C (39°F) for up to 4 days.',
+      },
+      {
+        questionEn: 'Can I freeze homemade cottage cheese egg bites?',
+        answerEn:
+          'Yes, freeze on a tray until solid, transfer to a freezer bag for up to 2 months, and thaw overnight in the refrigerator before warming.',
+      },
+      {
+        questionEn: 'Why did my egg bites deflate slightly after coming out of the oven?',
+        answerEn:
+          'A slight settle is normal; baking at a moderate 160°C (325°F) with a steam pan prevents over-puffing and collapsing.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 8,
+    cookMinutes: 22,
+    calories: 290,
+    proteinGrams: 28,
+    netCarbsGrams: 4,
+    image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    gearItem: {
+      id: 'gear-glass-prep-set',
+      nameEn: '10-Piece Borosilicate Glass Meal-Prep Container Set',
+      brand: 'Pyrex Culinary',
+      priceUsd: 68,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Large pasture-raised whole eggs', amount: 6, unit: 'pcs' },
+      { item: 'Small-curd cottage cheese', amount: 225, unit: 'g' },
+      { item: 'Shredded sharp cheddar or Gruyère cheese', amount: 60, unit: 'g' },
+      { item: 'Diced roasted red bell peppers & chopped baby spinach', amount: 120, unit: 'g' },
+      { item: 'Sea salt, black pepper & garlic powder', amount: 5, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Blend Eggs & Cottage Cheese Smooth',
+        instruction:
+          'Blend eggs, cottage cheese, salt, pepper, and garlic powder on medium speed for 20 seconds until smooth.',
+        timerSeconds: 60,
+      },
+      {
+        title: 'Divide Vegetables & Egg Mixture into Muffin Cups',
+        instruction:
+          'Divide diced roasted peppers, spinach, and shredded cheese evenly among 12 greased muffin cups and pour the blended egg mixture on top.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Steam-Bake at 160°C (325°F) to 71°C (160°F)',
+        instruction:
+          'Bake at 160°C (325°F) with a shallow pan of water on the lower rack for 20 to 22 minutes until set and 71°C (160°F) in the center.',
+        timerSeconds: 1320,
+      },
+    ],
+  },
+  {
+    id: 'vegan-crispy-sesame-tofu-broccoli-skillet',
+    slug: 'vegan-crispy-pan-seared-sesame-ginger-tofu-and-broccoli',
+    category: 'healthy_diet',
+    subcategoryId: 'vegan-vegetarian',
+    categoryLabelEn: 'Healthy & Diet · Vegan & Vegetarian',
+    titleEn: 'Crispy Pan-Seared Sesame Ginger Tofu & Broccoli Skillet',
+    subtitleEn:
+      'Extra-firm tofu pressed dry, tossed in cornstarch, and pan-seared until golden crisp, then glazed in a ginger, garlic, and toasted sesame sauce.',
+    wordCount: 950,
+    introParagraphsEn: [
+      'The key to crispy restaurant-style tofu in a home skillet is pressing out excess water for 10 minutes and dusting the cubes lightly with cornstarch before searing.',
+      'Once golden on all sides, the starch coating locks onto our ginger garlic sesame glaze without turning soggy.',
+    ],
+    whyThisWorksEn: [
+      'Pressing water from extra-firm tofu allows the cornstarch crust to blister and crisp.',
+      '100% plant-based vegan dinner with 26g protein per serving.',
+      'Cooks in one wide skillet in 20 minutes.',
+    ],
+    chefTipsEn: [
+      'Use extra-firm or super-firm vacuum-packed tofu rather than soft or silken tofu.',
+      'Wait to toss the tofu cubes with the liquid sesame sauce until right before serving so the crust stays crisp.',
+      'Toast sesame seeds in a dry pan for 60 seconds until fragrant before garnishing.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Store leftover cooked tofu and broccoli in a sealed container in the refrigerator at 4°C (39°F) for up to 4 days.',
+    substitutions: [
+      {
+        originalEn: 'Cornstarch Coating (20g)',
+        substituteEn: 'Arrowroot Powder or Potato Starch (1:1 Ratio)',
+        chefNoteEn: 'Arrowroot powder creates an equally crisp gluten-free crust.',
+      },
+      {
+        originalEn: 'Extra-Firm Tofu (400g)',
+        substituteEn: 'Cubed Tempeh or Shelled Edamame Beans',
+        chefNoteEn: 'Tempeh adds extra fermented plant protein and fiber.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I press tofu without a special tofu press?',
+        answerEn:
+          'Wrap the tofu block in paper towels, place it between two flat plates, and set a heavy cast-iron skillet on top for 10 minutes.',
+      },
+      {
+        questionEn: 'Can I cook the cornstarch-coated tofu in an Air Fryer?',
+        answerEn:
+          'Yes! Toss the coated tofu cubes in 1 tablespoon of oil and air-fry at 200°C (400°F) for 12 to 14 minutes, shaking halfway.',
+      },
+      {
+        questionEn: 'How do I keep leftover tofu crispy for meal prep?',
+        answerEn:
+          'Pack the sesame ginger glaze in a separate small cup and pour it over the reheated tofu and broccoli right before eating.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 12,
+    calories: 395,
+    proteinGrams: 26,
+    netCarbsGrams: 24,
+    image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Matte Black Enameled Cast-Iron Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Extra-firm tofu, pressed dry & cubed into 2cm pieces', amount: 400, unit: 'g' },
+      { item: 'Cornstarch (or arrowroot powder) for crisping', amount: 20, unit: 'g' },
+      { item: 'Fresh broccoli florets', amount: 300, unit: 'g' },
+      { item: 'Low-sodium tamari, maple syrup, garlic & grated ginger', amount: 55, unit: 'ml' },
+      { item: 'Toasted sesame oil & roasted sesame seeds', amount: 20, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Press, Cube & Dust Tofu in Cornstarch',
+        instruction:
+          'Cut pressed extra-firm tofu into 2cm cubes and toss gently in a bowl with cornstarch and a pinch of salt until lightly coated.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Pan-Sear Tofu Until Golden Crisp',
+        instruction:
+          'Sear tofu cubes in a hot skillet with 1 tablespoon oil for 6 to 8 minutes, turning to crisp all sides, then steam-sear broccoli florets.',
+        timerSeconds: 450,
+      },
+      {
+        title: 'Glaze with Ginger Sesame Sauce',
+        instruction:
+          'Pour the whisked tamari, ginger, garlic, and maple glaze into the hot skillet, toss for 60 seconds until glossy, and top with sesame seeds.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'no-bake-dark-chocolate-avocado-truffle-tart',
+    slug: 'no-bake-dark-chocolate-espresso-ganache-tart-date-walnut-crust',
+    category: 'desserts_baking',
+    subcategoryId: 'no-bake-desserts',
+    categoryLabelEn: 'Desserts & Baking · No-Bake Desserts',
+    titleEn: 'No-Bake 70% Dark Chocolate Ganache Tart with Toasted Walnut Crust',
+    subtitleEn:
+      'Silky no-bake Belgian 70% dark chocolate ganache set inside a pressed Medjool date, cocoa, and toasted walnut tart shell.',
+    wordCount: 940,
+    introParagraphsEn: [
+      'When you need a showstopping dinner party dessert without turning on the oven, a classic French dark chocolate ganache tart set over a toasted walnut and Medjool date crust takes just 15 minutes of active prep.',
+      'Pouring warm coconut cream or dairy cream over finely chopped 70% dark chocolate creates a smooth emulsion that sets cleanly in the refrigerator.',
+    ],
+    whyThisWorksEn: [
+      'Zero oven time required—sets in the refrigerator in 90 minutes.',
+      'Naturally gluten-free walnut and Medjool date crust.',
+      'Finely chopping the dark chocolate ensures it melts without graininess.',
+    ],
+    chefTipsEn: [
+      'Use a serrated bread knife to chop 70% dark chocolate bars into fine shards so they melt completely when warm cream is poured over top.',
+      'Let the cream sit on the chopped chocolate for 2 minutes before stirring gently from the center outward.',
+      'Slice the chilled tart with a chef knife dipped in warm water and wiped dry between cuts.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Keep ganache tarts refrigerated at 4°C (39°F) in an airtight container for up to 5 days.',
+    substitutions: [
+      {
+        originalEn: 'Heavy Cream (240ml)',
+        substituteEn: 'Full-Fat Canned Coconut Cream (240ml — for 100% Dairy-Free / Vegan Tart)',
+        chefNoteEn: 'Coconut cream sets just as firmly as dairy cream with 70% dark chocolate.',
+      },
+      {
+        originalEn: 'Toasted Walnuts (200g)',
+        substituteEn: 'Roasted Almonds, Pecans, or Hulled Sunflower Seeds (for Nut-Free)',
+        chefNoteEn: 'Pulse with pitted Medjool dates until the mixture holds together when pinched.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why did my chocolate ganache separate or look oily?',
+        answerEn:
+          'Boiling the cream too aggressively or whisking too fast can separate cocoa butter. Warm the cream just to a gentle simmer and stir slowly with a silicone spatula.',
+      },
+      {
+        questionEn: 'Can I make this no-bake chocolate tart 2 days before an event?',
+        answerEn:
+          'Yes, it slices even more cleanly after chilling overnight in the refrigerator.',
+      },
+      {
+        questionEn: 'Can I freeze slices of dark chocolate ganache tart?',
+        answerEn:
+          'Yes, wrap slices tightly and freeze at -18°C for up to 2 months.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 15,
+    cookMinutes: 5,
+    calories: 385,
+    proteinGrams: 6,
+    netCarbsGrams: 26,
+    image: '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+    gearItem: {
+      id: 'gear-piping-kit',
+      nameEn: '9-Inch Non-Stick Fluted Tart Pan with Removable Bottom',
+      brand: 'Ateco Pastry',
+      priceUsd: 34,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: '70% dark chocolate, finely chopped', amount: 280, unit: 'g' },
+      { item: 'Full-fat coconut cream or heavy whipping cream', amount: 240, unit: 'ml' },
+      { item: 'Toasted walnuts or pecans', amount: 200, unit: 'g' },
+      { item: 'Soft pitted Medjool dates & unsweetened cocoa powder', amount: 160, unit: 'g' },
+      { item: 'Vanilla extract & flaky sea salt for garnish', amount: 8, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Press Walnut & Date Crust into Tart Pan',
+        instruction:
+          'Pulse toasted walnuts, pitted Medjool dates, cocoa powder, and a pinch of salt in a food processor, then press firmly into a 9-inch tart pan.',
         timerSeconds: 300,
       },
       {
-        title: 'صنع صوص المقلاة في 60 ثانية',
+        title: 'Steep Warm Cream Over Chopped 70% Dark Chocolate',
         instruction:
-          'أضف المرق والليمون لتذويب الطبقة المحمرة في المقلاة ثم أطفئ النار وحرك مكعبات الزبدة الباردة.',
+          'Pour warm simmering cream over finely chopped dark chocolate, wait 2 minutes, and stir gently from the center until glossy.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Pour Ganache & Chill for 90 Minutes',
+        instruction:
+          'Pour ganache into the crust, tap gently to level, chill at 4°C for 90 minutes until firm, and garnish with flaky sea salt.',
+        timerSeconds: 120,
+      },
+    ],
+  },
+  {
+    id: 'no-bake-lemon-berry-mascarpone-parfait-cups',
+    slug: '10-minute-no-bake-lemon-berry-mascarpone-cheesecake-cups',
+    category: 'desserts_baking',
+    subcategoryId: 'no-bake-desserts',
+    categoryLabelEn: 'Desserts & Baking · No-Bake Desserts',
+    titleEn: '10-Minute No-Bake Lemon Berry Mascarpone Cheesecake Cups',
+    subtitleEn:
+      'Individual no-bake cheesecake jars layered with toasted oat biscuit crumbs, lemon-zested mascarpone cream, and fresh berries.',
+    wordCount: 910,
+    introParagraphsEn: [
+      'Individual no-bake cheesecake cups deliver all the creamy citrus tang of a baked New York cheesecake in 10 minutes without water baths or overnight cooling.',
+      'Because mascarpone has a naturally high butterfat content and mild sweetness, folding it with fresh lemon juice, lemon zest, and whipped cream sets into a spoonable mousse immediately.',
+    ],
+    whyThisWorksEn: [
+      'Ready in 10 minutes with zero baking required.',
+      'Portioned into individual glass jars for easy make-ahead entertaining.',
+      'Fresh lemon juice naturally thickens the mascarpone cream.',
+    ],
+    chefTipsEn: [
+      'Zest your lemons before juicing them, taking only the fragrant yellow outer peel and avoiding the bitter white pith.',
+      'Chill your mixing bowl for 10 minutes in the refrigerator before whipping the cream.',
+      'Assemble up to 24 hours ahead and keep covered in the refrigerator.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Refrigerate dairy mascarpone desserts at 4°C (39°F) immediately after assembly and consume within 3 days.',
+    substitutions: [
+      {
+        originalEn: 'Italian Mascarpone Cheese (225g)',
+        substituteEn: 'Full-Fat Cream Cheese (softened) or Thick Strained Greek Yogurt',
+        chefNoteEn: 'Strained Greek yogurt cuts calories while boosting protein.',
+      },
+      {
+        originalEn: 'Crushed Oat Biscuits / Graham Crackers (120g)',
+        substituteEn: 'Toasted Almond Meal + Melted Butter (for Low-Carb / Gluten-Free)',
+        chefNoteEn: 'Toast almond meal in a dry skillet for 2 minutes until golden.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Can I make these no-bake cheesecake cups the night before?',
+        answerEn:
+          'Yes! Chilling overnight in covered glass jars allows the lemon mascarpone layer to set even more cleanly.',
+      },
+      {
+        questionEn: 'Can I use frozen berries instead of fresh berries?',
+        answerEn:
+          'If using frozen berries, simmer them briefly with 1 tablespoon of honey and cool into a berry compote so thaw water does not soak the biscuit base.',
+      },
+      {
+        questionEn: 'Do these cheesecake cups need gelatin to set?',
+        answerEn:
+          'No gelatin is needed—the acidity of the lemon juice reacts with the mascarpone and whipped cream proteins to thicken naturally.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 0,
+    calories: 330,
+    proteinGrams: 7,
+    netCarbsGrams: 24,
+    image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    gearItem: {
+      id: 'gear-piping-kit',
+      nameEn: 'Set of 6 Glass Dessert Parfait Jars with Airtight Lids',
+      brand: 'Pyrex Culinary',
+      priceUsd: 29,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Chilled mascarpone cheese (or softened cream cheese)', amount: 225, unit: 'g' },
+      { item: 'Cold heavy whipping cream & powdered sugar (45g)', amount: 180, unit: 'ml' },
+      { item: 'Crushed oat biscuits tossed with 30g melted butter', amount: 150, unit: 'g' },
+      { item: 'Fresh raspberries, blueberries & sliced strawberries', amount: 200, unit: 'g' },
+      { item: 'Fresh lemon juice (30ml), grated lemon zest & vanilla', amount: 35, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Layer Buttered Biscuit Crumbs in Jars',
+        instruction:
+          'Toss crushed biscuits with melted butter and press 2 tablespoons into the base of 4 to 6 glass dessert jars.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Whip Lemon Mascarpone Cream',
+        instruction:
+          'Whisk mascarpone, heavy cream, powdered sugar, lemon zest, and lemon juice for 3 minutes until thick and billowy.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Pipe Cream & Top with Fresh Berries',
+        instruction:
+          'Spoon or pipe the lemon mascarpone filling over the crumb bases, top with fresh berries, and chill at 4°C until serving.',
+        timerSeconds: 180,
+      },
+    ],
+  },
+  {
+    id: 'healthy-almond-flour-dark-chocolate-chip-cookies',
+    slug: 'healthy-one-bowl-almond-flour-dark-chocolate-sea-salt-cookies',
+    category: 'desserts_baking',
+    subcategoryId: 'healthy-sweets',
+    categoryLabelEn: 'Desserts & Baking · Healthy Sweets',
+    titleEn: 'One-Bowl Almond Flour Dark Chocolate Chunk Cookies with Sea Salt',
+    subtitleEn:
+      'Naturally gluten-free, grain-free cookies baked with blanched almond flour, coconut oil, maple syrup, and 70% dark chocolate chunks.',
+    wordCount: 930,
+    introParagraphsEn: [
+      'Blanched almond flour produces naturally tender, chewy chocolate chunk cookies in a single mixing bowl without refined wheat flour or complicated chill times.',
+      'Finished with flaky sea salt right out of the oven, each cookie balances rich 70% dark chocolate with nutty toasted almond flavor.',
+    ],
+    whyThisWorksEn: [
+      'Naturally gluten-free and mixed in one bowl in 8 minutes.',
+      'Healthy monounsaturated fats from almond flour keep the centers soft for days.',
+      'Bakes in just 11 to 12 minutes at 175°C (350°F).',
+    ],
+    chefTipsEn: [
+      'Use fine blanched almond flour (made from peeled almonds) rather than coarse almond meal for the best cookie texture.',
+      'Let the cookies cool directly on the baking sheet for 10 minutes before moving them—almond flour cookies firm up as they cool.',
+      'Press two or three extra dark chocolate chunks onto the tops of each dough ball before baking.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Bake cookies involving whole eggs until set and golden around the edges (175°C / 350°F for 11–12 minutes).',
+    substitutions: [
+      {
+        originalEn: 'Pure Maple Syrup or Coconut Sugar (75g)',
+        substituteEn: 'Granulated Monkfruit / Erythritol Blend (for Keto Cookies)',
+        chefNoteEn: 'Lowers net carbs to 3g per cookie.',
+      },
+      {
+        originalEn: 'Melted Coconut Oil (60ml)',
+        substituteEn: 'Melted Unsalted Butter or Creamy Almond Butter',
+        chefNoteEn: 'Both work 1:1 by weight or volume.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Can I substitute coconut flour 1:1 for almond flour?',
+        answerEn:
+          'No! Coconut flour is extremely absorbent and requires four times more liquid and eggs than almond flour. Stick to blanched almond flour for this recipe.',
+      },
+      {
+        questionEn: 'How should I store almond flour cookies?',
+        answerEn:
+          'Store in an airtight container at cool room temperature for 3 days, or refrigerate at 4°C for up to 7 days.',
+      },
+      {
+        questionEn: 'Can I freeze balls of almond flour cookie dough?',
+        answerEn:
+          'Yes, freeze scooped dough balls on a tray, store in a freezer bag for up to 3 months, and bake directly from frozen adding 2 extra minutes.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 8,
+    cookMinutes: 12,
+    calories: 195,
+    proteinGrams: 5,
+    netCarbsGrams: 11,
+    image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    gearItem: {
+      id: 'gear-piping-kit',
+      nameEn: 'Heavy-Duty Aluminum Half-Sheet Baking Pan & Silicone Mat',
+      brand: 'Nordic Ware',
+      priceUsd: 38,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Fine blanched almond flour', amount: 220, unit: 'g' },
+      { item: '70% dark chocolate bar, chopped into chunks', amount: 110, unit: 'g' },
+      { item: 'Melted coconut oil or unsalted butter', amount: 60, unit: 'ml' },
+      { item: 'Coconut sugar or maple syrup', amount: 75, unit: 'g' },
+      { item: 'Large egg (1 pc), vanilla extract, baking soda & flaky sea salt', amount: 60, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Whisk Wet Ingredients in One Bowl',
+        instruction:
+          'Whisk melted coconut oil, coconut sugar, egg, and vanilla extract in a medium bowl until smooth.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Fold in Almond Flour & Dark Chocolate Chunks',
+        instruction:
+          'Stir in blanched almond flour, 1/2 teaspoon baking soda, and chopped 70% dark chocolate until a soft dough forms.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Bake at 175°C (350°F) for 11–12 Minutes & Cool on Sheet',
+        instruction:
+          'Scoop 12 dough balls onto a parchment-lined baking sheet, flatten slightly, bake at 175°C (350°F) for 11 to 12 minutes, top with sea salt, and cool 10 minutes on the pan.',
+        timerSeconds: 720,
+      },
+    ],
+  },
+  {
+    id: 'healthy-greek-yogurt-berry-oat-muffins',
+    slug: 'healthy-high-protein-greek-yogurt-blueberry-oat-muffins',
+    category: 'desserts_baking',
+    subcategoryId: 'healthy-sweets',
+    categoryLabelEn: 'Desserts & Baking · Healthy Sweets',
+    titleEn: 'Wholesome Greek Yogurt & Wild Blueberry Rolled Oat Muffins',
+    subtitleEn:
+      'Refined-sugar-free breakfast muffins made with rolled oats, strained Greek yogurt, honey, and fresh blueberries—no oil or butter required.',
+    wordCount: 920,
+    introParagraphsEn: [
+      'Strained Greek yogurt replaces refined vegetable oil in these wholesome blueberry oat muffins, keeping the crumb moist while adding extra protein and calcium.',
+      'Tossing the fresh blueberries in a teaspoon of oat flour before folding them into the batter keeps the berries suspended evenly instead of sinking to the bottom.',
+    ],
+    whyThisWorksEn: [
+      'Greek yogurt provides natural moisture and tenderness without butter or oil.',
+      'Rolled oats deliver slow-digesting beta-glucan soluble fiber.',
+      'Freezes well for quick weekday breakfasts.',
+    ],
+    chefTipsEn: [
+      'Pulse rolled oats in a blender for 15 seconds if you want to make your own fresh oat flour at home.',
+      'Start baking at 200°C (400°F) for the first 5 minutes to create tall bakery domes, then lower the oven to 175°C (350°F) for the remaining 13 minutes.',
+      'Cool muffins on a wire rack so the bottoms do not steam inside the tin.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Bake muffins until a tester inserted in the center comes out clean, and store cooled muffins in an airtight container in the refrigerator for up to 5 days.',
+    substitutions: [
+      {
+        originalEn: 'Strained Plain Greek Yogurt (240g)',
+        substituteEn: 'Blended Cottage Cheese or Unsweetened Applesauce',
+        chefNoteEn: 'Blended cottage cheese keeps the protein content high.',
+      },
+      {
+        originalEn: 'Fresh Blueberries (180g)',
+        substituteEn: 'Frozen Wild Blueberries (do not thaw first) or Raspberries',
+        chefNoteEn: 'Fold frozen berries in right before scooping so they do not streak the batter.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why do you start baking muffins at a higher temperature first?',
+        answerEn:
+          'An initial 5-minute burst at 200°C (400°F) activates the baking powder rapidly to lift the muffin domes before the outer crust sets.',
+      },
+      {
+        questionEn: 'How do I store and reheat oat muffins for meal prep?',
+        answerEn:
+          'Refrigerate in an airtight container for 5 days or freeze for 2 months. Warm for 15 seconds or toast cut halves in a skillet.',
+      },
+      {
+        questionEn: 'Are rolled oats gluten-free?',
+        answerEn:
+          'Oats are naturally gluten-free, but always look for certified gluten-free oats if baking for celiac sensitivity.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 18,
+    calories: 185,
+    proteinGrams: 8,
+    netCarbsGrams: 25,
+    image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    gearItem: {
+      id: 'gear-piping-kit',
+      nameEn: '12-Cup Non-Stick Muffin & Cupcake Baking Pan',
+      brand: 'Nordic Ware',
+      priceUsd: 32,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Rolled oat flour & whole rolled oats', amount: 240, unit: 'g' },
+      { item: 'Plain strained Greek yogurt', amount: 240, unit: 'g' },
+      { item: 'Fresh or frozen wild blueberries', amount: 180, unit: 'g' },
+      { item: 'Large eggs (2 pcs) & raw honey or maple syrup (80ml)', amount: 180, unit: 'ml' },
+      { item: 'Baking powder, cinnamon, lemon zest & pinch of salt', amount: 12, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Whisk Greek Yogurt, Eggs & Honey',
+        instruction:
+          'Whisk Greek yogurt, eggs, honey, vanilla, and grated lemon zest in a large bowl until smooth.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Fold in Oat Flour & Blueberries',
+        instruction:
+          'Stir in oat flour, baking powder, cinnamon, and salt until just combined, then gently fold in the blueberries.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Bake 5 Mins at 200°C then 13 Mins at 175°C',
+        instruction:
+          'Divide into 12 lined muffin cups. Bake at 200°C (400°F) for 5 minutes, reduce oven temperature to 175°C (350°F), and bake 13 minutes more until golden.',
+        timerSeconds: 1080,
+      },
+    ],
+  },
+  {
+    id: 'brown-butter-banana-bread-pecan-loaf',
+    slug: 'bakery-style-brown-butter-banana-bread-toasted-pecans',
+    category: 'desserts_baking',
+    subcategoryId: 'cakes-pastries',
+    categoryLabelEn: 'Desserts & Baking · Cakes & Pastries',
+    titleEn: 'Bakery-Style Brown Butter Banana Bread with Toasted Pecans',
+    subtitleEn:
+      'Moist, caramelized banana loaf made by browning unsalted butter until nutty and folding in overripe bananas, Greek yogurt, and toasted pecans.',
+    wordCount: 950,
+    introParagraphsEn: [
+      'Browning your butter in a skillet for four minutes before mixing banana bread batter toasts the milk solids into a rich, hazelnut-like aroma that elevates ripe bananas.',
+      'Combined with a spoonful of Greek yogurt and crunchy toasted pecans, this one-loaf recipe slices cleanly and stays moist for four days.',
+    ],
+    whyThisWorksEn: [
+      'Browned butter (beurre noisette) adds deep caramel flavor without extra sugar.',
+      'Using melted brown butter means no stand mixer is needed—just a whisk and bowl.',
+      'Freezes well in individual slices.',
+    ],
+    chefTipsEn: [
+      'Use heavily speckled, dark-spotted bananas, which have converted their starches into natural fruit sugars.',
+      'Browning butter in a light-colored stainless skillet makes it easy to see when the milk solids turn golden amber.',
+      'Tent the loaf loosely with foil after 40 minutes if the top is browning faster than the center finishes baking.',
+    ],
+    usdaSafetyNoteEn:
+      'Food Safety Note: Bake quick breads until a thermometer inserted into the center reads 93°C–96°C (200°F–205°F), and cool completely before wrapping.',
+    substitutions: [
+      {
+        originalEn: 'Toasted Pecans (80g)',
+        substituteEn: 'Toasted Walnuts or 70% Dark Chocolate Chunks',
+        chefNoteEn: 'Or omit nuts altogether for a classic nut-free banana loaf.',
+      },
+      {
+        originalEn: 'All-Purpose Flour (240g)',
+        substituteEn: '1:1 Gluten-Free Measure-for-Measure Baking Flour',
+        chefNoteEn: 'Works 1:1 in banana bread batters.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How can I ripen green or yellow bananas quickly for baking?',
+        answerEn:
+          'Place unpeeled yellow bananas on a baking sheet and bake at 150°C (300°F) for 15 to 20 minutes until the skins turn dark and the fruit softens. Cool before mashing.',
+      },
+      {
+        questionEn: 'How do I store banana bread so it does not dry out?',
+        answerEn:
+          'Wrap cooled banana bread tightly in parchment and store in an airtight container at cool room temperature for 3 days or in the refrigerator for 6 days.',
+      },
+      {
+        questionEn: 'Can I freeze individual slices of banana bread?',
+        answerEn:
+          'Yes! Place parchment squares between slices, seal in a freezer bag for up to 3 months, and toast slices directly from frozen.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 12,
+    cookMinutes: 50,
+    calories: 295,
+    proteinGrams: 6,
+    netCarbsGrams: 36,
+    image: '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+    gearItem: {
+      id: 'gear-piping-kit',
+      nameEn: '9x5-Inch Heavy-Gauge Aluminized Steel Loaf Pan',
+      brand: 'Nordic Ware',
+      priceUsd: 26,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Mashed overripe spotted bananas (about 3 large)', amount: 340, unit: 'g' },
+      { item: 'Unsalted butter, browned & cooled slightly', amount: 115, unit: 'g' },
+      { item: 'All-purpose flour, baking soda & cinnamon', amount: 245, unit: 'g' },
+      { item: 'Dark brown sugar (130g), eggs (2 pcs) & Greek yogurt (60g)', amount: 290, unit: 'g' },
+      { item: 'Coarsely chopped toasted pecans', amount: 80, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Brown the Butter & Mash Bananas',
+        instruction:
+          'Melt butter in a skillet over medium heat for 4 minutes, swirling until nutty amber brown specks form. Cool for 5 minutes, then whisk with mashed bananas, brown sugar, eggs, and yogurt.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'Fold in Flour & Toasted Pecans',
+        instruction:
+          'Gently fold in flour, baking soda, cinnamon, salt, and toasted pecans with a spatula just until no dry flour streaks remain.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Bake at 175°C (350°F) for 50 Minutes',
+        instruction:
+          'Pour into a parchment-lined 9x5-inch loaf pan and bake at 175°C (350°F) for 50 to 55 minutes until a toothpick comes out clean.',
+        timerSeconds: 3000,
+      },
+    ],
+  },
+  {
+    id: 'freezer-meal-prep-guide-soups-grains-proteins',
+    slug: 'ultimate-freezer-meal-prep-guide-how-to-freeze-and-thaw-cooked-food',
+    category: 'kitchen_hacks',
+    subcategoryId: 'meal-prep-guides',
+    categoryLabelEn: 'Kitchen Hacks & Guides · Meal Prep Guides',
+    titleEn: 'Complete Freezer Meal-Prep Handbook: Packaging, Shelf Life & Safe Thawing',
+    subtitleEn:
+      'Learn how to portion, freeze, and thaw cooked proteins, grains, sauces, and soups without freezer burn or texture loss.',
+    wordCount: 1140,
+    introParagraphsEn: [
+      'A well-organized home freezer acts as an on-demand weeknight pantry. When cooked grains, braised meats, and skillet sauces are cooled rapidly and packaged with minimal headspace air, they retain their fresh flavor for two to three months at -18°C (0°F).',
+      'This guide covers which foods freeze best, how to prevent ice-crystal freezer burn, and the three USDA-approved ways to thaw frozen meals safely.',
+    ],
+    whyThisWorksEn: [
+      'Eliminating trapped air prevents ice sublimation (freezer burn).',
+      'Freezing flat in portioned bags or stackable glass containers cuts thawing time in half.',
+      'Follows official USDA cold-chain and thawing safety standards.',
+    ],
+    chefTipsEn: [
+      'Cool cooked soups, rice, and proteins to room temperature within 60 to 90 minutes before placing them in the freezer so they do not warm neighboring frozen items.',
+      'Leave 2cm (3/4 inch) of expansion headspace at the top of glass freezer jars when freezing liquids or soups.',
+      'Label every container with a piece of painter’s tape showing the dish name, date frozen, and reheating instructions.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Safe Thawing Rule: Never thaw frozen food at room temperature on the counter. Thaw safely in the refrigerator at 4°C (40°F), submerged in cold tap water changed every 30 minutes, or directly during cooking/reheating to 74°C (165°F).',
+    substitutions: [
+      {
+        originalEn: 'Russet Potatoes in Freezer Soups',
+        substituteEn: 'Sweet Potatoes, White Beans, Chickpeas, or Pearl Barley',
+        chefNoteEn: 'High-starch white potatoes can turn grainy when frozen; beans and sweet potatoes hold their texture.',
+      },
+      {
+        originalEn: 'Heavy Cream Added Before Freezing',
+        substituteEn: 'Freeze soup base without dairy, then stir in cream during reheating',
+        chefNoteEn: 'Prevents dairy emulsions from separating during thawing.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How long does cooked food stay safe in the freezer at -18°C (0°F)?',
+        answerEn:
+          'Food kept continuously frozen at -18°C (0°F) remains safe indefinitely, and maintains peak culinary quality for 2 to 3 months for cooked meats/poultry and 3 to 4 months for soups and sauces.',
+      },
+      {
+        questionEn: 'Can I put glass meal-prep containers in the freezer?',
+        answerEn:
+          'Yes, tempered or borosilicate glass containers are freezer-safe as long as you cool the food first and leave 2cm of top headspace for liquid expansion.',
+      },
+      {
+        questionEn: 'Can I refreeze meat or meals after thawing them in the refrigerator?',
+        answerEn:
+          'According to the USDA, food thawed safely inside the refrigerator at 4°C (40°F) can be safely refrozen, though cooking raw thawed meat before refreezing preserves the best texture.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 15,
+    cookMinutes: 30,
+    calories: 420,
+    proteinGrams: 35,
+    netCarbsGrams: 26,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-glass-prep-set',
+      nameEn: '10-Piece Freezer-to-Oven Borosilicate Glass Container Set',
+      brand: 'Pyrex Culinary',
+      priceUsd: 68,
+      affiliateStore: 'Amazon Kitchen',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Cooked batch proteins (shredded chicken, turkey, or beef)', amount: 1000, unit: 'g' },
+      { item: 'Cooked grains (jasmine rice, quinoa, or farro)', amount: 600, unit: 'g' },
+      { item: 'Simmered tomato or bone-broth sauce bases', amount: 500, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Rapid Shallow-Tray Cooling (Under 60 Minutes)',
+        instruction:
+          'Spread freshly cooked grains and proteins on clean sheet pans to cool rapidly before packaging.',
+        timerSeconds: 600,
+      },
+      {
+        title: 'Portion with Minimal Air Headspace & Label',
+        instruction:
+          'Pack single-meal portions into freezer-safe glass containers (leaving 2cm headspace for liquids) and label with the date.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'Freeze at -18°C (0°F) & Thaw in Refrigerator at 4°C',
+        instruction:
+          'Freeze flat at -18°C (0°F). Move desired portions to the 4°C refrigerator the night before eating and reheat to 74°C (165°F).',
+        timerSeconds: 180,
+      },
+    ],
+  },
+  {
+    id: 'knife-skills-and-cutting-board-safety-guide',
+    slug: 'essential-chef-knife-skills-honing-and-cutting-board-food-safety',
+    category: 'kitchen_hacks',
+    subcategoryId: 'cooking-tips',
+    categoryLabelEn: 'Kitchen Hacks & Guides · Cooking Tips',
+    titleEn: 'Chef Knife Skills, Honing vs. Sharpening & Cutting Board Food Safety',
+    subtitleEn:
+      'Cut prep time in half with the claw grip, uniform vegetable dicing, daily honing rod alignment, and USDA cross-contamination prevention.',
+    wordCount: 1060,
+    introParagraphsEn: [
+      'A sharp 8-inch chef knife is the single most important tool in a home kitchen. Dull blades slip off onion and tomato skins, whereas a properly honed edge slices cleanly with minimal downward force.',
+      'This guide covers the pinch grip and claw guide-hand technique, why uniform vegetable cuts ensure even roasting, and how to separate cutting boards for raw proteins and ready-to-eat produce.',
+    ],
+    whyThisWorksEn: [
+      'Uniform 1.5cm or 2cm vegetable cuts finish roasting at the exact same minute.',
+      'Anchoring your cutting board with a damp towel prevents slipping on countertops.',
+      'Separate boards for raw poultry/meat and fresh produce prevent cross-contamination.',
+    ],
+    chefTipsEn: [
+      'Place a damp paper towel or thin silicone mat underneath your wooden or plastic cutting board so it never slides while chopping.',
+      'Use a honing steel for 15 seconds before each cooking session to realign the microscopic edge of your chef knife.',
+      'Always scrape chopped ingredients off the board using the flat spine (back) of your knife rather than the sharp cutting edge.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Cross-Contamination Guideline: Always use separate cutting boards for raw meat/poultry/seafood and fresh produce, and wash boards, knives, and hands thoroughly with hot soapy water after handling raw proteins.',
+    substitutions: [
+      {
+        originalEn: '8-Inch Western Chef Knife',
+        substituteEn: '7-Inch Japanese Santoku Knife',
+        chefNoteEn: 'A Santoku blade is lighter and great for thin, precise vegetable slicing.',
+      },
+      {
+        originalEn: 'End-Grain Maple Cutting Board (for Produce)',
+        substituteEn: 'Dishwasher-Safe High-Density Polyethylene Board (for Raw Poultry)',
+        chefNoteEn: 'Keep a dedicated dishwasher-safe board specifically for raw poultry and meat.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'What is the difference between honing a knife and sharpening a knife?',
+        answerEn:
+          'Honing with a steel rod realigns a bent microscopic blade edge between uses without removing metal; sharpening on a whetstone (every 3 to 6 months) grinds a brand-new bevel edge.',
+      },
+      {
+        questionEn: 'Should I put my chef knives in the dishwasher?',
+        answerEn:
+          'Never put chef knives in the dishwasher—high-pressure jets knock the blade edge against racks and harsh detergents dull high-carbon steel. Hand-wash and dry immediately.',
+      },
+      {
+        questionEn: 'How do I dice an onion without crying?',
+        answerEn:
+          'Use a sharp knife (which crushes fewer cells), chill the onion for 15 minutes before cutting, and leave the root end intact while making horizontal and vertical cuts.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 10,
+    cookMinutes: 0,
+    calories: 120,
+    proteinGrams: 4,
+    netCarbsGrams: 18,
+    image: '/images/hero_cookreel_studio_1795527112508.jpg',
+    gearItem: {
+      id: 'gear-damascus-knife',
+      nameEn: '8-Inch Japanese 67-Layer Damascus Chef Knife',
+      brand: 'Shun Premier',
+      priceUsd: 175,
+      affiliateStore: 'Williams Sonoma',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Yellow onions, carrots & celery stalks (Mirepoix practice)', amount: 450, unit: 'g' },
+      { item: 'Fresh parsley & cilantro bunches', amount: 60, unit: 'g' },
+      { item: 'Food-grade mineral oil (for wooden cutting board maintenance)', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Anchor the Cutting Board & Hone the Blade',
+        instruction:
+          'Lay a damp paper towel flat on the counter, set your cutting board on top, and draw your chef knife 5 times per side along a honing rod at a 15-degree angle.',
         timerSeconds: 90,
+      },
+      {
+        title: 'Pinch Grip & Claw Guide Hand',
+        instruction:
+          'Pinch the blade heel between thumb and forefinger, curl your non-dominant fingertips inward like a claw with knuckles guiding the flat side of the blade.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Uniform Dice & Immediate Hand-Wash',
+        instruction:
+          'Slice vegetables into uniform 1.5cm cubes for even cooking, then hand-wash and dry your chef knife immediately.',
+        timerSeconds: 120,
       },
     ],
   },
@@ -1798,12 +3070,12 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'meal_prep',
     topicLabel: 'Meal Prep & Storage',
     question:
-      'How do I keep meal-prepped chicken and vegetables from getting soggy or dry by Day 4?',
+      'How do I keep meal-prepped chicken and roasted vegetables from getting soggy in the fridge?',
     shortAnswer:
-      'Vent steam uncovered for 20 minutes before sealing, under-cook protein by 2°C, and store sauces in separate mini jars.',
+      'Cook poultry to the safe USDA 74°C (165°F) temperature, vent steam uncovered for 20 minutes before sealing lids, and pack sauces separately.',
     detailedAnswer:
-      'Closing container lids while food is still warm traps steam that condenses into water droplets on the lid and rains back onto your roasted vegetables. Always let sheet-pan vegetables and seared proteins cool uncovered on the counter for 20 minutes until room temperature. Pull chicken thighs at 77°C (170°F) or chicken breast at 70°C (158°F) so reheating brings them to peak juiciness.',
-    proMetric: '20-Min Uncovered Cool · 4°C Fridge Storage (Up to 5 Days)',
+      'Sealing container lids while food is still hot traps water vapor that condenses on the underside of the lid and rains back onto your roasted vegetables. Always let cooked proteins and sheet-pan vegetables cool uncovered for 20 minutes, then seal in airtight glass containers and refrigerate at 4°C (39°F) or colder within 2 hours.',
+    proMetric: 'USDA 74°C Poultry · 20-Min Steam Vent · 4°C Fridge',
     relatedRecipeId: 'sunday-meal-prep-high-protein-bowls',
   },
   {
@@ -1811,12 +3083,12 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'meal_prep',
     topicLabel: 'Meal Prep & Storage',
     question:
-      'What is the best way to wash and store fresh herbs (cilantro, parsley, basil) so they last 2 weeks?',
+      'What is the best way to store fresh herbs (cilantro, parsley, basil) so they stay crisp for up to 2 weeks?',
     shortAnswer:
-      'Store tender stems (cilantro & parsley) upright in a jar with 2cm cold water in the fridge; keep basil at room temperature.',
+      'Store cilantro and parsley upright in a jar with 2cm cold water in the fridge; keep fresh basil at room temperature out of direct sun.',
     detailedAnswer:
-      'Treat cilantro and parsley like fresh cut flowers: trim 1cm off the bottom stems, make sure the leaves are completely dry (wet leaves rot rapidly), place upright in a mason jar with 2cm of water, and drape a loose produce bag over the top in the refrigerator. Basil is a tropical herb that suffers cold damage below 10°C—keep basil in a glass of water on the kitchen counter away from direct sunlight.',
-    proMetric: '14-Day Shelf Life · Dry Leaves + 2cm Stem Water',
+      'Trim 1cm off the bottom stems of parsley or cilantro, ensure the leaves are completely dry, place upright in a jar with 2cm of water, and cover loosely in the refrigerator. Because basil is a cold-sensitive tropical herb that develops dark spots below 10°C, keep basil stems in water on the kitchen counter.',
+    proMetric: '10–14 Day Shelf Life · Dry Leaves + 2cm Stem Water',
     relatedRecipeId: 'cooking-science-temperatures-deglazing-guide',
   },
   {
@@ -1824,13 +3096,13 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'meal_prep',
     topicLabel: 'Meal Prep & Storage',
     question:
-      'Which cooked foods freeze well for monthly meal prep and which foods should never be frozen?',
+      'Which cooked foods freeze well for monthly meal prep and which foods should not be frozen?',
     shortAnswer:
-      'Braised meats, shakshuka sauce, cooked grains, and un-frosted cupcakes freeze for 3 months; avoid freezing raw salad greens or cream emulsions.',
+      'Cooked meats, tomato sauces, grains, and unfrosted baked goods freeze well at -18°C for 2–3 months; avoid freezing raw lettuce or plain dairy emulsions.',
     detailedAnswer:
-      'Foods with high moisture structure like raw cucumbers, lettuce, and plain dairy cream sauces separate or turn limp when ice crystals expand. Instead, freeze cooked rice, marinated or seared meats, tomato-based sauces, and baked goods wrapped tightly. When freezing soups or stews with potatoes, mash a portion of the potatoes or swap for sweet potatoes and beans, which hold their texture after thawing.',
-    proMetric: '-18°C Freezer Storage · 2 to 3 Months Peak Quality',
-    relatedRecipeId: 'mediterranean-spiced-shakshuka',
+      'High-water raw vegetables (lettuce, cucumbers) and un-stabilized cream sauces lose their structure when ice crystals expand. Freeze cooked rice, cooked poultry/beef, bean stews, and tomato-based sauces like shakshuka in airtight containers with minimal air headspace.',
+    proMetric: '-18°C (0°F) Freezer · 2 to 3 Months Quality',
+    relatedRecipeId: 'freezer-meal-prep-guide-soups-grains-proteins',
   },
   {
     id: 'qa-4',
@@ -1839,10 +3111,10 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     question:
       'What can I use instead of heavy whipping cream in pasta sauces, soups, or curries?',
     shortAnswer:
-      'Whisk 180ml whole milk with 60g melted unsalted butter (plus 1 tsp cornstarch if simmering), or use full-fat canned coconut cream 1:1.',
+      'Whisk 180ml whole milk with 60g melted unsalted butter (plus 1 tsp cornstarch if simmering), or substitute full-fat canned coconut cream 1:1.',
     detailedAnswer:
-      'Heavy cream is roughly 36% milkfat. Combining 3/4 cup (180ml) whole milk with 1/4 cup (60g) melted unsalted butter restores that exact fat-to-water ratio. For silky Italian pasta sauces like tagliatelle, you can skip cream altogether by emulsifying 90ml starchy pasta cooking water with cold butter and finely microplaned Parmigiano-Reggiano off the heat.',
-    proMetric: '1:1 Volume Ratio · 180ml Whole Milk + 60g Melted Butter',
+      'Heavy whipping cream contains roughly 36% milkfat. Combining 180ml (3/4 cup) whole milk with 60g (1/4 cup) melted unsalted butter restores that fat-to-liquid ratio. For Italian pasta dishes like tagliatelle, emulsifying starchy pasta water with butter and finely grated Parmigiano off the heat creates a creamy sauce without cream.',
+    proMetric: '1:1 Ratio · 180ml Whole Milk + 60g Melted Butter',
     relatedRecipeId: 'truffle-tagliatelle-pasta',
   },
   {
@@ -1850,24 +3122,24 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'substitutions',
     topicLabel: 'Ingredient Swaps',
     question:
-      'How do I make an instant 5-minute buttermilk substitute for baking cakes, cupcakes, or tenderizing chicken?',
+      'How do I make a quick 5-minute buttermilk substitute for baking cakes, cupcakes, or muffins?',
     shortAnswer:
-      'Stir 1 tablespoon (15ml) fresh lemon juice or white vinegar into 1 cup (240ml) warm whole milk and rest for 5 minutes.',
+      'Stir 1 tablespoon (15ml) fresh lemon juice or white vinegar into 225ml warm whole milk and let stand for 5 minutes.',
     detailedAnswer:
-      'The mild acidity in buttermilk reacts with baking soda to create carbon dioxide lift while breaking down gluten strands for a velvety crumb. Measuring 15ml of lemon juice or white distilled vinegar into a liquid measuring cup, topping up to the 240ml line with room-temperature milk, and waiting 5 minutes creates the exact pH needed for bakery-level cupcakes and pancakes.',
+      'The mild acidity reacts with baking soda to create lift while tenderizing gluten strands. Measure 15ml of lemon juice or white vinegar into a measuring cup, add whole milk to the 240ml (1 cup) mark, and wait 5 minutes until slightly thickened.',
     proMetric: '15ml Acid + 225ml Whole Milk · 5-Min Rest',
-    relatedRecipeId: 'mango-strawberry-sunset-cupcakes',
+    relatedRecipeId: 'tropical-mango-berry-swirl-cupcakes',
   },
   {
     id: 'qa-6',
     topic: 'substitutions',
     topicLabel: 'Ingredient Swaps',
     question:
-      'What is the exact conversion ratio when swapping fresh herbs for dried herbs in a recipe?',
+      'What is the conversion ratio when swapping fresh herbs for dried herbs in cooking?',
     shortAnswer:
-      'Follow the 3-to-1 Rule: use 1 teaspoon of dried herbs for every 1 tablespoon (3 teaspoons) of fresh chopped herbs.',
+      'Follow the 3-to-1 Rule: use 1 teaspoon (5ml) of dried herbs for every 1 tablespoon (15ml) of fresh chopped herbs.',
     detailedAnswer:
-      'Because drying removes water and concentrates essential aromatic oils by weight, dried oregano, thyme, and rosemary are three times more potent by volume than fresh leaves. Add dried herbs early in the cooking process so they rehydrate in warm oil or broth; add delicate fresh herbs (basil, parsley, cilantro, chives) during the final 60 seconds off the heat.',
+      'Drying removes moisture and concentrates aromatic oils, making dried rosemary, thyme, and oregano three times stronger by volume than fresh leaves. Add dried herbs early in cooking so they rehydrate; add fresh herbs at the very end.',
     proMetric: '3:1 Fresh-to-Dried Ratio (15ml Fresh = 5ml Dried)',
     relatedRecipeId: 'kitchen-guide-substitutes-cast-iron',
   },
@@ -1876,12 +3148,12 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'heat_skillet',
     topicLabel: 'Heat, Skillets & Air Fryer',
     question:
-      'How do I stop salmon skin, eggs, or steak from sticking to a cast-iron or stainless-steel skillet?',
+      'How do I stop salmon skin, chicken, or steak from sticking to a cast-iron or stainless-steel skillet?',
     shortAnswer:
-      'Preheat the dry pan until a water drop glides (193°C), add oil, and make sure the food surface is bone-dry before searing.',
+      'Preheat the dry pan until a water droplet glides, add oil, pat the protein completely dry with paper towels, and sear undisturbed.',
     detailedAnswer:
-      'Microscopic pores in cold metal expand and grip wet proteins. By preheating your dry skillet for 3 minutes until a drop of water dances across the metal (the Leidenfrost effect), then adding high-smoke-point avocado oil and patting your fish or steak completely dry with paper towels, an instant vapor barrier forms. Do not try to flip the protein for the first 3–5 minutes—once a golden Maillard crust forms, it releases naturally.',
-    proMetric: '193°C Leidenfrost Point · Dry Protein Surface',
+      'When a dry metal skillet reaches the Leidenfrost temperature (~193°C), a drop of water glides across the surface instead of sputtering. Add high-smoke-point oil, place bone-dry protein into the pan, and wait 4 to 6 minutes for a golden crust to form before flipping.',
+    proMetric: 'Preheat Dry Pan · Bone-Dry Protein Surface',
     relatedRecipeId: 'crispy-salmon-skillet',
   },
   {
@@ -1889,12 +3161,12 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'heat_skillet',
     topicLabel: 'Heat, Skillets & Air Fryer',
     question:
-      'How do I convert any traditional oven recipe into an Air Fryer recipe without burning the outside?',
+      'How do I convert a conventional oven recipe into an Air Fryer recipe?',
     shortAnswer:
-      'Reduce the recipe temperature by 15°C (25°F) and cut the total cooking time by 20% to 25%.',
+      'Reduce the oven temperature by 15°C (25°F) and reduce the total cooking time by about 20%.',
     detailedAnswer:
-      'An Air Fryer is a high-velocity countertop convection oven in a compact chamber. If a conventional oven recipe calls for roasting chicken thighs at 215°C (425°F) for 30 minutes, set your Air Fryer to 200°C (400°F) for 22 minutes. Leave at least 1cm of airflow space around food pieces in the basket and shake or flip halfway through.',
-    proMetric: '-15°C (-25°F) Temp · -20% Cooking Duration',
+      'Countertop Air Fryers circulate hot air rapidly in a compact chamber. If an oven recipe calls for 215°C (425°F) for 30 minutes, set your Air Fryer to 200°C (400°F) for 22 to 24 minutes and verify doneness with a food thermometer.',
+    proMetric: '-15°C (-25°F) Temp · -20% Cooking Time',
     relatedRecipeId: 'lemon-herb-roasted-chicken',
   },
   {
@@ -1902,26 +3174,26 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'heat_skillet',
     topicLabel: 'Heat, Skillets & Air Fryer',
     question:
-      'What are the exact internal temperatures for juicy steak, chicken, and salmon using a meat thermometer?',
+      'What are the official USDA safe minimum internal temperatures for poultry, beef, pork, and salmon?',
     shortAnswer:
-      'Pull Steak (Medium-Rare) at 52°C, Salmon at 50°C, Chicken Breast at 71°C, and Chicken Thighs at 79°C—then rest for 5 minutes.',
+      'USDA Safe Minimums: All Poultry 74°C (165°F) · Ground Beef/Pork 71°C (160°F) · Whole Beef/Pork Steaks & Chops 63°C (145°F + 3-min rest) · Salmon/Fish 63°C (145°F).',
     detailedAnswer:
-      'Carryover thermal momentum continues to raise the internal core temperature of meat by 3°C to 4°C (5°F–7°F) after you remove it from the heat source. Pulling a ribeye steak at 52°C (125°F) and resting it on a warm wooden board for 6 minutes yields a flawless edge-to-edge 55°C (131°F) medium-rare center while keeping all intramuscular juices inside the fibers.',
-    proMetric: 'Steak 52°C · Salmon 50°C · Chicken Breast 71°C + 5-Min Rest',
-    relatedRecipeId: 'garlic-butter-ribeye-steak',
+      'Using a digital instant-read food thermometer inserted into the thickest center of the food is the only reliable way to verify both food safety and juiciness. Always allow whole cuts of beef and pork to rest for 3 minutes after reaching 63°C (145°F).',
+    proMetric: 'Poultry 74°C (165°F) · Beef/Pork/Fish 63°C (145°F)',
+    relatedRecipeId: 'cooking-science-temperatures-deglazing-guide',
   },
   {
     id: 'qa-10',
     topic: 'reheating_safety',
     topicLabel: 'Defrosting & Reheating',
     question:
-      'What is the fastest and safest way to defrost frozen chicken, steak, or fish in 20 minutes?',
+      'What is the fastest USDA-approved way to defrost frozen chicken, steak, or fish safely?',
     shortAnswer:
-      'Submerge the vacuum-sealed or zip-bagged meat in a bowl of cold tap water (never hot water), changing the water every 10 minutes.',
+      'Submerge the leak-proof sealed package in cold tap water (changing water every 30 minutes), or thaw overnight in the refrigerator at 4°C.',
     detailedAnswer:
-      'Water conducts heat 25 times faster than air, so a cold-water bath thaws a 450g pack of chicken breasts, salmon fillets, or ribeye steak in 20 to 30 minutes while keeping the outer surface out of the bacterial danger zone (above 4°C–60°C). Never defrost meat in hot water or on a warm counter for hours, as the outer edges begin to cook and spoil while the core stays frozen.',
-    proMetric: 'Cold Tap Water Bath · 20–30 Mins per 450g',
-    relatedRecipeId: 'crispy-salmon-skillet',
+      'Never thaw raw meat or fish at room temperature on the kitchen counter. A cold tap-water bath conducts heat rapidly and safely thaws a 450g package of meat or fish in 20 to 30 minutes while keeping the surface out of the bacterial danger zone. Cook immediately after cold-water thawing.',
+    proMetric: 'Cold Tap Water Bath · Cook Immediately After Thawing',
+    relatedRecipeId: '15-minute-garlic-shrimp-zucchini-skillet',
   },
   {
     id: 'qa-11',
@@ -1930,10 +3202,10 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     question:
       'How do I reheat leftover cooked salmon, steak, or crispy chicken without drying it out?',
     shortAnswer:
-      'Skip the microwave: reheat in an Air Fryer at 175°C for 3–4 minutes or in a covered skillet over medium-low heat with a splash of broth.',
+      'Reheat in an Air Fryer at 175°C (350°F) for 3–5 minutes or in a covered skillet over medium-low heat with a splash of broth.',
     detailedAnswer:
-      'Microwaves agitate water molecules unevenly, boiling the moisture out of cooked fish and steak within 45 seconds and turningcrispy skin rubbery. Instead, place cold salmon or chicken skin-side up in a preheated 175°C (350°F) Air Fryer for 3 to 4 minutes, or warm sliced steak in a skillet with 15ml of melted garlic butter for 60 seconds just until warmed through.',
-    proMetric: '175°C (350°F) Air Fryer · 3 to 4 Minutes',
+      'High-power microwaves heat unevenly and soften crispy skin. Warming leftovers in a 175°C (350°F) Air Fryer or covered skillet restores crisp edges while bringing leftovers safely back up to reheating temperature.',
+    proMetric: '175°C (350°F) Air Fryer or Covered Skillet',
     relatedRecipeId: 'lemon-herb-roasted-chicken',
   },
   {
@@ -1941,13 +3213,167 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
     topic: 'reheating_safety',
     topicLabel: 'Defrosting & Reheating',
     question:
-      'How do I store and reheat cooked rice or pasta for meal prep so it stays fluffy and safe to eat?',
+      'How do I store and reheat cooked rice or pasta for meal prep safely?',
     shortAnswer:
-      'Cool cooked rice on a flat tray within 60 minutes, refrigerate at 4°C for up to 4 days, and reheat with 1 tablespoon of water per bowl.',
+      'Cool cooked rice rapidly on a flat plate, refrigerate at 4°C within 1 hour of cooking, and consume within 3 to 4 days.',
     detailedAnswer:
-      'To prevent Bacillus cereus spores from multiplying in warm starch, spread freshly cooked rice or pasta on a wide plate to cool rapidly and move it into the refrigerator within 1 hour of cooking. When reheating, sprinkle 15ml (1 tablespoon) of water or broth over the grains and cover loosely so the steam rehydrates the starch granules back to a freshly cooked texture.',
-    proMetric: 'Refrigerate Within 60 Mins · Add 15ml Water When Reheating',
-    relatedRecipeId: 'truffle-tagliatelle-pasta',
+      'To prevent heat-resistant Bacillus cereus spores from growing in warm cooked starch, never leave cooked rice sitting at room temperature. Cool it promptly, store in a shallow container at 4°C (39°F), and reheat thoroughly to 74°C (165°F) with 1 tablespoon of water.',
+    proMetric: 'Refrigerate Within 60 Mins at 4°C · Reheat to 74°C',
+    relatedRecipeId: 'sunday-meal-prep-high-protein-bowls',
+  },
+  {
+    id: 'qa-13',
+    topic: 'substitutions',
+    topicLabel: 'Ingredient Swaps',
+    question:
+      'How do I make cake flour at home using regular all-purpose flour?',
+    shortAnswer:
+      'For every 120g (1 cup) of all-purpose flour, remove 2 tablespoons (15g) of flour and replace with 2 tablespoons (15g) of cornstarch, then sift twice.',
+    detailedAnswer:
+      'All-purpose flour has 10% to 12% gluten protein, while cake flour has only 7% to 8%. Blending in cornstarch dilutes gluten formation so cupcakes and sponge cakes bake up light and tender.',
+    proMetric: '105g All-Purpose Flour + 15g Cornstarch per Cup',
+    relatedRecipeId: 'tropical-mango-berry-swirl-cupcakes',
+  },
+  {
+    id: 'qa-14',
+    topic: 'heat_skillet',
+    topicLabel: 'Heat, Skillets & Air Fryer',
+    question:
+      'How do I clean burnt-on browned bits from an enameled or seasoned cast-iron skillet without damaging it?',
+    shortAnswer:
+      'Simmer 120ml water in the warm skillet for 2 minutes and scrape gently with a flat wooden spatula to lift stuck fond.',
+    detailedAnswer:
+      'De-glazing the pan with warm water right after cooking dissolves caramelized proteins effortlessly. For enameled cast iron, a paste of baking soda and warm water removes stubborn brown stains without scratching the porcelain enamel.',
+    proMetric: '2-Min Warm Water Simmer + Wooden Spatula',
+    relatedRecipeId: 'kitchen-guide-substitutes-cast-iron',
+  },
+  {
+    id: 'qa-15',
+    topic: 'meal_prep',
+    topicLabel: 'Meal Prep & Storage',
+    question:
+      'How do I keep washed salad greens and spinach fresh in the fridge all week without turning slimy?',
+    shortAnswer:
+      'Spin greens bone-dry in a salad spinner and store in a rigid container lined top and bottom with dry paper towels.',
+    detailedAnswer:
+      'Surface moisture on bruised leaves accelerates decay. Lining a glass or BPA-free container with dry paper towels absorbs condensation and keeps washed spinach and romaine crisp for 7 to 10 days.',
+    proMetric: 'Spin Dry + Paper Towel Liner · 4°C Crisper Drawer',
+    relatedRecipeId: '15-minute-Mediterranean-chickpea-feta-skillet',
+  },
+  {
+    id: 'qa-16',
+    topic: 'reheating_safety',
+    topicLabel: 'Defrosting & Reheating',
+    question:
+      'What is the "2-Hour Rule" for food safety when serving meals or cooling meal-prep batches?',
+    shortAnswer:
+      'Never leave cooked food or perishable groceries in the temperature danger zone (4°C to 60°C / 40°F to 140°F) for more than 2 hours (1 hour if above 32°C).',
+    detailedAnswer:
+      'Bacteria double in number in as little as 20 minutes between 4°C and 60°C. Divide large pots of soup or batch-cooked grains into shallow containers so they cool rapidly in the refrigerator.',
+    proMetric: 'Max 2 Hours at Room Temp · Danger Zone 4°C–60°C',
+    relatedRecipeId: 'freezer-meal-prep-guide-soups-grains-proteins',
+  },
+];
+
+export type CookingQATopic =
+  | 'meal_prep_storage'
+  | 'cooking_science'
+  | 'ingredient_substitutions'
+  | 'air_fryer_equipment';
+
+export interface CookingQAItem {
+  id: string;
+  topic: CookingQATopic;
+  topicLabelEn: string;
+  questionEn: string;
+  shortAnswerEn: string;
+  detailedStepsEn: string[];
+  proTipEn: string;
+  relatedRecipeSlug?: string;
+}
+
+export const QA_TOPIC_LABELS: { id: 'all' | CookingQATopic; labelEn: string }[] = [
+  { id: 'all', labelEn: 'All Cooking & Prep Topics' },
+  { id: 'meal_prep_storage', labelEn: 'Meal Prep & Food Storage' },
+  { id: 'cooking_science', labelEn: 'Cooking Science & USDA Temps' },
+  { id: 'ingredient_substitutions', labelEn: '1:1 Ingredient Substitutions' },
+  { id: 'air_fryer_equipment', labelEn: 'Air Fryer & Skillet Techniques' },
+];
+
+const TOPIC_MAP: Record<Exclude<CookingQaTopic, 'all'>, CookingQATopic> = {
+  meal_prep: 'meal_prep_storage',
+  substitutions: 'ingredient_substitutions',
+  heat_skillet: 'air_fryer_equipment',
+  reheating_safety: 'cooking_science',
+};
+
+export const COOKING_QA_KNOWLEDGE_BASE: CookingQAItem[] =
+  COOKING_AND_MEAL_PREP_QA.map((item) => {
+    const matchedRecipe = COOKREEL_RECIPES.find(
+      (r) => r.id === item.relatedRecipeId
+    );
+    return {
+      id: item.id,
+      topic: TOPIC_MAP[item.topic],
+      topicLabelEn: item.topicLabel,
+      questionEn: item.question,
+      shortAnswerEn: item.shortAnswer,
+      detailedStepsEn: [item.detailedAnswer],
+      proTipEn: item.proMetric,
+      relatedRecipeSlug:
+        matchedRecipe?.slug || '15-minute-crispy-cast-iron-salmon-lemon-caper',
+    };
+  });
+
+export const MEAL_PLAN_DAYS = [
+  {
+    dayEn: 'Monday',
+    lunchEn: 'Mediterranean Chickpea, Spinach & Feta Bowl',
+    dinnerEn: '15-Minute Crispy Cast-Iron Salmon with Lemon Caper Butter',
+    totalKcal: 890,
+    prepTime: '20m',
+  },
+  {
+    dayEn: 'Tuesday',
+    lunchEn: 'Leftover Flaked Salmon & Quinoa Power Salad',
+    dinnerEn: 'Air Fryer Crispy Lemon Herb Chicken Thighs',
+    totalKcal: 920,
+    prepTime: '25m',
+  },
+  {
+    dayEn: 'Wednesday',
+    lunchEn: 'High-Protein Lemon Herb Chicken & Roasted Broccoli Box',
+    dinnerEn: '15-Minute Garlic Lemon Shrimp & Crisp Zucchini Skillet',
+    totalKcal: 860,
+    prepTime: '18m',
+  },
+  {
+    dayEn: 'Thursday',
+    lunchEn: 'Keto Creamy Tuscan Garlic Chicken with Baby Spinach',
+    dinnerEn: 'Keto Garlic Butter Cast-Iron Ribeye Steak',
+    totalKcal: 1120,
+    prepTime: '22m',
+  },
+  {
+    dayEn: 'Friday',
+    lunchEn: '15-Minute Low-Carb Shrimp & Egg Cauliflower Fried Rice',
+    dinnerEn: '5-Ingredient Creamy Black Truffle & Parmigiano Tagliatelle',
+    totalKcal: 980,
+    prepTime: '20m',
+  },
+  {
+    dayEn: 'Saturday',
+    lunchEn: 'One-Skillet Mediterranean Spiced Tomato Shakshuka',
+    dinnerEn: '5-Ingredient Pan-Seared Honey Mustard Pork Medallions',
+    totalKcal: 840,
+    prepTime: '24m',
+  },
+  {
+    dayEn: 'Sunday',
+    lunchEn: 'Sunday High-Protein 4-Day Meal-Prep Batch Assembly',
+    dinnerEn: '12-Minute Air Fryer Honey Garlic Salmon Bites & Broccoli',
+    totalKcal: 925,
+    prepTime: '45m',
   },
 ];
 

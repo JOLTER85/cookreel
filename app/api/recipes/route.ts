@@ -4,6 +4,7 @@ import {
   writeDatabase,
   sanitizeText,
   isValidCategory,
+  verifyAntiSpamChallenge,
 } from '@/lib/server-db';
 import { CulinaryRecipe, SITE_ARCHITECTURE } from '@/lib/cookreel-data';
 
@@ -18,6 +19,31 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+
+    if (
+      !verifyAntiSpamChallenge(
+        body.captchaA,
+        body.captchaB,
+        body.captchaAnswer,
+        body.websiteHoneypot
+      )
+    ) {
+      return NextResponse.json(
+        { error: 'Please complete the anti-spam security check correctly.' },
+        { status: 400 }
+      );
+    }
+
+    if (!body.rightsConfirmed) {
+      return NextResponse.json(
+        {
+          error:
+            'You must confirm that your recipe submission is original content and agree to the Editorial Terms.',
+        },
+        { status: 400 }
+      );
+    }
+
     const title = sanitizeText(body.title, 120);
     if (!title || title.length < 3) {
       return NextResponse.json(
@@ -28,14 +54,16 @@ export async function POST(req: NextRequest) {
 
     const subtitle =
       sanitizeText(body.subtitle, 240) ||
-      'Step-by-step culinary video reel and complete recipe guide published on CookReel.';
+      'Step-by-step recipe and culinary guide submitted by a community contributor and reviewed by the CookReel Editorial Team.';
     const introText =
       sanitizeText(body.introText, 900) ||
-      `${title} is crafted in our test kitchen to deliver maximum flavor with foolproof step-by-step video guidance. Below you will find our tested ingredient substitutions, storage FAQs, and interactive recipe card.`;
+      `${title} is designed for reliable home cooking with clear measurements, tested ingredient substitutions, and USDA food safety temperature guidance.`;
     const chefTipText =
       sanitizeText(body.chefTip, 400) ||
-      'Bring your primary ingredients to room temperature 15 minutes before cooking and season in layers for restaurant-level balance.';
-    const chefName = sanitizeText(body.chefName, 60) || 'CookReel Test Kitchen';
+      'Prep and measure your ingredients before heating the pan, and verify internal temperatures with an instant-read digital thermometer.';
+    const authorName =
+      sanitizeText(body.authorName || body.chefName, 60) ||
+      'CookReel Community Contributor';
     const category = isValidCategory(body.category)
       ? body.category
       : 'quick_easy';
@@ -53,21 +81,8 @@ export async function POST(req: NextRequest) {
     );
     const gearName =
       sanitizeText(body.gearName, 100) ||
-      'Professional Seasoned Cast-Iron Skillet';
+      'Seasoned Cast-Iron Skillet (12-Inch)';
     const gearPrice = Math.min(Math.max(Number(body.gearPrice) || 125, 10), 2000);
-
-    const allowedVideos = [
-      '/videos/hero-cookreel-featured.mp4',
-      '/videos/crispy-salmon-skillet.mp4',
-      '/videos/garlic-butter-ribeye-steak.mp4',
-      '/videos/truffle-tagliatelle-pasta.mp4',
-      '/videos/lemon-herb-roasted-chicken.mp4',
-      '/videos/mediterranean-spiced-shakshuka.mp4',
-      '/videos/mango-strawberry-sunset-cupcakes.mp4',
-    ];
-    const videoUrl = allowedVideos.includes(body.videoUrl)
-      ? body.videoUrl
-      : '/videos/hero-cookreel-featured.mp4';
 
     const newRecipe: CulinaryRecipe = {
       id: `reel-${Date.now()}`,
@@ -79,70 +94,43 @@ export async function POST(req: NextRequest) {
       category,
       subcategoryId: matchedSub.id,
       categoryLabelEn: `${catObj.labelEn} · ${matchedSub.labelEn}`,
-      categoryLabelAr: `${catObj.labelAr} · ${matchedSub.labelAr}`,
       titleEn: title,
-      titleAr: title,
       subtitleEn: subtitle,
-      subtitleAr: subtitle,
-      wordCount: 950,
+      wordCount: 860,
       introParagraphsEn: [
         introText,
-        'Every recipe on CookReel combines short-form video visuals, chef-tested ingredient substitutions, and complete nutritional metrics.',
-      ],
-      introParagraphsAr: [
-        introText,
-        'تجمع هذه الوصفة بين الفيديو القصير خطوة بخطوة، وجدول بدائل المكونات، وحساب القيم الغذائية.',
+        'Every recipe published on CookReel includes gram and milliliter measurements, 1:1 ingredient substitutions, storage instructions, and USDA safe cooking temperature guidelines.',
       ],
       whyThisWorksEn: [
-        'Tested for consistent weeknight execution with minimal cleanup.',
-        'Includes exact 1:1 ingredient substitutions and storage guidelines.',
-      ],
-      whyThisWorksAr: [
-        'مختبرة في مطبخ CookReel لضمان نجاح القوام والنكهة من أول مرة.',
-        'تتضمن جدول بدائل المكونات وإرشادات التخزين والتجميد.',
+        'Clear step-by-step timing with metric measurements for repeatable results.',
+        'Includes 1:1 ingredient substitutions and refrigerator/freezer storage instructions.',
       ],
       chefTipsEn: [
         chefTipText,
-        'Always taste and adjust acid (fresh lemon juice or vinegar) right before serving.',
-      ],
-      chefTipsAr: [
-        chefTipText,
-        'تذوق الطبق وأضف لمسة من عصير الليمون الطازج قبل التقديم مباشرة لإبراز النكهات.',
+        'Always taste and adjust seasoning and acidity (fresh lemon juice or vinegar) just before serving.',
       ],
       substitutions: [
         {
-          originalEn: 'Primary Cooking Fat (Butter / Olive Oil)',
-          originalAr: 'الدهن الأساسي (زبدة أو زيت زيتون)',
+          originalEn: 'Primary Cooking Fat (Unsalted Butter / Olive Oil)',
           substituteEn: 'Ghee or High-Smoke-Point Avocado Oil (1:1 Ratio)',
-          substituteAr: 'السمن الطبيعي أو زيت الأفوكادو بنسبة 1:1',
-          chefNoteEn: 'Maintains moisture and browning for dairy-free diets.',
-          chefNoteAr: 'يحافظ على التحمير المثالي لمن يتبعون حمية خالية من الألبان.',
+          chefNoteEn: 'Maintains even browning for dairy-free preparation.',
         },
       ],
       faqs: [
         {
           questionEn: 'How long can I store this dish in the refrigerator?',
-          questionAr: 'كم تدوم هذه الوصفة عند حفظها في الثلاجة؟',
           answerEn:
-            'Store in an airtight glass container in the refrigerator for up to 4 days.',
-          answerAr:
-            'تحفظ في وعاء زجاجي محكم الإغلاق داخل الثلاجة لمدة تصل إلى 4 أيام.',
+            'Store in an airtight glass container in the refrigerator (at or below 4°C / 40°F) for up to 3–4 days.',
         },
         {
           questionEn: 'Can I freeze leftovers of this recipe?',
-          questionAr: 'هل يمكن تجميد هذه الوصفة في الفريزر؟',
           answerEn:
-            'Yes, cool completely before freezing in portioned containers for up to 2 months.',
-          answerAr:
-            'نعم، اتركها تبرد تماماً ثم احفظها في الفريزر لمدة تصل إلى شهرين.',
+            'Yes, cool completely before freezing in portioned airtight containers for up to 2 months.',
         },
         {
-          questionEn: 'What is the best way to reheat without drying out?',
-          questionAr: 'ما هي أفضل طريقة لإعادة التسخين؟',
+          questionEn: 'What is the safest way to reheat leftovers?',
           answerEn:
-            'Reheat gently in a covered skillet over medium-low heat or in an Air Fryer at 175°C for 3–4 minutes.',
-          answerAr:
-            'سخنها على نار هادئة في مقلاة مغطاة أو في القلاية الهوائية على 175 مئوية لـ 3 دقائق.',
+            'Reheat gently in a covered skillet or oven until the internal temperature reaches 74°C (165°F) per USDA guidelines.',
         },
       ],
       stepGalleryImages: [
@@ -150,26 +138,22 @@ export async function POST(req: NextRequest) {
         '/images/action_searing_skillet_butter_1795530068462.jpg',
         '/images/gear_cast_iron_skillet_1795527125638.jpg',
       ],
-      chefName,
-      chefTitleEn: 'CookReel Verified Culinary Contributor',
-      chefTitleAr: 'شيف معتمد في استوديو CookReel',
+      authorName,
+      authorRoleEn: 'Community Recipe Contributor (Moderated by CookReel Editorial Team)',
       prepMinutes: 10,
       cookMinutes,
       calories: 420,
       proteinGrams: 32,
       netCarbsGrams: 16,
-      videoDuration: '0:12',
-      videoUrl,
-      rating: 5.0,
-      reviewsCount: 1,
+      usdaSafetyNoteEn:
+        'USDA Food Safety Note: Verify safe internal temperatures using a calibrated thermometer (74°C / 165°F for poultry and reheated leftovers; 63°C / 145°F for fish and whole beef/pork cuts; 71°C / 160°F for ground meats).',
       image: '/images/hero_cookreel_studio_1795527112508.jpg',
       gearItem: {
         id: `gear-${Date.now()}`,
         nameEn: gearName,
-        nameAr: gearName,
         brand: 'CookReel Select',
         priceUsd: gearPrice,
-        affiliateStore: 'Amazon Kitchen',
+        affiliateStore: 'Amazon Kitchen Partner',
         image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
       },
       ingredientsEn: [
@@ -181,35 +165,17 @@ export async function POST(req: NextRequest) {
         { item: 'Extra-virgin cold-pressed olive oil', amount: 30, unit: 'ml' },
         { item: 'Fresh garlic, herbs & flaky sea salt', amount: 15, unit: 'g' },
       ],
-      ingredientsAr: [
-        { item: 'المكون الرئيسي الطازج حسب الوصفة', amount: 350, unit: 'جم' },
-        { item: 'زيت زيتون بكر ممتاز', amount: 30, unit: 'مل' },
-        { item: 'ثوم طازج وأعشاب وملح بحري', amount: 15, unit: 'جم' },
-      ],
       stepsEn: [
         {
-          title: 'Prep & Season Ingredients',
+          title: 'Prep & Measure Ingredients',
           instruction:
-            'Bring ingredients to room temperature and season evenly before heating the pan.',
+            'Prepare and weigh all ingredients and pat proteins dry with paper towels before heating the pan.',
           timerSeconds: 90,
         },
         {
-          title: 'High-Heat Sear & Baste',
+          title: 'Cook & Verify Safe Internal Temperature',
           instruction:
-            'Sear over medium-high heat until golden brown and baste with aromatics.',
-          timerSeconds: 240,
-        },
-      ],
-      stepsAr: [
-        {
-          title: 'تجهيز وتتبيل المكونات',
-          instruction: 'جهّز المكونات الطازجة وتبلها بالتساوي قبل تسخين المقلاة.',
-          timerSeconds: 90,
-        },
-        {
-          title: 'الطهي والتحمير السريع',
-          instruction:
-            'احمر المكونات على نار متوسطة إلى عالية مع إضافة الأعشاب العطرية.',
+            'Cook over medium-high heat until golden and verify the USDA-recommended internal temperature with an instant-read thermometer.',
           timerSeconds: 240,
         },
       ],
@@ -222,7 +188,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ recipe: newRecipe }, { status: 201 });
   } catch {
     return NextResponse.json(
-      { error: 'Unable to save video recipe.' },
+      { error: 'Unable to save recipe submission.' },
       { status: 500 }
     );
   }

@@ -1,6 +1,8 @@
-import type {Metadata} from 'next';
-import {Fraunces, Plus_Jakarta_Sans, JetBrains_Mono} from 'next/font/google';
+import type { Metadata } from 'next';
+import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import { CookieConsentBanner } from '@/components/CookieConsentBanner';
+import { SOCIAL_LINKS } from '@/lib/cookreel-data';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -20,33 +22,70 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
+const siteUrl = process.env.APP_URL || 'https://cookreel.com';
+const defaultOgImage = `${siteUrl}/images/hero_cookreel_studio_1795527112508.jpg`;
+
 export const metadata: Metadata = {
-  title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
+  metadataBase: new URL(siteUrl),
+  title: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',
   description:
-    'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
+    'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, USDA safe cooking temperatures, and 1:1 ingredient substitutions by the CookReel Editorial Team.',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
+    title: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',
     description:
-      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
+      'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, USDA safe cooking temperatures, and 1:1 ingredient substitutions.',
+    url: siteUrl,
     type: 'website',
     siteName: 'CookReel',
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: 'CookReel Culinary Guides & Video Recipes',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CookReel – Short-Form Video Recipes & Culinary Guides',
+    title: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',
     description:
-      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
+      'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, and 1:1 ingredient substitutions.',
+    images: [defaultOgImage],
   },
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const schemaOrg = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'CookReel – Short-Form Video Recipes & Culinary Guides',
-    url: 'https://cookreel.com',
-    description:
-      'Short-form video recipes, 15-minute weeknight dinners, keto & high-protein guides, and tested ingredient substitutions by CookReel Test Kitchen.',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        name: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',
+        url: siteUrl,
+        description:
+          'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, and 1:1 ingredient substitutions.',
+        publisher: {
+          '@id': `${siteUrl}/#organization`,
+        },
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'CookReel',
+        url: siteUrl,
+        email: 'editorial@cookreel.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: defaultOgImage,
+        },
+        sameAs: SOCIAL_LINKS.map((s) => s.url),
+      },
+    ],
   };
 
   return (
@@ -57,7 +96,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrg)}}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
       <body
@@ -65,6 +104,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         className="bg-[#FAF9F6] text-slate-900 antialiased font-sans selection:bg-amber-700 selection:text-white"
       >
         {children}
+        <CookieConsentBanner />
       </body>
     </html>
   );

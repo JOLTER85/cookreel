@@ -1,24 +1,63 @@
 import type { MetadataRoute } from 'next';
 import { readDatabase } from '@/lib/server-db';
+import { SITE_ARCHITECTURE } from '@/lib/cookreel-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.APP_URL || 'https://cookreel.com';
   const db = readDatabase();
 
-  const recipeUrls: MetadataRoute.Sitemap = db.recipes.map((recipe) => ({
-    url: `${baseUrl}/?recipe=${encodeURIComponent(recipe.slug)}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.9,
-  }));
-
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1.0,
     },
-    ...recipeUrls,
+    {
+      url: `${baseUrl}/qa`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   ];
+
+  const categoryUrls: MetadataRoute.Sitemap = SITE_ARCHITECTURE.map((cat) => ({
+    url: `${baseUrl}/category/${cat.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  const recipeUrls: MetadataRoute.Sitemap = db.recipes.map((recipe) => ({
+    url: `${baseUrl}/recipes/${encodeURIComponent(recipe.slug)}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.9,
+  }));
+
+  return [...staticPages, ...categoryUrls, ...recipeUrls];
 }

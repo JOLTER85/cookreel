@@ -5,6 +5,7 @@ import {
   sanitizeText,
   KitchenOrder,
   ContactInquiry,
+  verifyAntiSpamChallenge,
 } from '@/lib/server-db';
 
 export async function POST(req: NextRequest) {
@@ -40,6 +41,19 @@ export async function POST(req: NextRequest) {
 
     // 2. Handle Contact Us Page Inquiry Submission
     if (body.type === 'contact') {
+      if (
+        !verifyAntiSpamChallenge(
+          body.captchaA,
+          body.captchaB,
+          body.captchaAnswer,
+          body.websiteHoneypot
+        )
+      ) {
+        return NextResponse.json(
+          { error: 'Please complete the anti-spam math verification.' },
+          { status: 400 }
+        );
+      }
       const name = sanitizeText(body.name, 80);
       const email = sanitizeText(body.email, 120);
       const subject = sanitizeText(body.subject, 120) || 'General Editorial Inquiry';
