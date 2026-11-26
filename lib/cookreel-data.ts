@@ -57,6 +57,9 @@ export interface CulinaryRecipe {
    */
   videoUrl?: string;
   videoDuration?: string;
+  targetKeywordEn?: string;
+  shortVideoConceptEn?: string;
+  internalLinks?: { slug: string; titleEn: string; contextEn: string }[];
   image: string;
   gearItem: {
     id: string;
@@ -3046,6 +3049,1283 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
         instruction:
           'Slice vegetables into uniform 1.5cm cubes for even cooking, then hand-wash and dry your chef knife immediately.',
         timerSeconds: 120,
+      },
+    ],
+  },
+  // ============================================================================
+  // 10 QUICK WEEKNIGHT DINNER LONG-TAIL SEO SERIES (With Short Video Clips,
+  // Structured Recipe Cards & Multi-Recipe Internal Linking)
+  // ============================================================================
+  {
+    id: 'one-pan-lemon-garlic-chicken-dinner-15-min',
+    slug: 'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 15-Minute One-Pan Dinners',
+    titleEn: 'One-Pan Lemon Garlic Chicken Skillet Dinner in 15 Minutes',
+    subtitleEn:
+      'A fast, single-skillet weeknight chicken dinner with golden garlic-herb pan sauce, fresh lemon juice, and zero extra pots to wash.',
+    targetKeywordEn: '15-minute one-pan chicken dinner',
+    shortVideoConceptEn:
+      'Fast sequential overhead shot adding sliced chicken cutlets, minced garlic, broth, and fresh lemon juice into the exact same hot skillet with zero extra dishes to wash.',
+    internalLinks: [
+      {
+        slug: 'quick-oven-baked-spiced-chicken-and-potato-sheet-pan',
+        titleEn: 'Quick Oven-Baked Spiced Chicken Breast & Potato Sheet Pan',
+        contextEn: 'Prefer hands-off oven roasting? Try our one-pan spiced chicken and crispy diced potatoes sheet-pan dinner.',
+      },
+      {
+        slug: 'quick-4-ingredient-crispy-chicken-cheese-quesadilla',
+        titleEn: 'Crispy 4-Ingredient Chicken & Cheese Quesadilla',
+        contextEn: 'Have leftover cooked lemon garlic chicken? Slice it thinly for these 10-minute crispy skillet quesadillas.',
+      },
+      {
+        slug: 'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
+        titleEn: 'Crispy Air Fryer & One-Pan Lemon Herb Chicken Thighs',
+        contextEn: 'Looking for bone-in dark meat? Check our golden chicken thighs guide.',
+      },
+    ],
+    wordCount: 1180,
+    introParagraphsEn: [
+      'When you need a high-protein weeknight dinner on the table in 15 minutes without a sink full of dishes, slicing boneless chicken breasts horizontally into thin cutlets is the fastest technique in the kitchen. Thin 1.5cm cutlets sear to a golden crust in 4 minutes per side and cook evenly to the safe USDA internal temperature of 74°C (165°F).',
+      'Everything in this recipe happens in a single 12-inch skillet: after searing the seasoned chicken cutlets, you deglaze the golden fond in the pan with garlic, chicken broth, butter, and fresh lemon juice to create a glossy pan sauce in 90 seconds.',
+    ],
+    whyThisWorksEn: [
+      'Slicing chicken breasts into thin cutlets cuts cooking time from 20 minutes down to 8 minutes.',
+      'Sequential one-pan cooking builds a rich garlic-lemon pan glaze with only one skillet to wash.',
+      'Verified at 74°C (165°F) with an instant-read thermometer so chicken stays juicy.',
+    ],
+    chefTipsEn: [
+      'Pat the chicken cutlets completely dry with paper towels before seasoning so they brown immediately instead of steaming.',
+      'Lower the burner heat to medium-low before adding the minced garlic so the garlic turns fragrant and golden without scorching.',
+      'Add cold unsalted butter off the heat and swirl the skillet continuously to emulsify the lemon-garlic sauce.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always verify poultry reaches a minimum internal temperature of 74°C (165°F) at the thickest part using a digital food thermometer.',
+    substitutions: [
+      {
+        originalEn: 'Boneless Skinless Chicken Breast Cutlets (500g)',
+        substituteEn: 'Boneless Skinless Chicken Tenders or Thighs (500g)',
+        chefNoteEn: 'Chicken tenders require zero slicing and sear in 3.5 minutes per side.',
+      },
+      {
+        originalEn: 'Low-Sodium Chicken Broth (120ml)',
+        substituteEn: 'Vegetable Broth or Dry White Wine Substitution (105ml broth + 15ml lemon juice)',
+        chefNoteEn: 'Deglazes the browned skillet fond equally well.',
+      },
+      {
+        originalEn: 'Unsalted Butter (30g)',
+        substituteEn: 'Extra-Virgin Olive Oil or Dairy-Free Plant Butter (30ml)',
+        chefNoteEn: 'Creates a light Mediterranean lemon-garlic emulsion.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I keep chicken breast cutlets from drying out in a skillet?',
+        answerEn:
+          'Slice the breasts evenly to 1.5cm thickness, sear over medium-high heat for 4 minutes per side, and remove from the pan as soon as the internal temperature hits 74°C (165°F).',
+      },
+      {
+        questionEn: 'Can I make this 15-minute one-pan chicken dinner ahead for meal prep?',
+        answerEn:
+          'Yes! Cool the cooked chicken and lemon-garlic pan sauce uncovered for 20 minutes, store in airtight glass containers at 4°C (39°F) for up to 4 days, and reheat gently with a splash of broth.',
+      },
+      {
+        questionEn: 'What sides pair best with one-pan lemon garlic chicken?',
+        answerEn:
+          'Serve over our 10-Minute Egg & Vegetable Fried Rice, steamed broccoli, or crusty toasted sourdough.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 390,
+    proteinGrams: 46,
+    netCarbsGrams: 4,
+    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Enameled Cast-Iron Everyday Skillet',
+      brand: 'Staub Culinary',
+      priceUsd: 145,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Thin-sliced boneless skinless chicken breast cutlets', amount: 500, unit: 'g' },
+      { item: 'Extra-virgin olive oil (for high-heat searing)', amount: 15, unit: 'ml' },
+      { item: 'Fresh garlic cloves, finely minced (4 cloves)', amount: 20, unit: 'g' },
+      { item: 'Low-sodium chicken broth (for pan deglazing)', amount: 120, unit: 'ml' },
+      { item: 'Freshly squeezed lemon juice & 1 tsp lemon zest', amount: 30, unit: 'ml' },
+      { item: 'Cold unsalted butter & chopped fresh Italian parsley', amount: 35, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Season & Sear Chicken Cutlets in One Skillet',
+        instruction:
+          'Pat chicken cutlets dry, season with kosher salt, black pepper, and oregano, and sear in hot olive oil for 4 minutes per side until golden and 74°C (165°F) internally.',
+        timerSeconds: 480,
+      },
+      {
+        title: 'Sequential Garlic & Lemon Broth Deglaze',
+        instruction:
+          'In the exact same skillet, add minced garlic for 30 seconds, then pour in chicken broth and fresh lemon juice, scraping up the golden pan fond.',
+        timerSeconds: 90,
+      },
+      {
+        title: 'Swirl Cold Butter & Spoon Sauce Over Chicken',
+        instruction:
+          'Turn off the heat, swirl in cold butter and fresh parsley until glossy, and coat the chicken cutlets for 30 seconds before serving.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: '5-ingredient-spinach-cream-cheese-pasta-dinner',
+    slug: '5-ingredient-creamy-spinach-and-cream-cheese-pasta-dinner',
+    category: 'quick-easy',
+    subcategoryId: '5-ingredient-recipes',
+    categoryLabelEn: 'Quick & Easy · 5-Ingredient Pasta Dinners',
+    titleEn: '5-Ingredient Creamy Spinach & Cream Cheese Pasta for Dinner',
+    subtitleEn:
+      'Turn 5 everyday pantry and fridge staples into a silky restaurant-style spinach cream pasta in 15 minutes using starchy pasta water.',
+    targetKeywordEn: 'how to make 5-ingredient pasta for dinner',
+    shortVideoConceptEn:
+      'Clean tabletop display showing only the 5 ingredients side-by-side, followed by a fast 30-second sequence melting cream cheese with hot pasta water and wilting fresh baby spinach.',
+    internalLinks: [
+      {
+        slug: 'quick-garlic-butter-shrimp-pasta-weeknight-dinner',
+        titleEn: 'Quick Garlic Butter Shrimp Pasta for Weeknight Dinner',
+        contextEn: 'Want to add seafood protein? See our 15-minute garlic butter shrimp pasta technique.',
+      },
+      {
+        slug: '5-ingredient-tagliatelle-black-truffle-butter-parmigiano',
+        titleEn: '5-Ingredient Tagliatelle with Black Truffle Butter & Parmigiano',
+        contextEn: 'Explore another 5-ingredient pasta emulsion classic from our kitchen.',
+      },
+    ],
+    wordCount: 1120,
+    introParagraphsEn: [
+      'Learning how to make a 5-ingredient pasta for dinner is the easiest way to skip jarred sauces forever. By combining softened cream cheese, freshly grated Parmigiano-Reggiano, garlic, and starchy boiling pasta water directly in the warm pan, you create a velvety sauce that clings to every ridge of pasta.',
+      'Fresh baby spinach wilts directly in the residual heat of the pasta and cream sauce in less than 60 seconds, adding vibrant color and nutrients without needing a separate colander or sauté pan.',
+    ],
+    whyThisWorksEn: [
+      'Uses only 5 core ingredients (pasta, cream cheese, baby spinach, Parmesan, and garlic).',
+      'Starchy pasta cooking water emulsifies the cream cheese into a smooth sauce that never feels heavy.',
+      'Baby spinach wilts directly in the warm skillet during the final 60-second toss.',
+    ],
+    chefTipsEn: [
+      'Always scoop out 180ml (3/4 cup) of cloudy, starchy pasta water before draining your pasta—this liquid gold binds the cream cheese and Parmesan.',
+      'Cut the block of cream cheese into small 2cm cubes so it melts into the warm pasta water in under 30 seconds.',
+      'Season with freshly cracked black pepper and a pinch of nutmeg or red pepper flakes right before serving.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Refrigerate leftover cooked pasta dishes at 4°C (39°F) or below within 2 hours of cooking and reheat to 74°C (165°F) with a splash of milk or water.',
+    substitutions: [
+      {
+        originalEn: 'Full-Fat Block Cream Cheese (120g)',
+        substituteEn: 'Mascarpone Cheese (120g) or Boursin Garlic & Herb Cheese',
+        chefNoteEn: 'Mascarpone melts even faster and adds a buttery Italian richness.',
+      },
+      {
+        originalEn: 'Penne or Fusilli Pasta (250g)',
+        substituteEn: 'Chickpea Protein Pasta or Whole-Wheat Rigatoni (250g)',
+        chefNoteEn: 'Chickpea pasta boosts protein to 24g per serving.',
+      },
+      {
+        originalEn: 'Fresh Baby Spinach (150g)',
+        substituteEn: 'Frozen Chopped Spinach (150g, thawed and squeezed dry) or Baby Kale',
+        chefNoteEn: 'Squeeze excess water from thawed spinach before stirring into the sauce.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I melt cream cheese into pasta sauce without lumps?',
+        answerEn:
+          'Cut softened cream cheese into small cubes and whisk it with 120ml of hot starchy pasta water over low heat for 30 seconds before tossing in the drained pasta.',
+      },
+      {
+        questionEn: 'Can I add cooked chicken or shrimp to this 5-ingredient spinach pasta?',
+        answerEn:
+          'Absolutely. Fold in sliced One-Pan Lemon Garlic Chicken or Pan-Seared Garlic Butter Shrimp during the final toss.',
+      },
+      {
+        questionEn: 'How do I reheat creamy spinach pasta the next day?',
+        answerEn:
+          'Add 2 tablespoons of milk or water per bowl before warming in a covered skillet or microwave, stirring halfway through so the cream sauce re-emulsifies.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/recipe_truffle_pasta_1795527116427.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 3,
+    cookMinutes: 12,
+    calories: 475,
+    proteinGrams: 18,
+    netCarbsGrams: 52,
+    videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
+    videoDuration: '0:12',
+    image: '/images/action_tossing_pasta_pan_1795530070327.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Stainless Steel Tri-Ply Saucier Pan',
+      brand: 'All-Clad Culinary',
+      priceUsd: 129,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Dry penne, fusilli, or tagliatelle pasta', amount: 250, unit: 'g' },
+      { item: 'Softened full-fat cream cheese, cut into cubes', amount: 120, unit: 'g' },
+      { item: 'Fresh triple-washed baby spinach leaves', amount: 150, unit: 'g' },
+      { item: 'Freshly grated Parmigiano-Reggiano cheese', amount: 55, unit: 'g' },
+      { item: 'Minced fresh garlic (3 cloves) & 150ml reserved starchy pasta water', amount: 165, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Boil Pasta Al Dente & Reserve Starchy Water',
+        instruction:
+          'Boil pasta in salted water for 1 minute less than package directions. Scoop out 150ml of hot starchy cooking water before draining.',
+        timerSeconds: 540,
+      },
+      {
+        title: 'Whisk Cream Cheese, Garlic & Hot Pasta Water',
+        instruction:
+          'In the warm pan over low heat, sauté minced garlic for 30 seconds, then whisk in cubed cream cheese and 100ml hot pasta water until silky.',
+        timerSeconds: 90,
+      },
+      {
+        title: 'Toss Pasta, Baby Spinach & Parmigiano',
+        instruction:
+          'Add hot pasta, fresh baby spinach, and grated Parmigiano, tossing vigorously for 60 seconds until the spinach wilts and the sauce coats every piece.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: '10-minute-air-fryer-crispy-honey-garlic-salmon-dinner',
+    slug: '10-minute-air-fryer-crispy-honey-garlic-salmon-recipe',
+    category: 'quick-easy',
+    subcategoryId: 'air-fryer-recipes',
+    categoryLabelEn: 'Quick & Easy · 10-Minute Air Fryer Dinners',
+    titleEn: 'Crispy Honey-Garlic Salmon in the Air Fryer (10-Minute Recipe)',
+    subtitleEn:
+      'Caramelized honey-garlic crust on the outside and flaky, tender salmon inside—cooked in just 8 minutes in your Air Fryer basket.',
+    targetKeywordEn: '10-minute air fryer salmon recipe',
+    shortVideoConceptEn:
+      'Quick close-up brushing the glossy honey-garlic-soy marinade onto salmon fillets, sliding the basket into the Air Fryer, and pulling out sizzling crispy-edged salmon 8 minutes later.',
+    internalLinks: [
+      {
+        slug: '15-minute-crispy-cast-iron-salmon-lemon-caper',
+        titleEn: '15-Minute Crispy Cast-Iron Salmon with Meyer Lemon Caper Butter',
+        contextEn: 'Cooking on the stovetop instead of an Air Fryer? Follow our cold-start cast-iron crispy skin method.',
+      },
+      {
+        slug: '10-minute-quick-egg-and-vegetable-fried-rice-dinner',
+        titleEn: '10-Minute Egg & Vegetable Fried Rice for a Quick Dinner',
+        contextEn: 'Serve these honey-garlic salmon fillets over our 10-minute leftover jasmine fried rice for a complete meal.',
+      },
+    ],
+    wordCount: 1150,
+    introParagraphsEn: [
+      'This 10-minute Air Fryer salmon recipe delivers caramelized edges and moist, flaky fillets without turning on your oven or splattering oil across the stove. High-velocity convection heat at 200°C (400°F) blisters the honey, soy, and fresh garlic glaze in 7 to 9 minutes.',
+      'To keep the honey glaze from scorching before the center reaches the safe USDA temperature of 63°C (145°F), we coat the fillets in half the marinade before air-frying and brush the remaining warm glaze over the top during the final 60 seconds.',
+    ],
+    whyThisWorksEn: [
+      '200°C (400°F) Air Fryer convection caramelizes the honey-garlic glaze in 8 minutes flat.',
+      'Two-stage glazing keeps sugars glossy and prevents burnt edges in the Air Fryer basket.',
+      'Reaches the official USDA 63°C (145°F) seafood temperature while staying buttery inside.',
+    ],
+    chefTipsEn: [
+      'Line the Air Fryer basket with perforated parchment paper or brush lightly with avocado oil so the salmon skin releases cleanly.',
+      'Use fillets of equal thickness (around 2.5cm at the center) so both pieces finish cooking at the exact same minute.',
+      'Check internal temperature at the 7-minute mark with a digital thermometer; pull at 63°C (145°F).',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook finfish and salmon to a minimum internal temperature of 63°C (145°F) measured at the thickest part, or until the flesh is opaque and flakes easily with a fork.',
+    substitutions: [
+      {
+        originalEn: 'Raw Honey (30ml / 2 Tbsp)',
+        substituteEn: 'Pure Maple Syrup (30ml) or Brown Sugar (25g + 10ml warm water)',
+        chefNoteEn: 'Maple syrup caramelizes at the same temperature and adds a warm autumn note.',
+      },
+      {
+        originalEn: 'Low-Sodium Soy Sauce (30ml)',
+        substituteEn: 'Gluten-Free Tamari or Coconut Aminos (30ml)',
+        chefNoteEn: '1:1 swap for gluten-free weeknight dinners.',
+      },
+      {
+        originalEn: 'Fresh Atlantic or King Salmon Fillets (400g)',
+        substituteEn: 'Steelhead Trout or Arctic Char Fillets (400g)',
+        chefNoteEn: 'Trout fillets are slightly thinner and finish in 6 to 7 minutes at 200°C.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Do I need to flip salmon fillets in the Air Fryer?',
+        answerEn:
+          'No flipping is required! Place the salmon skin-side down in the preheated 200°C (400°F) Air Fryer basket; circulating air cooks the top and sides evenly in 8 minutes.',
+      },
+      {
+        questionEn: 'How do I stop honey-glazed salmon from burning in the Air Fryer?',
+        answerEn:
+          'Toss the salmon in half the honey-garlic sauce before air-frying, then spoon the remaining warm glaze over the fillets during the last minute of cooking.',
+      },
+      {
+        questionEn: 'Can I cook frozen salmon fillets in the Air Fryer?',
+        answerEn:
+          'Yes. Air-fry frozen fillets at 180°C (360°F) for 7 minutes to thaw, brush with the honey-garlic glaze, and cook for 6 to 7 more minutes until 63°C (145°F) internally.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 2,
+    cookMinutes: 8,
+    calories: 440,
+    proteinGrams: 41,
+    netCarbsGrams: 12,
+    videoUrl: '/videos/crispy-salmon-skillet.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_crispy_salmon_1795527113114.jpg',
+    gearItem: {
+      id: 'gear-instant-thermometer',
+      nameEn: 'Waterproof Digital Instant-Read Meat & Seafood Thermometer',
+      brand: 'ThermoWorks Culinary',
+      priceUsd: 39,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Center-cut salmon fillets (2 fillets, pat dry)', amount: 400, unit: 'g' },
+      { item: 'Raw honey & low-sodium soy sauce (1:1 glaze base)', amount: 60, unit: 'ml' },
+      { item: 'Freshly minced garlic (3 cloves) & grated fresh ginger (5g)', amount: 20, unit: 'g' },
+      { item: 'Fresh lemon juice or apple cider vinegar', amount: 15, unit: 'ml' },
+      { item: 'Avocado oil & toasted sesame seeds for garnish', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Whisk 2-Minute Honey-Garlic Glaze & Coat Fillets',
+        instruction:
+          'Whisk honey, soy sauce, minced garlic, ginger, and lemon juice. Coat dry salmon fillets with half of the glaze.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Air Fry at 200°C (400°F) Skin-Side Down',
+        instruction:
+          'Place salmon skin-side down in the Air Fryer basket at 200°C (400°F) for 7 minutes until edges begin to caramelize.',
+        timerSeconds: 420,
+      },
+      {
+        title: 'Final Glaze Brush & 63°C (145°F) Verification',
+        instruction:
+          'Brush remaining honey-garlic glaze on top and air-fry 1 more minute until crispy and 63°C (145°F) in the center.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'crispy-ground-beef-and-cheese-tortilla-wraps',
+    slug: 'crispy-ground-beef-and-melted-cheese-tortilla-wraps-dinner',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 15-Minute Skillet Dinners',
+    titleEn: 'Crispy Ground Beef & Melted Cheese Tortilla Wraps',
+    subtitleEn:
+      'Seasoned ground beef, caramelized onions, and sharp cheddar folded into flour tortillas and pan-toasted seam-side down until golden and crunchy.',
+    targetKeywordEn: 'quick tortilla and ground beef dinner',
+    shortVideoConceptEn:
+      'Step-by-step close-up folding the tortilla corners tightly over the seasoned beef and shredded cheddar, then pressing seam-side down in a hot cast-iron skillet until golden and pulling apart to reveal the melted cheese.',
+    internalLinks: [
+      {
+        slug: 'quick-4-ingredient-crispy-chicken-cheese-quesadilla',
+        titleEn: 'Crispy 4-Ingredient Chicken & Cheese Quesadilla',
+        contextEn: 'Prefer poultry over ground beef? Try our 4-ingredient crispy chicken quesadilla next.',
+      },
+      {
+        slug: 'crispy-skillet-tuna-melt-sandwich-for-quick-dinner',
+        titleEn: 'Crispy Skillet Tuna Melt Sandwich for a Quick Dinner',
+        contextEn: 'Love golden pan-toasted melted cheese dinners? Check our 12-minute skillet tuna melt.',
+      },
+    ],
+    wordCount: 1140,
+    introParagraphsEn: [
+      'A quick tortilla and ground beef dinner hits every craving on a busy weeknight: savory spiced beef, gooey melted cheese, and a shatteringly crisp pan-toasted tortilla exterior. Using 90% lean ground beef means the filling browns in 6 minutes with minimal excess grease to drain.',
+      'The secret to wraps that never pop open while flipping is sprinkling a thin layer of shredded cheddar directly along the inside flap of the tortilla and placing the wrap seam-side down in the hot skillet first—the melting cheese acts as culinary glue within 45 seconds.',
+    ],
+    whyThisWorksEn: [
+      '90% lean ground beef browns in 6 minutes to the safe USDA 71°C (160°F) internal temperature.',
+      'Toasting seam-side down first seals the tortilla shut with melted cheddar.',
+      'Ready from fridge to plate in 15 minutes using one skillet.',
+    ],
+    chefTipsEn: [
+      'Warm your flour tortillas for 10 seconds on a dry skillet before filling so they fold cleanly without cracking at the edges.',
+      'Press gently on top of the wraps with a flat spatula while toasting so the heat penetrates evenly into the center cheese layer.',
+      'Let the toasted wraps rest for 90 seconds on a wooden board before slicing diagonally so the cheese sets slightly.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always cook ground beef, pork, and lamb to a minimum internal temperature of 71°C (160°F) verified with a food thermometer.',
+    substitutions: [
+      {
+        originalEn: '90% Lean Ground Beef (400g)',
+        substituteEn: 'Lean Ground Turkey (cooked to 74°C / 165°F) or Black Beans (400g)',
+        chefNoteEn: 'Ground turkey or black beans work 1:1 with the cumin-paprika seasoning.',
+      },
+      {
+        originalEn: 'Sharp Cheddar & Monterey Jack Cheese (140g)',
+        substituteEn: 'Low-Moisture Mozzarella or Pepper Jack Cheese (140g)',
+        chefNoteEn: 'Grate cheese from a block rather than pre-shredded bags for smoother melting.',
+      },
+      {
+        originalEn: 'Large Burrito-Size Flour Tortillas (4 tortillas)',
+        substituteEn: 'High-Fiber Low-Carb Tortillas or Whole-Wheat Wraps',
+        chefNoteEn: 'Low-carb tortillas toast up extra crispy in 90 seconds per side.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I keep tortilla wraps from getting soggy after filling?',
+        answerEn:
+          'Simmer off any excess liquid after seasoning the ground beef, place a barrier layer of shredded cheese directly on the tortilla before adding the warm beef, and pan-toast over medium heat.',
+      },
+      {
+        questionEn: 'Can I air-fry these ground beef tortilla wraps instead of pan-toasting?',
+        answerEn:
+          'Yes! Brush the folded wraps lightly with oil and air-fry seam-side down at 190°C (375°F) for 5 to 6 minutes until golden brown.',
+      },
+      {
+        questionEn: 'What dipping sauces go best with crispy beef tortilla wraps?',
+        answerEn:
+          'Serve with plain Greek yogurt mixed with lime juice, fresh pico de gallo, or smoky chipotle salsa.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 510,
+    proteinGrams: 36,
+    netCarbsGrams: 32,
+    videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: '90% lean ground beef', amount: 400, unit: 'g' },
+      { item: 'Finely diced yellow onion & 2 minced garlic cloves', amount: 90, unit: 'g' },
+      { item: 'Smoked paprika, ground cumin, oregano & kosher salt', amount: 12, unit: 'g' },
+      { item: 'Tomato paste & 45ml water or beef broth', amount: 60, unit: 'ml' },
+      { item: 'Freshly shredded sharp cheddar & Monterey Jack cheese', amount: 140, unit: 'g' },
+      { item: 'Large 10-inch flour tortillas (4 count) & 10ml avocado oil', amount: 240, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Brown Ground Beef, Onion & Spices to 71°C (160°F)',
+        instruction:
+          'Brown ground beef and diced onion in a hot skillet for 6 minutes, stir in garlic, cumin, smoked paprika, and tomato paste with a splash of water until reaches 71°C (160°F).',
+        timerSeconds: 360,
+      },
+      {
+        title: 'Layer Cheese & Fold Tortilla Wraps Tightly',
+        instruction:
+          'Sprinkle shredded cheese down the center of each warm tortilla, top with seasoned beef and more cheese, and fold the sides and bottom tightly into a rectangular wrap.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Pan-Toast Seam-Side Down Until Golden & Melted',
+        instruction:
+          'Place wraps seam-side down in the wiped skillet with a drop of oil and toast for 2 minutes per side until deeply golden and the cheddar is melted.',
+        timerSeconds: 240,
+      },
+    ],
+  },
+  {
+    id: '10-minute-egg-and-vegetable-fried-rice-dinner',
+    slug: '10-minute-quick-egg-and-vegetable-fried-rice-dinner',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 10-Minute Wok & Skillet Meals',
+    titleEn: '10-Minute Egg & Vegetable Fried Rice for a Quick Dinner',
+    subtitleEn:
+      'Transform chilled leftover lunch rice into a sizzling, savory 10-minute dinner with fluffy scrambled eggs, crisp vegetables, and toasted sesame soy glaze.',
+    targetKeywordEn: '10-minute quick fried rice for dinner',
+    shortVideoConceptEn:
+      'High-energy skillet clip breaking up cold leftover rice from lunch, pushing it aside to scramble eggs in 30 seconds, and tossing rapidly with colorful vegetables and soy-sesame sauce around the perimeter of the hot pan.',
+    internalLinks: [
+      {
+        slug: '10-minute-air-fryer-crispy-honey-garlic-salmon-recipe',
+        titleEn: 'Crispy Honey-Garlic Salmon in the Air Fryer (10-Minute Recipe)',
+        contextEn: 'Top a bowl of this 10-minute egg fried rice with our caramelized Air Fryer honey-garlic salmon.',
+      },
+      {
+        slug: 'keto-low-carb-garlic-ginger-shrimp-cauliflower-fried-rice',
+        titleEn: '15-Minute Low-Carb Shrimp & Egg Cauliflower Fried Rice',
+        contextEn: 'Following a ketogenic diet? Swap jasmine rice for our riced cauliflower version.',
+      },
+    ],
+    wordCount: 1160,
+    introParagraphsEn: [
+      'Making a 10-minute quick fried rice for dinner is the smartest way to turn leftover cooked rice from lunch into a hot, satisfying meal. Chilled day-old rice has firm, retrograded starch granules that stay separate and toast evenly in a hot skillet without clumping.',
+      'By pouring low-sodium soy sauce and toasted sesame oil directly against the searing-hot perimeter walls of the skillet rather than onto the cold rice, the sauce caramelizes instantaneously and infuses the grains with authentic wok-style aroma.',
+    ],
+    whyThisWorksEn: [
+      'Chilled leftover rice has low surface moisture so every grain fries crisp and separate.',
+      'Pushing vegetables to the side to scramble eggs directly in the same skillet saves a pan.',
+      'Perimeter soy-sauce caramelization delivers restaurant flavor in 10 minutes flat.',
+    ],
+    chefTipsEn: [
+      'If you only have freshly cooked warm rice, spread it in a thin layer on a baking sheet and place it in the freezer for 10 minutes to dry out surface steam before frying.',
+      'Use a high-smoke-point neutral oil (avocado oil) for frying, and drizzle toasted sesame oil only during the final 30 seconds off the heat.',
+      'Separate the white and green parts of your scallions—sauté the white stems with garlic first, and toss the raw green tops in at the very end.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Cooked Rice Storage & Reheating Guideline: Always cool leftover cooked rice rapidly and refrigerate at 4°C (39°F) within 1 to 2 hours of cooking; reheat fried rice thoroughly to 74°C (165°F).',
+    substitutions: [
+      {
+        originalEn: 'Chilled Cooked Jasmine or Long-Grain White Rice (450g)',
+        substituteEn: 'Chilled Cooked Brown Rice, Basmati, or Riced Cauliflower (450g)',
+        chefNoteEn: 'Riced cauliflower cuts net carbs by 75% and cooks in 5 minutes.',
+      },
+      {
+        originalEn: '3 Large Whole Eggs (150g)',
+        substituteEn: '150g Crumbled Extra-Firm Tofu or 200g Cooked Shrimp',
+        chefNoteEn: 'Crumbled tofu scrambles with a pinch of turmeric just like eggs.',
+      },
+      {
+        originalEn: 'Low-Sodium Soy Sauce (30ml)',
+        substituteEn: 'Gluten-Free Tamari or Coconut Aminos (30ml)',
+        chefNoteEn: 'Add 1/4 tsp kosher salt if using low-sodium coconut aminos.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why does fried rice turn mushy when I make it at home?',
+        answerEn:
+          'Mushy fried rice happens when warm, freshly steamed rice is used or when cold liquid sauces are poured directly over the rice. Use chilled rice and drizzle soy sauce down the hot edges of the pan.',
+      },
+      {
+        questionEn: 'How long can leftover cooked rice be stored in the fridge before making fried rice?',
+        answerEn:
+          'According to USDA guidelines, store cooked rice in an airtight container at 4°C (39°F) or below and use within 3 to 4 days.',
+      },
+      {
+        questionEn: 'What vegetables cook fastest in 10-minute fried rice?',
+        answerEn:
+          'Frozen sweet peas, finely diced carrots, corn kernels, bell peppers, and sliced scallions cook to crisp-tender perfection in 2 to 3 minutes.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 3,
+    cookMinutes: 7,
+    calories: 385,
+    proteinGrams: 16,
+    netCarbsGrams: 46,
+    videoUrl: '/videos/hero-cookreel-featured.mp4',
+    videoDuration: '0:12',
+    image: '/images/action_searing_skillet_butter_1795530068462.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Carbon Steel Flat-Bottom Skillet Wok',
+      brand: 'Joyce Chen Culinary',
+      priceUsd: 59,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Chilled day-old cooked jasmine or basmati rice', amount: 450, unit: 'g' },
+      { item: 'Large pasture-raised eggs, lightly beaten (3 eggs)', amount: 150, unit: 'g' },
+      { item: 'Diced carrots, sweet green peas & sliced scallions', amount: 180, unit: 'g' },
+      { item: 'Minced fresh garlic (2 cloves) & grated fresh ginger (5g)', amount: 15, unit: 'g' },
+      { item: 'Low-sodium soy sauce & toasted sesame oil', amount: 35, unit: 'ml' },
+      { item: 'High-smoke-point avocado oil', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Flash-Sauté Vegetables & Scramble Eggs in One Pan',
+        instruction:
+          'Stir-fry diced carrots, peas, scallion whites, and garlic in hot avocado oil for 2 minutes. Push to one side and scramble the beaten eggs in the empty space for 45 seconds.',
+        timerSeconds: 165,
+      },
+      {
+        title: 'Toss Chilled Rice Over High Heat',
+        instruction:
+          'Add chilled rice, breaking up any clumps with your spatula, and toss over medium-high heat for 3 minutes until grains pop and reach 74°C (165°F).',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Caramelize Soy Sauce & Finish with Sesame Oil',
+        instruction:
+          'Pour soy sauce around the hot perimeter of the skillet, toss vigorously for 45 seconds, then remove from heat and stir in toasted sesame oil and green scallions.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'quick-oven-baked-spiced-chicken-and-potato-sheet-pan',
+    slug: 'quick-oven-baked-spiced-chicken-and-potato-sheet-pan',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · Sheet-Pan Oven Dinners',
+    titleEn: 'Quick Oven-Baked Spiced Chicken Breast & Potato Sheet Pan',
+    subtitleEn:
+      'Toss cubed chicken breasts and baby gold potatoes with smoky Mediterranean spices in one bag, spread on a sheet pan, and roast to golden perfection.',
+    targetKeywordEn: 'quick chicken and potato sheet pan for oven',
+    shortVideoConceptEn:
+      'Quick hands-free prep clip tossing cubed chicken breasts, diced baby potatoes, olive oil, and smoky spices together inside a single zip-top bag or bowl, spreading onto a hot sheet pan, and pulling out golden roasted chicken and crispy potatoes.',
+    internalLinks: [
+      {
+        slug: 'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+        titleEn: 'One-Pan Lemon Garlic Chicken Skillet Dinner in 15 Minutes',
+        contextEn: 'Want to cook your lemon garlic chicken on the stovetop in 15 minutes instead of the oven? Use our one-skillet method.',
+      },
+      {
+        slug: 'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
+        titleEn: 'Crispy Air Fryer & One-Pan Lemon Herb Chicken Thighs with Potatoes',
+        contextEn: 'Prefer bone-in chicken thighs? See our Air Fryer and skillet chicken thigh guide.',
+      },
+    ],
+    wordCount: 1190,
+    introParagraphsEn: [
+      'A quick chicken and potato sheet pan for the oven normally suffers from one flaw: potatoes take 40 minutes to roast while boneless chicken breasts dry out after 18 minutes. The solution is cutting your baby gold potatoes into bite-sized 1.5cm cubes while cutting the chicken breasts into slightly larger 3cm chunks.',
+      'By tossing the potatoes and chicken with olive oil, garlic powder, smoked paprika, oregano, and lemon juice inside a single mixing bag or bowl and spreading them onto a preheated heavy rimmed baking sheet at 220°C (425°F), both the potatoes and chicken finish in exactly 18 to 20 minutes.',
+    ],
+    whyThisWorksEn: [
+      '1.5cm potato cubes and 3cm chicken chunks finish roasting at the exact same 18-minute mark.',
+      'One-bag spice coating coats every crevice evenly with minimal cleanup.',
+      '220°C (425°F) high-heat roasting blisters potato exteriors while chicken reaches 74°C (165°F).',
+    ],
+    chefTipsEn: [
+      'Place your empty rimmed baking sheet inside the oven while it preheats to 220°C (425°F) so the potatoes sizzle the moment they touch the metal.',
+      'Leave at least 1cm of breathing room between pieces on the tray so heat circulates and crisps the potatoes instead of steaming them.',
+      'Squeeze fresh lemon juice and scatter chopped parsley over the pan right after pulling it from the oven.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Verify roasted chicken pieces reach a minimum internal temperature of 74°C (165°F) with a food thermometer before serving; discard any bag used to marinate raw poultry.',
+    substitutions: [
+      {
+        originalEn: 'Boneless Skinless Chicken Breasts (550g)',
+        substituteEn: 'Boneless Skinless Chicken Thighs (550g)',
+        chefNoteEn: 'Boneless thighs stay extra juicy at 220°C and roast in the same 18–20 minutes.',
+      },
+      {
+        originalEn: 'Baby Yukon Gold Potatoes (450g)',
+        substituteEn: 'Red-Skinned Baby Potatoes or Peeled Sweet Potato Cubes (450g)',
+        chefNoteEn: 'No peeling needed for thin-skinned Yukon Gold or red potatoes.',
+      },
+      {
+        originalEn: 'Smoked Paprika & Dried Oregano Blend (12g)',
+        substituteEn: ' Za’atar, Cajun Seasoning, or Italian Herb Blend (12g)',
+        chefNoteEn: '1:1 seasoning swap to vary your weekly meal prep flavors.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I get potatoes crispy on a sheet pan with chicken?',
+        answerEn:
+          'Dice the potatoes into small 1.5cm cubes, pat them dry, preheat the sheet pan at 220°C (425°F), and avoid overcrowding the tray.',
+      },
+      {
+        questionEn: 'Do I need to boil the potatoes before baking this sheet-pan dinner?',
+        answerEn:
+          'No parboiling is needed when you cut thin-skinned baby gold potatoes into 1.5cm cubes and roast at 220°C (425°F).',
+      },
+      {
+        questionEn: 'How long do leftovers keep for weekly lunches?',
+        answerEn:
+          'Cool uncovered for 20 minutes, seal in airtight containers, and refrigerate at 4°C (39°F) for up to 4 days. Reheat in the Air Fryer at 180°C for 4 minutes to restore crispness.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 7,
+    cookMinutes: 18,
+    calories: 445,
+    proteinGrams: 44,
+    netCarbsGrams: 28,
+    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-braiser-pan',
+      nameEn: 'Heavy-Gauge Aluminum Half-Sheet Baking Pan Set',
+      brand: 'Nordic Ware Culinary',
+      priceUsd: 38,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Boneless skinless chicken breasts, cut into 3cm chunks', amount: 550, unit: 'g' },
+      { item: 'Baby Yukon Gold potatoes, cut into small 1.5cm cubes', amount: 450, unit: 'g' },
+      { item: 'Extra-virgin olive oil', amount: 30, unit: 'ml' },
+      { item: 'Smoked paprika, garlic powder, dried oregano & kosher salt', amount: 15, unit: 'g' },
+      { item: 'Fresh lemon juice & chopped fresh parsley for finishing', amount: 25, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Dice Potatoes to 1.5cm & Chicken to 3cm',
+        instruction:
+          'Preheat oven (with sheet pan inside) to 220°C (425°F). Cut baby potatoes into small 1.5cm cubes and chicken breasts into 3cm bite-sized pieces.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'One-Bag Olive Oil & Smoked Spice Toss',
+        instruction:
+          'Place chicken, potatoes, olive oil, smoked paprika, garlic powder, oregano, and salt into a large zip-top bag or bowl and shake for 60 seconds until coated.',
+        timerSeconds: 90,
+      },
+      {
+        title: 'Roast on Hot Sheet Pan for 18 Minutes to 74°C (165°F)',
+        instruction:
+          'Spread in a single uncrowded layer on the hot sheet pan and roast at 220°C (425°F) for 18 minutes until potatoes are crispy and chicken hits 74°C (165°F).',
+        timerSeconds: 1080,
+      },
+    ],
+  },
+  {
+    id: 'quick-garlic-butter-shrimp-pasta-weeknight-dinner',
+    slug: 'quick-garlic-butter-shrimp-pasta-weeknight-dinner',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 15-Minute Seafood Pasta',
+    titleEn: 'Quick Garlic Butter Shrimp Pasta for Weeknight Dinner',
+    subtitleEn:
+      'Succulent jumbo shrimp seared in garlic herb butter for just 2 minutes and tossed with al dente linguine, lemon juice, and Parmigiano.',
+    targetKeywordEn: 'quick garlic butter shrimp pasta',
+    shortVideoConceptEn:
+      'Macro close-up searing pink jumbo shrimp in foaming garlic-herb butter for just 2 minutes, then tossing ribbons of pasta and starchy water directly into the bubbling skillet.',
+    internalLinks: [
+      {
+        slug: '5-ingredient-creamy-spinach-and-cream-cheese-pasta-dinner',
+        titleEn: '5-Ingredient Creamy Spinach & Cream Cheese Pasta for Dinner',
+        contextEn: 'Craving a richer cream cheese and spinach sauce? Combine both pasta techniques!',
+      },
+      {
+        slug: '15-minute-garlic-lemon-shrimp-and-zucchini-skillet',
+        titleEn: '15-Minute Garlic Lemon Shrimp & Crisp Zucchini Skillet',
+        contextEn: 'Looking for a low-carb keto version without pasta? Try our garlic shrimp and zucchini skillet.',
+      },
+    ],
+    wordCount: 1130,
+    introParagraphsEn: [
+      'Nothing beats a quick garlic butter shrimp pasta when you want a restaurant-quality seafood dinner in 15 minutes. Jumbo peeled shrimp cook in just 60 to 90 seconds per side in a hot skillet—meaning by the time your linguine or spaghetti finishes boiling, your shrimp and garlic butter sauce are ready.',
+      'To build a glossy scampi-style sauce without heavy cream, we emulsify cold unsalted butter, fresh lemon juice, and 120ml of starchy pasta cooking water together in the skillet before folding the pink shrimp back in.',
+    ],
+    whyThisWorksEn: [
+      'Jumbo shrimp sear in just 2 to 3 minutes total to stay plump and tender.',
+      'Starchy pasta water and cold butter create a glossy lemon-garlic emulsion.',
+      'Complete seafood pasta dinner on the table in 15 minutes.',
+    ],
+    chefTipsEn: [
+      'Pat thawed shrimp thoroughly dry with paper towels and season with a tiny pinch of baking soda and salt 5 minutes before searing for an extra snappy bite.',
+      'Remove the shrimp onto a warm plate as soon as they curl into a loose “C” shape (63°C / 145°F)—tight “O” curls mean overcooked shrimp.',
+      'Add fresh lemon zest and chopped parsley right at the end for bright coastal flavor.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook shrimp and shellfish until the flesh turns pearly and opaque and reaches a minimum internal temperature of 63°C (145°F).',
+    substitutions: [
+      {
+        originalEn: 'Peeled & Deveined Jumbo Shrimp (400g)',
+        substituteEn: 'Sea Scallops (400g) or Bite-Sized Salmon Cubes',
+        chefNoteEn: 'Bay or sea scallops sear in the exact same 2–3 minute window.',
+      },
+      {
+        originalEn: 'Dry Linguine or Spaghetti (250g)',
+        substituteEn: 'Angel Hair Pasta (boils in 4 mins) or Gluten-Free Brown Rice Pasta',
+        chefNoteEn: 'Angel hair cuts total dinner time down to 10 minutes.',
+      },
+      {
+        originalEn: 'Unsalted Butter (45g)',
+        substituteEn: '25g Unsalted Butter + 20ml Extra-Virgin Olive Oil',
+        chefNoteEn: 'Combining olive oil and butter keeps the sauce fluid even as it cools.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I thaw frozen shrimp quickly for a 15-minute pasta dinner?',
+        answerEn:
+          'Place frozen peeled shrimp in a colander submerged in a bowl of cold tap water for 8 to 10 minutes, then pat completely dry on paper towels before searing.',
+      },
+      {
+        questionEn: 'Why did my garlic butter pasta sauce separate and look greasy?',
+        answerEn:
+          'Melted butter separates if heated dry without water. Whisking 90–120ml of starchy pasta water with cold cubed butter off the heat creates a stable, creamy emulsion.',
+      },
+      {
+        questionEn: 'Can I add white wine to this garlic butter shrimp pasta?',
+        answerEn:
+          'Yes, deglaze the pan with 60ml dry white wine (or 50ml chicken broth + 10ml lemon juice) right after sautéing the garlic.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_truffle_pasta_1795527116427.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 465,
+    proteinGrams: 38,
+    netCarbsGrams: 48,
+    videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_truffle_pasta_1795527116427.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: '12-Inch Tri-Ply Stainless Steel Skillet',
+      brand: 'All-Clad Culinary',
+      priceUsd: 129,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Dry linguine or spaghetti pasta', amount: 250, unit: 'g' },
+      { item: 'Peeled & deveined jumbo shrimp, patted dry', amount: 400, unit: 'g' },
+      { item: 'Unsalted butter (divided) & 15ml olive oil', amount: 60, unit: 'g' },
+      { item: 'Fresh garlic cloves, thinly sliced or minced (5 cloves)', amount: 25, unit: 'g' },
+      { item: 'Fresh lemon juice, zest & 120ml starchy pasta water', amount: 150, unit: 'ml' },
+      { item: 'Grated Parmigiano-Reggiano, parsley & red pepper flakes', amount: 40, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Boil Linguine & Reserve Starchy Water',
+        instruction:
+          'Boil linguine in salted water until al dente (8 minutes) and reserve 120ml of starchy pasta water before draining.',
+        timerSeconds: 480,
+      },
+      {
+        title: '2-Minute High-Heat Garlic Butter Shrimp Sear',
+        instruction:
+          'Sear dry seasoned shrimp in olive oil and half the butter over medium-high heat for 60–90 seconds per side until pink and 63°C (145°F). Transfer shrimp to a plate.',
+        timerSeconds: 150,
+      },
+      {
+        title: 'Emulsify Garlic Butter Sauce & Toss Pasta',
+        instruction:
+          'Sauté garlic for 30 seconds, add pasta water and lemon juice, then toss in drained linguine, remaining cold butter, Parmigiano, and cooked shrimp for 60 seconds.',
+        timerSeconds: 90,
+      },
+    ],
+  },
+  {
+    id: 'crispy-skillet-tuna-melt-sandwich-for-quick-dinner',
+    slug: 'crispy-skillet-tuna-melt-sandwich-for-quick-dinner',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · 10-Minute Skillet Sandwiches',
+    titleEn: 'Crispy Skillet Tuna Melt Sandwich for a Quick Dinner',
+    subtitleEn:
+      'Pantry albacore tuna tossed with lemon, celery, and Dijon, layered with sharp aged cheddar on sourdough and pan-toasted in butter until golden.',
+    targetKeywordEn: 'quick tuna and cheese dinner sandwich',
+    shortVideoConceptEn:
+      'Crisp ASMR knife cut slicing the pan-toasted sourdough tuna melt diagonally in half, pulling the two halves apart to show the golden crust and stretchy melted cheddar.',
+    internalLinks: [
+      {
+        slug: 'crispy-ground-beef-and-melted-cheese-tortilla-wraps-dinner',
+        titleEn: 'Crispy Ground Beef & Melted Cheese Tortilla Wraps',
+        contextEn: 'Another 15-minute crispy pan-toasted melted cheese dinner favorite.',
+      },
+      {
+        slug: 'quick-15-minute-red-lentil-soup-with-lemon-and-cumin',
+        titleEn: 'Quick 15-Minute Red Lentil Soup with Lemon & Cumin',
+        contextEn: 'Pair half a crispy tuna melt with a warm bowl of our 15-minute lemon red lentil soup.',
+      },
+    ],
+    wordCount: 1110,
+    introParagraphsEn: [
+      'A quick tuna and cheese dinner sandwich turns two cans of pantry tuna into a hot, gourmet bistro meal in 10 minutes. The key to a tuna melt that stays crisp from edge to edge is draining the tuna thoroughly and layering a slice of sharp cheddar on BOTH sides of the tuna salad—creating a moisture barrier that protects the sourdough bread.',
+      'Toasting the sandwich over medium-low heat in a cast-iron skillet with a lid loosely tented for the final 90 seconds melts the cheddar completely without scorching the buttered sourdough crust.',
+    ],
+    whyThisWorksEn: [
+      'Double-sided cheese barrier locks the tuna filling inside and keeps the sourdough crisp.',
+      'Greek yogurt + a touch of mayo and Dijon balances richness with high protein.',
+      'Ready in 10 minutes using shelf-stable pantry tuna.',
+    ],
+    chefTipsEn: [
+      'Press the lid of the tuna can firmly after opening to squeeze out all excess packing water or oil so the salad is never watery.',
+      'Finely diced celery, red onion, or capers add essential crunch against the melted cheddar.',
+      'Toast over medium-low heat (not high heat) so the interior cheddar reaches melting temperature simultaneously with the golden sourdough exterior.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Pantry & Seafood Storage Guideline: Once opened, transfer unused canned tuna to a sealed glass or plastic container, refrigerate at 4°C (39°F) or below, and consume within 3 days.',
+    substitutions: [
+      {
+        originalEn: 'Mayonnaise (30g / 2 Tbsp)',
+        substituteEn: 'Full-Fat Plain Greek Yogurt (30g) or Mashed Avocado',
+        chefNoteEn: 'Greek yogurt cuts saturated fat while adding tangy brightness.',
+      },
+      {
+        originalEn: 'Sharp Aged Cheddar Slices (80g)',
+        substituteEn: 'Gruyère, Swiss, or Provolone Cheese Slices (80g)',
+        chefNoteEn: 'Gruyère and Swiss give a classic French bistro flavor profile.',
+      },
+      {
+        originalEn: 'Thick-Cut Sourdough Bread (4 slices)',
+        substituteEn: 'Whole-Grain Rye Bread or Low-Carb Tortilla Wraps',
+        chefNoteEn: 'Sturdy artisanal slices hold up best in a cast-iron skillet.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I keep a skillet tuna melt from getting soggy?',
+        answerEn:
+          'Drain the canned tuna thoroughly, go light on the mayonnaise/yogurt binder, and place a slice of cheese directly against both inner faces of the bread to shield the crumb from moisture.',
+      },
+      {
+        questionEn: 'Should I use water-packed or olive-oil-packed canned tuna?',
+        answerEn:
+          'Both work well! Olive-oil-packed albacore or skipjack tuna has a richer, flakier texture and requires less added mayonnaise.',
+      },
+      {
+        questionEn: 'Can I make the tuna salad mixture ahead of time?',
+        answerEn:
+          'Yes, mix the drained tuna, celery, Dijon, and lemon juice up to 2 days ahead and store in a sealed container at 4°C (39°F), then assemble and grill fresh in 6 minutes.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 4,
+    cookMinutes: 6,
+    calories: 480,
+    proteinGrams: 39,
+    netCarbsGrams: 34,
+    videoUrl: '/videos/hero-cookreel-featured.mp4',
+    videoDuration: '0:12',
+    image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Griddle & Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Solid albacore tuna, thoroughly drained (2 cans)', amount: 240, unit: 'g' },
+      { item: 'Greek yogurt (or mayo), Dijon mustard & fresh lemon juice', amount: 45, unit: 'g' },
+      { item: 'Finely diced celery stalk, capers & chopped parsley', amount: 40, unit: 'g' },
+      { item: 'Sharp aged cheddar or Swiss cheese (4 slices)', amount: 90, unit: 'g' },
+      { item: 'Thick-sliced sourdough bread (4 slices) & softened butter', amount: 180, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Flake Drained Tuna with Lemon, Dijon & Celery',
+        instruction:
+          'Drain tuna completely, then fold with Greek yogurt (or mayo), Dijon mustard, lemon juice, finely diced celery, and black pepper.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Double-Cheese Barrier Assembly on Sourdough',
+        instruction:
+          'Butter the outer faces of 4 sourdough slices. Place 1 cheese slice on the bottom bread, spread the tuna salad evenly, top with a second cheese slice, and close.',
+        timerSeconds: 60,
+      },
+      {
+        title: 'Pan-Toast Over Medium-Low Heat & Slice in Half',
+        instruction:
+          'Toast in a skillet over medium-low heat for 3 minutes per side (covering loosely for the final minute) until golden brown and cheese is molten. Slice diagonally.',
+        timerSeconds: 360,
+      },
+    ],
+  },
+  {
+    id: 'quick-15-minute-red-lentil-soup-with-lemon-and-cumin',
+    slug: 'quick-15-minute-red-lentil-soup-with-lemon-and-cumin',
+    category: 'healthy-diet',
+    subcategoryId: 'vegan-vegetarian',
+    categoryLabelEn: 'Healthy & Diet · 15-Minute Healthy Soups',
+    titleEn: 'Quick 15-Minute Red Lentil Soup with Lemon & Toasted Cumin',
+    subtitleEn:
+      'Split red lentils simmer into a velvety, high-fiber Mediterranean soup in just 12 minutes—finished with warm cumin, turmeric, and fresh lemon juice.',
+    targetKeywordEn: 'quick lentil soup for healthy dinner',
+    shortVideoConceptEn:
+      'Warm overhead shot blooming cumin and garlic in olive oil, simmering coral-red split lentils until golden and creamy, and ladling into a bowl with a fresh squeeze of lemon juice.',
+    internalLinks: [
+      {
+        slug: 'crispy-skillet-tuna-melt-sandwich-for-quick-dinner',
+        titleEn: 'Crispy Skillet Tuna Melt Sandwich for a Quick Dinner',
+        contextEn: 'Serve a bowl of this 15-minute lemon lentil soup alongside a crispy half tuna melt.',
+      },
+      {
+        slug: '15-minute-mediterranean-spiced-chickpea-spinach-feta-skillet',
+        titleEn: '15-Minute Mediterranean Crispy Chickpea, Spinach & Feta Skillet',
+        contextEn: 'Love 15-minute Mediterranean plant-protein dinners? Try our crispy chickpea and feta skillet.',
+      },
+      {
+        slug: 'ultimate-freezer-meal-prep-guide-how-to-freeze-and-thaw-cooked-food',
+        titleEn: 'Complete Freezer Meal-Prep Handbook',
+        contextEn: 'Red lentil soup freezes beautifully for up to 3 months—see our freezer storage guide.',
+      },
+    ],
+    wordCount: 1170,
+    introParagraphsEn: [
+      'Unlike brown or green lentils that take 40 minutes to soften, split red lentils have had their outer hulls removed so they cook to a naturally creamy texture in 12 minutes with zero soaking required. That makes this quick lentil soup for a healthy dinner one of the fastest plant-based meals you can cook on a weeknight.',
+      'Blooming ground cumin, coriander, and turmeric in warm extra-virgin olive oil with onion and garlic for 60 seconds before pouring in the broth unlocks fat-soluble aromatics, while a generous squeeze of fresh lemon juice at the very end brightens the earthy lentils.',
+    ],
+    whyThisWorksEn: [
+      'Split red lentils cook in 12 minutes without presoaking and thicken the broth naturally.',
+      'Packs 18g of plant protein and 11g of dietary fiber per bowl.',
+      'Finishing with fresh lemon juice off the heat preserves vitamin C and bright citrus flavor.',
+    ],
+    chefTipsEn: [
+      'Rinse split red lentils in a fine-mesh strainer under cold running water for 20 seconds until the water runs clear to prevent excess foam.',
+      'Add acidic ingredients like fresh lemon juice only AFTER the lentils are fully tender—acid added early can slow down legume softening.',
+      'For an ultra-velvety texture, pulse the pot twice with an immersion blender (or whisk vigorously for 15 seconds) right before ladling.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Soup Storage & Cooling Guideline: Divide hot soup into shallow containers so it cools quickly, refrigerate at 4°C (39°F) within 2 hours, and reheat to a rolling boil (74°C / 165°F).',
+    substitutions: [
+      {
+        originalEn: 'Split Red Lentils (220g / 1 Cup)',
+        substituteEn: 'Yellow Split Moong Dal (220g)',
+        chefNoteEn: 'Yellow split lentils cook in the same 12–14 minute timeframe.',
+      },
+      {
+        originalEn: 'Low-Sodium Vegetable Broth (950ml)',
+        substituteEn: 'Low-Sodium Chicken Bone Broth (950ml)',
+        chefNoteEn: 'Bone broth adds an extra 9g of collagen protein per serving.',
+      },
+      {
+        originalEn: 'Fresh Lemon Juice (30ml)',
+        substituteEn: 'Fresh Lime Juice (30ml) + 1/2 tsp Sumac',
+        chefNoteEn: 'Sumac adds a tangy Levantine citrus note.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Do I need to soak red lentils before making 15-minute lentil soup?',
+        answerEn:
+          'No! Split red lentils are hulled and thin; simply rinse them in cold water and simmer directly in broth for 12 minutes.',
+      },
+      {
+        questionEn: 'Why did my lentils stay hard in the soup?',
+        answerEn:
+          'Either old lentils were used or lemon juice/tomato acid was added at the beginning of cooking. Always simmer red lentils in broth first and stir in lemon juice at the end.',
+      },
+      {
+        questionEn: 'Can I freeze this lemon red lentil soup?',
+        answerEn:
+          'Yes, red lentil soup is one of the best freezer meals. Cool completely, leave 2.5cm headspace in freezer containers, and freeze at -18°C (0°F) for up to 3 months.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/hero_cookreel_studio_1795527112508.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 3,
+    cookMinutes: 12,
+    calories: 320,
+    proteinGrams: 18,
+    netCarbsGrams: 42,
+    videoUrl: '/videos/mediterranean-spiced-shakshuka.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    gearItem: {
+      id: 'gear-enameled-skillet',
+      nameEn: '4-Quart Enameled Cast-Iron Dutch Oven Soup Pot',
+      brand: 'Staub Culinary',
+      priceUsd: 165,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Split red lentils, rinsed in cold water', amount: 220, unit: 'g' },
+      { item: 'Finely diced yellow onion, grated carrot & 3 minced garlic cloves', amount: 160, unit: 'g' },
+      { item: 'Ground toasted cumin (2 tsp), turmeric (1/2 tsp) & smoked paprika', amount: 12, unit: 'g' },
+      { item: 'Low-sodium vegetable or chicken broth', amount: 950, unit: 'ml' },
+      { item: 'Freshly squeezed lemon juice & extra-virgin olive oil', amount: 45, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Bloom Onion, Garlic, Cumin & Turmeric in Olive Oil',
+        instruction:
+          'Sauté diced onion and grated carrot in olive oil for 2 minutes, then stir in minced garlic, ground cumin, and turmeric for 45 seconds until fragrant.',
+        timerSeconds: 165,
+      },
+      {
+        title: 'Simmer Rinsed Split Red Lentils for 12 Minutes',
+        instruction:
+          'Pour in rinsed red lentils and broth. Bring to a boil, cover partially, and simmer over medium-low heat for 12 minutes until lentils break down into a creamy soup.',
+        timerSeconds: 720,
+      },
+      {
+        title: 'Whisk Smooth & Squeeze Fresh Lemon Juice',
+        instruction:
+          'Remove from heat, whisk vigorously (or pulse briefly) for a velvety texture, and stir in fresh lemon juice and chopped parsley before ladling.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'quick-4-ingredient-crispy-chicken-cheese-quesadilla',
+    slug: 'quick-4-ingredient-crispy-chicken-cheese-quesadilla',
+    category: 'quick-easy',
+    subcategoryId: '5-ingredient-recipes',
+    categoryLabelEn: 'Quick & Easy · 4-Ingredient Skillet Meals',
+    titleEn: 'Crispy 4-Ingredient Chicken & Cheese Quesadilla for Beginners',
+    subtitleEn:
+      'Learn how to make a golden, crispy chicken and melted cheese quesadilla in 10 minutes with just 4 ingredients and clean triangle slices.',
+    targetKeywordEn: 'quick chicken quesadilla recipe for beginners',
+    shortVideoConceptEn:
+      'Beginner-friendly overhead shot layering cheese, seasoned shredded chicken, and more cheese onto half a tortilla, folding in half to toast golden brown, and slicing into 4 even triangles with a side of salsa.',
+    internalLinks: [
+      {
+        slug: 'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+        titleEn: 'One-Pan Lemon Garlic Chicken Skillet Dinner in 15 Minutes',
+        contextEn: 'Use leftover cooked chicken from our 15-minute lemon garlic chicken skillet inside these quesadillas.',
+      },
+      {
+        slug: 'crispy-ground-beef-and-melted-cheese-tortilla-wraps-dinner',
+        titleEn: 'Crispy Ground Beef & Melted Cheese Tortilla Wraps',
+        contextEn: 'Want a hearty ground beef wrap variation? Check out our crispy beef and cheddar tortilla wraps.',
+      },
+    ],
+    wordCount: 1130,
+    introParagraphsEn: [
+      'This quick chicken quesadilla recipe for beginners uses the “half-moon fold” technique so you never have to flip two separate stacked tortillas in a hot pan. By filling only one half of a large flour tortilla and folding the empty half over the top, you can flip the quesadilla in one smooth motion with zero spilled filling.',
+      'With just 4 ingredients—flour tortillas, cooked shredded chicken, freshly grated Monterey Jack/Cheddar cheese, and your favorite salsa or taco seasoning—you get a shatteringly crisp exterior and molten cheese pull in 10 minutes.',
+    ],
+    whyThisWorksEn: [
+      'Half-moon single-tortilla fold makes flipping effortless for beginners.',
+      'Requires only 4 core ingredients and 10 minutes total time.',
+      'Layering cheese both below and above the chicken glues the tortilla halves together.',
+    ],
+    chefTipsEn: [
+      'Always put a layer of shredded cheese on the bottom tortilla, then the chicken, then a second layer of cheese on top so both sides stick together when folded.',
+      'Cook over medium heat (not high heat) in a dry or lightly buttered skillet so the tortilla turns evenly golden while the center cheese melts.',
+      'Use a pizza wheel or long chef knife to cut each half-moon quesadilla into 3 or 4 clean, equal triangles.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: If cooking raw chicken strips for the filling, verify they reach 74°C (165°F) first; when reheating pre-cooked shredded chicken inside the quesadilla, heat until steaming hot throughout.',
+    substitutions: [
+      {
+        originalEn: 'Cooked Shredded or Diced Chicken Breast (250g)',
+        substituteEn: 'Rotisserie Chicken, Turkey Breast, or Black Beans (250g)',
+        chefNoteEn: 'Store-bought rotisserie chicken reduces prep time to 2 minutes.',
+      },
+      {
+        originalEn: 'Monterey Jack & Mild Cheddar Cheese Blend (140g)',
+        substituteEn: 'Oaxaca Cheese, Mozzarella, or Pepper Jack (140g)',
+        chefNoteEn: 'Monterey Jack and Oaxaca have the highest meltability for classic cheese pulls.',
+      },
+      {
+        originalEn: '10-Inch Flour Tortillas (2 large tortillas)',
+        substituteEn: 'Corn Tortillas or Gluten-Free Cassava Tortillas',
+        chefNoteEn: 'Warm corn tortillas first so they fold without splitting.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'What is the easiest way to flip a quesadilla without the filling falling out?',
+        answerEn:
+          'Fill only half of a single tortilla and fold the other half over like a book (half-moon style). Slide your spatula under the folded edge and flip toward the open edge.',
+      },
+      {
+        questionEn: 'Should I use butter or oil in the skillet for crispy quesadillas?',
+        answerEn:
+          'A thin 1-teaspoon swipe of unsalted butter or avocado oil in a cast-iron skillet produces golden, blistered crunch without greasiness.',
+      },
+      {
+        questionEn: 'How do I keep cooked quesadillas crispy if making several batches?',
+        answerEn:
+          'Place finished quesadillas on a wire cooling rack set over a sheet pan in a warm 95°C (200°F) oven—stacking them on a cold plate traps steam and softens the crust.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'CookReel Editorial Team',
+    authorRoleEn: 'CookReel Culinary Contributors',
+    prepMinutes: 4,
+    cookMinutes: 6,
+    calories: 460,
+    proteinGrams: 37,
+    netCarbsGrams: 29,
+    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
+    videoDuration: '0:12',
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Griddle & Comal',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Cooked shredded or finely diced seasoned chicken breast', amount: 250, unit: 'g' },
+      { item: 'Freshly shredded Monterey Jack & cheddar cheese', amount: 140, unit: 'g' },
+      { item: 'Large 10-inch flour tortillas (2 tortillas)', amount: 130, unit: 'g' },
+      { item: 'Fire-roasted tomato salsa & 10g butter for skillet', amount: 90, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Warm Tortilla & Layer Cheese-Chicken-Cheese on One Half',
+        instruction:
+          'Warm a large tortilla in a lightly buttered skillet over medium heat for 30 seconds. Sprinkle cheese on one half, add seasoned chicken, and top with a second layer of cheese.',
+        timerSeconds: 90,
+      },
+      {
+        title: 'Half-Moon Fold & Crisp 2 Minutes Per Side',
+        instruction:
+          'Fold the empty half of the tortilla over the filling, press gently with a spatula, and toast for 2 minutes per side until golden and crispy.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Rest 60 Seconds & Slice into Equal Triangles',
+        instruction:
+          'Transfer to a cutting board, rest 60 seconds so the melted cheese sets slightly, and slice into 4 even triangles. Serve warm with salsa.',
+        timerSeconds: 60,
       },
     ],
   },

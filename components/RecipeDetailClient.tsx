@@ -327,6 +327,68 @@ export function RecipeDetailClient({
         </div>
 
         <div className="p-6 sm:p-10 space-y-12">
+          {/* QUICK STRUCTURED SUMMARY BAR (Prep Time, Cook Time, Servings, Calories + Jump to Recipe Card) */}
+          <div className="rounded-xl border border-amber-300/80 bg-[#FAF9F6] p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
+              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+                <div className="text-[11px] font-mono uppercase text-slate-500">
+                  Prep Time
+                </div>
+                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
+                  <Clock className="w-4 h-4 text-amber-800" />
+                  <span>{recipe.prepMinutes} mins</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+                <div className="text-[11px] font-mono uppercase text-slate-500">
+                  Cook Time
+                </div>
+                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
+                  <Timer className="w-4 h-4 text-amber-800" />
+                  <span>{recipe.cookMinutes} mins</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+                <div className="text-[11px] font-mono uppercase text-slate-500">
+                  Yield / Servings
+                </div>
+                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
+                  <Users className="w-4 h-4 text-amber-800" />
+                  <span>{2 * servingsMultiplier} Servings</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-white border border-slate-200/90">
+                <div className="text-[11px] font-mono uppercase text-slate-500">
+                  Calories &amp; Protein
+                </div>
+                <div className="font-mono text-base font-bold text-amber-900 flex items-center gap-1.5 mt-0.5">
+                  <Flame className="w-4 h-4 text-amber-800" />
+                  <span>
+                    {recipe.calories} kcal · {recipe.proteinGrams}g P
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              <a
+                href="#structured-recipe-card"
+                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-xs"
+              >
+                Jump to Structured Recipe Card ↓
+              </a>
+              {recipe.videoUrl && (
+                <a
+                  href="#step-by-step-visuals"
+                  className="px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5"
+                >
+                  <Play className="w-3.5 h-3.5 text-amber-800 fill-current" />
+                  <span>Watch Short Video</span>
+                </a>
+              )}
+            </div>
+          </div>
+
           {/* USDA Food Safety Callout Banner */}
           <div className="rounded-xl border border-emerald-300 bg-emerald-50/70 p-4 flex items-start gap-3">
             <ShieldAlert className="w-5 h-5 text-emerald-800 shrink-0 mt-0.5" />
@@ -375,7 +437,7 @@ export function RecipeDetailClient({
           </div>
 
           {/* SECTION 2: STEP-BY-STEP VISUALS (Unique Video Clip OR Step Photography) */}
-          <div className="pt-8 border-t border-slate-200">
+          <div id="step-by-step-visuals" className="pt-8 border-t border-slate-200">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
                 <Play className="w-4 h-4" />
@@ -390,6 +452,22 @@ export function RecipeDetailClient({
                 Visual Reference for Each Cooking Stage
               </span>
             </div>
+
+            {recipe.shortVideoConceptEn && (
+              <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50/70 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="text-xs sm:text-sm text-slate-800 leading-relaxed">
+                  <strong className="text-amber-950 font-bold">
+                    Short-Form Video Camera Angle:
+                  </strong>{' '}
+                  {recipe.shortVideoConceptEn}
+                </div>
+                {recipe.targetKeywordEn && (
+                  <span className="px-2.5 py-1 rounded bg-white border border-amber-300 text-[11px] font-mono text-amber-900 font-semibold shrink-0">
+                    Topic: {recipe.targetKeywordEn}
+                  </span>
+                )}
+              </div>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               {recipe.videoUrl ? (
@@ -528,9 +606,17 @@ export function RecipeDetailClient({
             </div>
 
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold mb-4">
-                <Repeat className="w-4 h-4" />
-                <span>1:1 Ingredient Substitutions Table</span>
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
+                  <Repeat className="w-4 h-4" />
+                  <span>1:1 Ingredient Substitutions Table</span>
+                </div>
+                <Link
+                  href="/substitutions"
+                  className="text-xs font-bold text-amber-800 hover:underline"
+                >
+                  Open Master Substitutions Guide →
+                </Link>
               </div>
               <div className="overflow-x-auto rounded-xl border border-slate-200">
                 <table className="w-full text-left border-collapse text-xs sm:text-sm">
@@ -565,8 +651,41 @@ export function RecipeDetailClient({
             </div>
           </div>
 
+          {/* INTERNAL CROSS-LINKING: PAIR WITH & RELATED COOKREEL GUIDES */}
+          {recipe.internalLinks && recipe.internalLinks.length > 0 && (
+            <div className="pt-8 border-t border-slate-200">
+              <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-6">
+                <span className="text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
+                  Pair With &amp; Related Weeknight Recipes
+                </span>
+                <h3 className="font-serif text-xl font-bold text-slate-900 mt-1 mb-4">
+                  Recommended Companion Recipes from Our Kitchen
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {recipe.internalLinks.map((linkItem, idx) => (
+                    <Link
+                      key={idx}
+                      href={`/recipes/${linkItem.slug}`}
+                      className="p-4 rounded-xl bg-white border border-slate-200/90 hover:border-amber-800 transition-colors flex flex-col justify-between group"
+                    >
+                      <div>
+                        <div className="font-serif text-base font-bold text-slate-900 group-hover:text-amber-800 transition-colors mb-1 flex items-center justify-between gap-2">
+                          <span>{linkItem.titleEn}</span>
+                          <ChevronRight className="w-4 h-4 text-amber-800 shrink-0" />
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          {linkItem.contextEn}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* SECTION 4: STRUCTURED RECIPE CARD */}
-          <div className="pt-8 border-t border-slate-200">
+          <div id="structured-recipe-card" className="pt-8 border-t border-slate-200">
             <div className="rounded-2xl border-2 border-amber-800/30 bg-[#FAF9F6] p-6 sm:p-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
