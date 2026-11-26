@@ -95,7 +95,7 @@ export function CookReelBrandLogo({
                 isDark ? 'text-amber-300/90' : 'text-slate-600'
               }`}
             >
-              www.cookreel.com
+              cookreel.com
             </span>
             {showTagline && (
               <span

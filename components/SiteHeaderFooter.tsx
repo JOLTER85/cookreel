@@ -1,5 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   HelpCircle,
   Mail,
@@ -7,8 +10,15 @@ import {
   ExternalLink,
   BookOpen,
   Repeat,
+  Search,
+  Clock,
+  ChevronRight,
 } from 'lucide-react';
-import { SITE_ARCHITECTURE, SOCIAL_LINKS } from '@/lib/cookreel-data';
+import {
+  SITE_ARCHITECTURE,
+  SOCIAL_LINKS,
+  COOKREEL_RECIPES,
+} from '@/lib/cookreel-data';
 import { CookReelBrandLogo } from '@/components/CookReelBrandLogo';
 
 export function SiteHeader({
@@ -19,12 +29,41 @@ export function SiteHeader({
   rightSlot?: React.ReactNode;
 }) {
   const substitutionsSlug = '/substitutions';
+  const router = useRouter();
+  const [headerSearch, setHeaderSearch] = useState('');
+  const [searchFocused, setSearchFocused] = useState(false);
+
+  const matchingRecipes =
+    headerSearch.trim().length >= 1
+      ? COOKREEL_RECIPES.filter((r) => {
+          const q = headerSearch.trim().toLowerCase();
+          return (
+            r.titleEn.toLowerCase().includes(q) ||
+            r.subtitleEn.toLowerCase().includes(q) ||
+            r.categoryLabelEn.toLowerCase().includes(q) ||
+            r.ingredientsEn.some((i) => i.item.toLowerCase().includes(q))
+          );
+        }).slice(0, 6)
+      : [];
+
+  const handleHeaderSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = headerSearch.trim();
+    if (!q) return;
+    if (matchingRecipes.length === 1) {
+      setSearchFocused(false);
+      router.push(`/recipes/${matchingRecipes[0].slug}`);
+      return;
+    }
+    setSearchFocused(false);
+    router.push(`/?q=${encodeURIComponent(q)}#recipe-directory`);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF9F6]/95 backdrop-blur-md">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <Link href="/" aria-label="CookReel Home — www.cookreel.com">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 h-20 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 shrink-0">
+          <Link href="/" aria-label="CookReel Home — cookreel.com">
             <CookReelBrandLogo
               theme="light"
               size="md"
@@ -37,7 +76,7 @@ export function SiteHeader({
         {/* Clean Main Navigation with Real Indexable URLs + Substitutions Guide */}
         <nav
           aria-label="Primary Categories"
-          className="hidden xl:flex items-center gap-1 text-sm font-semibold text-slate-700"
+          className="hidden xl:flex items-center gap-0.5 text-xs font-bold text-slate-700"
         >
           {SITE_ARCHITECTURE.map((cat) => {
             const href = `/category/${cat.slug}`;
@@ -46,7 +85,7 @@ export function SiteHeader({
               <Link
                 key={cat.slug}
                 href={href}
-                className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+                className={`px-2.5 py-2 rounded-lg transition-colors flex items-center gap-1 whitespace-nowrap ${
                   isActive
                     ? 'bg-amber-800 text-white shadow-sm'
                     : 'hover:text-amber-800 hover:bg-amber-50/70'
@@ -58,29 +97,37 @@ export function SiteHeader({
           })}
           <Link
             href={substitutionsSlug}
-            className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+            className={`px-2.5 py-2 rounded-lg transition-colors flex items-center gap-1 whitespace-nowrap ${
               activePath === substitutionsSlug
                 ? 'bg-amber-800 text-white shadow-sm'
                 : 'hover:text-amber-800 hover:bg-amber-50/70'
             }`}
           >
-            <Repeat className="w-3.5 h-3.5 text-amber-800" />
+            <Repeat
+              className={`w-3.5 h-3.5 ${
+                activePath === substitutionsSlug ? 'text-white' : 'text-amber-800'
+              }`}
+            />
             <span>Substitutions Guide</span>
           </Link>
           <Link
             href="/qa"
-            className={`px-3 py-2 rounded-lg transition-colors flex items-center gap-1.5 ${
+            className={`px-2.5 py-2 rounded-lg transition-colors flex items-center gap-1 whitespace-nowrap ${
               activePath === '/qa'
                 ? 'bg-amber-800 text-white shadow-sm'
                 : 'hover:text-amber-800 hover:bg-amber-50/70'
             }`}
           >
-            <HelpCircle className="w-4 h-4 text-amber-800" />
+            <HelpCircle
+              className={`w-3.5 h-3.5 ${
+                activePath === '/qa' ? 'text-white' : 'text-amber-800'
+              }`}
+            />
             <span>Cooking Q&amp;A</span>
           </Link>
           <Link
             href="/about"
-            className={`px-2.5 py-2 rounded-lg transition-colors ${
+            className={`px-2.5 py-2 rounded-lg transition-colors whitespace-nowrap ${
               activePath === '/about'
                 ? 'bg-amber-800 text-white shadow-sm'
                 : 'hover:text-amber-800 hover:bg-amber-50/70'
@@ -90,26 +137,83 @@ export function SiteHeader({
           </Link>
         </nav>
 
+        {/* Global Recipe Search Bar + Action Slot (No Duplicate Cooking Q&A Button) */}
         <div className="flex items-center gap-2.5">
+          <div className="relative">
+            <form onSubmit={handleHeaderSearchSubmit} className="relative">
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="search"
+                value={headerSearch}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setTimeout(() => setSearchFocused(false), 180)}
+                onChange={(e) => {
+                  setHeaderSearch(e.target.value);
+                  setSearchFocused(true);
+                }}
+                placeholder="Search recipes (e.g. salmon, chicken)..."
+                aria-label="Search recipes or ingredients"
+                className="w-44 sm:w-56 md:w-64 pl-8 pr-3 py-2 rounded-lg border border-slate-300 bg-white text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-amber-800 focus:ring-2 focus:ring-amber-800/15 transition-all"
+              />
+            </form>
+
+            {/* Instant Recipe Search Results Dropdown */}
+            {searchFocused && headerSearch.trim().length >= 1 && (
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-xl border border-slate-200 bg-white shadow-2xl z-50 overflow-hidden">
+                <div className="px-3.5 py-2 bg-[#FAF9F6] border-b border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                  <span>Matching Recipes ({matchingRecipes.length})</span>
+                  <span>Press Enter to search</span>
+                </div>
+                {matchingRecipes.length === 0 ? (
+                  <div className="p-4 text-xs text-slate-500">
+                    No recipes found for &ldquo;{headerSearch}&rdquo;. Try searching for{' '}
+                    <span className="font-semibold text-slate-700">
+                      chicken, salmon, pasta, keto, or lentil
+                    </span>
+                    .
+                  </div>
+                ) : (
+                  <ul className="divide-y divide-slate-100 max-h-80 overflow-y-auto">
+                    {matchingRecipes.map((rec) => (
+                      <li key={rec.id}>
+                        <Link
+                          href={`/recipes/${rec.slug}`}
+                          onClick={() => setSearchFocused(false)}
+                          className="px-3.5 py-2.5 hover:bg-amber-50/70 flex items-center justify-between gap-3 transition-colors group"
+                        >
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-slate-900 group-hover:text-amber-800 truncate">
+                              {rec.titleEn}
+                            </div>
+                            <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5 font-mono">
+                              <span>{rec.categoryLabelEn.split('·')[0]}</span>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Clock className="w-3 h-3 text-amber-800" />
+                                {rec.prepMinutes + rec.cookMinutes}m
+                              </span>
+                            </div>
+                          </div>
+                          <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-800 shrink-0" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+
           {rightSlot ? (
             rightSlot
           ) : (
-            <>
-              <Link
-                href="/qa"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
-              >
-                <HelpCircle className="w-3.5 h-3.5 text-amber-800" />
-                <span>Cooking Q&amp;A</span>
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>All Recipes</span>
-              </Link>
-            </>
+            <Link
+              href="/"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm shrink-0"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>All Recipes</span>
+            </Link>
           )}
         </div>
       </div>

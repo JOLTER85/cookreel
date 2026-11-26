@@ -226,117 +226,162 @@ export function RecipeDetailClient({
       </nav>
 
       <article className="rounded-2xl border border-slate-200/90 bg-white shadow-lg overflow-hidden">
-        {/* Top Article Banner */}
+        {/* Top Article Banner — Split Two-Column Layout with Appetizing Dish Photo Above the Fold */}
         <div className="bg-slate-900 text-white px-6 sm:px-10 py-8 border-b border-slate-800">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                href={`/category/${recipe.category}`}
-                className="px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest hover:bg-amber-500/30 transition-colors"
-              >
-                {recipe.categoryLabelEn}
-              </Link>
-              <span className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">
-                {recipe.wordCount}+ Words · Step-by-Step Guide
-              </span>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: Category, Share Actions, Title, Subtitle & Author Meta */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Link
+                    href={`/category/${recipe.category}`}
+                    className="px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest hover:bg-amber-500/30 transition-colors"
+                  >
+                    {recipe.categoryLabelEn}
+                  </Link>
+                  <span className="px-2.5 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono">
+                    Step-by-Step Guide
+                  </span>
+                </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <a
-                href={pinterestShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white text-xs font-bold transition-colors"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>Pin to Pinterest</span>
-              </a>
-              <button
-                type="button"
-                onClick={handleCopyShareLink}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
-              >
-                {copiedUrl ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Link Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Share2 className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Copy Link</span>
-                  </>
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  typeof window !== 'undefined' && window.print()
-                }
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
-              >
-                <Printer className="w-3.5 h-3.5 text-amber-400" />
-                <span>Print Recipe</span>
-              </button>
-            </div>
-          </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href={pinterestShareUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white text-xs font-bold transition-colors"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Pin to Pinterest</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={handleCopyShareLink}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+                  >
+                    {copiedUrl ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Link Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Copy Link</span>
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      typeof window !== 'undefined' && window.print()
+                    }
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+                  >
+                    <Printer className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Print Recipe</span>
+                  </button>
+                </div>
+              </div>
 
-          <h1 className="font-serif text-2xl sm:text-4xl font-bold text-white leading-tight mb-3">
-            {recipe.titleEn}
-          </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed mb-5">
-            {recipe.subtitleEn}
-          </p>
+              <h1 className="font-serif text-2xl sm:text-4xl font-bold text-white leading-tight">
+                {recipe.titleEn}
+              </h1>
+              <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+                {recipe.subtitleEn}
+              </p>
 
-          <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800/80 text-xs text-slate-300">
-            <div>
-              Written by{' '}
-              <Link
-                href="/about"
-                className="font-bold text-amber-300 underline hover:text-amber-200"
-              >
-                {recipe.authorName}
-              </Link>{' '}
-              <span className="text-slate-400">({recipe.authorRoleEn})</span>
-            </div>
-            <span className="text-slate-600">•</span>
-            <span className="font-mono">
-              Prep: {recipe.prepMinutes}m · Cook: {recipe.cookMinutes}m · Total:{' '}
-              {recipe.prepMinutes + recipe.cookMinutes}m
-            </span>
-            <span className="text-slate-600">•</span>
-            {averageRating && reviewCount > 0 ? (
-              <a
-                href="#reader-reviews"
-                className="inline-flex items-center gap-1 text-amber-300 font-bold hover:underline"
-              >
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                <span>
-                  {averageRating} ({reviewCount} verified{' '}
-                  {reviewCount === 1 ? 'review' : 'reviews'})
+              <div className="flex flex-wrap items-center gap-3.5 pt-4 border-t border-slate-800/80 text-xs text-slate-300">
+                <div>
+                  Written by{' '}
+                  <Link
+                    href="/about"
+                    className="font-bold text-amber-300 underline hover:text-amber-200"
+                  >
+                    {recipe.authorName}
+                  </Link>{' '}
+                  <span className="text-slate-400">({recipe.authorRoleEn})</span>
+                </div>
+                <span className="text-slate-600">•</span>
+                <span className="font-mono">
+                  Prep: {recipe.prepMinutes}m · Cook: {recipe.cookMinutes}m · Total:{' '}
+                  {recipe.prepMinutes + recipe.cookMinutes}m
                 </span>
-              </a>
-            ) : (
-              <a
-                href="#reader-reviews"
-                className="text-slate-400 hover:text-amber-300 underline"
-              >
-                0 Reader Reviews — Be the first to review
-              </a>
-            )}
+                <span className="text-slate-600">•</span>
+                {averageRating && reviewCount > 0 ? (
+                  <a
+                    href="#reader-reviews"
+                    className="inline-flex items-center gap-1 text-amber-300 font-bold hover:underline"
+                  >
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                    <span>
+                      {averageRating} ({reviewCount} verified{' '}
+                      {reviewCount === 1 ? 'review' : 'reviews'})
+                    </span>
+                  </a>
+                ) : (
+                  <a
+                    href="#reader-reviews"
+                    className="text-slate-400 hover:text-amber-300 underline"
+                  >
+                    0 Reader Reviews — Be the first to review
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Right Column: Appetizing Hero Dish Photo & Quick Video Preview Above the Fold */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-xl overflow-hidden border border-slate-700/80 bg-slate-950 aspect-[16/10] shadow-2xl group">
+                <Image
+                  src={recipe.image}
+                  alt={recipe.titleEn}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  referrerPolicy="no-referrer"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                  <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md text-amber-300 text-[11px] font-mono font-semibold border border-amber-400/30">
+                    Ready in {recipe.prepMinutes + recipe.cookMinutes} Mins
+                  </span>
+                  {recipe.videoUrl && (
+                    <a
+                      href="#step-by-step-visuals"
+                      className="px-2.5 py-1 rounded bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-bold flex items-center gap-1 shadow-md transition-colors"
+                    >
+                      <Play className="w-3 h-3 fill-current" />
+                      <span>Watch {recipe.videoDuration || '0:12'} Clip</span>
+                    </a>
+                  )}
+                </div>
+
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
+                  <span className="font-serif font-bold truncate pr-2">
+                    {recipe.titleEn}
+                  </span>
+                  <span className="font-mono text-[11px] text-amber-300 shrink-0">
+                    {recipe.calories} kcal · {recipe.proteinGrams}g Protein
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="p-6 sm:p-10 space-y-12">
-          {/* QUICK STRUCTURED SUMMARY BAR (Prep Time, Cook Time, Servings, Calories + Jump to Recipe Card) */}
-          <div className="rounded-xl border border-amber-300/80 bg-[#FAF9F6] p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          {/* QUICK SUMMARY BAR (Prep Time, Cook Time, Servings, Calories + Jump to Recipe) */}
+          <div className="rounded-xl border border-amber-300/80 bg-[#FAF9F6] p-5 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
               <div className="p-3 rounded-lg bg-white border border-slate-200/90">
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Prep Time
                 </div>
-                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
-                  <Clock className="w-4 h-4 text-amber-800" />
+                <div className="font-mono text-sm sm:text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
+                  <Clock className="w-4 h-4 text-amber-800 shrink-0" />
                   <span>{recipe.prepMinutes} mins</span>
                 </div>
               </div>
@@ -344,8 +389,8 @@ export function RecipeDetailClient({
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Cook Time
                 </div>
-                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
-                  <Timer className="w-4 h-4 text-amber-800" />
+                <div className="font-mono text-sm sm:text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
+                  <Timer className="w-4 h-4 text-amber-800 shrink-0" />
                   <span>{recipe.cookMinutes} mins</span>
                 </div>
               </div>
@@ -353,8 +398,8 @@ export function RecipeDetailClient({
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Yield / Servings
                 </div>
-                <div className="font-mono text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5">
-                  <Users className="w-4 h-4 text-amber-800" />
+                <div className="font-mono text-sm sm:text-base font-bold text-slate-900 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
+                  <Users className="w-4 h-4 text-amber-800 shrink-0" />
                   <span>{2 * servingsMultiplier} Servings</span>
                 </div>
               </div>
@@ -362,8 +407,8 @@ export function RecipeDetailClient({
                 <div className="text-[11px] font-mono uppercase text-slate-500">
                   Calories &amp; Protein
                 </div>
-                <div className="font-mono text-base font-bold text-amber-900 flex items-center gap-1.5 mt-0.5">
-                  <Flame className="w-4 h-4 text-amber-800" />
+                <div className="font-mono text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-1.5 mt-0.5 whitespace-nowrap">
+                  <Flame className="w-4 h-4 text-amber-800 shrink-0" />
                   <span>
                     {recipe.calories} kcal · {recipe.proteinGrams}g P
                   </span>
@@ -374,14 +419,14 @@ export function RecipeDetailClient({
             <div className="flex flex-wrap items-center gap-2.5 shrink-0">
               <a
                 href="#structured-recipe-card"
-                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-xs"
+                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-xs whitespace-nowrap"
               >
-                Jump to Structured Recipe Card ↓
+                Jump to Recipe ↓
               </a>
               {recipe.videoUrl && (
                 <a
                   href="#step-by-step-visuals"
-                  className="px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5 whitespace-nowrap"
                 >
                   <Play className="w-3.5 h-3.5 text-amber-800 fill-current" />
                   <span>Watch Short Video</span>

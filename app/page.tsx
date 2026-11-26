@@ -77,6 +77,15 @@ export default function CookReelHomePage() {
 
   useEffect(() => {
     let active = true;
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const qParam = params.get('q');
+      if (qParam) {
+        setTimeout(() => {
+          if (active) setSearchQuery(qParam);
+        }, 0);
+      }
+    }
     fetch('/api/recipes')
       .then((res) => res.json())
       .then((data) => {
@@ -192,23 +201,14 @@ export default function CookReelHomePage() {
       <SiteHeader
         activePath="/"
         rightSlot={
-          <>
-            <Link
-              href="/qa"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-slate-300 bg-white hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-amber-800" />
-              <span>Cooking Q&amp;A</span>
-            </Link>
-            <button
-              type="button"
-              onClick={() => setSubmitModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Submit Recipe</span>
-            </button>
-          </>
+          <button
+            type="button"
+            onClick={() => setSubmitModalOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-sm shrink-0"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Submit Recipe</span>
+          </button>
         }
       />
 
@@ -362,7 +362,10 @@ export default function CookReelHomePage() {
         </section>
 
         {/* SECTION 1: 4-PILLAR SITE ARCHITECTURE & STANDALONE RECIPE DIRECTORY */}
-        <section className="py-12 border-b border-slate-200/80 bg-white">
+        <section
+          id="recipe-directory"
+          className="py-12 border-b border-slate-200/80 bg-white"
+        >
           <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
               <div>
