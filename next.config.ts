@@ -20,7 +20,29 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Historical subdomain tv.cookreel.com (e.g. yankeedoodlepaddy.com backlink) -> /videos
+      // 1. Historical subdomain http(s)://tv.cookreel.com/ and http(s)://tv.cookreel.com/today -> Homepage https://www.cookreel.com/
+      {
+        source: '/',
+        has: [
+          {
+            type: 'host',
+            value: 'tv.cookreel.com',
+          },
+        ],
+        destination: 'https://www.cookreel.com/',
+        permanent: true,
+      },
+      {
+        source: '/today',
+        has: [
+          {
+            type: 'host',
+            value: 'tv.cookreel.com',
+          },
+        ],
+        destination: 'https://www.cookreel.com/',
+        permanent: true,
+      },
       {
         source: '/:path*',
         has: [
@@ -29,20 +51,36 @@ const nextConfig: NextConfig = {
             value: 'tv.cookreel.com',
           },
         ],
-        destination: 'https://www.cookreel.com/videos',
+        destination: 'https://www.cookreel.com/',
+        permanent: true,
+      },
+      // 2. Direct path redirects for /today, /tv, and /tv/today on main domain -> Homepage /
+      {
+        source: '/today',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/today/:path*',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/tv',
-        destination: '/videos',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/tv/today',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/tv/:path*',
-        destination: '/videos',
+        destination: '/',
         permanent: true,
       },
-      // Legacy underscore category paths -> hyphenated category paths
+      // 3. Legacy underscore category paths -> hyphenated category paths
       {
         source: '/category/quick_easy',
         destination: '/category/quick-easy',
@@ -63,7 +101,7 @@ const nextConfig: NextConfig = {
         destination: '/category/kitchen-hacks',
         permanent: true,
       },
-      // Legacy recipe slug aliases -> canonical recipe slugs
+      // 4. Legacy recipe slug aliases -> canonical recipe slugs
       {
         source: '/recipes/keto-garlic-herb-butter-ribeye-steak-cast-iron',
         destination: '/recipes/keto-garlic-herb-butter-ribeye-steak-high-protein',
