@@ -213,27 +213,27 @@ export default function CookReelHomePage() {
       />
 
       <main className="flex-1">
-        {/* HERO SECTION — Central Hub Overview (Links to Standalone Recipe Page) */}
-        <section className="relative overflow-hidden bg-slate-950 text-white border-b border-slate-800">
+        {/* HERO SECTION — Clean White Editorial Hub Overview */}
+        <section className="relative overflow-hidden bg-white text-slate-900 border-b border-slate-200/90">
           <div className="mx-auto max-w-[1440px] px-4 sm:px-8 py-12 lg:py-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Editorial Copy */}
               <div className="lg:col-span-7 space-y-6">
-                <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-md bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest">
-                  <Sparkles className="w-3.5 h-3.5" />
+                <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-xs font-mono uppercase tracking-widest font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-800" />
                   <span>
                     Step-by-Step Video Recipes · 1:1 Substitutions · USDA Safety Standards
                   </span>
                 </div>
 
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight leading-[1.08] text-white">
+                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight leading-[1.08] text-slate-900">
                   Practical Weeknight Recipes &amp;{' '}
-                  <span className="text-amber-400">
+                  <span className="text-amber-800">
                     Short-Form Step Visuals.
                   </span>
                 </h1>
 
-                <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
                   Explore {recipes.length} comprehensive recipe guides across Quick 15-Minute Meals, Keto &amp; High-Protein Dinners, No-Bake Desserts, and Kitchen Hacks—complete with gram measurements, 1:1 ingredient swaps, and official USDA safe internal cooking temperatures.
                 </p>
 
@@ -241,7 +241,7 @@ export default function CookReelHomePage() {
                 <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Link
                     href={`/recipes/${featuredHeroRecipe.slug}`}
-                    className="px-6 py-3.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm flex items-center gap-2.5 shadow-lg shadow-amber-900/30 transition-all cursor-pointer"
+                    className="px-6 py-3.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white font-bold text-sm flex items-center gap-2.5 shadow-md shadow-amber-900/15 transition-all cursor-pointer"
                   >
                     <Play className="w-4 h-4 fill-current" />
                     <span>Open Featured Salmon Recipe</span>
@@ -249,26 +249,26 @@ export default function CookReelHomePage() {
 
                   <Link
                     href="/qa"
-                    className="px-5 py-3.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-100 border border-slate-700 font-semibold text-sm flex items-center gap-2 transition-colors"
+                    className="px-5 py-3.5 rounded-lg bg-[#FAF9F6] hover:bg-amber-50/70 text-slate-800 border border-slate-300 hover:border-amber-800 font-semibold text-sm flex items-center gap-2 transition-colors"
                   >
-                    <HelpCircle className="w-4 h-4 text-amber-400" />
+                    <HelpCircle className="w-4 h-4 text-amber-800" />
                     <span>Cooking &amp; Meal-Prep Q&amp;A ({COOKING_QA_KNOWLEDGE_BASE.length})</span>
                   </Link>
                 </div>
 
                 {/* 4 Pillar Quick Links to Real Category Pages */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-800/90">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-200">
                   {SITE_ARCHITECTURE.map((cat) => (
                     <Link
                       key={cat.slug}
                       href={`/category/${cat.slug}`}
-                      className="text-left p-2.5 rounded-lg bg-slate-900/70 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/40 transition-all group"
+                      className="text-left p-2.5 rounded-lg bg-[#FAF9F6] hover:bg-amber-50/60 border border-slate-200/90 hover:border-amber-800/50 transition-all group"
                     >
-                      <div className="text-xs font-bold text-white group-hover:text-amber-300 flex items-center justify-between">
+                      <div className="text-xs font-bold text-slate-900 group-hover:text-amber-800 flex items-center justify-between">
                         <span>{cat.labelEn}</span>
-                        <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                        <ChevronRight className="w-3.5 h-3.5 text-amber-800" />
                       </div>
-                      <div className="text-[11px] text-slate-400 mt-0.5 truncate">
+                      <div className="text-[11px] text-slate-500 mt-0.5 truncate">
                         {cat.subcategories.map((s) => s.labelEn).join(' · ')}
                       </div>
                     </Link>
@@ -278,8 +278,8 @@ export default function CookReelHomePage() {
 
               {/* Right Featured Recorded Video Preview Card */}
               <div className="lg:col-span-5">
-                <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-2xl">
-                  <div className="relative aspect-[16/10] w-full bg-slate-950">
+                <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xl">
+                  <div className="relative aspect-[16/10] w-full bg-slate-100">
                     <video
                       src="/videos/crispy-salmon-skillet.mp4"
                       poster={featuredHeroRecipe.image}
@@ -290,18 +290,18 @@ export default function CookReelHomePage() {
                       preload="metadata"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
-                    {/* Top Video Controls — Honest Recorded Label (No "LIVE HD") */}
+                    {/* Top Video Controls — Honest Recorded Label */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                      <span className="px-2.5 py-1 rounded bg-black/75 backdrop-blur-md text-amber-300 text-xs font-mono font-semibold flex items-center gap-1.5 border border-amber-400/30">
-                        <Play className="w-3 h-3 fill-current" />
+                      <span className="px-2.5 py-1 rounded bg-white/95 backdrop-blur-md text-amber-900 text-xs font-mono font-bold flex items-center gap-1.5 border border-amber-300 shadow-xs">
+                        <Play className="w-3 h-3 fill-amber-800 text-amber-800" />
                         Recorded Recipe Clip · 0:12
                       </span>
                       <button
                         type="button"
                         onClick={() => setIsHeroMuted(!isHeroMuted)}
-                        className="p-2 rounded-lg bg-black/70 hover:bg-black text-white backdrop-blur-md transition-colors"
+                        className="p-2 rounded-lg bg-white/90 hover:bg-white text-slate-900 shadow-xs backdrop-blur-md transition-colors"
                         aria-label={isHeroMuted ? 'Unmute video' : 'Mute video'}
                       >
                         {isHeroMuted ? (
@@ -314,13 +314,13 @@ export default function CookReelHomePage() {
 
                     {/* Bottom Overlay Info */}
                     <div className="absolute bottom-3 left-4 right-4">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-300">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-200 font-semibold">
                         {featuredHeroRecipe.categoryLabelEn}
                       </span>
                       <h2 className="font-serif text-xl font-bold text-white leading-snug">
                         <Link
                           href={`/recipes/${featuredHeroRecipe.slug}`}
-                          className="hover:text-amber-300 transition-colors"
+                          className="hover:text-amber-200 transition-colors"
                         >
                           {featuredHeroRecipe.titleEn}
                         </Link>
@@ -329,27 +329,27 @@ export default function CookReelHomePage() {
                   </div>
 
                   {/* Card Footer */}
-                  <div className="p-4 bg-slate-900/95 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-4 text-xs text-slate-300 font-mono">
+                  <div className="p-4 bg-white border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-4 text-xs text-slate-700 font-mono">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-amber-400" />
+                        <Clock className="w-3.5 h-3.5 text-amber-800" />
                         {featuredHeroRecipe.prepMinutes +
                           featuredHeroRecipe.cookMinutes}{' '}
                         Mins
                       </span>
                       <span className="flex items-center gap-1">
-                        <Flame className="w-3.5 h-3.5 text-amber-400" />
+                        <Flame className="w-3.5 h-3.5 text-amber-800" />
                         {featuredHeroRecipe.calories} kcal
                       </span>
-                      <span className="flex items-center gap-1 text-emerald-400 font-semibold">
-                        <ShieldCheck className="w-3.5 h-3.5" />
+                      <span className="flex items-center gap-1 text-emerald-800 font-semibold">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
                         USDA 63°C (145°F)
                       </span>
                     </div>
 
                     <Link
                       href={`/recipes/${featuredHeroRecipe.slug}`}
-                      className="px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold transition-colors flex items-center gap-1"
+                      className="px-3.5 py-1.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors flex items-center gap-1"
                     >
                       <span>View Recipe Page</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -469,7 +469,7 @@ export default function CookReelHomePage() {
             </div>
 
             {/* Subcategory Filter Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 py-3 px-4 rounded-xl bg-slate-100/80 border border-slate-200/80 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-3 py-3 px-4 rounded-xl bg-[#FAF9F6] border border-slate-200/80 mb-8">
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
@@ -479,8 +479,8 @@ export default function CookReelHomePage() {
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                     activeCategory === 'all'
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-white text-slate-700 hover:bg-slate-200'
+                      ? 'bg-amber-800 text-white'
+                      : 'bg-white border border-slate-200 text-slate-700 hover:bg-amber-50'
                   }`}
                 >
                   All Categories ({recipes.length})
@@ -664,23 +664,23 @@ export default function CookReelHomePage() {
                 </div>
               </div>
 
-              {/* Honest Newsletter Card — No Fake Subscriber Count & No "60-Second" Mismatch */}
-              <div className="lg:col-span-5 rounded-2xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between">
+              {/* Clean White Newsletter Card */}
+              <div className="lg:col-span-5 rounded-2xl bg-white text-slate-900 border-2 border-amber-800/20 shadow-sm p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <span className="inline-block px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest mb-3">
+                  <span className="inline-block px-2.5 py-1 rounded bg-amber-50 border border-amber-200 text-amber-900 text-xs font-mono uppercase tracking-widest font-bold mb-3">
                     Free Weekly Meal-Prep Dispatch
                   </span>
-                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                  <h3 className="font-serif text-2xl font-bold text-slate-900 mb-2">
                     Get New 15-Minute Recipes &amp; 1:1 Substitution Charts
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                     Receive our weekly Sunday meal-prep checklist, printable metric shopping lists, and concise 12-second step-by-step cooking clips directly in your inbox. No spam, unsubscribe anytime.
                   </p>
                 </div>
 
                 {newsletterSaved ? (
-                  <div className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 text-xs font-semibold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                     <span>
                       You are subscribed to the CookReel Weekly Meal-Prep Dispatch!
                     </span>
@@ -693,11 +693,11 @@ export default function CookReelHomePage() {
                       value={newsletterEmail}
                       onChange={(e) => setNewsletterEmail(e.target.value)}
                       placeholder="Enter your email address..."
-                      className="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                      className="w-full px-4 py-3 rounded-lg bg-[#FAF9F6] border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-amber-800"
                     />
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs transition-colors"
+                      className="w-full py-3 rounded-lg bg-amber-800 hover:bg-amber-700 text-white font-bold text-xs transition-colors"
                     >
                       Send Me the Weekly Meal-Prep Guide
                     </button>

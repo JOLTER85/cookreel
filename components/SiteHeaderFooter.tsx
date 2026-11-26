@@ -191,9 +191,9 @@ export function SiteHeader({
 
 export function SiteFooter() {
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-800 py-14">
+    <footer className="bg-white text-slate-600 border-t border-slate-200 py-14">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-10 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-10 border-b border-slate-200">
           <div className="lg:col-span-2">
             <Link
               href="/"
@@ -201,17 +201,17 @@ export function SiteFooter() {
               className="inline-block mb-4"
             >
               <CookReelBrandLogo
-                theme="dark"
+                theme="light"
                 size="md"
                 showDomain={true}
                 showTagline={true}
               />
             </Link>
-            <p className="text-xs text-slate-400 leading-relaxed max-w-md mb-4">
+            <p className="text-xs text-slate-600 leading-relaxed max-w-md mb-4">
               CookReel is an independent culinary publication offering step-by-step recipe guides, short-form cooking clips, 1:1 ingredient substitutions, and USDA-aligned food safety references for everyday home cooks.
             </p>
-            <div className="rounded-lg border border-slate-800 bg-slate-900/80 p-3 text-[11px] text-slate-400 leading-relaxed mb-4">
-              <strong className="text-amber-400">
+            <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-3 text-[11px] text-slate-700 leading-relaxed mb-4">
+              <strong className="text-amber-900">
                 Editorial &amp; Affiliate Disclosure:
               </strong>{' '}
               Recommended cookware and kitchen tools are independently selected by our editorial team. Some &ldquo;Shop Gear&rdquo; links may be affiliate partner links that earn CookReel a small referral commission at no extra cost to you.
@@ -227,17 +227,17 @@ export function SiteFooter() {
                       ? undefined
                       : 'noopener noreferrer'
                   }
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-amber-500 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-[#FAF9F6] px-3 py-1.5 text-xs font-semibold text-slate-800 hover:border-amber-800 hover:text-amber-900 transition-colors"
                 >
                   <span>{soc.platform}</span>
-                  <ExternalLink className="w-3 h-3 text-slate-500" />
+                  <ExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-widest text-white font-bold mb-3">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-900 font-bold mb-3">
               Recipe Categories
             </h4>
             <ul className="space-y-2 text-xs">
@@ -245,7 +245,7 @@ export function SiteFooter() {
                 <li key={cat.slug}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className="hover:text-white transition-colors"
+                    className="hover:text-amber-800 transition-colors"
                   >
                     {cat.labelEn}
                   </Link>
@@ -254,7 +254,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/substitutions"
-                  className="hover:text-white transition-colors text-amber-300 font-semibold"
+                  className="hover:text-amber-950 transition-colors text-amber-800 font-semibold"
                 >
                   1:1 Substitutions Guide (/substitutions)
                 </Link>
@@ -262,7 +262,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/videos"
-                  className="hover:text-white transition-colors text-amber-300 font-semibold"
+                  className="hover:text-amber-950 transition-colors text-amber-800 font-semibold"
                 >
                   Video Recipes Hub (/videos)
                 </Link>
@@ -270,7 +270,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/qa"
-                  className="hover:text-white transition-colors text-amber-400 font-semibold"
+                  className="hover:text-amber-950 transition-colors text-amber-900 font-semibold"
                 >
                   Cooking &amp; Meal-Prep Q&amp;A
                 </Link>
@@ -279,14 +279,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-widest text-white font-bold mb-3">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-900 font-bold mb-3">
               Popular Guides
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link
                   href="/recipes/15-minute-crispy-cast-iron-salmon-lemon-caper"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-amber-800 transition-colors"
                 >
                   15-Min Crispy Cast-Iron Salmon
                 </Link>
@@ -294,7 +294,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/recipes/keto-garlic-herb-butter-ribeye-steak-high-protein"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-amber-800 transition-colors"
                 >
                   Keto Garlic Butter Ribeye Steak
                 </Link>
@@ -302,7 +302,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/recipes/air-fryer-or-skillet-golden-lemon-herb-chicken-thighs"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-amber-800 transition-colors"
                 >
                   Air Fryer Lemon Herb Chicken
                 </Link>
@@ -310,7 +310,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/substitutions"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-amber-800 transition-colors"
                 >
                   Essential Ingredient Substitutions Guide
                 </Link>
@@ -318,7 +318,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/recipes/tropical-mango-berry-swirl-vanilla-bean-cupcakes"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-amber-800 transition-colors"
                 >
                   Tropical Mango &amp; Berry Cupcakes
                 </Link>
@@ -327,35 +327,35 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-mono uppercase tracking-widest text-white font-bold mb-3">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-slate-900 font-bold mb-3">
               Editorial &amp; Legal Pages
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-amber-800 transition-colors">
                   About Us &amp; Editorial Process
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/contact" className="hover:text-amber-800 transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-white transition-colors">
+                <Link href="/privacy" className="hover:text-amber-800 transition-colors">
                   Privacy, Cookie &amp; Affiliate Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-white transition-colors">
+                <Link href="/terms" className="hover:text-amber-800 transition-colors">
                   Terms &amp; Conditions
                 </Link>
               </li>
-              <li className="pt-2 text-slate-400 flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+              <li className="pt-2 text-slate-600 flex items-center gap-1.5">
+                <Mail className="w-3.5 h-3.5 text-amber-800 shrink-0" />
                 <a
                   href="mailto:editorial@cookreel.com"
-                  className="hover:text-white underline"
+                  className="hover:text-amber-900 underline font-medium"
                 >
                   editorial@cookreel.com
                 </a>
@@ -368,8 +368,8 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} CookReel (www.cookreel.com). All rights reserved. Written and edited by the CookReel Editorial Team.
           </p>
-          <div className="flex items-center gap-2 text-[11px] text-slate-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
+          <div className="flex items-center gap-2 text-[11px] text-slate-600">
+            <ShieldCheck className="w-4 h-4 text-emerald-700" />
             <span>USDA Safe Internal Temperature Guidelines Included on Every Recipe</span>
           </div>
         </div>
