@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     'Watch step-by-step short-form cooking videos from CookReel (formerly tv.cookreel.com)—featuring 15-minute crispy cast-iron salmon, garlic butter ribeye steak, air fryer chicken, and more.',
   alternates: {
-    canonical: '/videos',
+    canonical: 'https://cookreel.com/videos',
   },
   openGraph: {
     title: 'Short-Form Video Recipes & Step-by-Step Cooking Clips | CookReel TV',
@@ -46,6 +46,7 @@ export const metadata: Metadata = {
 
 export default function VideosHubPage() {
   const videoRecipes = COOKREEL_RECIPES.filter((r) => Boolean(r.videoUrl));
+  const illustratedRecipes = COOKREEL_RECIPES.filter((r) => !r.videoUrl);
 
   const videoCollectionSchema = {
     '@context': 'https://schema.org',
@@ -100,11 +101,11 @@ export default function VideosHubPage() {
         </nav>
 
         {/* Hero Banner for /videos (Destination for tv.cookreel.com 301 Redirect) */}
-        <div className="rounded-2xl bg-slate-950 text-white p-7 sm:p-10 mb-10 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="rounded-2xl bg-slate-950 text-white p-7 sm:p-10 mb-8 border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest">
               <Film className="w-3.5 h-3.5" />
-              <span>CookReel Video Showcase · Official Destination of tv.cookreel.com</span>
+              <span>CookReel Video Showcase · {videoRecipes.length} Unique Recipe Video Clips + 1 Kitchen Overview Reel</span>
             </div>
 
             <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white leading-tight">
@@ -112,7 +113,7 @@ export default function VideosHubPage() {
             </h1>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              Watch our recorded 12-second technique clips demonstrating pan searing, butter basting, pasta emulsification, and cupcake piping—each paired with a full 900+ word recipe guide, metric weights, 1:1 ingredient substitutions, and USDA safe cooking temperatures.
+              Explore our {videoRecipes.length} dedicated 12-second visual technique clips demonstrating pan searing, butter basting, pasta emulsification, and cupcake piping—each paired with a kitchen-tested recipe guide, metric &amp; US weights, 1:1 ingredient substitutions, and USDA safe cooking temperatures.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -149,12 +150,26 @@ export default function VideosHubPage() {
           </div>
         </div>
 
+        {/* Transparent Visual Media & Recipe Testing Disclosure */}
+        <div className="mb-10 p-4 rounded-xl bg-amber-50/90 border border-amber-200 text-xs text-slate-700 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <strong className="text-amber-950 font-bold">Editorial Testing &amp; Visual Media Disclosure: </strong>
+            All {COOKREEL_RECIPES.length} recipes on CookReel feature kitchen-tested ingredient weights, cooking times, and USDA-verified internal temperatures developed by Marcus Vance and Elena Rostova. We only embed video players on the {videoRecipes.length} recipes with an exact matching visual technique clip; our remaining {illustratedRecipes.length} recipes are clearly labeled as Step-by-Step Illustrated Guides. Visual media across the site includes AI-assisted culinary illustrations created to demonstrate plating and texture.
+          </div>
+          <Link
+            href="/about#editorial-testing-disclosure"
+            className="text-amber-900 font-bold underline shrink-0 hover:text-amber-700"
+          >
+            Read Testing Standards →
+          </Link>
+        </div>
+
         {/* Dedicated Video Player Cards Grid */}
         <section className="mb-14">
           <div className="flex items-center justify-between mb-6">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
-                Recorded Kitchen Clips ({videoRecipes.length} Unique Videos)
+                Visual Technique Clips ({videoRecipes.length} Unique Recipe Videos)
               </span>
               <h2 className="font-serif text-2xl font-bold text-slate-900 mt-1">
                 Watch &amp; Cook Step-by-Step Video Guides

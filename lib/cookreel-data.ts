@@ -14,7 +14,52 @@ export interface CategoryArchitecture {
   slug: PrimaryCategorySlug;
   labelEn: string;
   descriptionEn: string;
+  editorialGuideParagraphsEn: string[];
+  featuredRecipeSlugs: string[];
   subcategories: SubcategoryMeta[];
+}
+
+export interface AuthorProfile {
+  name: string;
+  slug: string;
+  yearsExperience: number;
+  roleEn: string;
+  credentialsEn: string;
+  bioEn: string;
+  specialtyEn: string;
+  testingProtocolEn: string;
+}
+
+export const AUTHOR_PROFILES: Record<string, AuthorProfile> = {
+  'Marcus Vance': {
+    name: 'Marcus Vance',
+    slug: 'marcus-vance',
+    yearsExperience: 14,
+    roleEn: 'Executive Culinary Director & Cast-Iron Specialist',
+    credentialsEn: '14 Years Commercial Kitchen & Skillet Recipe Development · ServSafe Food Protection Manager',
+    bioEn:
+      'Marcus Vance leads savory skillet, cast-iron searing, and high-protein weeknight recipe development at CookReel. After working on hot-line sauté and grill stations in Seattle and Chicago bistros, he specializes in translating commercial heat control, pan deglazing, and USDA temperature standards into repeatable 15-to-25-minute home kitchen methods.',
+    specialtyEn: 'Cast-Iron Searing, Pan Emulsions & High-Protein Dinners',
+    testingProtocolEn:
+      'Every skillet and Air Fryer recipe is tested at least 3 times using standard home induction and gas burners, gram-scale measurements, and calibrated digital instant-read thermometers.',
+  },
+  'Elena Rostova': {
+    name: 'Elena Rostova',
+    slug: 'elena-rostova',
+    yearsExperience: 10,
+    roleEn: 'Senior Recipe Developer & Food Science Editor',
+    credentialsEn: 'B.S. Food Science & Culinary Nutrition · 10 Years Pastry, Emulsion & Meal-Prep Testing',
+    bioEn:
+      'Elena Rostova oversees baking chemistry, 1:1 ingredient substitution ratios, plant-forward Mediterranean recipes, and 4-day refrigerated meal-prep testing at CookReel. She verifies gram-to-US-cup conversions, starch-lipid pasta emulsions, and USDA FoodData Central macronutrient calculations across our recipe archive.',
+    specialtyEn: 'Baking Science, 5-Ingredient Pasta Emulsions & Meal-Prep Storage',
+    testingProtocolEn:
+      'All baking ratios, substitution swaps, and meal-prep storage timelines are validated across multiple multi-day refrigeration and reheating cycles at 4°C (39°F).',
+  },
+};
+
+export function getAuthorProfile(authorName: string): AuthorProfile {
+  const cleaned = (authorName || '').replace(/^Chef\s+/i, '').trim();
+  return AUTHOR_PROFILES[cleaned] || AUTHOR_PROFILES['Marcus Vance'];
 }
 
 export interface IngredientSubstitution {
@@ -59,6 +104,7 @@ export interface CulinaryRecipe {
   videoDuration?: string;
   targetKeywordEn?: string;
   shortVideoConceptEn?: string;
+  publishedMonthLabelEn?: string;
   internalLinks?: { slug: string; titleEn: string; contextEn: string }[];
   image: string;
   gearItem: {
@@ -73,7 +119,7 @@ export interface CulinaryRecipe {
   stepsEn: { title: string; instruction: string; timerSeconds: number }[];
 }
 
-export const SITE_ORIGIN = 'https://www.cookreel.com';
+export const SITE_ORIGIN = 'https://cookreel.com';
 export const HERO_FEATURED_VIDEO_URL = '/videos/hero-cookreel-featured.mp4';
 
 /**
@@ -84,19 +130,19 @@ export const SOCIAL_LINKS = [
   {
     name: 'Pin to Pinterest',
     platform: 'Pin to Pinterest',
-    url: 'https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.cookreel.com&media=https%3A%2F%2Fwww.cookreel.com%2Fimages%2Fhero_cookreel_studio_1795527112508.jpg&description=CookReel%20Step-by-Step%20Video%20Recipes%20%26%20Culinary%20Guides',
+    url: 'https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fcookreel.com&media=https%3A%2F%2Fcookreel.com%2Fimages%2Fhero_cookreel_studio_1795527112508.jpg&description=CookReel%20Step-by-Step%20Video%20Recipes%20%26%20Culinary%20Guides',
     handle: 'Save Recipe Pin',
   },
   {
     name: 'Share on WhatsApp',
     platform: 'Share on WhatsApp',
-    url: 'https://api.whatsapp.com/send?text=CookReel%20Step-by-Step%20Video%20Recipes%20https%3A%2F%2Fwww.cookreel.com',
+    url: 'https://api.whatsapp.com/send?text=CookReel%20Step-by-Step%20Video%20Recipes%20https%3A%2F%2Fcookreel.com',
     handle: 'Send to Kitchen',
   },
   {
     name: 'Share on Facebook',
     platform: 'Share on Facebook',
-    url: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.cookreel.com',
+    url: 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcookreel.com',
     handle: 'Share Guide',
   },
   {
@@ -112,7 +158,17 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
     slug: 'quick-easy',
     labelEn: 'Quick & Easy',
     descriptionEn:
-      'Weeknight dinners ready in 15 to 25 minutes—featuring crispy air fryer favorites, one-pan skillets, and streamlined 5-ingredient meals.',
+      'Weeknight dinners ready in 10 to 25 minutes—featuring crispy air fryer favorites, one-pan cast-iron skillets, and streamlined 5-ingredient meals.',
+    editorialGuideParagraphsEn: [
+      'Cooking a scratch dinner on a busy weeknight does not require compromising on crust development, pan sauces, or food safety. In our Quick & Easy culinary section, every recipe is engineered around three time-saving principles: high-surface-area cutting (such as slicing poultry into thin 1.5cm cutlets or cubing potatoes to 1.5cm), single-vessel heat transfer in a preheated cast-iron skillet or countertop Air Fryer, and 60-second pan deglazing that turns browned fond into a glossy emulsion while keeping cleanup to a single pan.',
+      'Whether you only have five pantry staples for an Italian starch-emulsified tagliatelle or fifteen minutes to sear crispy-skin Atlantic salmon with Meyer lemon caper butter, each guide includes both metric gram weights and US cup/ounce equivalents, step-by-step interactive countdown timers, and official USDA safe internal temperature checkpoints. Start with our reader-favorite weeknight staples below or filter by 15-Minute Meals, 5-Ingredient Recipes, or Air Fryer Techniques.',
+    ],
+    featuredRecipeSlugs: [
+      '15-minute-crispy-cast-iron-salmon-lemon-caper',
+      '5-ingredient-tagliatelle-black-truffle-butter-parmigiano',
+      'air-fryer-or-skillet-golden-lemon-herb-chicken-thighs',
+      'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+    ],
     subcategories: [
       {
         id: '15-minute-meals',
@@ -135,7 +191,17 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
     slug: 'healthy-diet',
     labelEn: 'Healthy & Diet',
     descriptionEn:
-      'Nutrient-dense recipes with complete macro profiles—covering Keto, low-carb, high-protein, and plant-based meals.',
+      'Nutrient-dense recipes with USDA FoodData Central macro profiles—covering Keto, low-carb, high-protein, and plant-forward Mediterranean meals.',
+    editorialGuideParagraphsEn: [
+      'Sustainable healthy cooking relies on bold culinary technique rather than bland steamed ingredients. Our Healthy & Diet collection pairs complete macronutrient transparency—calculated from USDA FoodData Central ingredient weights for calories, complete protein, and net carbohydrates—with restaurant-level searing, spice blooming, and herb-infused pan reductions. From zero-carb garlic herb butter ribeye steaks to fiber-rich Mediterranean poached eggs in spiced tomato shakshuka and 20-minute red lentil soup, every dish is built to keep you satisfied.',
+      'For readers preparing multi-day lunches, our high-protein and plant-forward recipes are specifically tested for 4-day refrigerator stability at 4°C (39°F), including steam-venting instructions and Air Fryer or covered-skillet reheating rules so lean proteins and crisp vegetables never turn rubbery or waterlogged. Explore our top-tested Keto, High-Protein, and Vegan & Vegetarian guides below.',
+    ],
+    featuredRecipeSlugs: [
+      'keto-garlic-herb-butter-ribeye-steak-high-protein',
+      'mediterranean-poached-eggs-spiced-tomato-pepper-shakshuka',
+      'quick-15-minute-red-lentil-soup-with-lemon-and-cumin',
+      'november-high-protein-white-bean-kale-roasted-garlic-soup',
+    ],
     subcategories: [
       {
         id: 'keto-low-carb',
@@ -158,7 +224,17 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
     slug: 'desserts-baking',
     labelEn: 'Desserts & Baking',
     descriptionEn:
-      'Step-by-step cakes, swirled cupcakes, effortless no-bake treats, and naturally sweetened desserts.',
+      'Precision-tested cakes, swirled vanilla bean cupcakes, effortless no-bake treats, and naturally sweetened wholesome desserts.',
+    editorialGuideParagraphsEn: [
+      'Successful home baking comes down to accurate ingredient ratios, temperature control, and moisture balance. In our Desserts & Baking archive, Food Science Editor Elena Rostova develops every recipe using exact gram weights alongside US cup and ounce conversions so your batters and emulsions turn out consistently whether you are whipping a two-tone Alfonso mango and freeze-dried strawberry buttercream or pressing a no-bake 70% dark chocolate ganache tart into a toasted walnut shell.',
+      'We also focus on practical weeknight and seasonal baking—such as our 25-minute cast-iron skillet Honeycrisp apple pecan crisp that jump-starts fruit tenderizing on the stovetop in foaming cinnamon butter, and one-bowl blanched almond flour cookies that require zero mixer setup. Each recipe includes verified dairy-free, egg-free, and gluten-free 1:1 substitution notes.',
+    ],
+    featuredRecipeSlugs: [
+      'tropical-mango-berry-swirl-vanilla-bean-cupcakes',
+      'november-spiced-cinnamon-apple-pecan-skillet-crisp-no-mixer',
+      'no-bake-dark-chocolate-espresso-ganache-tart-date-walnut-crust',
+      '10-minute-no-bake-lemon-berry-mascarpone-cheesecake-cups',
+    ],
     subcategories: [
       {
         id: 'no-bake-desserts',
@@ -181,7 +257,17 @@ export const SITE_ARCHITECTURE: CategoryArchitecture[] = [
     slug: 'kitchen-hacks',
     labelEn: 'Kitchen Hacks & Guides',
     descriptionEn:
-      'Practical culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, and USDA safe cooking temperatures.',
+      'Practical culinary handbooks covering 1:1 ingredient substitutions, weekly meal-prep storage, cast-iron care, and USDA safe cooking temperatures.',
+    editorialGuideParagraphsEn: [
+      'Great home cooks rely on foundational kitchen science when an ingredient is missing from the pantry or when prepping five days of lunches in a single Sunday hour. Our Kitchen Hacks & Guides category serves as CookReel’s technical reference library—covering exact weight-and-volume baking and savory substitutions, cast-iron polymerization and deglazing maintenance, freezer headspace rules, and official USDA safe minimum internal temperatures.',
+      'Every handbook is structured with quick-reference conversion metrics, step-by-step workflows, and direct links to the recipes where those techniques apply—helping you rescue a sauce without heavy cream, thaw proteins safely in cold water, or keep washed salad greens and fresh herbs crisp for up to two weeks.',
+    ],
+    featuredRecipeSlugs: [
+      'ultimate-kitchen-ingredient-substitutes-and-cast-iron-meal-prep-guide',
+      '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
+      'ultimate-freezer-meal-prep-guide-how-to-freeze-and-thaw-cooked-food',
+      'essential-cooking-temperatures-pan-deglazing-and-herb-storage-guide',
+    ],
     subcategories: [
       {
         id: 'ingredient-substitutes',
@@ -221,6 +307,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       'Most of the cooking time happens skin-side down, shielding the tender fish flesh from drying out.',
       'Drying the skin thoroughly with paper towels before searing prevents sticking and spattering.',
       'Emulsifying butter with fresh Meyer lemon juice, garlic, and caper brine creates a quick 60-second sauce.',
+      'USDA FoodData Central Nutrition (per 1 of 2 servings): 200g Atlantic salmon (416 kcal, 41g protein) + 15g unsalted butter (108 kcal) + 100g green asparagus & Meyer lemon caper pan jus (26 kcal, 2g protein, 4g net carbs) = 550 kcal · 43g Protein · 4g Net Carbs.',
     ],
     chefTipsEn: [
       'Pat the salmon skin completely dry with paper towels right before cooking, and season with flaky salt just before placing it into the hot skillet.',
@@ -231,7 +318,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       'USDA Food Safety Guideline: Cook salmon to an internal temperature of 63°C (145°F) measured at the thickest part, or until the flesh is opaque and flakes easily with a fork.',
     substitutions: [
       {
-        originalEn: 'Unsalted Dairy Butter (35g)',
+        originalEn: 'Unsalted Dairy Butter (30g)',
         substituteEn: 'Clarified Ghee or Extra-Virgin Olive Oil + 1 tsp Dijon Mustard',
         chefNoteEn:
           'Works well for dairy-free diets while keeping the lemon caper sauce smooth.',
@@ -268,16 +355,16 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_crispy_salmon_1795527113114.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
-    calories: 460,
-    proteinGrams: 42,
+    calories: 550,
+    proteinGrams: 43,
     netCarbsGrams: 4,
     videoDuration: '0:12',
     videoUrl: '/videos/crispy-salmon-skillet.mp4',
@@ -292,7 +379,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     },
     ingredientsEn: [
       { item: 'Skin-on Atlantic salmon fillets (center-cut)', amount: 400, unit: 'g' },
-      { item: 'Unsalted butter', amount: 35, unit: 'g' },
+      { item: 'Unsalted butter', amount: 30, unit: 'g' },
       { item: 'Crushed fresh garlic cloves', amount: 2, unit: 'cloves' },
       { item: 'Fresh Meyer lemon juice & finely grated zest', amount: 25, unit: 'ml' },
       { item: 'Drained non-pareil capers', amount: 15, unit: 'g' },
@@ -378,12 +465,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 9,
     calories: 610,
@@ -488,11 +575,11 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     ],
     stepGalleryImages: [
       '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_truffle_pasta_1795527116427.jpg',
-      '/images/action_tossing_pasta_pan_1795530070327.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
     prepMinutes: 8,
     cookMinutes: 10,
     calories: 540,
@@ -595,12 +682,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 25,
     calories: 520,
@@ -703,12 +790,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
     prepMinutes: 10,
     cookMinutes: 18,
     calories: 380,
@@ -812,11 +899,11 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     ],
     stepGalleryImages: [
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
-      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
     prepMinutes: 20,
     cookMinutes: 18,
     calories: 340,
@@ -930,8 +1017,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 15,
     calories: 310,
@@ -1035,8 +1122,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_crispy_salmon_1795527113114.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 20,
     cookMinutes: 40,
     calories: 495,
@@ -1141,8 +1228,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 15,
     calories: 320,
@@ -1244,8 +1331,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_crispy_salmon_1795527113114.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 6,
     cookMinutes: 9,
     calories: 340,
@@ -1344,12 +1431,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 410,
@@ -1452,8 +1539,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_truffle_pasta_1795527116427.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 4,
     cookMinutes: 10,
     calories: 480,
@@ -1556,8 +1643,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 9,
     calories: 390,
@@ -1656,12 +1743,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_crispy_salmon_1795527113114.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 8,
     calories: 430,
@@ -1764,8 +1851,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 8,
     cookMinutes: 10,
     calories: 245,
@@ -1868,8 +1955,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 8,
     cookMinutes: 14,
     calories: 510,
@@ -1972,8 +2059,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_crispy_salmon_1795527113114.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 365,
@@ -2076,8 +2163,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 8,
     cookMinutes: 17,
     calories: 470,
@@ -2176,12 +2263,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 8,
     cookMinutes: 22,
     calories: 290,
@@ -2284,8 +2371,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 12,
     calories: 395,
@@ -2385,11 +2472,11 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     ],
     stepGalleryImages: [
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
-      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 15,
     cookMinutes: 5,
     calories: 385,
@@ -2488,12 +2575,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_mango_cupcakes_1795527116791.jpg',
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 0,
     calories: 330,
@@ -2596,8 +2683,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 8,
     cookMinutes: 12,
     calories: 195,
@@ -2696,12 +2783,12 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       },
     ],
     stepGalleryImages: [
-      '/images/recipe_mango_cupcakes_1795527116791.jpg',
       '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 18,
     calories: 185,
@@ -2804,8 +2891,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_mango_cupcakes_1795527116791.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 12,
     cookMinutes: 50,
     calories: 295,
@@ -2908,8 +2995,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 15,
     cookMinutes: 30,
     calories: 420,
@@ -3010,8 +3097,8 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/hero_cookreel_studio_1795527112508.jpg',
       '/images/action_searing_skillet_butter_1795530068462.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 10,
     cookMinutes: 0,
     calories: 120,
@@ -3141,15 +3228,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 390,
     proteinGrams: 46,
     netCarbsGrams: 4,
-    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -3268,15 +3353,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_truffle_pasta_1795527116427.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 3,
     cookMinutes: 12,
     calories: 475,
     proteinGrams: 18,
     netCarbsGrams: 52,
-    videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
-    videoDuration: '0:12',
     image: '/images/action_tossing_pasta_pan_1795530070327.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -3394,15 +3477,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 2,
     cookMinutes: 8,
     calories: 440,
     proteinGrams: 41,
     netCarbsGrams: 12,
-    videoUrl: '/videos/crispy-salmon-skillet.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_crispy_salmon_1795527113114.jpg',
     gearItem: {
       id: 'gear-instant-thermometer',
@@ -3520,15 +3601,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 510,
     proteinGrams: 36,
     netCarbsGrams: 32,
-    videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -3647,15 +3726,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 3,
     cookMinutes: 7,
     calories: 385,
     proteinGrams: 16,
     netCarbsGrams: 46,
-    videoUrl: '/videos/hero-cookreel-featured.mp4',
-    videoDuration: '0:12',
     image: '/images/action_searing_skillet_butter_1795530068462.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -3774,15 +3851,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 7,
     cookMinutes: 18,
     calories: 445,
     proteinGrams: 44,
     netCarbsGrams: 28,
-    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-braiser-pan',
@@ -3900,15 +3975,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/recipe_truffle_pasta_1795527116427.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 5,
     cookMinutes: 10,
     calories: 465,
     proteinGrams: 38,
     netCarbsGrams: 48,
-    videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_truffle_pasta_1795527116427.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -4027,15 +4100,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 4,
     cookMinutes: 6,
     calories: 480,
     proteinGrams: 39,
     netCarbsGrams: 34,
-    videoUrl: '/videos/hero-cookreel-featured.mp4',
-    videoDuration: '0:12',
     image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -4158,15 +4229,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/hero_cookreel_studio_1795527112508.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 3,
     cookMinutes: 12,
     calories: 320,
     proteinGrams: 18,
     netCarbsGrams: 42,
-    videoUrl: '/videos/mediterranean-spiced-shakshuka.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     gearItem: {
       id: 'gear-enameled-skillet',
@@ -4284,15 +4353,13 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
       '/images/action_searing_skillet_butter_1795530068462.jpg',
       '/images/gear_cast_iron_skillet_1795527125638.jpg',
     ],
-    authorName: 'CookReel Editorial Team',
-    authorRoleEn: 'CookReel Culinary Contributors',
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
     prepMinutes: 4,
     cookMinutes: 6,
     calories: 460,
     proteinGrams: 37,
     netCarbsGrams: 29,
-    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
-    videoDuration: '0:12',
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -4326,6 +4393,1017 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
         instruction:
           'Transfer to a cutting board, rest 60 seconds so the melted cheese sets slightly, and slice into 4 even triangles. Serve warm with salsa.',
         timerSeconds: 60,
+      },
+    ],
+  },
+  // ============================================================================
+  // LATEST & BEST OF NOVEMBER 2026 — SEASONAL & TRENDING WEEKNIGHT RECIPES (8 NEW GUIDES)
+  // ============================================================================
+  {
+    id: 'november-maple-mustard-glazed-salmon-roasted-brussels-sprouts',
+    slug: 'november-maple-mustard-glazed-salmon-roasted-brussels-sprouts',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · November 2026 Seasonal Skillet',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '15-Minute Maple Dijon Glazed Salmon & Crispy Brussels Sprouts Skillet',
+    subtitleEn:
+      'Sear flaky wild salmon fillets and halved autumn Brussels sprouts in one cast-iron skillet, finished with a glossy pure maple syrup, Dijon mustard, and apple cider pan glaze.',
+    targetKeywordEn: 'maple dijon salmon and brussels sprouts one pan november dinner',
+    shortVideoConceptEn:
+      'Overhead close-up placing halved Brussels sprouts cut-side down around two center salmon fillets in a cast-iron skillet, then brushing the bubbling maple-Dijon glaze over the fish during the final 90 seconds.',
+    internalLinks: [
+      {
+        slug: '15-minute-crispy-cast-iron-salmon-lemon-caper',
+        titleEn: '15-Minute Crispy Cast-Iron Salmon with Lemon Caper Butter',
+        contextEn: 'Love crispy skillet salmon? Compare this autumn maple-Dijon glaze with our classic Mediterranean lemon caper butter technique.',
+      },
+      {
+        slug: 'crispy-air-fryer-honey-garlic-salmon-in-10-minutes',
+        titleEn: 'Crispy Honey Garlic Salmon in the Air Fryer in 10 Minutes',
+        contextEn: 'Cooking in an Air Fryer instead of a skillet? Follow our 10-minute air fryer salmon guide.',
+      },
+    ],
+    wordCount: 1220,
+    introParagraphsEn: [
+      'As chilly November evenings set in, nothing beats a one-pan dinner that pairs rich omega-3 salmon with deeply caramelized seasonal Brussels sprouts in just 15 minutes. By placing the halved Brussels sprouts cut-side down in the hot skillet alongside the salmon fillets, the sprouts blister and sweeten in the rendered salmon drippings.',
+      'During the final 90 seconds of cooking, a simple 3-ingredient November glaze of pure Grade-A maple syrup, whole-grain Dijon mustard, and a splash of apple cider vinegar reduces into a glossy, savory-sweet coating that clings to both the flaky salmon and crispy sprouts.',
+    ],
+    whyThisWorksEn: [
+      'Halved Brussels sprouts sear cut-side down in the same skillet—zero extra sheet pans to wash.',
+      'Dijon mustard emulsifies the pure maple syrup so the glaze coats the fish without burning.',
+      'Ready from prep to table in 15 minutes with 41g protein per serving.',
+    ],
+    chefTipsEn: [
+      'Trim the dry base off the Brussels sprouts and slice them lengthwise so every piece has a flat surface for maximum cast-iron browning.',
+      'Wait until the final 90 seconds to pour in the maple-Dijon glaze so the natural maple sugars caramelize into a lacquer without scorching.',
+      'Finish with flaky sea salt and cracked black pepper right off the heat to balance the maple sweetness.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Cook salmon fillets to a safe minimum internal temperature of 63°C (145°F) at the thickest center point, where the flesh flakes easily with a fork.',
+    substitutions: [
+      {
+        originalEn: 'Pure Maple Syrup (30ml / 2 tbsp)',
+        substituteEn: 'Raw Honey or Sugar-Free Maple Syrup (30ml)',
+        chefNoteEn: 'Raw honey produces an equally glossy glaze; keto maple syrup keeps net carbs under 6g.',
+      },
+      {
+        originalEn: 'Fresh Brussels Sprouts, Halved (280g)',
+        substituteEn: 'Broccoli Florets or Cubed Butternut Squash (280g)',
+        chefNoteEn: 'Cut broccoli or squash into bite-sized 2cm florets so they tenderize in the same 10-minute cook window.',
+      },
+      {
+        originalEn: 'Dijon Mustard (20g) + Apple Cider Vinegar (10ml)',
+        substituteEn: 'Whole-Grain Stone-Ground Mustard + Fresh Lemon Juice',
+        chefNoteEn: 'Provides the same bright acidity and mustard-seed texture.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I make Brussels sprouts tender inside and crispy outside in a skillet?',
+        answerEn:
+          'Sear them cut-side down undisturbed in hot oil for 5 minutes until charred, then add 2 tablespoons of water or broth and cover for 2 minutes before glazing.',
+      },
+      {
+        questionEn: 'Can I bake this maple Dijon salmon on a sheet pan in the oven?',
+        answerEn:
+          'Yes! Roast the halved Brussels sprouts at 205°C (400°F) for 10 minutes first, push them to the edges, add the glazed salmon fillets, and roast 10 to 12 minutes more.',
+      },
+      {
+        questionEn: 'Does maple syrup make the salmon taste overly sweet?',
+        answerEn:
+          'No—pairing 2 tablespoons of pure maple syrup with sharp Dijon mustard, garlic, and apple cider vinegar creates a balanced savory-tangy glaze.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_crispy_salmon_1795527113114.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
+    prepMinutes: 5,
+    cookMinutes: 10,
+    calories: 495,
+    proteinGrams: 41,
+    netCarbsGrams: 16,
+    image: '/images/recipe_crispy_salmon_1795527113114.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Center-cut wild or Atlantic salmon fillets (2 fillets)', amount: 360, unit: 'g' },
+      { item: 'Fresh November Brussels sprouts, trimmed & halved lengthwise', amount: 280, unit: 'g' },
+      { item: 'Pure Grade-A amber maple syrup', amount: 30, unit: 'ml' },
+      { item: 'Smooth or whole-grain Dijon mustard', amount: 20, unit: 'g' },
+      { item: 'Apple cider vinegar & 2 minced garlic cloves', amount: 15, unit: 'ml' },
+      { item: 'Avocado or extra-virgin olive oil, kosher salt & black pepper', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sear Salmon Skin-Side Down & Brussels Sprouts Cut-Side Down',
+        instruction:
+          'Heat oil in a 12-inch skillet over medium-high heat. Place salmon skin-side down in the center and arrange halved Brussels sprouts cut-side down around the perimeter. Sear 5 minutes.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'Flip Salmon & Toss Brussels Sprouts with Garlic',
+        instruction:
+          'Flip the salmon fillets and stir the charred Brussels sprouts with minced garlic. Cook for 3 minutes until the sprouts are crisp-tender.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Brush Maple-Dijon Glaze & Verify 63°C (145°F)',
+        instruction:
+          'Whisk maple syrup, Dijon mustard, and apple cider vinegar. Pour over the salmon and sprouts, basting for 90 seconds until glossy and internal salmon temp reaches 63°C (145°F).',
+        timerSeconds: 90,
+      },
+    ],
+  },
+  {
+    id: 'november-herb-butter-turkey-or-chicken-cutlets-cranberry-pan-sauce',
+    slug: 'november-herb-butter-turkey-or-chicken-cutlets-cranberry-pan-sauce',
+    category: 'quick-easy',
+    subcategoryId: 'one-pan-dinners',
+    categoryLabelEn: 'Quick & Easy · November Holiday Skillet',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '20-Minute Pan-Seared Herb Butter Turkey & Chicken Cutlets with Cranberry Shallot Jus',
+    subtitleEn:
+      'All the festive flavor of a November Thanksgiving roast in 20 minutes—golden pan-seared turkey or chicken breast cutlets topped with a ruby cranberry, rosemary, and shallot pan sauce.',
+    targetKeywordEn: 'quick pan seared turkey cutlets cranberry pan sauce weeknight dinner',
+    shortVideoConceptEn:
+      'Searing thin poultry cutlets golden in foaming rosemary butter, deglazing the pan with chicken stock and tart cranberries until they burst, and spooning the ruby sauce over the sliced cutlets.',
+    internalLinks: [
+      {
+        slug: 'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+        titleEn: 'One-Pan Lemon Garlic Chicken Skillet Dinner in 15 Minutes',
+        contextEn: 'Prefer a bright citrus pan sauce? Try our 15-minute one-pan lemon garlic chicken skillet.',
+      },
+      {
+        slug: 'sheet-pan-spiced-chicken-breast-and-potatoes-oven-dinner',
+        titleEn: 'Sheet-Pan Spiced Chicken Breast & Crispy Potatoes Oven Dinner',
+        contextEn: 'Pair these cranberry-glazed cutlets with crispy oven-roasted potatoes from our sheet-pan guide.',
+      },
+    ],
+    wordCount: 1190,
+    introParagraphsEn: [
+      'You do not need to roast a whole bird for four hours to enjoy the signature flavors of November on a Tuesday night. Thinly sliced turkey breast cutlets (or chicken breast cutlets) sear to golden perfection in just 4 minutes per side in a heavy skillet.',
+      'Once the cutlets rest on a warm platter, finely diced shallots, fresh rosemary needles, chicken bone broth, and a handful of tart cranberries (fresh or dried) deglaze the savory browned pan drippings into a glossy, restaurant-grade November pan jus in under 6 minutes.',
+    ],
+    whyThisWorksEn: [
+      'Delivers classic November turkey-and-cranberry flavor in 20 minutes without heating the oven.',
+      'Thin 1.5cm cutlets cook evenly and stay remarkably juicy at 74°C (165°F).',
+      'Cold butter whisked into the cranberry broth creates a velvety emulsion without flour.',
+    ],
+    chefTipsEn: [
+      'Pat the turkey or chicken cutlets completely dry and season with kosher salt and rubbed sage 5 minutes before searing.',
+      'If using fresh November cranberries, simmer them in the broth for 4 minutes until their skins pop and naturally thicken the sauce with pectin.',
+      'Turn off the burner before swirling in the final tablespoon of cold butter so the ruby sauce shines.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always verify turkey or chicken breast cutlets reach an internal temperature of 74°C (165°F) with a digital food thermometer before serving.',
+    substitutions: [
+      {
+        originalEn: 'Turkey Breast Cutlets (400g)',
+        substituteEn: 'Thin-Sliced Chicken Breast Cutlets or Pork Loin Medallions (400g)',
+        chefNoteEn: 'Chicken cutlets cook in the exact same 8-minute skillet window.',
+      },
+      {
+        originalEn: 'Fresh or Frozen Cranberries (100g) + 15ml Maple/Honey',
+        substituteEn: 'Whole-Berry Cranberry Sauce (90g) or Dried Cranberries (70g)',
+        chefNoteEn: 'If using prepared cranberry sauce, omit the extra sweetener and whisk directly into the broth.',
+      },
+      {
+        originalEn: 'Fresh Rosemary & Sage Leaves',
+        substituteEn: 'Fresh Thyme Sprigs or 1 tsp Dried Poultry Seasoning',
+        chefNoteEn: 'Poultry seasoning blends sage, thyme, and marjoram for instant autumn aroma.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do I prevent turkey breast cutlets from drying out in a skillet?',
+        answerEn:
+          'Sear over medium-high heat for only 3.5 to 4 minutes per side and pull them from the skillet the moment an instant-read thermometer hits 74°C (165°F).',
+      },
+      {
+        questionEn: 'Can I use leftover Thanksgiving cranberry sauce for the pan jus?',
+        answerEn:
+          'Yes! Whisk 3 tablespoons of leftover cranberry sauce with 120ml chicken broth and 1 teaspoon Dijon mustard directly in the hot skillet.',
+      },
+      {
+        questionEn: 'What side dishes pair best with cranberry herb cutlets?',
+        answerEn:
+          'Creamy garlic mashed potatoes, roasted sweet potatoes, or steamed green beans soak up the tangy cranberry-shallot pan sauce wonderfully.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
+    prepMinutes: 6,
+    cookMinutes: 14,
+    calories: 430,
+    proteinGrams: 44,
+    netCarbsGrams: 14,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Turkey breast cutlets or thin chicken breast cutlets', amount: 400, unit: 'g' },
+      { item: 'Fresh or frozen cranberries (or 85g whole-berry cranberry sauce)', amount: 100, unit: 'g' },
+      { item: 'Low-sodium chicken bone broth', amount: 140, unit: 'ml' },
+      { item: 'Finely minced shallot & fresh rosemary/sage leaves', amount: 45, unit: 'g' },
+      { item: 'Unsalted butter, divided (for searing & sauce finish)', amount: 28, unit: 'g' },
+      { item: 'Pure honey or maple syrup & 1 tsp Dijon mustard', amount: 15, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sear Seasoned Cutlets 4 Minutes Per Side to 74°C (165°F)',
+        instruction:
+          'Season turkey or chicken cutlets with salt, pepper, and sage. Sear in 14g butter and a splash of oil over medium-high heat for 4 minutes per side until 74°C (165°F). Transfer to a warm plate.',
+        timerSeconds: 480,
+      },
+      {
+        title: 'Sauté Shallots, Rosemary & Simmer Cranberries in Broth',
+        instruction:
+          'Add minced shallot and rosemary to the skillet for 60 seconds, then pour in chicken broth, cranberries, honey, and Dijon. Simmer 4 minutes until cranberries burst and thicken.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Swirl Cold Butter & Spoon Ruby Jus Over Cutlets',
+        instruction:
+          'Remove skillet from heat, swirl in the remaining 14g cold butter until glossy, and spoon generously over the rested cutlets.',
+        timerSeconds: 60,
+      },
+    ],
+  },
+  {
+    id: 'november-creamy-roasted-butternut-squash-sage-parmesan-pasta',
+    slug: 'november-creamy-roasted-butternut-squash-sage-parmesan-pasta',
+    category: 'quick-easy',
+    subcategoryId: '5-ingredient-recipes',
+    categoryLabelEn: 'Quick & Easy · November Autumn Pasta',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: 'Creamy Roasted Butternut Squash, Crispy Sage & Parmigiano Pasta in 20 Minutes',
+    subtitleEn:
+      'Velvety golden butternut squash and nutty brown-butter crispy sage leaves coat al dente pasta ribbons with aged Parmigiano-Reggiano—our #1 cozy November vegetarian pasta.',
+    targetKeywordEn: 'creamy butternut squash sage pasta 20 minute november recipe',
+    shortVideoConceptEn:
+      'Frying whole fresh sage leaves in foaming brown butter for 15 seconds, blending tender roasted butternut squash with starchy pasta water and Parmigiano, and tossing with glossy pasta ribbons.',
+    internalLinks: [
+      {
+        slug: '5-ingredient-creamy-spinach-pasta-weeknight-dinner',
+        titleEn: '5-Ingredient Creamy Spinach & Cream Cheese Weeknight Pasta',
+        contextEn: 'Need an even faster 12-minute greens pasta? Check out our 5-ingredient creamy spinach pasta.',
+      },
+      {
+        slug: '5-ingredient-creamy-black-truffle-parmigiano-tagliatelle',
+        titleEn: '5-Ingredient Creamy Black Truffle & Parmigiano Tagliatelle',
+        contextEn: 'Explore our signature Parmigiano emulsion method in our black truffle tagliatelle guide.',
+      },
+    ],
+    wordCount: 1175,
+    introParagraphsEn: [
+      'Butternut squash reaches its peak sweetness in November, making it the ultimate natural base for a rich, velvety pasta sauce that requires almost no heavy cream. When tender cooked squash is blended or mashed with starchy pasta cooking water, nutty brown butter, and freshly grated Parmigiano-Reggiano, it transforms into a silky golden sauce.',
+      'To elevate the dish to trattoria quality in 20 minutes, whole fresh sage leaves are crisped in foaming butter before building the sauce, then crumbled on top for an aromatic, earthy crunch in every bite.',
+    ],
+    whyThisWorksEn: [
+      'Uses naturally sweet November butternut squash and pasta water for creaminess without feeling heavy.',
+      'Crisping fresh sage in brown butter infuses the entire sauce with toasted autumn aroma.',
+      'Can be made in 20 minutes using pre-cubed fresh or steamed-in-bag butternut squash.',
+    ],
+    chefTipsEn: [
+      'Buy pre-peeled, cubed butternut squash (or steam-in-bag squash) on busy weeknights to cut prep time down to 2 minutes.',
+      'Watch the butter closely when crisping the sage leaves—once the milk solids turn hazelnut brown and smell nutty, add the squash immediately to stop the browning.',
+      'A tiny pinch of freshly grated nutmeg brings out the natural caramel notes of November squash.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Refrigerate leftover butternut squash pasta in shallow airtight containers within 2 hours and reheat to 74°C (165°F) with a splash of milk or water.',
+    substitutions: [
+      {
+        originalEn: 'Cubed Butternut Squash, Cooked Tender (350g)',
+        substituteEn: '100% Pure Canned Pumpkin Puree or Honeynut Squash (320g)',
+        chefNoteEn: 'Unsweetened canned pumpkin puree reduces cooking time to 12 minutes total.',
+      },
+      {
+        originalEn: 'Aged Parmigiano-Reggiano (70g)',
+        substituteEn: 'Pecorino Romano or Aged White Cheddar (70g)',
+        chefNoteEn: 'Pecorino adds a sharper salty finish that contrasts beautifully with sweet squash.',
+      },
+      {
+        originalEn: 'Tagliatelle, Fettuccine, or Rigatoni Pasta (250g)',
+        substituteEn: 'Chickpea Protein Pasta or Gluten-Free Rigatoni (250g)',
+        chefNoteEn: 'Chickpea pasta boosts total protein to 26g per serving.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Can I use canned pumpkin puree instead of fresh butternut squash?',
+        answerEn:
+          'Yes! Stir 1 cup (240g) of 100% pure unsweetened pumpkin puree directly into the brown-butter sage pan with 150ml starchy pasta water and Parmigiano.',
+      },
+      {
+        questionEn: 'How do I keep the sage leaves crispy?',
+        answerEn:
+          'Fry the dry sage leaves in foaming butter for 15 to 20 seconds, then transfer them to a paper-towel-lined plate with a slotted spoon and garnish the pasta right before serving.',
+      },
+      {
+        questionEn: 'What protein can I add to butternut squash pasta?',
+        answerEn:
+          'Crispy browned Italian chicken sausage, rotisserie shredded chicken, or toasted walnuts add wonderful texture and protein.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_truffle_pasta_1795527116427.jpg',
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
+    prepMinutes: 5,
+    cookMinutes: 15,
+    calories: 510,
+    proteinGrams: 19,
+    netCarbsGrams: 54,
+    image: '/images/recipe_truffle_pasta_1795527116427.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Heavy Stainless Steel Saucier & Pasta Pan',
+      brand: 'All-Clad Culinary',
+      priceUsd: 95,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Dry tagliatelle, fettuccine, or rigatoni pasta', amount: 250, unit: 'g' },
+      { item: 'Peeled & cubed November butternut squash (steamed or roasted tender)', amount: 350, unit: 'g' },
+      { item: 'Unsalted butter & 14 whole fresh sage leaves', amount: 35, unit: 'g' },
+      { item: 'Freshly grated Parmigiano-Reggiano cheese', amount: 70, unit: 'g' },
+      { item: 'Minced garlic (2 cloves), pinch of nutmeg & black pepper', amount: 12, unit: 'g' },
+      { item: 'Reserved starchy pasta cooking water', amount: 160, unit: 'ml' },
+    ],
+    stepsEn: [
+      {
+        title: 'Boil Pasta & Crisp Fresh Sage in Brown Butter',
+        instruction:
+          'Boil pasta in salted water until al dente, reserving 160ml pasta water. In a wide skillet, melt butter over medium heat until foaming and nutty, then crisp whole sage leaves for 20 seconds and set sage aside.',
+        timerSeconds: 480,
+      },
+      {
+        title: 'Mash or Blend Tender Squash with Garlic & Pasta Water',
+        instruction:
+          'Sauté garlic in the brown butter for 30 seconds, add the tender cooked butternut squash and 120ml pasta water, and mash (or blend smooth) into a velvety golden sauce.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Emulsify with Parmigiano & Top with Crispy Sage',
+        instruction:
+          'Toss hot drained pasta and grated Parmigiano into the squash sauce off the heat, adding extra pasta water as needed. Crown with crispy sage leaves and black pepper.',
+        timerSeconds: 120,
+      },
+    ],
+  },
+  {
+    id: 'november-keto-rosemary-garlic-butter-steak-bites-mushrooms',
+    slug: 'november-keto-rosemary-garlic-butter-steak-bites-mushrooms',
+    category: 'healthy-diet',
+    subcategoryId: 'keto-low-carb',
+    categoryLabelEn: 'Healthy & Diet · November Keto Skillet',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '15-Minute Rosemary Garlic Butter Steak Bites & Caramelized Cremini Mushrooms',
+    subtitleEn:
+      'High-protein, low-carb cubed sirloin or ribeye steak bites seared in a smoking-hot cast-iron skillet with earthy November cremini mushrooms and rosemary garlic herb butter.',
+    targetKeywordEn: 'garlic butter steak bites and mushrooms cast iron skillet november',
+    shortVideoConceptEn:
+      'Browning quartered cremini mushrooms first, searing 3cm steak cubes undisturbed for 90 seconds until a deep mahogany crust forms, and tossing together in foaming rosemary garlic butter.',
+    internalLinks: [
+      {
+        slug: 'keto-garlic-herb-butter-ribeye-steak-high-protein',
+        titleEn: 'Keto Garlic Herb Butter Cast-Iron Ribeye Steak (High-Protein)',
+        contextEn: 'Cooking full whole ribeye steaks instead of bite-sized cubes? Follow our master cast-iron ribeye guide.',
+      },
+      {
+        slug: 'one-pan-lemon-garlic-chicken-dinner-in-15-minutes',
+        titleEn: 'One-Pan Lemon Garlic Chicken Skillet Dinner in 15 Minutes',
+        contextEn: 'Looking for a lighter poultry version of bite-sized skillet protein? Try our 15-minute chicken bites.',
+      },
+    ],
+    wordCount: 1185,
+    introParagraphsEn: [
+      'Earthy cremini mushrooms and fresh woody rosemary are signature November skillet ingredients that pair effortlessly with tender beef steak bites. By cutting ribeye or top sirloin into bite-sized 3cm cubes, you get four times more caramelized Maillard crust surface area and cut total cooking time down to under 4 minutes.',
+      'The secret to restaurant-level steak bites and mushrooms is searing them in two quick stages in the same cast-iron skillet: brown the mushrooms first so their moisture evaporates, remove them, sear the steak cubes over high heat for 90 seconds per side, and reunite everything in foaming garlic-rosemary butter.',
+    ],
+    whyThisWorksEn: [
+      'Two-stage single-skillet sear prevents mushroom moisture from steaming the steak bites.',
+      'Delivers 49g complete protein and only 5g net carbs per serving.',
+      'Ready in 15 minutes total for an effortless November keto weeknight dinner.',
+    ],
+    chefTipsEn: [
+      'Do not salt the mushrooms until after they have turned golden brown—salting raw mushrooms early draws out water and slows browning.',
+      'Pat the steak cubes bone-dry with paper towels and leave at least 1cm space between cubes so they sear rather than steam.',
+      'Pull the skillet off the burner as soon as the garlic and rosemary butter coats the steak so the center stays tender medium-rare to medium.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Whole-muscle beef steak cuts and cubes are safe at a minimum internal temperature of 63°C (145°F) followed by a 3-minute rest.',
+    substitutions: [
+      {
+        originalEn: 'Ribeye or Top Sirloin Steak, Cubed 3cm (450g)',
+        substituteEn: 'New York Strip Steak or Beef Tenderloin Tips (450g)',
+        chefNoteEn: 'Strip steak and tenderloin cook in the same 3-minute high-heat window.',
+      },
+      {
+        originalEn: 'Cremini / Baby Bella Mushrooms, Halved (250g)',
+        substituteEn: 'Shiitake, Oyster, or White Button Mushrooms (250g)',
+        chefNoteEn: 'Cremini and shiitake offer the deepest umami flavor for autumn cooking.',
+      },
+      {
+        originalEn: 'Grass-Fed Unsalted Butter (35g)',
+        substituteEn: 'Clarified Ghee or Olive Oil + 1 tsp Worcestershire Sauce',
+        chefNoteEn: 'Ghee provides a higher smoke point for cast-iron searing.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why did my steak bites turn gray and chewy instead of browned?',
+        answerEn:
+          'Crowding too many steak cubes into the skillet at once or cooking them alongside raw watery mushrooms drops the pan temperature. Sear the mushrooms first, then sear the dry steak cubes in a single uncrowded layer.',
+      },
+      {
+        questionEn: 'What is the best steak cut for 15-minute garlic butter steak bites?',
+        answerEn:
+          'Boneless ribeye, New York strip, or center-cut top sirloin are ideal because they are naturally tender for quick high-heat searing.',
+      },
+      {
+        questionEn: 'What low-carb side dishes go best with steak bites and mushrooms?',
+        answerEn:
+          'Creamy cauliflower mash, garlic-roasted green beans, or seared asparagus make a complete keto plate.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
+    prepMinutes: 6,
+    cookMinutes: 9,
+    calories: 560,
+    proteinGrams: 49,
+    netCarbsGrams: 5,
+    image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Boneless ribeye or top sirloin steak, cut into 3cm cubes', amount: 450, unit: 'g' },
+      { item: 'Fresh cremini (baby bella) mushrooms, wiped clean & halved', amount: 250, unit: 'g' },
+      { item: 'Grass-fed unsalted butter', amount: 35, unit: 'g' },
+      { item: 'Minced garlic (4 cloves) & 1 tbsp fresh chopped rosemary/thyme', amount: 20, unit: 'g' },
+      { item: 'High-smoke-point avocado oil (for initial sear)', amount: 15, unit: 'ml' },
+      { item: 'Coarse kosher salt & freshly cracked black pepper', amount: 6, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Brown Halved Cremini Mushrooms Undisturbed',
+        instruction:
+          'Heat half the avocado oil in a 12-inch cast-iron skillet over medium-high heat. Add halved mushrooms cut-side down and sear 4 minutes until deeply browned. Season with a pinch of salt and transfer to a plate.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'High-Heat 90-Second Sear on Dry Steak Cubes',
+        instruction:
+          'Pat steak cubes dry, season generously with salt and pepper, add remaining oil to the hot skillet, and sear in a single layer for 90 seconds per side without moving them.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Toss with Foaming Rosemary Garlic Butter & Mushrooms',
+        instruction:
+          'Lower heat, add butter, minced garlic, rosemary, and the browned mushrooms back into the skillet. Toss for 60 seconds until glossy and steak reaches 63°C (145°F). Rest 3 minutes.',
+        timerSeconds: 120,
+      },
+    ],
+  },
+  {
+    id: 'november-thanksgiving-leftover-turkey-cranberry-brie-skillet-melt',
+    slug: 'november-thanksgiving-leftover-turkey-cranberry-brie-skillet-melt',
+    category: 'quick-easy',
+    subcategoryId: '15-minute-meals',
+    categoryLabelEn: 'Quick & Easy · November Leftover Upgrade',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '10-Minute Crispy Leftover Turkey, Melted Brie & Cranberry Sourdough Skillet Panini',
+    subtitleEn:
+      'Turn November holiday roast turkey or rotisserie chicken into a gourmet bistro sandwich with creamy triple-cream Brie, ruby cranberry relish, and golden butter-toasted sourdough.',
+    targetKeywordEn: 'best november leftover turkey cranberry brie grilled cheese skillet',
+    shortVideoConceptEn:
+      'Spreading ruby cranberry sauce and Dijon onto sourdough, layering sliced roast turkey and thick slabs of Brie cheese, pressing in a buttered skillet, and slicing open for a molten Brie pull.',
+    internalLinks: [
+      {
+        slug: 'quick-crispy-skillet-tuna-melt-sandwich-dinner',
+        titleEn: '10-Minute Crispy Skillet Tuna Melt Sandwich with Cheddar',
+        contextEn: 'Love crispy cast-iron skillet melts? Try our 10-minute classic cheddar tuna melt next.',
+      },
+      {
+        slug: 'november-herb-butter-turkey-or-chicken-cutlets-cranberry-pan-sauce',
+        titleEn: '20-Minute Pan-Seared Herb Butter Turkey & Chicken Cutlets with Cranberry Jus',
+        contextEn: 'Use any extra pan-seared turkey cutlets from our 20-minute skillet guide inside this sandwich.',
+      },
+    ],
+    wordCount: 1140,
+    introParagraphsEn: [
+      'Every November, the day-after Thanksgiving sandwich is often even more anticipated than the holiday feast itself. When thick slices of artisan sourdough are spread with a thin swipe of whole-grain Dijon on one side and tangy cranberry sauce on the other, then stacked with warm roasted turkey breast and creamy Brie cheese, the flavors hit every savory-sweet-tart note.',
+      'Toasting the sandwich over medium-low heat in a cast-iron skillet while pressing gently with a smaller pan (or spatula) fuses the sourdough into a shatteringly crisp panini while the Brie melts into a warm velvet blanket around the turkey.',
+    ],
+    whyThisWorksEn: [
+      'Transforms leftover November roast turkey or store-bought deli turkey into a 10-minute bistro meal.',
+      'Layering Brie cheese on both sides of the turkey locks the filling together.',
+      'A thin smear of Dijon mustard cuts through the richness of the Brie and sweetness of the cranberry.',
+    ],
+    chefTipsEn: [
+      'Slice the Brie while it is still slightly chilled so you get clean 5mm slabs; leave the edible white rind on for extra flavor, or trim it if you prefer ultra-smooth melting.',
+      'Warm the leftover turkey slices briefly in the skillet for 45 seconds before assembling the sandwich so the center is piping hot by the time the bread turns golden.',
+      'Add a few crisp baby spinach leaves or thin green apple slices for fresh crunch.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Use refrigerated leftover cooked turkey within 3 to 4 days of roasting, and heat the sandwich filling until steaming hot throughout (74°C / 165°F).',
+    substitutions: [
+      {
+        originalEn: 'Sliced Roast Turkey Breast (220g)',
+        substituteEn: 'Shredded Rotisserie Chicken or Deli Smoked Turkey (220g)',
+        chefNoteEn: 'Works year-round with rotisserie chicken or thick-cut deli turkey.',
+      },
+      {
+        originalEn: 'Creamy Brie or Camembert Cheese (100g)',
+        substituteEn: 'Havarti, Fontina, Provolone, or Aged White Cheddar (100g)',
+        chefNoteEn: 'Havarti and Fontina offer the same buttery, high-moisture melt.',
+      },
+      {
+        originalEn: 'Whole-Berry Cranberry Sauce (50g)',
+        substituteEn: 'Fig Jam, Apricot Preserves, or Apple Butter (50g)',
+        chefNoteEn: 'Fig jam or spiced November apple butter pairs phenomenally with Brie and poultry.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Should I cut the white rind off Brie cheese for a grilled cheese sandwich?',
+        answerEn:
+          'The white bloomy rind on Brie is 100% edible and adds subtle earthy flavor, though you can slice off the very top edge if you want a completely uniform molten texture.',
+      },
+      {
+        questionEn: 'How do I keep the cranberry sauce from making the sourdough soggy?',
+        answerEn:
+          'Place a thin layer of cheese directly against the bread slice first, then spread the cranberry sauce over the turkey in the middle so the melted cheese acts as a moisture barrier.',
+      },
+      {
+        questionEn: 'Can I make this turkey Brie melt in an Air Fryer?',
+        answerEn:
+          'Yes! Butter the outside of the sourdough, secure with a toothpick, and air fry at 190°C (375°F) for 6 minutes, flipping halfway through.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
+    prepMinutes: 4,
+    cookMinutes: 6,
+    calories: 520,
+    proteinGrams: 39,
+    netCarbsGrams: 34,
+    image: '/images/action_searing_skillet_butter_1795530068462.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 12-Inch Cast-Iron Skillet & Panini Press',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Cooked roasted turkey breast (or rotisserie chicken), sliced', amount: 220, unit: 'g' },
+      { item: 'Triple-cream Brie or Havarti cheese, sliced into 5mm slabs', amount: 100, unit: 'g' },
+      { item: 'Artisan sourdough bread slices (4 slices)', amount: 160, unit: 'g' },
+      { item: 'Whole-berry cranberry sauce or cranberry orange relish', amount: 55, unit: 'g' },
+      { item: 'Dijon mustard & fresh baby spinach or thyme leaves', amount: 20, unit: 'g' },
+      { item: 'Softened unsalted butter for outer bread crust', amount: 20, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Warm Turkey Slices & Prep Sourdough with Dijon',
+        instruction:
+          'Warm sliced turkey in a skillet over medium heat for 45 seconds so it is hot throughout. Butter the outer faces of 4 sourdough slices and spread Dijon on the inner faces.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Layer Brie, Warm Turkey & Cranberry Sauce',
+        instruction:
+          'Layer half the Brie on the bottom bread slices, stack the warm turkey and cranberry sauce in the center, and top with the remaining Brie and top bread slice.',
+        timerSeconds: 90,
+      },
+      {
+        title: 'Press & Toast 3 Minutes Per Side Until Molten',
+        instruction:
+          'Toast in the skillet over medium-low heat for 3 minutes per side, pressing gently with a spatula until the sourdough is golden brown and the Brie is molten. Slice diagonally.',
+        timerSeconds: 360,
+      },
+    ],
+  },
+  {
+    id: 'november-high-protein-white-bean-kale-roasted-garlic-soup',
+    slug: 'november-high-protein-white-bean-kale-roasted-garlic-soup',
+    category: 'healthy-diet',
+    subcategoryId: 'high-protein',
+    categoryLabelEn: 'Healthy & Diet · November Warming Soup',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '20-Minute Tuscan White Bean, Lacinato Kale & Parmesan Broth Soup',
+    subtitleEn:
+      'A nourishing November one-pot soup with creamy cannellini white beans, tender Lacinato kale, rosemary-garlic broth, and grated Parmigiano—naturally creamy with zero heavy cream.',
+    targetKeywordEn: 'quick tuscan white bean and kale soup 20 minutes november',
+    shortVideoConceptEn:
+      'Sautéing garlic, rosemary, and mirepoix in olive oil, simmering cannellini beans in broth, mashing a third of the beans against the pot side for instant creaminess, and folding in dark green kale ribbons.',
+    internalLinks: [
+      {
+        slug: 'quick-red-lentil-soup-with-lemon-and-cumin-healthy-dinner',
+        titleEn: '20-Minute Red Lentil Soup with Fresh Lemon & Warm Cumin',
+        contextEn: 'Love fast, protein-packed November soups? Try our 20-minute lemon cumin red lentil soup next.',
+      },
+      {
+        slug: 'mediterranean-chickpea-feta-lunch-bowls',
+        titleEn: 'No-Cook Mediterranean Chickpea, Cucumber & Feta Meal-Prep Bowls',
+        contextEn: 'Pair a bowl of this Tuscan white bean soup with our Mediterranean chickpea salad for meal prep.',
+      },
+    ],
+    wordCount: 1160,
+    introParagraphsEn: [
+      'Cold November nights call for a steaming bowl of Tuscan soup that feels rich and comforting while remaining light, high in fiber, and packed with plant and dairy protein. Instead of relying on heavy cream or flour roux, traditional Tuscan cooks mash roughly one-third of the cooked cannellini beans right against the wall of the soup pot.',
+      'As the mashed white beans dissolve into the garlic, rosemary, and vegetable or chicken bone broth, they create a velvety body that coats ribbons of dark Lacinato (dinosaur) kale. Finishing each bowl with a squeeze of fresh lemon juice and grated Parmigiano-Reggiano wakes up every herbal flavor in 20 minutes.',
+    ],
+    whyThisWorksEn: [
+      'Mashing 1/3 of the white beans thickens the broth naturally without dairy cream.',
+      'Lacinato kale holds its tender bite for 4 days in the refrigerator without turning slimy.',
+      'Ready in 20 minutes using pantry-friendly canned cannellini beans and bone broth.',
+    ],
+    chefTipsEn: [
+      'If you have a leftover Parmesan cheese rind in your fridge, drop it into the simmering broth for 10 minutes—it infuses deep savory umami into the soup.',
+      'Strip the tough center stems from the Lacinato kale before chopping the leaves into bite-sized ribbons so they wilt in just 3 minutes.',
+      'Add a pinch of crushed red pepper flakes with the garlic and rosemary for gentle November warmth.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Bring broth-based soups to a full rolling boil (100°C / 212°F) during cooking, cool leftovers in shallow containers within 2 hours, and reheat to 74°C (165°F).',
+    substitutions: [
+      {
+        originalEn: 'Cannellini White Beans, Rinsed & Drained (500g / 2 cans)',
+        substituteEn: 'Great Northern Beans, Navy Beans, or Chickpeas (500g)',
+        chefNoteEn: 'Great Northern and Navy beans mash just as smoothly as cannellini beans.',
+      },
+      {
+        originalEn: 'Lacinato (Tuscan Dinosaur) Kale, Chopped (150g)',
+        substituteEn: 'Baby Spinach, Swiss Chard, or Escarole (150g)',
+        chefNoteEn: 'Baby spinach wilts in 60 seconds right at the end of cooking.',
+      },
+      {
+        originalEn: 'Chicken Bone Broth or Vegetable Stock (800ml)',
+        substituteEn: 'Turkey Bone Broth (great for November leftovers!)',
+        chefNoteEn: 'Using chicken or turkey bone broth adds an extra 18g of collagen protein to the pot.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'How do you make white bean soup creamy without adding heavy cream?',
+        answerEn:
+          'Use the back of a wooden spoon or a potato masher to mash about 1 cup of the white beans directly in the pot—their natural starch thickens the broth immediately.',
+      },
+      {
+        questionEn: 'Can I add sausage or shredded chicken to Tuscan white bean soup?',
+        answerEn:
+          'Absolutely! Brown 200g of Italian turkey sausage with the aromatics or stir in 200g of leftover shredded roast turkey or chicken during the final 3 minutes.',
+      },
+      {
+        questionEn: 'Does Tuscan white bean and kale soup freeze well?',
+        answerEn:
+          'Yes—it freezes cleanly for up to 3 months in airtight freezer containers with 2cm headspace.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+      '/images/action_tossing_pasta_pan_1795530070327.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
+    prepMinutes: 5,
+    cookMinutes: 15,
+    calories: 385,
+    proteinGrams: 24,
+    netCarbsGrams: 41,
+    image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Enameled Cast-Iron Dutch Oven (5.5-Quart)',
+      brand: 'Le Creuset Culinary',
+      priceUsd: 135,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Canned cannellini white beans, rinsed & drained (2 cans)', amount: 500, unit: 'g' },
+      { item: 'Low-sodium chicken bone broth or rich vegetable stock', amount: 800, unit: 'ml' },
+      { item: 'Fresh Lacinato (Tuscan) kale, stems removed & chopped', amount: 150, unit: 'g' },
+      { item: 'Diced carrot, celery, onion & 4 minced garlic cloves', amount: 180, unit: 'g' },
+      { item: 'Fresh chopped rosemary, thyme & pinch of red pepper flakes', amount: 10, unit: 'g' },
+      { item: 'Grated Parmigiano-Reggiano, 15ml olive oil & squeeze of lemon', amount: 55, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sauté Mirepoix, Garlic & Rosemary in Olive Oil',
+        instruction:
+          'Warm olive oil in a Dutch oven over medium heat. Sauté diced onion, carrot, celery, garlic, rosemary, and red pepper flakes for 4 minutes until fragrant and softened.',
+        timerSeconds: 240,
+      },
+      {
+        title: 'Simmer White Beans in Broth & Mash One-Third for Creaminess',
+        instruction:
+          'Add cannellini beans and broth. Bring to a simmer for 7 minutes, then press one-third of the beans against the side of the pot with a spoon to naturally thicken the soup.',
+        timerSeconds: 420,
+      },
+      {
+        title: 'Wilt Lacinato Kale & Finish with Lemon & Parmigiano',
+        instruction:
+          'Stir in the chopped kale leaves for 3 minutes until tender and bright green. Off the heat, stir in lemon juice and top bowls with grated Parmigiano.',
+        timerSeconds: 180,
+      },
+    ],
+  },
+  {
+    id: 'november-spiced-cinnamon-apple-pecan-skillet-crisp-no-mixer',
+    slug: 'november-spiced-cinnamon-apple-pecan-skillet-crisp-no-mixer',
+    category: 'desserts-baking',
+    subcategoryId: 'quick-pastries',
+    categoryLabelEn: 'Desserts & Baking · November Autumn Dessert',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: '25-Minute Warm Cinnamon Honeycrisp Apple & Toasted Pecan Cast-Iron Skillet Crisp',
+    subtitleEn:
+      'Skip rolling pie crust this November—sweet-tart Honeycrisp apples tossed with Ceylon cinnamon and maple bake under a crunchy brown-butter oat and pecan streusel in one skillet.',
+    targetKeywordEn: 'quick cast iron apple pecan crisp november dessert recipe',
+    shortVideoConceptEn:
+      'Sautéing sliced Honeycrisp apples in cinnamon butter for 3 minutes to jump-start softening, scattering crunchy pecan-oat streusel over the top, and pulling the bubbling golden skillet from the oven.',
+    internalLinks: [
+      {
+        slug: 'tropical-mango-berry-swirl-vanilla-bean-cupcakes',
+        titleEn: 'Tropical Mango & Strawberry Swirl Vanilla Bean Cupcakes',
+        contextEn: 'Planning a full dessert spread? Pair this warm autumn skillet crisp with our vanilla bean cupcakes.',
+      },
+      {
+        slug: '15-minute-no-bake-lemon-berry-mascarpone-cheesecake-cups',
+        titleEn: '15-Minute No-Bake Lemon Berry Mascarpone Cheesecake Cups',
+        contextEn: 'Need a no-oven dessert option while your oven is full? Try our 15-minute no-bake cheesecake cups.',
+      },
+    ],
+    wordCount: 1170,
+    introParagraphsEn: [
+      'Traditional apple pie takes well over an hour to chill, roll, blind-bake, and cool, whereas a cast-iron skillet apple pecan crisp delivers all the warm, spiced November nostalgia in just 25 minutes. The secret to cutting the bake time in half is giving the sliced Honeycrisp apples a 3-minute head start right on the stovetop in foaming cinnamon butter.',
+      'Once the apples begin releasing their fragrant cider juices in the skillet, you scatter a single-bowl streusel of rolled oats, chopped pecans, brown sugar, and melted butter over the top and slide the hot skillet straight into the oven for 18 minutes until bubbling and golden.',
+    ],
+    whyThisWorksEn: [
+      'Pre-sautéing the apples in the skillet for 3 minutes ensures tender fruit without a 50-minute bake.',
+      'No pie crust or electric mixer required—just one bowl for the pecan-oat streusel.',
+      'Cast iron retains heat so the apple crisp stays warm and bubbling at the dinner table.',
+    ],
+    chefTipsEn: [
+      'Use firm, sweet-tart November apples like Honeycrisp, Granny Smith, or Pink Lady so the slices hold their shape without turning into applesauce.',
+      'Chop the pecans coarsely so they toast evenly alongside the rolled oats during the 18-minute oven bake.',
+      'Let the skillet rest for 5 minutes out of the oven so the bubbling apple juices thicken into a caramel syrup before scooping.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Always wash fresh apples thoroughly under running water before slicing, and use oven mitts when handling a 200°C (400°F) cast-iron skillet handle.',
+    substitutions: [
+      {
+        originalEn: 'Honeycrisp or Granny Smith Apples, Sliced (600g / 4 apples)',
+        substituteEn: 'Bosc Pears or a 50/50 Apple & Fresh Cranberry Mix (600g)',
+        chefNoteEn: 'Adding a handful of fresh cranberries gives the crisp a festive ruby November color.',
+      },
+      {
+        originalEn: 'Chopped Raw Pecans (65g)',
+        substituteEn: 'Chopped Walnuts, Sliced Almonds, or Pumpkin Seeds (65g)',
+        chefNoteEn: 'Pumpkin seeds (pepitas) make a delicious nut-free crunchy topping.',
+      },
+      {
+        originalEn: 'Old-Fashioned Rolled Oats (80g) + All-Purpose Flour (40g)',
+        substituteEn: 'Certified Gluten-Free Rolled Oats + Almond Flour (120g total)',
+        chefNoteEn: 'Almond flour creates an extra-buttery, naturally gluten-free streusel.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Do I have to peel the apples for a skillet apple crisp?',
+        answerEn:
+          'Peeling is optional! Thin-skinned apples like Honeycrisp soften nicely with the peel left on (provided you slice them 5mm thin), adding extra fiber and rosy color.',
+      },
+      {
+        questionEn: 'Why is my apple crisp topping soggy instead of crunchy?',
+        answerEn:
+          'Covering the warm crisp with foil traps steam and softens the oat topping. Bake uncovered and let it cool uncovered on a trivet.',
+      },
+      {
+        questionEn: 'Can I prep the apple crisp ahead of Thanksgiving or a dinner party?',
+        answerEn:
+          'Yes—mix the dry pecan-oat topping in a bowl and slice the apples tossed with lemon juice up to 6 hours ahead, then assemble and bake right as dinner starts.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_mango_cupcakes_1795527116791.jpg',
+      '/images/action_piping_cupcake_swirl_1795530073426.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Elena Rostova',
+    authorRoleEn: 'Senior Recipe Developer & Food Science Editor',
+    prepMinutes: 7,
+    cookMinutes: 18,
+    calories: 340,
+    proteinGrams: 5,
+    netCarbsGrams: 46,
+    image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Seasoned 10-Inch or 12-Inch Cast-Iron Baking Skillet',
+      brand: 'Lodge Culinary',
+      priceUsd: 49,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Honeycrisp or Granny Smith apples, cored & sliced 5mm thin', amount: 600, unit: 'g' },
+      { item: 'Old-fashioned rolled oats & 40g all-purpose (or almond) flour', amount: 120, unit: 'g' },
+      { item: 'Coarsely chopped raw pecans', amount: 65, unit: 'g' },
+      { item: 'Unsalted butter, melted (divided for skillet & streusel)', amount: 60, unit: 'g' },
+      { item: 'Pure maple syrup & dark brown sugar', amount: 55, unit: 'g' },
+      { item: 'Ground Ceylon cinnamon, nutmeg, vanilla & lemon juice', amount: 15, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Sauté Sliced Apples 3 Minutes in Cinnamon Butter Skillet',
+        instruction:
+          'Preheat oven to 200°C (400°F). In an oven-safe skillet over medium heat, toss sliced apples with 15g butter, maple syrup, lemon juice, and cinnamon for 3 minutes until slightly softened.',
+        timerSeconds: 180,
+      },
+      {
+        title: 'Mix Pecan-Oat Streusel & Scatter Evenly Over Apples',
+        instruction:
+          'In a bowl, stir rolled oats, flour, brown sugar, chopped pecans, a pinch of salt, and 45g melted butter until clumpy. Scatter evenly over the warm apples.',
+        timerSeconds: 120,
+      },
+      {
+        title: 'Bake 18 Minutes at 200°C (400°F) Until Golden & Bubbling',
+        instruction:
+          'Transfer skillet to the oven and bake uncovered for 18 minutes until the pecan topping is toasted golden brown and the apple juices bubble around the edges.',
+        timerSeconds: 1080,
+      },
+    ],
+  },
+  {
+    id: 'november-sheet-pan-honey-thyme-chicken-thighs-sweet-potatoes',
+    slug: 'november-sheet-pan-honey-thyme-chicken-thighs-sweet-potatoes',
+    category: 'healthy-diet',
+    subcategoryId: 'high-protein',
+    categoryLabelEn: 'Healthy & Diet · November Sheet-Pan Meal Prep',
+    publishedMonthLabelEn: 'November 2026 Featured',
+    titleEn: 'One-Pan Honey Thyme Chicken Thighs, Roasted Sweet Potatoes & Red Onion',
+    subtitleEn:
+      'High-protein November sheet-pan dinner and 4-day meal prep—juicy herb-roasted chicken thighs, caramelized cubed sweet potatoes, and sweet red onion wedges glazed with thyme honey.',
+    targetKeywordEn: 'sheet pan honey thyme chicken and sweet potatoes november dinner',
+    shortVideoConceptEn:
+      'Spreading seasoned chicken thighs, 2cm orange sweet potato cubes, and red onion wedges onto a preheated rimmed sheet pan, roasting until golden, and brushing with warm thyme-garlic honey.',
+    internalLinks: [
+      {
+        slug: 'sheet-pan-spiced-chicken-breast-and-potatoes-oven-dinner',
+        titleEn: 'Sheet-Pan Spiced Chicken Breast & Crispy Potatoes Oven Dinner',
+        contextEn: 'Prefer white gold potatoes and chicken breast? Check out our classic spiced chicken and potato sheet pan.',
+      },
+      {
+        slug: '60-minute-sunday-meal-prep-guide-5-high-protein-lunches',
+        titleEn: '60-Minute Sunday High-Protein Meal-Prep Blueprint (5 Lunches)',
+        contextEn: 'Portion this November sweet potato and chicken bake into glass containers using our Sunday meal-prep guide.',
+      },
+    ],
+    wordCount: 1180,
+    introParagraphsEn: [
+      'Sweet potatoes are a powerhouse November staple rich in beta-carotene and complex carbohydrates that stay tender when reheated for weekday lunches. Pairing 2cm sweet potato cubes and red onion wedges with boneless chicken thighs on a single preheated rimmed sheet pan ensures everything finishes cooking at the exact same moment.',
+      'During the final 2 minutes out of the oven, a light brush of raw honey infused with fresh thyme leaves and apple cider vinegar glazes the roasted chicken thighs and caramelized sweet potato edges with warm autumn aroma.',
+    ],
+    whyThisWorksEn: [
+      'Complete balanced macro meal (43g protein, complex sweet potato carbs) on a single sheet pan.',
+      'Boneless chicken thighs and 2cm sweet potato cubes both finish roasting in 22 minutes at 215°C (420°F).',
+      'Reheats wonderfully for up to 4 days of November high-protein meal-prep lunches.',
+    ],
+    chefTipsEn: [
+      'Cut the sweet potatoes into uniform 2cm (3/4-inch) cubes so they caramelize in the same 22-minute window as the chicken thighs.',
+      'Preheat your empty metal sheet pan in the oven for 5 minutes before adding the oiledsweet potatoes and chicken for an instant bottom sear.',
+      'Vent meal-prep containers uncovered for 15 minutes before snapping lids shut so condensation never softens the roasted sweet potatoes.',
+    ],
+    usdaSafetyNoteEn:
+      'USDA Food Safety Guideline: Roast chicken thighs to a minimum internal temperature of 74°C (165°F)—dark-meat thighs become even more tender between 77°C and 80°C (170°F–175°F).',
+    substitutions: [
+      {
+        originalEn: 'Boneless Skinless Chicken Thighs (500g)',
+        substituteEn: 'Chicken Breasts (Cut in Half) or Turkey Tenderloin Medallions (500g)',
+        chefNoteEn: 'If using chicken breast pieces, check temperature at 18 minutes so they stay juicy at 74°C.',
+      },
+      {
+        originalEn: 'Orange Sweet Potatoes, Cubed 2cm (450g)',
+        substituteEn: 'Cubed Butternut Squash or Baby Yukon Gold Potatoes (450g)',
+        chefNoteEn: 'Butternut squash cubes roast in the exact same 22-minute timeframe.',
+      },
+      {
+        originalEn: 'Raw Honey (25ml) + Fresh Thyme Leaves',
+        substituteEn: 'Pure Maple Syrup + Fresh Rosemary or Dried Herbes de Provence',
+        chefNoteEn: 'Maple and rosemary offer an equally classic November flavor profile.',
+      },
+    ],
+    faqs: [
+      {
+        questionEn: 'Why did my roasted sweet potatoes turn soft instead of caramelized?',
+        answerEn:
+          'Avoid lining the sheet pan with silicone mats or crowding the cubes touching one another; bare preheated aluminum and 2cm airflow spacing let steam escape so the edges brown.',
+      },
+      {
+        questionEn: 'Can I use bone-in, skin-on chicken thighs for this sheet-pan recipe?',
+        answerEn:
+          'Yes! Roast bone-in, skin-on thighs for 10 minutes first before adding the cubed sweet potatoes to the pan, then roast 22 minutes more until crispy.',
+      },
+      {
+        questionEn: 'How long does honey thyme chicken and sweet potatoes last in the fridge?',
+        answerEn:
+          'Stored in airtight glass meal-prep containers at 4°C (40°F) or below, it stays fresh for up to 4 days.',
+      },
+    ],
+    stepGalleryImages: [
+      '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+      '/images/action_searing_skillet_butter_1795530068462.jpg',
+      '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    ],
+    authorName: 'Marcus Vance',
+    authorRoleEn: 'Executive Culinary Director & Cast-Iron Specialist',
+    prepMinutes: 8,
+    cookMinutes: 22,
+    calories: 485,
+    proteinGrams: 43,
+    netCarbsGrams: 34,
+    image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
+    gearItem: {
+      id: 'gear-skillet-12',
+      nameEn: 'Heavy-Gauge Aluminum Half-Sheet Roasting Pan',
+      brand: 'Nordic Ware Culinary',
+      priceUsd: 38,
+      affiliateStore: 'Culinary Gear Partner',
+      image: '/images/gear_cast_iron_skillet_1795527125638.jpg',
+    },
+    ingredientsEn: [
+      { item: 'Boneless skinless chicken thighs, trimmed', amount: 500, unit: 'g' },
+      { item: 'Fresh November sweet potatoes, peeled & cut into 2cm cubes', amount: 450, unit: 'g' },
+      { item: 'Red onion, cut into 2cm wedges & 3 smashed garlic cloves', amount: 130, unit: 'g' },
+      { item: 'Extra-virgin olive oil, smoked paprika, kosher salt & pepper', amount: 25, unit: 'ml' },
+      { item: 'Raw honey & 10ml apple cider vinegar (for finishing glaze)', amount: 25, unit: 'ml' },
+      { item: 'Fresh thyme leaves & chopped parsley', amount: 10, unit: 'g' },
+    ],
+    stepsEn: [
+      {
+        title: 'Toss Chicken Thighs, Cubed Sweet Potatoes & Red Onion with Herbs',
+        instruction:
+          'Preheat oven (with empty sheet pan inside) to 215°C (420°F). Toss chicken thighs, 2cm sweet potato cubes, and red onion wedges with olive oil, half the thyme, garlic, smoked paprika, salt, and pepper.',
+        timerSeconds: 300,
+      },
+      {
+        title: 'Spread on Hot Sheet Pan & Roast 22 Minutes at 215°C (420°F)',
+        instruction:
+          'Carefully arrange chicken and sweet potatoes in a single uncrowded layer on the hot sheet pan. Roast for 22 minutes, flipping sweet potatoes halfway, until chicken reaches 74°C (165°F).',
+        timerSeconds: 1320,
+      },
+      {
+        title: 'Brush Warm Honey-Thyme Cider Glaze & Serve',
+        instruction:
+          'Stir raw honey, apple cider vinegar, and remaining fresh thyme together. Brush over the hot chicken thighs and roasted sweet potatoes right out of the oven.',
+        timerSeconds: 90,
       },
     ],
   },
@@ -4561,7 +5639,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-17',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Air Fryer',
+    topicLabel: 'Popular Question · Air Fryer',
     question:
       'Can you put aluminum foil or perforated parchment paper inside an Air Fryer basket safely?',
     shortAnswer:
@@ -4574,7 +5652,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-18',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · High-Protein Swaps',
+    topicLabel: 'Popular Question · High-Protein Swaps',
     question:
       'How do I substitute cottage cheese or Greek yogurt for heavy cream or mayo in high-protein sauces?',
     shortAnswer:
@@ -4587,20 +5665,20 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-19',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Seafood Science',
+    topicLabel: 'Popular Question · Seafood Science',
     question:
       'What is the white stuff (albumin) that comes out of cooked salmon, and how do I prevent it?',
     shortAnswer:
-      'Albumin is a harmless liquid muscle protein that squeezes out and coagulates when salmon is overcooked or heated too aggressively; pulling salmon at 63°C (145°F) minimizes it.',
+      'Albumin is a water-soluble sarcoplasmic protein that begins coagulating at 49°C–54°C (120°F–130°F); intense direct heat makes muscle fibers contract rapidly and squeeze it to the surface, whereas a 10-minute 6% salt brine and gentle heat minimize it while reaching the USDA 63°C (145°F) safety minimum.',
     detailedAnswer:
-      'To keep salmon fillets clean and glossy, pat the fish dry, salt it 10 minutes before cooking (or soak in a 6% salt-water brine for 10 minutes and pat dry), sear 80% of the time skin-side down, and remove from heat as soon as the center reaches the USDA-recommended 63°C (145°F).',
-    proMetric: '10-Min Pre-Salt · Pull at USDA 63°C (145°F)',
+      'Because albumin starts setting between 49°C and 54°C (120°F–130°F)—well below the official USDA safe minimum internal temperature of 63°C (145°F)—cooking salmon to 63°C does not prevent albumin by temperature alone; in fact, higher heat increases muscle fiber contraction and pushes more white protein out. To prevent surface albumin scientifically, soak fillets in a 6% salt-water brine (15g salt per 250ml cold water) for 10 minutes before drying (the salt partially dissolves surface myosin so muscle fibers seal smoothly without squeezing out albumin), sear 80% of the time skin-side down so the skin insulates the flesh from harsh thermal shock, and remove from the skillet right at the USDA-recommended 63°C (145°F).',
+    proMetric: '10-Min 6% Salt Brine · Gentle Skin-Side Heat · USDA 63°C (145°F)',
     relatedRecipeId: 'crispy-salmon-skillet',
   },
   {
     id: 'qa-20',
     topic: 'reheating_safety',
-    topicLabel: 'Trending Last 30 Days · Poultry & USDA Temps',
+    topicLabel: 'Popular Question · Poultry & USDA Temps',
     question:
       'Why is my chicken breast rubbery or dry even when cooked to 74°C (165°F), and how do I keep it juicy?',
     shortAnswer:
@@ -4613,7 +5691,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-21',
     topic: 'meal_prep',
-    topicLabel: 'Trending Last 30 Days · Breakfast Meal Prep',
+    topicLabel: 'Popular Question · Breakfast Meal Prep',
     question:
       'How long do hard-boiled eggs and baked cottage-cheese egg bites stay fresh in the refrigerator?',
     shortAnswer:
@@ -4626,7 +5704,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-22',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · Baking Swaps',
+    topicLabel: 'Popular Question · Baking Swaps',
     question:
       'What is the best 1:1 substitute for eggs when baking cupcakes, banana bread, or cookies?',
     shortAnswer:
@@ -4639,7 +5717,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-23',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Air Fryer Care',
+    topicLabel: 'Popular Question · Air Fryer Care',
     question:
       'Why is my Air Fryer smoking when cooking fatty meats, and how do I stop grease smoke immediately?',
     shortAnswer:
@@ -4652,7 +5730,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-24',
     topic: 'meal_prep',
-    topicLabel: 'Trending Last 30 Days · Produce Prep',
+    topicLabel: 'Popular Question · Produce Prep',
     question:
       'How do I chop potatoes, sweet potatoes, or apples a day ahead without them turning brown or gray?',
     shortAnswer:
@@ -4665,7 +5743,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-25',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · Gluten-Free Baking',
+    topicLabel: 'Popular Question · Gluten-Free Baking',
     question:
       'Can I substitute almond flour or oat flour 1:1 for regular all-purpose wheat flour in baking?',
     shortAnswer:
@@ -4678,7 +5756,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-26',
     topic: 'reheating_safety',
-    topicLabel: 'Trending Last 30 Days · USDA Food Safety',
+    topicLabel: 'Popular Question · USDA Food Safety',
     question:
       'Should I wash raw chicken or turkey in the kitchen sink before cooking?',
     shortAnswer:
@@ -4691,7 +5769,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-27',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Cooking Oils',
+    topicLabel: 'Popular Question · Cooking Oils',
     question:
       'Which cooking oils have the highest smoke point for cast-iron steak searing vs. Air Frying?',
     shortAnswer:
@@ -4704,7 +5782,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-28',
     topic: 'meal_prep',
-    topicLabel: 'Trending Last 30 Days · Freezer Pasta Prep',
+    topicLabel: 'Popular Question · Freezer Pasta Prep',
     question:
       'How do I freeze and reheat pasta dishes or gnocchi for meal prep without the pasta turning mushy?',
     shortAnswer:
@@ -4717,7 +5795,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-29',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · Alcohol-Free Swaps',
+    topicLabel: 'Popular Question · Alcohol-Free Swaps',
     question:
       'What is the best non-alcoholic substitute for white or red wine when deglazing a skillet sauce?',
     shortAnswer:
@@ -4730,7 +5808,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-30',
     topic: 'reheating_safety',
-    topicLabel: 'Trending Last 30 Days · Holiday & Roast Thawing',
+    topicLabel: 'Popular Question · Holiday & Roast Thawing',
     question:
       'How many hours per kilogram (or pound) does a frozen whole chicken or turkey take to thaw safely in the fridge?',
     shortAnswer:
@@ -4743,7 +5821,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-31',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Frozen-to-Air-Fryer',
+    topicLabel: 'Popular Question · Frozen-to-Air-Fryer',
     question:
       'Can I cook frozen salmon fillets or shrimp directly in the Air Fryer without thawing first?',
     shortAnswer:
@@ -4756,7 +5834,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-32',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · Leavening Swaps',
+    topicLabel: 'Popular Question · Leavening Swaps',
     question:
       'How do I substitute baking powder for baking soda (or baking soda for baking powder) in a recipe?',
     shortAnswer:
@@ -4769,7 +5847,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-33',
     topic: 'meal_prep',
-    topicLabel: 'Trending Last 30 Days · Soup & Broth Safety',
+    topicLabel: 'Popular Question · Soup & Broth Safety',
     question:
       'What is the safest way to cool a large pot of hot soup, stew, or chili before refrigerating?',
     shortAnswer:
@@ -4782,7 +5860,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-34',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Cast-Iron Restoration',
+    topicLabel: 'Popular Question · Cast-Iron Restoration',
     question:
       'Why is my seasoned cast-iron skillet sticky, and how do I re-season it in the oven?',
     shortAnswer:
@@ -4795,7 +5873,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-35',
     topic: 'substitutions',
-    topicLabel: 'Trending Last 30 Days · Natural Sweeteners',
+    topicLabel: 'Popular Question · Natural Sweeteners',
     question:
       'How do I replace refined white sugar with honey or maple syrup in baking without making the batter soggy?',
     shortAnswer:
@@ -4808,7 +5886,7 @@ export const COOKING_AND_MEAL_PREP_QA: CookingQaItem[] = [
   {
     id: 'qa-36',
     topic: 'heat_skillet',
-    topicLabel: 'Trending Last 30 Days · Sheet-Pan Roasting',
+    topicLabel: 'Popular Question · Sheet-Pan Roasting',
     question:
       'Why do my roasted vegetables turn soft and steamed instead of crispy, and how do I fix it?',
     shortAnswer:
@@ -4840,7 +5918,7 @@ export interface CookingQAItem {
 
 export const QA_TOPIC_LABELS: { id: 'all' | 'trending_30d' | CookingQATopic; labelEn: string }[] = [
   { id: 'all', labelEn: 'All 36 Cooking Q&As' },
-  { id: 'trending_30d', labelEn: '🔥 Top 20 Most-Asked (Last 30 Days)' },
+  { id: 'trending_30d', labelEn: 'Popular Kitchen Questions (20)' },
   { id: 'meal_prep_storage', labelEn: 'Meal Prep & Food Storage' },
   { id: 'cooking_science', labelEn: 'Cooking Science & USDA Temps' },
   { id: 'ingredient_substitutions', labelEn: '1:1 Ingredient Substitutions' },

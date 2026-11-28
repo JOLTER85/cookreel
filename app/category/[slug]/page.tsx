@@ -45,7 +45,7 @@ export async function generateMetadata({
     title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,
     description: category.descriptionEn,
     alternates: {
-      canonical: `/category/${category.slug}`,
+      canonical: `https://cookreel.com/category/${category.slug}`,
     },
     openGraph: {
       title: `${category.labelEn} Recipes & Culinary Guides | CookReel`,

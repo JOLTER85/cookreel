@@ -381,6 +381,12 @@ export function SiteHeader({
 }
 
 export function SiteFooter() {
+  const handleOpenCookiePreferences = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookreel:open-cookie-banner'));
+    }
+  };
+
   return (
     <footer className="bg-white text-slate-600 border-t border-slate-200 py-14">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
@@ -388,7 +394,7 @@ export function SiteFooter() {
           <div className="lg:col-span-2">
             <Link
               href="/"
-              aria-label="CookReel Home — www.cookreel.com"
+              aria-label="CookReel Home — cookreel.com"
               className="inline-block mb-4"
             >
               <CookReelBrandLogo
@@ -399,13 +405,13 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-xs text-slate-600 leading-relaxed max-w-md mb-4">
-              CookReel is an independent culinary publication offering step-by-step recipe guides, short-form cooking clips, 1:1 ingredient substitutions, and USDA-aligned food safety references for everyday home cooks.
+              CookReel is an independent culinary publication offering step-by-step recipe guides, visual technique clips, 1:1 ingredient substitutions, and USDA-aligned food safety references developed by Marcus Vance and Elena Rostova.
             </p>
-            <div className="rounded-lg border border-amber-200 bg-amber-50/60 p-3 text-[11px] text-slate-700 leading-relaxed mb-4">
-              <strong className="text-amber-900">
-                Editorial &amp; Affiliate Disclosure:
+            <div className="rounded-lg border border-slate-200 bg-[#FAF9F6] p-3 text-[11px] text-slate-700 leading-relaxed mb-4">
+              <strong className="text-slate-900">
+                Editorial Independence &amp; Visual Media Disclosure:
               </strong>{' '}
-              Recommended cookware and kitchen tools are independently selected by our editorial team. Some &ldquo;Shop Gear&rdquo; links may be affiliate partner links that earn CookReel a small referral commission at no extra cost to you.
+              Recipe ratios, gram-to-cup conversions, and USDA internal cooking temperatures are editorially verified. Cookware mentions are unsponsored equipment notes (no commercial affiliate links). Step photographs and short motion clips include AI-assisted culinary illustrations.
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {SOCIAL_LINKS.map((soc) => (
@@ -447,7 +453,7 @@ export function SiteFooter() {
                   href="/substitutions"
                   className="hover:text-amber-950 transition-colors text-amber-800 font-semibold"
                 >
-                  1:1 Substitutions Guide (/substitutions)
+                  1:1 Substitutions Guide
                 </Link>
               </li>
               <li>
@@ -455,7 +461,7 @@ export function SiteFooter() {
                   href="/videos"
                   className="hover:text-amber-950 transition-colors text-amber-800 font-semibold"
                 >
-                  Video Recipes Hub (/videos)
+                  Video Recipes Hub
                 </Link>
               </li>
               <li>
@@ -524,7 +530,7 @@ export function SiteFooter() {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/about" className="hover:text-amber-800 transition-colors">
-                  About Us &amp; Editorial Process
+                  About Us &amp; Culinary Team
                 </Link>
               </li>
               <li>
@@ -534,13 +540,22 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link href="/privacy" className="hover:text-amber-800 transition-colors">
-                  Privacy, Cookie &amp; Affiliate Policy
+                  Privacy &amp; Cookie Policy
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className="hover:text-amber-800 transition-colors">
-                  Terms &amp; Conditions
+                  Terms &amp; Conditions (DMCA)
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={handleOpenCookiePreferences}
+                  className="hover:text-amber-800 transition-colors underline text-left cursor-pointer"
+                >
+                  Manage Cookie Preferences
+                </button>
               </li>
               <li className="pt-2 text-slate-600 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-amber-800 shrink-0" />
@@ -557,7 +572,7 @@ export function SiteFooter() {
 
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {new Date().getFullYear()} CookReel (www.cookreel.com). All rights reserved. Written and edited by the CookReel Editorial Team.
+            © {new Date().getFullYear()} CookReel. All rights reserved. Recipes developed and verified by Marcus Vance &amp; Elena Rostova.
           </p>
           <div className="flex items-center gap-2 text-[11px] text-slate-600">
             <ShieldCheck className="w-4 h-4 text-emerald-700" />

@@ -1,28 +1,85 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShieldCheck, X } from 'lucide-react';
 
+const CONSENT_STORAGE_KEY = 'cookreel_cookie_consent_v1';
+
 export function CookieConsentBanner() {
-  const [dismissed, setDismissed] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [currentConsent, setCurrentConsent] = useState<
+    'accepted_all' | 'essential_only' | null
+  >(null);
+
+  useEffect(() => {
+    const initTimer = window.setTimeout(() => {
+      try {
+        const raw = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (
+            parsed?.choice === 'accepted_all' ||
+            parsed?.choice === 'essential_only'
+          ) {
+            setCurrentConsent(parsed.choice);
+            document.documentElement.setAttribute(
+              'data-cookie-consent',
+              parsed.choice
+            );
+            setVisible(false);
+          } else {
+            document.documentElement.setAttribute(
+              'data-cookie-consent',
+              'essential_only'
+            );
+            setVisible(true);
+          }
+        } else {
+          // Strictly block non-essential scripts prior to user opt-in
+          document.documentElement.setAttribute(
+            'data-cookie-consent',
+            'essential_only'
+          );
+          setVisible(true);
+        }
+      } catch {
+        setVisible(true);
+      }
+    }, 0);
+
+    const handleOpenBanner = () => {
+      setVisible(true);
+    };
+
+    window.addEventListener('cookreel:open-cookie-banner', handleOpenBanner);
+    return () => {
+      window.clearTimeout(initTimer);
+      window.removeEventListener(
+        'cookreel:open-cookie-banner',
+        handleOpenBanner
+      );
+    };
+  }, []);
 
   const handleChoice = (choice: 'accepted_all' | 'essential_only') => {
     try {
       window.localStorage.setItem(
-        'cookreel_cookie_consent_v1',
+        CONSENT_STORAGE_KEY,
         JSON.stringify({
           choice,
           timestamp: new Date().toISOString(),
         })
       );
+      document.documentElement.setAttribute('data-cookie-consent', choice);
     } catch {
       // Ignore storage errors in private mode
     }
-    setDismissed(true);
+    setCurrentConsent(choice);
+    setVisible(false);
   };
 
-  if (dismissed) return null;
+  if (!visible) return null;
 
   return (
     <div
@@ -37,10 +94,15 @@ export function CookieConsentBanner() {
           </div>
           <div className="text-xs leading-relaxed text-slate-600">
             <p className="font-bold text-slate-900 text-sm mb-0.5">
-              Cookie &amp; Advertising Transparency (GDPR / EEA Compliance)
+              Cookie &amp; Privacy Controls (GDPR / EEA &amp; CCPA Compliance)
+              {currentConsent && (
+                <span className="ml-2 text-[11px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                  Current: {currentConsent === 'accepted_all' ? 'All Accepted' : 'Essential Only'}
+                </span>
+              )}
             </p>
             <p>
-              We use essential cookies to remember your recipe preferences and optional analytics/advertising cookies (including Google AdSense &amp; affiliate tracking) to support free culinary guides. Read our{' '}
+              Non-essential analytics and advertising cookies are strictly blocked by default until you opt in. Essential storage remembers only your consent choice and recipe checklist state. Read our{' '}
               <Link
                 href="/privacy"
                 className="font-semibold text-amber-800 underline hover:text-amber-900"
@@ -69,7 +131,7 @@ export function CookieConsentBanner() {
           <button
             type="button"
             onClick={() => handleChoice('essential_only')}
-            aria-label="Close cookie banner"
+            aria-label="Reject non-essential cookies and close"
             className="p-1.5 text-slate-400 hover:text-slate-700"
           >
             <X className="h-4 w-4" />

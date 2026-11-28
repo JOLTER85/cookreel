@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
@@ -20,7 +23,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // 1. Historical subdomain http(s)://tv.cookreel.com/ and http(s)://tv.cookreel.com/today -> Homepage https://www.cookreel.com/
+      // 1. Historical subdomain http(s)://tv.cookreel.com/ and http(s)://tv.cookreel.com/today -> Homepage https://cookreel.com/
       {
         source: '/',
         has: [
@@ -29,7 +32,7 @@ const nextConfig: NextConfig = {
             value: 'tv.cookreel.com',
           },
         ],
-        destination: 'https://www.cookreel.com/',
+        destination: 'https://cookreel.com/',
         permanent: true,
       },
       {
@@ -40,7 +43,7 @@ const nextConfig: NextConfig = {
             value: 'tv.cookreel.com',
           },
         ],
-        destination: 'https://www.cookreel.com/',
+        destination: 'https://cookreel.com/',
         permanent: true,
       },
       {
@@ -51,7 +54,7 @@ const nextConfig: NextConfig = {
             value: 'tv.cookreel.com',
           },
         ],
-        destination: 'https://www.cookreel.com/',
+        destination: 'https://cookreel.com/',
         permanent: true,
       },
       // 2. Direct path redirects for /today, /tv, and /tv/today on main domain -> Homepage /

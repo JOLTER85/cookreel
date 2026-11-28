@@ -105,10 +105,10 @@ export function RecipeCard({
           </p>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 space-y-2">
+        <div className="pt-3 border-t border-slate-100">
           <div className="flex items-center justify-between gap-2">
             <div className="text-[11px] text-slate-500 truncate max-w-[175px] sm:max-w-[190px]">
-              Pan/Tool:{' '}
+              Recommended Tool:{' '}
               <strong className="text-slate-700">{recipe.gearItem.nameEn}</strong>
             </div>
             <Link
@@ -119,13 +119,6 @@ export function RecipeCard({
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
-          <p className="text-[10px] text-slate-400 leading-snug">
-            Affiliate Disclosure: Gear links inside recipe cards may earn a commission at no extra cost ({' '}
-            <Link href="/privacy#affiliate-disclosure" className="underline hover:text-amber-800">
-              details
-            </Link>
-            ).
-          </p>
         </div>
       </div>
     </article>

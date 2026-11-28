@@ -30,11 +30,91 @@ import {
 import {
   CulinaryRecipe,
   SITE_ARCHITECTURE,
-  SOCIAL_LINKS,
+  SITE_ORIGIN,
+  getAuthorProfile,
 } from '@/lib/cookreel-data';
 import { RecipeReview } from '@/lib/server-db';
 import { RecipeCard } from '@/components/RecipeCard';
 import { CookReelBrandLogo } from '@/components/CookReelBrandLogo';
+import TurnstileVerificationWidget, {
+  VerificationChallengeState,
+} from '@/components/TurnstileVerificationWidget';
+
+function formatIngredientMeasurement(
+  amount: number,
+  unit: string,
+  item: string,
+  system: 'metric' | 'us'
+): string {
+  const scaled = Number(amount.toFixed(1));
+  if (system === 'metric') {
+    return `${scaled} ${unit}`;
+  }
+
+  const u = unit.trim().toLowerCase();
+  const itemLower = item.toLowerCase();
+
+  if (u === 'g') {
+    if (scaled < 15) {
+      const tsp = Math.max(0.25, Math.round((scaled / 5) * 4) / 4);
+      return `${tsp} tsp (${scaled}g)`;
+    }
+    if (scaled < 45) {
+      const tbsp = (scaled / 14.2).toFixed(1).replace(/\.0$/, '');
+      const oz = (scaled / 28.3495).toFixed(1).replace(/\.0$/, '');
+      return `${tbsp} tbsp / ${oz} oz`;
+    }
+    const oz = (scaled / 28.3495).toFixed(1).replace(/\.0$/, '');
+    const isDryCupItem =
+      itemLower.includes('flour') ||
+      itemLower.includes('sugar') ||
+      itemLower.includes('oat') ||
+      itemLower.includes('cheese') ||
+      itemLower.includes('spinach') ||
+      itemLower.includes('kale') ||
+      itemLower.includes('lentil') ||
+      itemLower.includes('rice') ||
+      itemLower.includes('berry') ||
+      itemLower.includes('berries') ||
+      itemLower.includes('pecan') ||
+      itemLower.includes('walnut') ||
+      itemLower.includes('butter') ||
+      itemLower.includes('yogurt');
+    if (isDryCupItem) {
+      const gramsPerCup = itemLower.includes('spinach') || itemLower.includes('kale')
+        ? 30
+        : itemLower.includes('flour') || itemLower.includes('cheese') || itemLower.includes('pecan') || itemLower.includes('walnut')
+          ? 120
+          : itemLower.includes('oat')
+            ? 90
+            : 225;
+      const cups = (scaled / gramsPerCup).toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+      return `${oz} oz (~${cups} cups)`;
+    }
+    if (scaled >= 450) {
+      const lbs = (scaled / 453.592).toFixed(2).replace(/\.00$/, '');
+      return `${oz} oz (${lbs} lb)`;
+    }
+    return `${oz} oz (${scaled}g)`;
+  }
+
+  if (u === 'ml') {
+    if (scaled <= 15) {
+      const tbsp = (scaled / 14.787).toFixed(1).replace(/\.0$/, '');
+      return `${tbsp} tbsp (${scaled}ml)`;
+    }
+    if (scaled < 60) {
+      const tbsp = Math.round((scaled / 14.787) * 2) / 2;
+      const flOz = (scaled / 29.5735).toFixed(1).replace(/\.0$/, '');
+      return `${tbsp} tbsp (${flOz} fl oz)`;
+    }
+    const cups = (scaled / 236.588).toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+    const flOz = (scaled / 29.5735).toFixed(1).replace(/\.0$/, '');
+    return `${cups} cups (${flOz} fl oz)`;
+  }
+
+  return `${scaled} ${unit}`;
+}
 
 export function RecipeDetailClient({
   recipe,
@@ -47,6 +127,7 @@ export function RecipeDetailClient({
 }) {
   const [reviews, setReviews] = useState<RecipeReview[]>(initialReviews);
   const [servingsMultiplier, setServingsMultiplier] = useState<number>(1);
+  const [unitSystem, setUnitSystem] = useState<'metric' | 'us'>('metric');
   const [checkedIngredients, setCheckedIngredients] = useState<
     Record<string, boolean>
   >({});
@@ -63,9 +144,15 @@ export function RecipeDetailClient({
   const [reviewAuthor, setReviewAuthor] = useState('');
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState('');
-  const [captchaA, setCaptchaA] = useState(4);
-  const [captchaB, setCaptchaB] = useState(5);
-  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const [verificationState, setVerificationState] =
+    useState<VerificationChallengeState>({
+      numA: 7,
+      numB: 6,
+      answer: '',
+      verified: false,
+      turnstileToken: '',
+    });
+  const [resetSignal, setResetSignal] = useState(0);
   const [websiteHoneypot, setWebsiteHoneypot] = useState('');
   const [reviewTermsAccepted, setReviewTermsAccepted] = useState(false);
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
@@ -132,6 +219,14 @@ export function RecipeDetailClient({
     e.preventDefault();
     setReviewFeedback(null);
 
+    if (!verificationState.verified) {
+      setReviewFeedback({
+        type: 'error',
+        message: 'Please complete the human verification check before posting.',
+      });
+      return;
+    }
+
     if (!reviewTermsAccepted) {
       setReviewFeedback({
         type: 'error',
@@ -151,9 +246,9 @@ export function RecipeDetailClient({
           authorName: reviewAuthor || 'Home Cook',
           rating: reviewRating,
           comment: reviewComment,
-          captchaA,
-          captchaB,
-          captchaAnswer,
+          captchaA: verificationState.numA,
+          captchaB: verificationState.numB,
+          captchaAnswer: verificationState.answer,
           websiteHoneypot,
         }),
       });
@@ -167,10 +262,8 @@ export function RecipeDetailClient({
         setReviews((prev) => [data.review, ...prev]);
         setReviewComment('');
         setReviewAuthor('');
-        setCaptchaAnswer('');
         setReviewTermsAccepted(false);
-        setCaptchaA(Math.floor(2 + Math.random() * 7));
-        setCaptchaB(Math.floor(2 + Math.random() * 7));
+        setResetSignal((prev) => prev + 1);
         setReviewFeedback({
           type: 'success',
           message: 'Thank you! Your review has been verified and published below.',
@@ -196,11 +289,20 @@ export function RecipeDetailClient({
       : null;
 
   const categoryObj = SITE_ARCHITECTURE.find((c) => c.slug === recipe.category);
+  const authorProfile = getAuthorProfile(recipe.authorName);
+  const canonicalRecipeUrl = `${SITE_ORIGIN}/recipes/${recipe.slug}`;
+  const canonicalRecipeImageUrl = `${SITE_ORIGIN}${recipe.image}`;
   const pinterestShareUrl = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(
-    `https://www.cookreel.com/recipes/${recipe.slug}`
+    canonicalRecipeUrl
   )}&media=${encodeURIComponent(
-    `https://www.cookreel.com${recipe.image}`
-  )}&description=${encodeURIComponent(recipe.titleEn)}`;
+    canonicalRecipeImageUrl
+  )}&description=${encodeURIComponent(`${recipe.titleEn} — ${recipe.subtitleEn}`)}`;
+  const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+    `${recipe.titleEn} (${canonicalRecipeUrl})`
+  )}`;
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+    canonicalRecipeUrl
+  )}`;
 
   return (
     <div className="mx-auto max-w-[1440px] px-3 sm:px-8 py-5 sm:py-10">
@@ -293,15 +395,19 @@ export function RecipeDetailClient({
 
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 pt-3.5 border-t border-slate-800/80 text-xs text-slate-300">
                 <div>
-                  Written by{' '}
-                  <Link
-                    href="/about"
+                  By{' '}
+                  <a
+                    href="#author-verification-card"
                     className="font-bold text-amber-300 underline hover:text-amber-200"
                   >
-                    {recipe.authorName}
-                  </Link>{' '}
-                  <span className="text-slate-400">({recipe.authorRoleEn})</span>
+                    {authorProfile.name}
+                  </a>{' '}
+                  <span className="text-slate-400">({authorProfile.roleEn})</span>
                 </div>
+                <span className="text-slate-600 hidden sm:inline">•</span>
+                <span className="font-mono text-slate-300">
+                  Updated: Nov 28, 2026
+                </span>
                 <span className="text-slate-600 hidden sm:inline">•</span>
                 <span className="font-mono">
                   Prep: {recipe.prepMinutes}m · Cook: {recipe.cookMinutes}m · Total:{' '}
@@ -324,7 +430,7 @@ export function RecipeDetailClient({
                     href="#reader-reviews"
                     className="text-slate-400 hover:text-amber-300 underline"
                   >
-                    0 Reader Reviews — Be the first to review
+                    0 Reader Reviews — Leave a review
                   </a>
                 )}
               </div>
@@ -484,32 +590,47 @@ export function RecipeDetailClient({
 
           {/* SECTION 2: STEP-BY-STEP VISUALS (Unique Video Clip OR Step Photography) */}
           <div id="step-by-step-visuals" className="pt-8 border-t border-slate-200">
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
                 <Play className="w-4 h-4" />
                 <span>
                   2. Step-by-Step Visuals{' '}
                   {recipe.videoUrl
-                    ? `(${recipe.videoDuration || '0:12'} Recorded Video Clip + Process Photos)`
-                    : '(Step-by-Step Process Photography)'}
+                    ? `(${recipe.videoDuration || '0:12'} Visual Technique Clip + 3-Stage Process Gallery)`
+                    : '(3-Stage Process Illustration Gallery)'}
                 </span>
               </div>
               <span className="text-xs text-slate-500 font-mono">
-                Visual Reference for Each Cooking Stage
+                3 Distinct Cooking Stages
               </span>
+            </div>
+
+            <div className="mb-5 rounded-xl border border-slate-200 bg-slate-50/90 px-4 py-3 text-xs text-slate-600 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <strong className="text-slate-800 font-bold">
+                  Editorial Testing &amp; Visual Media Disclosure:
+                </strong>{' '}
+                All ingredient weights, cooking times, and USDA internal temperatures are kitchen-tested and verified by {authorProfile.name}. Step photographs and short motion clips include AI-assisted culinary illustrations produced to demonstrate each stage clearly.
+              </div>
+              <Link
+                href="/about#editorial-testing-disclosure"
+                className="text-amber-800 font-bold hover:underline shrink-0"
+              >
+                Testing Standards →
+              </Link>
             </div>
 
             {recipe.shortVideoConceptEn && (
               <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50/70 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="text-xs sm:text-sm text-slate-800 leading-relaxed">
                   <strong className="text-amber-950 font-bold">
-                    Short-Form Video Camera Angle:
+                    Visual Technique Focus:
                   </strong>{' '}
                   {recipe.shortVideoConceptEn}
                 </div>
                 {recipe.targetKeywordEn && (
                   <span className="px-2.5 py-1 rounded bg-white border border-amber-300 text-[11px] font-mono text-amber-900 font-semibold shrink-0">
-                    Topic: {recipe.targetKeywordEn}
+                    Focus: {recipe.targetKeywordEn}
                   </span>
                 )}
               </div>
@@ -541,7 +662,7 @@ export function RecipeDetailClient({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 pointer-events-none" />
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                     <span className="px-2.5 py-1 rounded bg-black/75 text-white text-xs font-mono">
-                      Recorded Recipe Clip ({recipe.videoDuration || '0:12'})
+                      Visual Technique Clip ({recipe.videoDuration || '0:12'})
                     </span>
                     <div className="flex items-center gap-2">
                       <button
@@ -750,13 +871,45 @@ export function RecipeDetailClient({
                     {recipe.titleEn}
                   </h2>
                   <p className="text-xs text-slate-600 mt-1">
-                    Author: {recipe.authorName} · Prep: {recipe.prepMinutes}{' '}
+                    Author: {authorProfile.name} ({authorProfile.roleEn}) · Updated: Nov 28, 2026 · Prep: {recipe.prepMinutes}{' '}
                     mins · Cook: {recipe.cookMinutes} mins
                   </p>
                 </div>
 
-                {/* Portion Scaler */}
-                <div className="flex items-center gap-3">
+                {/* Unit Converter Toggle (Metric vs US) + Portion Scaler */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div
+                    role="group"
+                    aria-label="Measurement Unit System"
+                    className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1"
+                  >
+                    <span className="text-xs text-slate-500 px-2 font-medium">
+                      Units:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setUnitSystem('metric')}
+                      className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-colors cursor-pointer ${
+                        unitSystem === 'metric'
+                          ? 'bg-slate-900 text-white'
+                          : 'text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      Metric (g / ml)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setUnitSystem('us')}
+                      className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-colors cursor-pointer ${
+                        unitSystem === 'us'
+                          ? 'bg-slate-900 text-white'
+                          : 'text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      US (oz / cups)
+                    </button>
+                  </div>
+
                   <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
                     <span className="text-xs text-slate-500 px-2 flex items-center gap-1">
                       <Users className="w-3.5 h-3.5 text-amber-800" />
@@ -767,7 +920,7 @@ export function RecipeDetailClient({
                         key={mult}
                         type="button"
                         onClick={() => setServingsMultiplier(mult)}
-                        className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-colors ${
+                        className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-colors cursor-pointer ${
                           servingsMultiplier === mult
                             ? 'bg-amber-800 text-white'
                             : 'text-slate-700 hover:bg-slate-100'
@@ -792,7 +945,7 @@ export function RecipeDetailClient({
                 </div>
                 <div className="p-2.5 rounded-lg bg-white border border-slate-200/80">
                   <div className="text-[11px] text-slate-500 uppercase font-mono">
-                    Calories
+                    Calories (USDA)
                   </div>
                   <div className="font-mono text-sm font-bold text-amber-800">
                     {recipe.calories} kcal
@@ -819,22 +972,30 @@ export function RecipeDetailClient({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
                 {/* Ingredients Checklist */}
                 <div className="lg:col-span-5">
-                  <h3 className="font-serif text-lg font-bold text-slate-900 mb-3">
-                    Measured Ingredients ({servingsMultiplier}x Batch)
-                  </h3>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <h3 className="font-serif text-lg font-bold text-slate-900">
+                      Measured Ingredients ({servingsMultiplier}x Batch)
+                    </h3>
+                    <span className="text-[11px] font-mono text-slate-500">
+                      {unitSystem === 'metric' ? 'Metric Weights' : 'US Customary'}
+                    </span>
+                  </div>
                   <ul className="space-y-2">
                     {recipe.ingredientsEn.map((ing, idx) => {
                       const key = `${recipe.id}-ing-${idx}`;
                       const isChecked = !!checkedIngredients[key];
-                      const scaledAmount = Number(
-                        (ing.amount * servingsMultiplier).toFixed(1)
+                      const formattedAmount = formatIngredientMeasurement(
+                        ing.amount * servingsMultiplier,
+                        ing.unit,
+                        ing.item,
+                        unitSystem
                       );
                       return (
                         <li key={key}>
                           <button
                             type="button"
                             onClick={() => toggleIngredient(key)}
-                            className={`w-full min-h-[44px] flex items-center justify-between gap-3 p-3 rounded-lg border text-left active:scale-[0.99] transition-all ${
+                            className={`w-full min-h-[44px] flex items-center justify-between gap-3 p-3 rounded-lg border text-left active:scale-[0.99] transition-all cursor-pointer ${
                               isChecked
                                 ? 'bg-emerald-50/60 border-emerald-200 text-slate-400 line-through'
                                 : 'bg-white border-slate-200/90 hover:border-amber-800/40 text-slate-800'
@@ -857,7 +1018,7 @@ export function RecipeDetailClient({
                               </span>
                             </div>
                             <span className="font-mono text-xs font-semibold text-amber-900 bg-amber-100/70 px-2 py-0.5 rounded shrink-0">
-                              {scaledAmount} {ing.unit}
+                              {formattedAmount}
                             </span>
                           </button>
                         </li>
@@ -865,42 +1026,16 @@ export function RecipeDetailClient({
                     })}
                   </ul>
 
-                  {/* Recommended Pan/Tool with Explicit FTC Affiliate Disclosure */}
-                  <div className="mt-6 p-4 rounded-xl bg-white border border-amber-200">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="text-[10px] font-mono uppercase tracking-wider text-amber-800 font-bold">
-                          Recommended Cookware ({recipe.gearItem.brand})
-                        </div>
-                        <div className="text-xs font-bold text-slate-900 truncate">
-                          {recipe.gearItem.nameEn}
-                        </div>
-                        <div className="text-xs font-mono text-slate-500">
-                          Est. Price: ${recipe.gearItem.priceUsd} · Partner:{' '}
-                          {recipe.gearItem.affiliateStore}
-                        </div>
-                      </div>
-                      <Link
-                        href="/privacy#affiliate-disclosure"
-                        className="px-3 py-2 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold flex items-center gap-1.5 shrink-0"
-                      >
-                        <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>Shop Gear</span>
-                      </Link>
+                  {/* Non-Commercial Recommended Kitchen Equipment Note */}
+                  <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200/90">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-amber-800 font-bold mb-1">
+                      Recommended Kitchen Equipment
                     </div>
-                    <p className="mt-2.5 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 leading-relaxed">
-                      <strong>Affiliate Disclosure:</strong> Recommended kitchen
-                      tools are independently selected by our editorial team. If
-                      you purchase through our partner links, CookReel may earn
-                      a small referral commission at no extra cost to you. See
-                      our{' '}
-                      <Link
-                        href="/privacy#affiliate-disclosure"
-                        className="underline text-amber-800 hover:text-amber-900"
-                      >
-                        Affiliate &amp; Privacy Policy
-                      </Link>
-                      .
+                    <div className="text-xs sm:text-sm font-bold text-slate-900">
+                      {recipe.gearItem.nameEn}
+                    </div>
+                    <p className="mt-1.5 text-[11px] text-slate-600 leading-relaxed">
+                      Unsponsored editorial equipment note: Any heavy-bottomed 10-to-12-inch skillet, sheet pan, or baking vessel of similar capacity works reliably for this recipe. CookReel does not sell cookware or attach commercial affiliate store links here.
                     </p>
                   </div>
                 </div>
@@ -1030,33 +1165,104 @@ export function RecipeDetailClient({
             </div>
           </div>
 
-          {/* SECTION 6: FOLLOW & SHARE ON PINTEREST / SOCIAL CHANNELS */}
-          <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-amber-50/50 p-5 rounded-xl border border-amber-200/70">
-            <div>
-              <h3 className="font-serif text-base font-bold text-slate-900">
-                Save This Recipe on Pinterest or Follow CookReel
-              </h3>
-              <p className="text-xs text-slate-600">
-                Pin this recipe card to your weeknight cooking board or watch our short clips on social media.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              {SOCIAL_LINKS.map((soc) => (
-                <a
-                  key={soc.platform}
-                  href={soc.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
+          {/* AUTHOR BIO, CREDENTIALS & E-E-A-T TESTING STANDARDS CARD */}
+          <div
+            id="author-verification-card"
+            className="pt-8 border-t border-slate-200"
+          >
+            <div className="rounded-2xl border border-slate-200/90 bg-[#FAF9F6] p-6 flex flex-col md:flex-row md:items-start justify-between gap-6">
+              <div className="space-y-2.5 max-w-3xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded bg-amber-800 text-white text-[11px] font-mono uppercase tracking-wider font-bold">
+                    Recipe Author &amp; Kitchen Verification
+                  </span>
+                  <span className="text-xs font-mono text-slate-500">
+                    Published: November 15, 2026 · Last Updated: November 28, 2026
+                  </span>
+                </div>
+                <h3 className="font-serif text-xl font-bold text-slate-900">
+                  {authorProfile.name}{' '}
+                  <span className="text-sm font-sans font-normal text-amber-900">
+                    — {authorProfile.roleEn}
+                  </span>
+                </h3>
+                <p className="text-xs font-mono text-emerald-800 font-semibold">
+                  {authorProfile.credentialsEn}
+                </p>
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                  {authorProfile.bioEn}
+                </p>
+                <p className="text-xs text-slate-500 leading-relaxed pt-1 border-t border-slate-200/80">
+                  <strong className="text-slate-700">Testing Protocol:</strong>{' '}
+                  {authorProfile.testingProtocolEn}
+                </p>
+              </div>
+              <div className="shrink-0 flex flex-col gap-2">
+                <Link
+                  href="/about"
+                  className="px-4 py-2.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors text-center"
                 >
-                  <span>{soc.platform}</span>
-                  <ExternalLink className="w-3 h-3 text-slate-400" />
-                </a>
-              ))}
+                  Meet Our Culinary Team →
+                </Link>
+                <Link
+                  href="/contact"
+                  className="px-4 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-xs font-semibold text-amber-900 transition-colors text-center"
+                >
+                  Ask the Author a Question
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* SECTION 7: VERIFIED READER REVIEWS WITH ANTI-SPAM CAPTCHA */}
+          {/* SECTION 6: SAVE OR SHARE THIS RECIPE (PER-RECIPE CANONICAL SHARE URLS) */}
+          <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-amber-50/50 p-5 rounded-xl border border-amber-200/70">
+            <div>
+              <h3 className="font-serif text-base font-bold text-slate-900">
+                Save or Share This Recipe
+              </h3>
+              <p className="text-xs text-slate-600">
+                Pin this specific recipe card and dish photo to your weeknight cooking board or send the direct recipe link to your kitchen.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={pinterestShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
+              >
+                <span>Pin Recipe to Pinterest</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+              <a
+                href={whatsappShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
+              >
+                <span>Send via WhatsApp</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+              <a
+                href={facebookShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors"
+              >
+                <span>Share on Facebook</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyShareLink}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-xs font-bold text-slate-800 transition-colors cursor-pointer"
+              >
+                <span>{copiedUrl ? 'Recipe Link Copied!' : 'Copy Recipe URL'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* SECTION 7: VERIFIED READER REVIEWS WITH TURNSTILE HUMAN VERIFICATION */}
           <div
             id="reader-reviews"
             className="pt-8 border-t border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8"
@@ -1110,9 +1316,6 @@ export function RecipeDetailClient({
                 <h4 className="font-serif text-base font-bold text-slate-900">
                   Leave an Honest Recipe Review
                 </h4>
-                <span className="text-[11px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
-                  CAPTCHA Protected
-                </span>
               </div>
 
               {reviewFeedback && (
@@ -1172,22 +1375,11 @@ export function RecipeDetailClient({
                 className="w-full px-3 py-2 rounded-lg bg-white border border-slate-300 text-xs focus:outline-none focus:border-amber-800"
               />
 
-              {/* Anti-Spam Math CAPTCHA + Moderation Terms */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center pt-1">
-                <div className="flex items-center gap-2 text-xs text-slate-700 font-semibold">
-                  <span>
-                    Anti-Spam Check: What is {captchaA} + {captchaB}?
-                  </span>
-                </div>
-                <input
-                  type="number"
-                  required
-                  value={captchaAnswer}
-                  onChange={(e) => setCaptchaAnswer(e.target.value)}
-                  placeholder="Enter sum"
-                  className="px-3 py-2 rounded-lg bg-white border border-slate-300 text-xs focus:outline-none focus:border-amber-800"
-                />
-              </div>
+              <TurnstileVerificationWidget
+                onChange={setVerificationState}
+                resetSignal={resetSignal}
+                compact
+              />
 
               <label className="flex items-start gap-2 text-[11px] text-slate-600 cursor-pointer">
                 <input
@@ -1208,7 +1400,7 @@ export function RecipeDetailClient({
               <button
                 type="submit"
                 disabled={isSubmittingReview}
-                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors disabled:opacity-50"
+                className="px-4 py-2.5 rounded-lg bg-amber-800 hover:bg-amber-700 text-white text-xs font-bold transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {isSubmittingReview
                   ? 'Verifying & Posting...'

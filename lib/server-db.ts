@@ -87,8 +87,8 @@ function normalizeRecipes(rawRecipes: unknown): CulinaryRecipe[] {
 
 function getWritableDbPath(): string | null {
   const candidates = [
-    path.resolve(process.cwd(), 'data', 'cookreel-db-v6.json'),
-    path.resolve(os.tmpdir(), 'cookreel-db-v6.json'),
+    path.resolve(process.cwd(), 'data', 'cookreel-db-v7.json'),
+    path.resolve(os.tmpdir(), 'cookreel-db-v7.json'),
   ];
 
   for (const filePath of candidates) {
@@ -204,8 +204,8 @@ export function getSafeSiteUrl(): string {
         : `https://${raw}`;
       return new URL(candidate).origin;
     } catch {
-      return 'https://www.cookreel.com';
+      return 'https://cookreel.com';
     }
   }
-  return 'https://www.cookreel.com';
+  return 'https://cookreel.com';
 }

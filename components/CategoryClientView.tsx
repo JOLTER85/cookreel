@@ -111,6 +111,64 @@ export function CategoryClientView({
         </div>
       </div>
 
+      {/* Unique 180+ Word Category Editorial Guide & Featured Recipe Links (Audit Item 12) */}
+      {category.editorialGuideParagraphsEn &&
+        category.editorialGuideParagraphsEn.length > 0 && (
+          <section className="rounded-2xl bg-white border border-slate-200/90 p-6 sm:p-8 mb-8 shadow-xs">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold">
+                <BookOpen className="w-4 h-4" />
+                <span>{category.labelEn} — Culinary Technique &amp; Ingredient Guide</span>
+              </div>
+              <span className="text-xs font-mono text-slate-500">
+                Curated by Marcus Vance &amp; Elena Rostova · Updated Nov 28, 2026
+              </span>
+            </div>
+
+            <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+              {category.editorialGuideParagraphsEn.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+
+            {category.featuredRecipeSlugs &&
+              category.featuredRecipeSlugs.length > 0 && (
+                <div className="mt-6 pt-5 border-t border-slate-100">
+                  <div className="text-xs font-mono uppercase tracking-wider text-slate-500 font-bold mb-3">
+                    Featured Pillar Recipes in {category.labelEn}:
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {category.featuredRecipeSlugs.map((slug) => {
+                      const featuredRecipe = initialRecipes.find(
+                        (r) => r.slug === slug
+                      );
+                      if (!featuredRecipe) return null;
+                      return (
+                        <Link
+                          key={slug}
+                          href={`/recipes/${featuredRecipe.slug}`}
+                          className="p-3.5 rounded-xl bg-[#FAF9F6] border border-slate-200/80 hover:border-amber-800/60 transition-all flex flex-col justify-between group"
+                        >
+                          <div>
+                            <span className="text-[10px] font-mono uppercase tracking-wider text-amber-800 font-bold">
+                              Editor&apos;s Pick · {featuredRecipe.prepMinutes + featuredRecipe.cookMinutes} Mins
+                            </span>
+                            <h3 className="font-serif text-sm font-bold text-slate-900 group-hover:text-amber-800 transition-colors mt-0.5 line-clamp-2">
+                              {featuredRecipe.titleEn}
+                            </h3>
+                          </div>
+                          <span className="text-[11px] font-semibold text-amber-800 mt-2 inline-flex items-center gap-1">
+                            View Recipe Guide →
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+          </section>
+        )}
+
       {/* Recipe Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayedRecipes.map((recipe) => (

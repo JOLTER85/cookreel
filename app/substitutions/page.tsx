@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'Interactive 1:1 ingredient substitution chart with exact gram and milliliter ratios for heavy cream, buttermilk, eggs, cake flour, fresh herbs, cooking oils, and pan sauce deglazers.',
   alternates: {
-    canonical: '/substitutions',
+    canonical: 'https://cookreel.com/substitutions',
   },
   openGraph: {
     title:
@@ -57,9 +57,10 @@ export default function SubstitutionsPage() {
           'Exact gram-for-gram culinary ratios for swapping missing heavy cream, buttermilk, eggs, cake flour, fresh herbs, cooking fats, and wine deglazers.',
         image: [ogImg],
         author: {
-          '@type': 'Organization',
-          name: 'CookReel Editorial Team',
-          url: `${SITE_ORIGIN}/about`,
+          '@type': 'Person',
+          name: 'Elena Rostova',
+          jobTitle: 'Senior Recipe Developer & Food Science Editor',
+          url: `${SITE_ORIGIN}/about#elena-rostova`,
         },
         publisher: {
           '@type': 'Organization',
@@ -67,7 +68,7 @@ export default function SubstitutionsPage() {
           url: SITE_ORIGIN,
         },
         datePublished: '2026-11-15',
-        dateModified: '2026-11-26',
+        dateModified: '2026-11-28',
       },
       {
         '@type': 'FAQPage',

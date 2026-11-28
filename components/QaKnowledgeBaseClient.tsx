@@ -17,6 +17,7 @@ import {
   CookingQAItem,
   CookingQATopic,
 } from '@/lib/cookreel-data';
+import { TurnstileVerificationWidget } from '@/components/TurnstileVerificationWidget';
 
 export function QaKnowledgeBaseClient() {
   const [qaList, setQaList] = useState<CookingQAItem[]>(
@@ -28,14 +29,12 @@ export function QaKnowledgeBaseClient() {
   const [searchQuery, setSearchQuery] = useState('');
   const [askModalOpen, setAskModalOpen] = useState(false);
 
-  // Ask question form with anti-spam CAPTCHA
+  // Ask question form with Turnstile human verification
   const [questionText, setQuestionText] = useState('');
   const [topic, setTopic] = useState<CookingQATopic>('meal_prep_storage');
   const [answerText, setAnswerText] = useState('');
   const [proTipText, setProTipText] = useState('');
-  const [captchaA] = useState(3);
-  const [captchaB] = useState(6);
-  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [formError, setFormError] = useState('');
@@ -65,8 +64,8 @@ export function QaKnowledgeBaseClient() {
       return;
     }
 
-    if (Number(captchaAnswer) !== captchaA + captchaB) {
-      setFormError('Please answer the anti-spam math question correctly.');
+    if (!turnstileToken) {
+      setFormError('Please complete the Turnstile human verification check.');
       return;
     }
 
@@ -91,7 +90,7 @@ export function QaKnowledgeBaseClient() {
       questionEn: questionText.trim(),
       shortAnswerEn:
         answerText.trim() ||
-        'Submitted to the CookReel Editorial Team. Always verify safe internal cooking temperatures with a calibrated digital thermometer (74°C / 165°F for poultry and leftovers; 63°C / 145°F for fish and whole cuts).',
+        'Submitted to Elena Rostova & Marcus Vance for kitchen verification. Always verify safe internal cooking temperatures with a calibrated digital thermometer (74°C / 165°F for poultry and leftovers; 63°C / 145°F for fish and whole cuts).',
       detailedStepsEn: [
         'Pre-measure ingredients and bring proteins out of the refrigerator 15 minutes before searing for even cooking.',
         'Store cooked meal-prep portions in airtight glass containers at or below 4°C (40°F) within 90 minutes of cooking.',
@@ -108,7 +107,7 @@ export function QaKnowledgeBaseClient() {
     setQuestionText('');
     setAnswerText('');
     setProTipText('');
-    setCaptchaAnswer('');
+    setTurnstileToken('');
     setTermsAccepted(false);
     setAskModalOpen(false);
   };
@@ -240,11 +239,11 @@ export function QaKnowledgeBaseClient() {
                 </span>
                 {qa.isTrendingLast30Days ? (
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-[11px] font-mono font-bold">
-                    Most-Asked · Last 30 Days
+                    Popular Kitchen Question
                   </span>
                 ) : (
                   <span className="text-[11px] font-mono text-slate-500">
-                    CookReel Editorial Guide
+                    CookReel Culinary Guide
                   </span>
                 )}
               </div>
@@ -390,19 +389,9 @@ export function QaKnowledgeBaseClient() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center pt-1">
-                <span className="text-xs font-bold text-slate-700">
-                  Anti-Spam Check: What is {captchaA} + {captchaB}?
-                </span>
-                <input
-                  type="number"
-                  required
-                  value={captchaAnswer}
-                  onChange={(e) => setCaptchaAnswer(e.target.value)}
-                  placeholder="Enter sum"
-                  className="px-3.5 py-2 rounded-lg border border-slate-300 text-xs focus:outline-none focus:border-amber-800"
-                />
-              </div>
+              <TurnstileVerificationWidget
+                onVerify={(token) => setTurnstileToken(token)}
+              />
 
               <label className="flex items-start gap-2 text-xs text-slate-600 cursor-pointer">
                 <input

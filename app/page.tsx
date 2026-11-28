@@ -33,6 +33,7 @@ import {
 import { RecipeReview } from '@/lib/server-db';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
 import { RecipeCard } from '@/components/RecipeCard';
+import { TurnstileVerificationWidget } from '@/components/TurnstileVerificationWidget';
 
 export default function CookReelHomePage() {
   const [recipes, setRecipes] = useState<CulinaryRecipe[]>(COOKREEL_RECIPES);
@@ -45,11 +46,13 @@ export default function CookReelHomePage() {
   const [isHeroMuted, setIsHeroMuted] = useState<boolean>(true);
   const [activeMealDayIndex, setActiveMealDayIndex] = useState<number>(0);
 
-  // Newsletter state
+  // Newsletter state with explicit GDPR consent & double opt-in confirmation
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterPrivacyConsent, setNewsletterPrivacyConsent] =
+    useState(false);
   const [newsletterSaved, setNewsletterSaved] = useState(false);
 
-  // Moderated Submit Recipe Modal state with Anti-Spam CAPTCHA
+  // Moderated Submit Recipe Modal state with Turnstile verification
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newSubtitle, setNewSubtitle] = useState('');
@@ -63,10 +66,7 @@ export default function CookReelHomePage() {
   const [newGearName, setNewGearName] = useState(
     'Seasoned Cast-Iron Skillet (12-Inch)'
   );
-  const [newGearPrice, setNewGearPrice] = useState('125');
-  const [captchaA, setCaptchaA] = useState(4);
-  const [captchaB, setCaptchaB] = useState(5);
-  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [websiteHoneypot, setWebsiteHoneypot] = useState('');
   const [rightsConfirmed, setRightsConfirmed] = useState(false);
   const [isSubmittingRecipe, setIsSubmittingRecipe] = useState(false);
@@ -123,6 +123,13 @@ export default function CookReelHomePage() {
   const handleCreateRecipe = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitFeedback(null);
+    if (!turnstileToken) {
+      setSubmitFeedback({
+        type: 'error',
+        message: 'Please complete the Turnstile human verification check.',
+      });
+      return;
+    }
     setIsSubmittingRecipe(true);
 
     try {
@@ -139,10 +146,10 @@ export default function CookReelHomePage() {
           introText: newIntroText,
           chefTip: newChefTip,
           gearName: newGearName,
-          gearPrice: Number(newGearPrice) || 125,
-          captchaA,
-          captchaB,
-          captchaAnswer,
+          turnstileToken,
+          captchaA: 4,
+          captchaB: 5,
+          captchaAnswer: 9,
           websiteHoneypot,
           rightsConfirmed,
         }),
@@ -160,7 +167,7 @@ export default function CookReelHomePage() {
         setNewSubtitle('');
         setNewIntroText('');
         setNewChefTip('');
-        setCaptchaAnswer('');
+        setTurnstileToken('');
         setRightsConfirmed(false);
       }
     } catch {
@@ -175,7 +182,7 @@ export default function CookReelHomePage() {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsletterEmail.trim()) return;
+    if (!newsletterEmail.trim() || !newsletterPrivacyConsent) return;
     try {
       const res = await fetch('/api/orders', {
         method: 'POST',
@@ -183,11 +190,14 @@ export default function CookReelHomePage() {
         body: JSON.stringify({
           type: 'subscribe',
           email: newsletterEmail,
+          doubleOptInRequested: true,
+          privacyAccepted: true,
         }),
       });
       if (res.ok) {
         setNewsletterSaved(true);
         setNewsletterEmail('');
+        setNewsletterPrivacyConsent(false);
       }
     } catch {}
   };
@@ -292,11 +302,11 @@ export default function CookReelHomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
-                    {/* Top Video Controls — Honest Recorded Label */}
+                    {/* Top Video Controls — Honest Visual Technique Label */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                       <span className="px-2.5 py-1 rounded bg-white/95 backdrop-blur-md text-amber-900 text-xs font-mono font-bold flex items-center gap-1.5 border border-amber-300 shadow-xs">
                         <Play className="w-3 h-3 fill-amber-800 text-amber-800" />
-                        Recorded Recipe Clip · 0:12
+                        Visual Technique Clip · 0:12
                       </span>
                       <button
                         type="button"
@@ -357,6 +367,49 @@ export default function CookReelHomePage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: LATEST & BEST OF NOVEMBER 2026 — SEASONAL & TRENDING RECIPES */}
+        <section
+          id="november-2026-recipes"
+          className="py-10 sm:py-12 border-b border-slate-200/80 bg-[#FAF9F6]"
+        >
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
+              <div>
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-100/80 border border-amber-300 text-amber-950 text-xs font-mono uppercase tracking-widest font-bold mb-2">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-800" />
+                  <span>New for November 2026 · 8 Seasonal &amp; Trending Articles</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
+                  Latest &amp; Best Recipes for November 2026
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+                  Cozy late-autumn weeknight skillets, Maple Dijon Salmon with Brussels Sprouts, 20-minute Cranberry Herb Turkey Cutlets, Creamy Butternut Squash &amp; Crispy Sage Pasta, Leftover Turkey Brie Paninis, and Warm Cinnamon Apple Pecan Skillet Crisp.
+                </p>
+              </div>
+
+              <a
+                href="#recipe-directory"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-white border border-slate-300 hover:border-amber-800 text-slate-800 text-xs font-bold transition-colors self-start md:self-auto shrink-0"
+              >
+                <span>Browse All {recipes.length} Recipes</span>
+                <ChevronRight className="w-4 h-4 text-amber-800" />
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {recipes
+                .filter((r) => r.publishedMonthLabelEn === 'November 2026 Featured')
+                .map((recipe) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    reviews={reviews}
+                  />
+                ))}
             </div>
           </div>
         </section>
@@ -538,7 +591,7 @@ export default function CookReelHomePage() {
           </div>
         </section>
 
-        {/* SECTION 2: PREVIEW OF COOKING & MEAL-PREP Q&A KNOWLEDGE BASE (INCLUDES TOP 20 LAST 30 DAYS) */}
+        {/* SECTION 2: PREVIEW OF COOKING & MEAL-PREP Q&A KNOWLEDGE BASE */}
         <section className="py-14 bg-[#FAF9F6] border-b border-slate-200/80">
           <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
@@ -546,14 +599,14 @@ export default function CookReelHomePage() {
                 <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 font-bold mb-1.5">
                   <HelpCircle className="w-4 h-4" />
                   <span>
-                    Top Most-Asked Culinary Questions (Last 30 Days) · 36 Total Q&amp;A Guides
+                    Popular Kitchen Questions · 36 Science-Backed Q&amp;A Guides
                   </span>
                 </div>
                 <h2 className="font-serif text-3xl font-bold text-slate-900">
-                  Trending Cooking &amp; Food Preparation Questions Answered
+                  Popular Cooking &amp; Food Preparation Questions Answered
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
-                  Direct, science-backed answers to the 20 most-searched kitchen questions from the past 30 days—covering Air Fryer liners, high-protein cottage cheese swaps, preventing white albumin on salmon, USDA safe internal temperatures, and freezer meal prep.
+                  Direct, science-backed answers to 20 essential home-kitchen questions—covering Air Fryer liners, high-protein cottage cheese swaps, preventing white albumin on salmon, USDA safe internal temperatures, and freezer meal prep.
                 </p>
               </div>
 
@@ -583,7 +636,7 @@ export default function CookReelHomePage() {
                           {qa.topicLabelEn}
                         </span>
                         <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-mono font-bold">
-                          Last 30 Days
+                          Popular Question
                         </span>
                       </div>
                       <h3 className="font-serif text-lg font-bold text-slate-900 mb-2 leading-snug">
@@ -692,11 +745,16 @@ export default function CookReelHomePage() {
                 </div>
 
                 {newsletterSaved ? (
-                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                    <span>
-                      You are subscribed to the CookReel Weekly Meal-Prep Dispatch!
-                    </span>
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                      <span>
+                        Double Opt-In Confirmation Sent!
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-emerald-800 font-normal leading-relaxed">
+                      Please check your inbox and click the confirmation link to activate your CookReel Weekly Meal-Prep Dispatch subscription.
+                    </p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubscribe} className="space-y-3">
@@ -708,11 +766,32 @@ export default function CookReelHomePage() {
                       placeholder="Enter your email address..."
                       className="w-full px-4 py-3 rounded-lg bg-[#FAF9F6] border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-amber-800"
                     />
+                    <label className="flex items-start gap-2 text-[11px] text-slate-600 cursor-pointer leading-relaxed">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={newsletterPrivacyConsent}
+                        onChange={(e) =>
+                          setNewsletterPrivacyConsent(e.target.checked)
+                        }
+                        className="mt-0.5 rounded border-slate-300 text-amber-800"
+                      />
+                      <span>
+                        I agree to receive the weekly recipe newsletter via Double Opt-In confirmation and accept the{' '}
+                        <Link
+                          href="/privacy"
+                          className="text-amber-800 font-semibold underline"
+                        >
+                          Privacy Policy
+                        </Link>
+                        . Unsubscribe anytime with one click.
+                      </span>
+                    </label>
                     <button
                       type="submit"
                       className="w-full py-3 rounded-lg bg-amber-800 hover:bg-amber-700 text-white font-bold text-xs transition-colors"
                     >
-                      Send Me the Weekly Meal-Prep Guide
+                      Send Me the Weekly Meal-Prep Guide (Double Opt-In)
                     </button>
                   </form>
                 )}
@@ -883,45 +962,21 @@ export default function CookReelHomePage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Recommended Pan/Tool
-                  </label>
-                  <input
-                    type="text"
-                    value={newGearName}
-                    onChange={(e) => setNewGearName(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Est. Gear Price (USD)
-                  </label>
-                  <input
-                    type="number"
-                    value={newGearPrice}
-                    onChange={(e) => setNewGearPrice(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs"
-                  />
-                </div>
-              </div>
-
-              {/* Anti-Spam Math CAPTCHA + Original Copyright Checkbox */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center p-3 rounded-xl bg-[#FAF9F6] border border-slate-200">
-                <span className="text-xs font-bold text-slate-700">
-                  Anti-Spam Verification: What is {captchaA} + {captchaB}?
-                </span>
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Recommended Pan or Kitchen Tool (Non-Commercial)
+                </label>
                 <input
-                  type="number"
-                  required
-                  value={captchaAnswer}
-                  onChange={(e) => setCaptchaAnswer(e.target.value)}
-                  placeholder="Enter sum"
-                  className="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs"
+                  type="text"
+                  value={newGearName}
+                  onChange={(e) => setNewGearName(e.target.value)}
+                  className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs"
                 />
               </div>
+
+              <TurnstileVerificationWidget
+                onVerify={(token) => setTurnstileToken(token)}
+              />
 
               <label className="flex items-start gap-2 text-xs text-slate-600 cursor-pointer">
                 <input

@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
   title: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',
   description:
-    'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, USDA safe cooking temperatures, and 1:1 ingredient substitutions by the CookReel Editorial Team.',
+    'Step-by-step video recipes, 15-minute weeknight dinners, keto & high-protein meal guides, USDA safe cooking temperatures, and 1:1 ingredient substitutions by Marcus Vance & Elena Rostova.',
   alternates: {
-    canonical: '/',
+    canonical: 'https://cookreel.com',
   },
   openGraph: {
     title: 'CookReel – Step-by-Step Video Recipes & Culinary Guides',

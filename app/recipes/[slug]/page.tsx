@@ -7,6 +7,7 @@ import {
   SITE_ORIGIN,
   findRecipeBySlug,
   LEGACY_RECIPE_SLUG_ALIASES,
+  getAuthorProfile,
 } from '@/lib/cookreel-data';
 import { SiteHeader, SiteFooter } from '@/components/SiteHeaderFooter';
 import { RecipeDetailClient } from '@/components/RecipeDetailClient';
@@ -45,7 +46,7 @@ export async function generateMetadata({
     title: `${recipe.titleEn} | CookReel`,
     description: recipe.subtitleEn,
     alternates: {
-      canonical: `/recipes/${recipe.slug}`,
+      canonical: `https://cookreel.com/recipes/${recipe.slug}`,
     },
     openGraph: {
       title: `${recipe.titleEn} | CookReel`,
@@ -92,6 +93,8 @@ export default async function RecipePage({
     ? recipe.image
     : `${SITE_ORIGIN}${recipe.image}`;
 
+  const authorProfile = getAuthorProfile(recipe.authorName);
+
   const recipeNode: Record<string, unknown> = {
     '@type': 'Recipe',
     '@id': `${SITE_ORIGIN}/recipes/${recipe.slug}#recipe`,
@@ -104,11 +107,14 @@ export default async function RecipePage({
       ),
     ],
     author: {
-      '@type': 'Organization',
-      name: recipe.authorName,
-      url: `${SITE_ORIGIN}/about`,
+      '@type': 'Person',
+      name: authorProfile.name,
+      jobTitle: authorProfile.roleEn,
+      description: authorProfile.credentialsEn,
+      url: `${SITE_ORIGIN}/about#${authorProfile.slug}`,
     },
     datePublished: '2026-11-15',
+    dateModified: '2026-11-28',
     prepTime: `PT${recipe.prepMinutes}M`,
     cookTime: `PT${recipe.cookMinutes}M`,
     totalTime: `PT${recipe.prepMinutes + recipe.cookMinutes}M`,
