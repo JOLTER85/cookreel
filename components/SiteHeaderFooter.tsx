@@ -13,6 +13,7 @@ import {
   Search,
   Clock,
   ChevronRight,
+  Film,
 } from 'lucide-react';
 import {
   SITE_ARCHITECTURE,
@@ -110,6 +111,21 @@ export function SiteHeader({
               }`}
             />
             <span>Substitutions Guide</span>
+          </Link>
+          <Link
+            href="/videos"
+            className={`px-2.5 py-2 rounded-lg transition-colors flex items-center gap-1 whitespace-nowrap ${
+              activePath === '/videos'
+                ? 'bg-amber-800 text-white shadow-sm'
+                : 'hover:text-amber-800 hover:bg-amber-50/70'
+            }`}
+          >
+            <Film
+              className={`w-3.5 h-3.5 ${
+                activePath === '/videos' ? 'text-white' : 'text-amber-800'
+              }`}
+            />
+            <span>Video Clips</span>
           </Link>
           <Link
             href="/qa"
@@ -343,6 +359,16 @@ export function SiteHeader({
             }`}
           >
             Substitutions Guide
+          </Link>
+          <Link
+            href="/videos"
+            className={`px-3 py-1.5 rounded-lg transition-colors ${
+              activePath === '/videos'
+                ? 'bg-amber-800 text-white'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+            }`}
+          >
+            Video Clips
           </Link>
           <Link
             href="/qa"

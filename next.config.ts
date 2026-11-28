@@ -136,6 +136,16 @@ const nextConfig: NextConfig = {
         destination: '/substitutions',
         permanent: true,
       },
+      {
+        source: '/video',
+        destination: '/videos',
+        permanent: true,
+      },
+      {
+        source: '/videos-hub',
+        destination: '/videos',
+        permanent: true,
+      },
     ];
   },
   output: 'standalone',
