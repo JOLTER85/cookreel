@@ -87,8 +87,8 @@ function normalizeRecipes(rawRecipes: unknown): CulinaryRecipe[] {
 
 function getWritableDbPath(): string | null {
   const candidates = [
-    path.resolve(process.cwd(), 'data', 'cookreel-db-v7.json'),
-    path.resolve(os.tmpdir(), 'cookreel-db-v7.json'),
+    path.resolve(process.cwd(), 'data', 'cookreel-db-v8.json'),
+    path.resolve(os.tmpdir(), 'cookreel-db-v8.json'),
   ];
 
   for (const filePath of candidates) {

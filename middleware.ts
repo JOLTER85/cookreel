@@ -8,7 +8,7 @@ export function middleware(req: NextRequest) {
 
   // 1. Permanent 301 Redirect from http(s)://tv.cookreel.com/ and http(s)://tv.cookreel.com/today (and any tv.cookreel.com path) to the Homepage
   if (hostname === 'tv.cookreel.com') {
-    return NextResponse.redirect('https://www.cookreel.com/', {
+    return NextResponse.redirect('https://cookreel.com/', {
       status: 301,
     });
   }
@@ -31,6 +31,6 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|images/|videos/|googlebf7d373e6f63afbc.html).*)',
+    '/((?!_next/static|_next/image|favicon.ico|images/|media-clips/|googlebf7d373e6f63afbc.html).*)',
   ],
 };

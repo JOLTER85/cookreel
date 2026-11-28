@@ -120,7 +120,7 @@ export interface CulinaryRecipe {
 }
 
 export const SITE_ORIGIN = 'https://cookreel.com';
-export const HERO_FEATURED_VIDEO_URL = '/videos/hero-cookreel-featured.mp4';
+export const HERO_FEATURED_VIDEO_URL = '/media-clips/hero-cookreel-featured.mp4';
 
 /**
  * Verified sharing & bookmarking channels for CookReel.com
@@ -367,7 +367,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 43,
     netCarbsGrams: 4,
     videoDuration: '0:12',
-    videoUrl: '/videos/crispy-salmon-skillet.mp4',
+    videoUrl: '/media-clips/crispy-salmon-skillet.mp4',
     image: '/images/recipe_crispy_salmon_1795527113114.jpg',
     gearItem: {
       id: 'gear-skillet-12',
@@ -477,7 +477,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 54,
     netCarbsGrams: 1,
     videoDuration: '0:12',
-    videoUrl: '/videos/garlic-butter-ribeye-steak.mp4',
+    videoUrl: '/media-clips/garlic-butter-ribeye-steak.mp4',
     image: '/images/recipe_garlic_butter_steak_1795529483479.jpg',
     gearItem: {
       id: 'gear-damascus-knife',
@@ -586,7 +586,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 21,
     netCarbsGrams: 52,
     videoDuration: '0:12',
-    videoUrl: '/videos/truffle-tagliatelle-pasta.mp4',
+    videoUrl: '/media-clips/truffle-tagliatelle-pasta.mp4',
     image: '/images/recipe_truffle_pasta_1795527116427.jpg',
     gearItem: {
       id: 'gear-pasta-roller',
@@ -694,7 +694,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 44,
     netCarbsGrams: 24,
     videoDuration: '0:12',
-    videoUrl: '/videos/lemon-herb-roasted-chicken.mp4',
+    videoUrl: '/media-clips/lemon-herb-roasted-chicken.mp4',
     image: '/images/recipe_lemon_herb_chicken_1795529480309.jpg',
     gearItem: {
       id: 'gear-braiser-pan',
@@ -802,7 +802,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 22,
     netCarbsGrams: 18,
     videoDuration: '0:12',
-    videoUrl: '/videos/mediterranean-spiced-shakshuka.mp4',
+    videoUrl: '/media-clips/mediterranean-spiced-shakshuka.mp4',
     image: '/images/recipe_mediterranean_shakshuka_1795529480892.jpg',
     gearItem: {
       id: 'gear-enameled-skillet',
@@ -910,7 +910,7 @@ export const COOKREEL_RECIPES: CulinaryRecipe[] = [
     proteinGrams: 5,
     netCarbsGrams: 42,
     videoDuration: '0:12',
-    videoUrl: '/videos/mango-strawberry-sunset-cupcakes.mp4',
+    videoUrl: '/media-clips/mango-strawberry-sunset-cupcakes.mp4',
     image: '/images/recipe_mango_cupcakes_1795527116791.jpg',
     gearItem: {
       id: 'gear-piping-kit',

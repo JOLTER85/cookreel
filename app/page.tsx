@@ -291,7 +291,7 @@ export default function CookReelHomePage() {
                 <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xl">
                   <div className="relative aspect-[16/10] w-full bg-slate-100">
                     <video
-                      src="/videos/crispy-salmon-skillet.mp4"
+                      src="/media-clips/crispy-salmon-skillet.mp4"
                       poster={featuredHeroRecipe.image}
                       autoPlay
                       loop
